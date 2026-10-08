@@ -190,6 +190,7 @@ fieldset {
 .login_links a {
     position: relative;
     padding: 0 10px;
+    text-decoration: none;
     font-size: 1.1rem;
     line-height: 1;
     color: var(--darkText);
