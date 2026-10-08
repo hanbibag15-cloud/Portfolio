@@ -320,7 +320,14 @@ fieldset {
 
 /* NAVER 로그인 UI 2 캡처 화면 */
 .screen2_page { width: calc(100% - 32px); min-width: 0; max-width: 390px; }
-.screen2_page .input_group > label { display: block; margin-bottom: 5px; font-size: 1.3rem; font-weight: 500; line-height: 1; color: var(--subText); }
+.screen2_page .input_group > label {
+    display: block;
+    margin-bottom: 11px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 1;
+    color: #727272;
+}
 .screen2_page .input_group input { height: 31px; padding: 0 0 11px; font-size: 1.8rem; font-weight: 500; }
 .screen2_page .input_group:first-child input { border-bottom-color: var(--primary); }
 .screen2_page .input_group + .input_group { margin-top: 31px; }
