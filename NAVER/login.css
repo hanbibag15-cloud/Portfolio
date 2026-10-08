@@ -234,7 +234,7 @@ fieldset {
 .state_page .state_input_group > label {
     display: block;
     margin-bottom: 8px;
-    font-size: 0.9rem;
+    font-size: 1.3rem;
     font-weight: 500;
     line-height: 1;
     color: var(--subText);
