@@ -283,6 +283,10 @@ fieldset {
     object-fit: contain;
 }
 
+.state_page .password_view {
+    bottom: 14.5px;
+}
+
 .state_page .login_btn {
     margin-top: 58px;
 }
