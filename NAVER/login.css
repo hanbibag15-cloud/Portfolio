@@ -242,8 +242,8 @@ fieldset {
 
 .state_page .state_input_group input {
     width: 100%;
-    height: 35px;
-    padding: 0;
+    height: 46px;
+    padding: 0 0 11px;
     box-sizing: border-box;
     border: 0;
     border-bottom: 1px solid var(--border);
