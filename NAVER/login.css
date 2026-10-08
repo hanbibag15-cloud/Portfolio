@@ -129,7 +129,7 @@ fieldset {
     border-radius: 7px;
     background-color: var(--primary);
     font-family: inherit;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 600;
     color: #fff;
 }
@@ -146,8 +146,8 @@ fieldset {
     border-radius: 7px;
     background-color: var(--inputBg);
     font-family: inherit;
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.5rem;
+    font-weight: 600;
     color: var(--darkText);
 }
 
