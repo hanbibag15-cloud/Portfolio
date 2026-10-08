@@ -221,3 +221,94 @@ fieldset {
         padding-right: 23px;
     }
 }
+
+/* 입력값이 표시된 로그인 상태 화면 */
+.state_page .state_input_group {
+    width: 100%;
+}
+
+.state_page .state_input_group + .state_input_group {
+    margin-top: 18px;
+}
+
+.state_page .state_input_group > label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--subText);
+}
+
+.state_page .state_input_group input {
+    width: 100%;
+    height: 27px;
+    padding: 0;
+    box-sizing: border-box;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    outline: 0;
+    background: transparent;
+    font-family: inherit;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--black);
+}
+
+.state_page .password_input {
+    position: relative;
+}
+
+.state_page .password_input input {
+    padding-right: 24px;
+}
+
+.state_page .password_view {
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+.state_page .password_view img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+}
+
+.state_page .login_btn {
+    margin-top: 31px;
+}
+
+.state_page .login_links {
+    margin-top: 28px;
+}
+
+.state_page .state_input_group.error input {
+    border-bottom-color: var(--error);
+}
+
+.state_page .error_message {
+    margin: 7px 0 0;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--error);
+}
+
+.state_page .state_input_group.error + .login_btn {
+    margin-top: 25px;
+}
+
+@media (max-width: 389px) {
+    .state_page .error_message {
+        white-space: normal;
+    }
+}
