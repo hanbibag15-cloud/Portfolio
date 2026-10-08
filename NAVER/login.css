@@ -329,7 +329,9 @@ fieldset {
     color: #727272;
 }
 .screen2_page .input_group input { height: 31px; padding: 0 0 11px; font-size: 1.8rem; font-weight: 500; }
-.screen2_page .input_group:first-child input { border-bottom-color: var(--primary); }
+.screen2_page .input_group:first-child input {
+    border-bottom-color: #02A94D;
+}
 .screen2_page .input_group + .input_group { margin-top: 31px; }
 .screen2_page .login_btn { margin-top: 40px; }
 .screen2_page .login_links { margin-top: 38px; }
