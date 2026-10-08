@@ -8,7 +8,7 @@
     <title>NAVER 로그인 UI 2</title>
 </head>
 <body>
-    <div id="wrap" class="state_page">
+    <div id="wrap" class="screen2_page">
         <header>
             <button type="button" class="back_btn" aria-label="뒤로가기"></button>
 
@@ -26,31 +26,26 @@
                     <fieldset>
                         <legend class="sr-only">로그인 정보 입력</legend>
 
-                        <div class="state_input_group">
-                            <label for="id_2">아이디 또는 전화번호</label>
+                        <div class="input_group">
+                            <label for="id_screen2" class="sr-only">아이디</label>
                             <input
                                 type="text"
-                                id="id_2"
+                                id="id_screen2"
                                 name="id"
-                                value="hanbibag15@gmail.com"
+                                value="ha"
                                 autocomplete="username"
                             >
                         </div>
 
-                        <div class="state_input_group">
-                            <label for="password_2">비밀번호</label>
-                            <div class="password_input">
-                                <input
-                                    type="password"
-                                    id="password_2"
-                                    name="password"
-                                    value="12345678"
-                                    autocomplete="current-password"
-                                >
-                                <button type="button" class="password_view" aria-label="비밀번호 보기">
-                                    <img src="img/eye_icon (1).svg" alt="">
-                                </button>
-                            </div>
+                        <div class="input_group">
+                            <label for="password_screen2" class="sr-only">비밀번호</label>
+                            <input
+                                type="password"
+                                id="password_screen2"
+                                name="password"
+                                placeholder="비밀번호"
+                                autocomplete="current-password"
+                            >
                         </div>
 
                         <button type="submit" class="login_btn">로그인</button>
