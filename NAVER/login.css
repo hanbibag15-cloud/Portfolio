@@ -41,36 +41,13 @@ header {
 
 .back_btn {
     position: absolute;
-    top: 51px;
-    left: 23px;
-    width: 24px;
-    height: 24px;
+    top: 47px;
+    left: 19px;
+    width: 33px;
+    height: 33px;
     padding: 0;
-}
-
-.back_btn::before,
-.back_btn::after {
-    content: "";
-    position: absolute;
-    left: 5px;
-    width: 13px;
-    height: 1.5px;
-    background-color: var(--black);
-}
-
-.back_btn::before {
-    top: 8px;
-    transform: rotate(45deg);
-}
-
-.back_btn::after {
-    top: 16px;
-    transform: rotate(-45deg);
-}
-
-.back_btn {
     border: 0;
-    background: transparent;
+    background: url("img/Arrow back.svg") no-repeat center / 33px 33px;
 }
 
 .logo {
@@ -230,7 +207,7 @@ fieldset {
     }
 
     .back_btn {
-        left: 16px;
+        left: 12px;
     }
 
     .logo {
