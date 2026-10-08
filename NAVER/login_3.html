@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
+    <link rel="stylesheet" href="login.css">
+    <title>NAVER 로그인 UI 3</title>
+</head>
+<body>
+    <div id="wrap" class="state_page">
+        <header>
+            <button type="button" class="back_btn" aria-label="뒤로가기"></button>
+
+            <h1 class="logo">
+                <img src="img/naver_icon 1.svg" alt="NAVER">
+                <span>로그인</span>
+            </h1>
+        </header>
+
+        <main>
+            <section class="login">
+                <h2 class="sr-only">NAVER 로그인</h2>
+
+                <form action="">
+                    <fieldset>
+                        <legend class="sr-only">로그인 정보 입력</legend>
+
+                        <div class="state_input_group">
+                            <label for="id_3">아이디 또는 전화번호</label>
+                            <input
+                                type="text"
+                                id="id_3"
+                                name="id"
+                                value="hanbibag15@gmail.com"
+                                autocomplete="username"
+                            >
+                        </div>
+
+                        <div class="state_input_group error">
+                            <label for="password_3">비밀번호</label>
+                            <div class="password_input">
+                                <input
+                                    type="password"
+                                    id="password_3"
+                                    name="password"
+                                    value="12345678"
+                                    autocomplete="current-password"
+                                >
+                                <button type="button" class="password_view" aria-label="비밀번호 보기">
+                                    <img src="img/eye_icon (1).svg" alt="">
+                                </button>
+                            </div>
+                            <p class="error_message">아이디 또는 비밀번호가 일치하지 않습니다. 입력한 정보를 다시 확인해 주세요.</p>
+                        </div>
+
+                        <button type="submit" class="login_btn">로그인</button>
+
+                        <button type="button" class="passkey_btn">
+                            <img src="img/Passkey.svg" alt="">
+                            <span>패스키 로그인</span>
+                        </button>
+                    </fieldset>
+                </form>
+
+                <nav class="login_links" aria-label="로그인 관련 메뉴">
+                    <a href="#">아이디 찾기</a>
+                    <a href="#">비밀번호 찾기</a>
+                    <a href="#">회원가입</a>
+                </nav>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
