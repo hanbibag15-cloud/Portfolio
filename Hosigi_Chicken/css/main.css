@@ -48,16 +48,19 @@ body {
     margin-top: 0;
     top: 54.17%;
     transform: translateY(-50%);
-    color: #F7F7F7;
-    opacity: .6;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50px 50px;
 }
 
 .hero-sec .visual .swiper-button-prev {
     left: clamp(20px, 5.21vw, 100px);
+    background-image: url("../img/Arrow back ios (1).svg");
 }
 
 .hero-sec .visual .swiper-button-next {
     right: clamp(20px, 5.21vw, 100px);
+    background-image: url("../img/Arrow forward ios.svg");
 }
 
 .hero-sec .visual .swiper-button-prev::after,
@@ -66,24 +69,6 @@ body {
     content: "";
 }
 
-.hero-sec .visual .swiper-button-prev::before,
-.hero-sec .visual .swiper-button-next::before {
-    content: "";
-    display: block;
-    width: 23px;
-    height: 23px;
-    border-top: 5px solid currentColor;
-    border-right: 5px solid currentColor;
-    border-radius: 2px;
-}
-
-.hero-sec .visual .swiper-button-prev::before {
-    transform: translateX(6px) rotate(-135deg);
-}
-
-.hero-sec .visual .swiper-button-next::before {
-    transform: translateX(-6px) rotate(45deg);
-}
 
 .hero-sec .visual .swiper-pagination {
     left: auto;
