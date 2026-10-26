@@ -64,9 +64,11 @@ body {
 }
 
 .hero-sec .visual .swiper-button-prev::after,
-.hero-sec .visual .swiper-button-next::after {
-    font-size: 0;
-    content: "";
+.hero-sec .visual .swiper-button-next::after,
+.hero-sec .visual .swiper-button-prev::before,
+.hero-sec .visual .swiper-button-next::before {
+    display: none;
+    content: none;
 }
 
 
