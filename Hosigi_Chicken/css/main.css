@@ -71,6 +71,12 @@ body {
     content: none;
 }
 
+/* Swiper 12 automatically inserts navigation SVGs into buttons. */
+.hero-sec .visual .swiper-button-prev > svg,
+.hero-sec .visual .swiper-button-next > svg {
+    display: none;
+}
+
 
 .hero-sec .visual .swiper-pagination {
     left: auto;
