@@ -35,3 +35,92 @@ body {
         height: 100dvh;
     }
 }
+
+/* Figma Hero: Swiper navigation / pagination */
+.hero-sec .visual {
+    --swiper-pagination-color: #F7F7F7;
+}
+
+.hero-sec .visual .swiper-button-prev,
+.hero-sec .visual .swiper-button-next {
+    width: 50px;
+    height: 50px;
+    margin-top: 0;
+    top: 54.17%;
+    transform: translateY(-50%);
+    color: #F7F7F7;
+    opacity: .6;
+}
+
+.hero-sec .visual .swiper-button-prev {
+    left: clamp(20px, 5.21vw, 100px);
+}
+
+.hero-sec .visual .swiper-button-next {
+    right: clamp(20px, 5.21vw, 100px);
+}
+
+.hero-sec .visual .swiper-button-prev::after,
+.hero-sec .visual .swiper-button-next::after {
+    font-size: 0;
+    content: "";
+}
+
+.hero-sec .visual .swiper-button-prev::before,
+.hero-sec .visual .swiper-button-next::before {
+    content: "";
+    display: block;
+    width: 23px;
+    height: 23px;
+    border-top: 5px solid currentColor;
+    border-right: 5px solid currentColor;
+    border-radius: 2px;
+}
+
+.hero-sec .visual .swiper-button-prev::before {
+    transform: translateX(6px) rotate(-135deg);
+}
+
+.hero-sec .visual .swiper-button-next::before {
+    transform: translateX(-6px) rotate(45deg);
+}
+
+.hero-sec .visual .swiper-pagination {
+    left: auto;
+    right: clamp(24px, 9.22vw, 177px);
+    bottom: 37px;
+    width: auto;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.hero-sec .visual .swiper-pagination-bullet {
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin: 0;
+    background: #F7F7F7;
+    opacity: .5;
+}
+
+.hero-sec .visual .swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+/* Figma Hero에는 별도의 scrollbar가 보이지 않음 */
+.hero-sec .visual .swiper-scrollbar {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .hero-sec .visual .swiper-button-prev,
+    .hero-sec .visual .swiper-button-next {
+        top: 50%;
+    }
+
+    .hero-sec .visual .swiper-pagination {
+        right: 24px;
+        bottom: 30px;
+    }
+}
