@@ -28,9 +28,7 @@
                             <img src="img/vlsual02.png" alt="수라깐풍치킨배너" class="pc">
                             <img src="img/m_vlsual02.jpg" alt="모바일수라깐풍치킨배너" class= "mo">
                         </div>
-                        <div class="swiper-slide">Slide 3</div>
-                        ...
-                    </div>
+                                    </div>
                     <!-- If we need pagination -->
                     <div class="swiper-pagination"></div>
 
@@ -38,8 +36,6 @@
                     <div class="swiper-button-prev"></div>
                     <div class="swiper-button-next"></div>
 
-                    <!-- If we need scrollbar -->
-                    <div class="swiper-scrollbar"></div>
                 </div>
             </div>
         </main>
@@ -54,17 +50,13 @@
         // If we need pagination
         pagination: {
             el: '.visual .swiper-pagination',
+            clickable: true,
         },
 
         // Navigation arrows
         navigation: {
             nextEl: '.visual .swiper-button-next',
             prevEl: '.visual .swiper-button-prev',
-        },
-
-        // And if we need scrollbar
-        scrollbar: {
-            el: '.visual .swiper-scrollbar',
         },
     });
     </script>
