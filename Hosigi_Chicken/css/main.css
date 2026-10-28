@@ -763,3 +763,10 @@ body {
         height: 153px;
     }
 }
+
+/* Show only the previous, current, and next chicken in the 13-item carousel. */
+.menu-feature-product.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
