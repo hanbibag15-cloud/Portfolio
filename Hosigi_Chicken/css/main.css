@@ -103,8 +103,15 @@
     align-items: center;
     gap: 5px;
     white-space: nowrap;
+    line-height: 19px;
+}
+.header-utils a span {
+    display: block;
+    line-height: 19px;
 }
 .header-utils img {
+    display: block;
+    flex: 0 0 19px;
     width: 19px;
     height: 19px;
 }
