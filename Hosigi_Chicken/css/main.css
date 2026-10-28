@@ -151,15 +151,14 @@ body {
     }
 }
 
-/* Three additional visual dots; only two slides are available. */
+/* Four real slide bullets + one decorative dot keep Figma's five-dot layout. */
 .hero-sec .visual .swiper-pagination::after {
     content: "";
     display: block;
-    flex: 0 0 54px;
-    width: 54px;
+    flex: 0 0 10px;
+    width: 10px;
     height: 10px;
-    background-image: radial-gradient(circle at 5px 5px, rgba(247,247,247,.5) 5px, transparent 5.1px);
-    background-size: 22px 10px;
-    background-repeat: repeat-x;
+    border-radius: 50%;
+    background: rgba(247, 247, 247, .5);
     pointer-events: none;
 }
