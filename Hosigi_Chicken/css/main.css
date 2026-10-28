@@ -620,25 +620,19 @@ body {
 }
 .menu-feature-arrow {
     position: relative;
-    flex: 0 0 48px;
-    width: 48px;
-    height: 48px;
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
     margin-top: -90px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30px 30px;
 }
-.menu-feature-arrow::before {
-    content: "";
-    position: absolute;
-    top: 14px;
-    left: 18px;
-    width: 16px;
-    height: 16px;
-    border-top: 3px solid #999;
-    border-right: 3px solid #999;
-    transform: rotate(45deg);
+.menu-feature-prev {
+    background-image: url("../img/Arrow back ios (1).svg");
 }
-.menu-feature-prev::before {
-    left: 20px;
-    transform: rotate(-135deg);
+.menu-feature-next {
+    background-image: url("../img/Arrow forward ios.svg");
 }
 .menu-side-notice {
     margin: 135px auto;
@@ -693,14 +687,9 @@ body {
         margin-top: 48px;
     }
     .menu-feature-arrow {
-        flex-basis: 28px;
-        width: 28px;
-        height: 40px;
-    }
-    .menu-feature-arrow::before {
-        left: 8px;
-        width: 12px;
-        height: 12px;
+        flex-basis: 30px;
+        width: 30px;
+        height: 30px;
     }
     .menu-feature-products {
         height: 260px;
