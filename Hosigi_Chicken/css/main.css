@@ -83,6 +83,10 @@
     line-height: 1;
     letter-spacing: -0.023em;
 }
+.header-nav a:hover,
+.header-nav a:focus-visible {
+    color: var(--action-primary);
+}
 .header-utils {
     position: absolute;
     top: 13px;
