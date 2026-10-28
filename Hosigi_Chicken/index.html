@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/default.css">
     <link rel="stylesheet" href="../npm/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
-    <link rel="stylesheet" href="css/main.css?v=17">
+    <link rel="stylesheet" href="css/main.css?v=18">
     <script src="../npm/swiper/swiper-bundle.min.js"></script>
 </head>
 <body>
@@ -23,8 +23,8 @@
                 <nav class="header-nav" id="header-nav" aria-label="주요 메뉴">
                     <ul>
                         <li class="has-submenu">
-                            <a href="#menu">메뉴</a>
-                            <ul class="header-submenu" aria-label="메뉴 상세">
+                            <a href="#menu" aria-expanded="false" aria-controls="mobile-submenu">메뉴</a>
+                            <ul class="header-submenu" id="mobile-submenu" aria-label="메뉴 상세">
                                 <li><a href="#all-menu">전체 메뉴</a></li>
                                 <li><a href="#chicken-menu">치킨 메뉴</a></li>
                                 <li><a href="#parts-menu">부위별 메뉴</a></li>
@@ -98,8 +98,22 @@
         menuToggle.setAttribute('aria-expanded', String(isOpen));
         menuToggle.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
     });
+    const menuMainLink = document.querySelector('.has-submenu > a');
+    const submenuContainer = document.querySelector('.has-submenu');
+
+    menuMainLink.addEventListener('click', (event) => {
+        if (window.matchMedia('(max-width: 1024px)').matches) {
+            event.preventDefault();
+            const isOpen = submenuContainer.classList.toggle('submenu-open');
+            menuMainLink.setAttribute('aria-expanded', String(isOpen));
+        }
+    });
+
     document.querySelectorAll('.header-nav a').forEach(link => {
-        link.addEventListener('click', () => {
+        link.addEventListener('click', (event) => {
+            if (link === menuMainLink && window.matchMedia('(max-width: 1024px)').matches) return;
+            submenuContainer.classList.remove('submenu-open');
+            menuMainLink.setAttribute('aria-expanded', 'false');
             siteHeader.classList.remove('menu-open');
             menuToggle.setAttribute('aria-expanded', 'false');
             menuToggle.setAttribute('aria-label', '메뉴 열기');
