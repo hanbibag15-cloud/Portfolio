@@ -554,11 +554,12 @@ body {
     top: 0;
     width: 28%;
     height: 100%;
-    transition: left .85s cubic-bezier(.22, 1, .36, 1),
-                right .85s cubic-bezier(.22, 1, .36, 1),
-                width .85s cubic-bezier(.22, 1, .36, 1),
-                transform .85s cubic-bezier(.22, 1, .36, 1),
-                opacity .65s ease;
+    /* Move horizontally throughout; resize briefly near the end. */
+    transition: left .95s cubic-bezier(.22, 1, .36, 1),
+                right .95s cubic-bezier(.22, 1, .36, 1),
+                transform .95s cubic-bezier(.22, 1, .36, 1),
+                width .3s ease-out .48s,
+                opacity .55s ease;
 }
 .menu-feature-product.is-prev {
     left: 0;
@@ -585,9 +586,9 @@ body {
 }
 /* Keep the size and vertical movement in sync with the carousel. */
 .menu-feature-product .menu-product-image {
-    transition: width .85s cubic-bezier(.22, 1, .36, 1),
-                height .85s cubic-bezier(.22, 1, .36, 1),
-                margin-top .85s cubic-bezier(.22, 1, .36, 1);
+    transition: width .3s ease-out .48s,
+                height .3s ease-out .48s,
+                margin-top .3s ease-out .48s;
 }
 .menu-product-image img {
     display: block;
