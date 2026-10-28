@@ -554,12 +554,10 @@ body {
     top: 0;
     width: 28%;
     height: 100%;
-    /* Move horizontally throughout; resize briefly near the end. */
-    transition: left .95s cubic-bezier(.22, 1, .36, 1),
-                right .95s cubic-bezier(.22, 1, .36, 1),
-                transform .95s cubic-bezier(.22, 1, .36, 1),
-                width .3s ease-out .48s,
-                opacity .55s ease;
+    /* Consistent horizontal movement and simultaneous, gentle resizing. */
+    transition: left .85s cubic-bezier(.25, .8, .25, 1),
+                width .85s cubic-bezier(.25, .8, .25, 1),
+                opacity .6s ease;
 }
 .menu-feature-product.is-prev {
     left: 0;
@@ -586,9 +584,9 @@ body {
 }
 /* Keep the size and vertical movement in sync with the carousel. */
 .menu-feature-product .menu-product-image {
-    transition: width .3s ease-out .48s,
-                height .3s ease-out .48s,
-                margin-top .3s ease-out .48s;
+    transition: width .85s cubic-bezier(.25, .8, .25, 1),
+                height .85s cubic-bezier(.25, .8, .25, 1),
+                margin-top .85s cubic-bezier(.25, .8, .25, 1);
 }
 .menu-product-image img {
     display: block;
@@ -747,9 +745,9 @@ body {
 @media (min-width: 1025px) {
     /* Center: 415px. Both side images sit 125px from its edges. */
     .menu-feature-product.is-prev {
-        left: calc(50% - 522.5px);
+        left: calc(50% - 427.5px);
         width: 190px;
-        transform: none;
+        transform: translateX(-50%);
     }
     .menu-feature-product.is-active {
         left: 50%;
@@ -757,10 +755,10 @@ body {
         transform: translateX(-50%);
     }
     .menu-feature-product.is-next {
-        left: calc(50% + 332.5px);
+        left: calc(50% + 435px);
         right: auto;
         width: 205px;
-        transform: none;
+        transform: translateX(-50%);
     }
     .menu-feature-product:not(.is-active) .menu-product-image {
         margin-top: 112px;
@@ -862,5 +860,17 @@ body {
         opacity: 1;
         transform: none;
         transition: none;
+    }
+}
+
+/* Mobile: use one transform origin for all three positions. */
+@media (max-width: 1024px) {
+    .menu-feature-product.is-prev {
+        left: 12%;
+        transform: translateX(-50%);
+    }
+    .menu-feature-product.is-next {
+        left: 88%;
+        transform: translateX(-50%);
     }
 }
