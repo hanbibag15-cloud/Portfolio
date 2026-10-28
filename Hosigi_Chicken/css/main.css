@@ -180,19 +180,26 @@
         transform: translateY(-8px) rotate(-45deg);
     }
     .header-nav {
-        display: none;
+        display: block;
         position: absolute;
         top: 70px;
         left: -20px;
         right: -20px;
-        transform: none;
         padding: 20px;
         background: var(--surface-default);
         border-top: 1px solid var(--border-default);
         box-shadow: 0 8px 16px rgba(0, 0, 0, .08);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-10px);
+        transition: opacity .3s ease, transform .3s ease, visibility .3s;
     }
     .site-header.menu-open .header-nav {
-        display: block;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
     }
     .header-nav > ul {
         flex-direction: column;
