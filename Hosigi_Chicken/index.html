@@ -226,14 +226,19 @@
         !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         menuSection.classList.add('menu-motion-ready');
         const menuHeading = menuSection.querySelector('.menu-section-heading');
-        const menuObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                menuSection.classList.add('is-visible');
-                observer.unobserve(entry.target);
-            });
-        }, { threshold: 0.15, rootMargin: '0px 0px -12% 0px' });
-        if (menuHeading) menuObserver.observe(menuHeading);
+        if (menuHeading) {
+            // Keep the reveal visible below MENU, and reset it above the heading.
+            const updateMenuReveal = () => {
+                const revealLine = window.innerHeight * 0.78;
+                menuSection.classList.toggle(
+                    'is-visible',
+                    menuHeading.getBoundingClientRect().top <= revealLine
+                );
+            };
+            window.addEventListener('scroll', updateMenuReveal, { passive: true });
+            window.addEventListener('resize', updateMenuReveal);
+            updateMenuReveal();
+        }
     }
 
     const menuItems = document.querySelectorAll('.menu-feature-product');
