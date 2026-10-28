@@ -735,8 +735,9 @@ body {
 
 /* PC MENU carousel: exact image sizes by current position */
 @media (min-width: 1025px) {
+    /* Center: 415px. Both side images sit 125px from its edges. */
     .menu-feature-product.is-prev {
-        left: 0;
+        left: calc(50% - 522.5px);
         width: 190px;
         transform: none;
     }
@@ -746,10 +747,13 @@ body {
         transform: translateX(-50%);
     }
     .menu-feature-product.is-next {
-        left: auto;
-        right: 0;
+        left: calc(50% + 332.5px);
+        right: auto;
         width: 205px;
         transform: none;
+    }
+    .menu-feature-product:not(.is-active) .menu-product-image {
+        margin-top: 112px;
     }
     .menu-feature-product.is-prev .menu-product-image {
         width: 190px;
