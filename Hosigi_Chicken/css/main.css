@@ -834,3 +834,22 @@ body {
         transition: none;
     }
 }
+
+/* MENU 상품 이미지·배지·상품명·화살표를 함께 부드럽게 등장 */
+.menu-section.menu-motion-ready .menu-feature {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 750ms ease 360ms,
+                transform 750ms cubic-bezier(.22, 1, .36, 1) 360ms;
+}
+.menu-section.menu-motion-ready.is-visible .menu-feature {
+    opacity: 1;
+    transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+    .menu-section.menu-motion-ready .menu-feature {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
