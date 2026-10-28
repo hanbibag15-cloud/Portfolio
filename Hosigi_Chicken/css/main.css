@@ -1,6 +1,37 @@
+:root {
+    /* Typography */
+    --font: "Pretendard Variable", sans-serif;
+
+    /* Figma Primitives */
+    --brand-brown: #221714;
+    --brand-red: #E60012;
+    --brand-orange: #E0690C;
+    --neutral-cream: #FFF8F1;
+    --neutral-white: #FFFFFF;
+    --neutral-border-gray: #E5E5E5;
+    --neutral-light-gray: #F7F7F7;
+    --support-light-red: #FFE9EA;
+    --support-light-orange: #FFF3E4;
+
+    /* Figma Semantic (Primitives aliases) */
+    --background-default: var(--neutral-cream);
+    --background-subtle: var(--neutral-light-gray);
+    --surface-default: var(--neutral-white);
+    --surface-accent-soft: var(--support-light-orange);
+    --surface-brand-soft: var(--support-light-red);
+    --text-primary: var(--brand-brown);
+    --text-inverse: var(--neutral-white);
+    --text-brand: var(--brand-red);
+    --border-default: var(--neutral-border-gray);
+    --action-primary: var(--brand-red);
+    --action-secondary: var(--brand-brown);
+    --accent-default: var(--brand-orange);
+    --accent-soft: var(--support-light-orange);
+}
+
 body {
     background-color: yellow;
-    font-family: "Pretendard Variable", sans-serif;
+    font-family: var(--font);
 }
 .mo {
     display: none;
