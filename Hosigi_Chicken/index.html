@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/default.css">
     <link rel="stylesheet" href="../npm/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
-    <link rel="stylesheet" href="css/main.css?v=13">
+    <link rel="stylesheet" href="css/main.css?v=14">
     <script src="../npm/swiper/swiper-bundle.min.js"></script>
 </head>
 <body>
@@ -22,7 +22,15 @@
 
                 <nav class="header-nav" id="header-nav" aria-label="주요 메뉴">
                     <ul>
-                        <li><a href="#menu">메뉴</a></li>
+                        <li class="has-submenu">
+                            <a href="#menu">메뉴</a>
+                            <ul class="header-submenu" aria-label="메뉴 상세">
+                                <li><a href="#all-menu">전체 메뉴</a></li>
+                                <li><a href="#chicken-menu">치킨 메뉴</a></li>
+                                <li><a href="#parts-menu">부위별 메뉴</a></li>
+                                <li><a href="#side-menu">사이드 메뉴</a></li>
+                            </ul>
+                        </li>
                         <li><a href="#brand">브랜드</a></li>
                         <li><a href="#stores">매장찾기</a></li>
                         <li><a href="#events">이벤트</a></li>
