@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/default.css">
     <link rel="stylesheet" href="../npm/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
-    <link rel="stylesheet" href="css/main.css?v=37">
+    <link rel="stylesheet" href="css/main.css?v=38">
     <script src="../npm/swiper/swiper-bundle.min.js"></script>
 </head>
 <body>
@@ -240,16 +240,22 @@
 
     function updateFeaturedMenu() {
         menuItems.forEach((item, index) => {
-            item.classList.remove('is-prev', 'is-active', 'is-next', 'is-hidden');
+            item.classList.remove('is-prev', 'is-active', 'is-next', 'is-hidden', 'is-before', 'is-after');
             const distance = (index - activeMenuIndex + menuItems.length) % menuItems.length;
             if (distance === 0) item.classList.add('is-active');
             else if (distance === 1) item.classList.add('is-next');
             else if (distance === menuItems.length - 1) item.classList.add('is-prev');
-            else item.classList.add('is-hidden');
+            else {
+                item.classList.add('is-hidden');
+                item.classList.add(distance <= menuItems.length / 2 ? 'is-after' : 'is-before');
+            }
             const caption = item.querySelector('.menu-product-caption');
             if (caption) caption.hidden = distance !== 0;
         });
     }
+
+    // Place offscreen items on the correct side before the first interaction.
+    updateFeaturedMenu();
 
     document.querySelector('.menu-feature-prev').addEventListener('click', () => {
         activeMenuIndex = (activeMenuIndex - 1 + menuItems.length) % menuItems.length;
