@@ -495,8 +495,11 @@ body {
 
 /* MENU section — first content section below Hero */
 .menu-section {
-    min-height: 860px;
-    padding: 118px 24px 100px;
+    width: 100%;
+    max-width: 1920px;
+    height: 874px;
+    margin: 0 auto;
+    padding: 120px 20px;
     background: var(--surface-default);
     text-align: center;
     color: var(--text-primary);
@@ -652,6 +655,7 @@ body {
 }
 @media (max-width: 1024px) {
     .menu-section {
+        height: auto;
         min-height: 650px;
         padding: 90px 18px;
     }
