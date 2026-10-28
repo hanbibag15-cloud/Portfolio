@@ -970,7 +970,7 @@ body {
 /* MENU side products are slightly subdued; active center remains fully visible. */
 .menu-feature-product.is-prev,
 .menu-feature-product.is-next {
-    opacity: .6;
+    opacity: .8;
 }
 .menu-feature-product.is-active {
     opacity: 1;
