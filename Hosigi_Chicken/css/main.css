@@ -213,7 +213,7 @@
 }
 
 body {
-    background-color: yellow;
+    background-color: var(--surface-default);
     font-family: var(--font);
 }
 .mo {
@@ -221,7 +221,6 @@ body {
 }
 .hero-sec .swiper {
     width: 100%;
-    max-width: 1920px;
     height: 720px;
     margin: 0 auto;
 }
