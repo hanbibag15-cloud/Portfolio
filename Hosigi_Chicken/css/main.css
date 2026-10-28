@@ -332,7 +332,7 @@ body {
         align-items: stretch;
         width: 145px;
         height: 204px;
-        padding: 0 10px;
+        padding: 8px 10px;
         border-radius: 0 0 16px 16px;
         background: rgba(255, 255, 255, .95);
         box-shadow: 0 12px 18px rgba(34, 23, 20, .12);
@@ -354,7 +354,7 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 51px;
+        height: 47px;
         padding: 0;
         text-align: center;
         font-size: 16px;
