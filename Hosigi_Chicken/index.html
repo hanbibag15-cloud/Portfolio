@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/default.css">
     <link rel="stylesheet" href="../npm/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
-    <link rel="stylesheet" href="css/main.css?v=38">
+    <link rel="stylesheet" href="css/main.css?v=39">
     <script src="../npm/swiper/swiper-bundle.min.js"></script>
 </head>
 <body>
@@ -271,6 +271,27 @@
         activeMenuIndex = (activeMenuIndex + 1) % menuItems.length;
         updateFeaturedMenu();
     });
+
+    // Mobile: swipe horizontally on the product area without blocking vertical scrolling.
+    const menuSwipeArea = document.querySelector('.menu-feature-products');
+    let swipeStartX = 0;
+    let swipeStartY = 0;
+
+    menuSwipeArea.addEventListener('touchstart', (event) => {
+        if (event.touches.length !== 1) return;
+        swipeStartX = event.touches[0].clientX;
+        swipeStartY = event.touches[0].clientY;
+    }, { passive: true });
+
+    menuSwipeArea.addEventListener('touchend', (event) => {
+        if (event.changedTouches.length !== 1) return;
+        const deltaX = event.changedTouches[0].clientX - swipeStartX;
+        const deltaY = event.changedTouches[0].clientY - swipeStartY;
+        if (Math.abs(deltaX) < 45 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.2) return;
+
+        activeMenuIndex = (activeMenuIndex + (deltaX < 0 ? 1 : -1) + menuItems.length) % menuItems.length;
+        updateFeaturedMenu();
+    }, { passive: true });
 
     document.querySelectorAll('.menu-category').forEach(button => {
         button.addEventListener('click', () => {
