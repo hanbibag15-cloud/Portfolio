@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +7,45 @@
     <link rel="stylesheet" href="../css/default.css">
     <link rel="stylesheet" href="../npm/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
-    <link rel="stylesheet" href="css/main.css?v=9">
+    <link rel="stylesheet" href="css/main.css?v=10">
     <script src="../npm/swiper/swiper-bundle.min.js"></script>
 </head>
 <body>
     <div id="wrap">
-        <header>제목공간</header>
+                <header class="site-header">
+            <div class="header-inner">
+                <h1 class="header-logo">
+                    <a href="index.html" aria-label="호식이두마리치킨 홈">
+                        <img src="img/log.png" alt="호식이두마리치킨">
+                    </a>
+                </h1>
+
+                <nav class="header-nav" id="header-nav" aria-label="주요 메뉴">
+                    <ul>
+                        <li><a href="#menu">메뉴</a></li>
+                        <li><a href="#brand">브랜드</a></li>
+                        <li><a href="#stores">매장찾기</a></li>
+                        <li><a href="#events">이벤트</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-utils">
+                    <a href="#franchise">
+                        <img src="img/store 2.svg" alt="">
+                        <span>창업안내</span>
+                    </a>
+                    <span class="header-utils-divider" aria-hidden="true"></span>
+                    <a href="#gift-card">
+                        <img src="img/ticket 2.svg" alt="">
+                        <span>상품권</span>
+                    </a>
+                </div>
+
+                <button class="header-menu-toggle" type="button" aria-label="메뉴 열기" aria-controls="header-nav" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </header>
         <main>
             <div class="hero-sec">
                 <!-- Slider main container -->
@@ -50,6 +83,21 @@
         <footer>&copy;</footer>
     </div>
     <script>
+    const menuToggle = document.querySelector('.header-menu-toggle');
+    const siteHeader = document.querySelector('.site-header');
+    menuToggle.addEventListener('click', () => {
+        const isOpen = siteHeader.classList.toggle('menu-open');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+        menuToggle.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
+    });
+    document.querySelectorAll('.header-nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            siteHeader.classList.remove('menu-open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.setAttribute('aria-label', '메뉴 열기');
+        });
+    });
+
     const swiper = new Swiper('.hero-sec > .swiper', {
         // Optional parameters
         direction: 'horizontal',
