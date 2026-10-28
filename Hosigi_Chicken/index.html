@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/default.css">
     <link rel="stylesheet" href="../npm/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
-    <link rel="stylesheet" href="css/main.css?v=32">
+    <link rel="stylesheet" href="css/main.css?v=33">
     <script src="../npm/swiper/swiper-bundle.min.js"></script>
 </head>
 <body>
@@ -219,6 +219,21 @@
             menuToggle.setAttribute('aria-label', '메뉴 열기');
         });
     });
+
+    // Animate MENU text upward once when the section enters the viewport.
+    const menuSection = document.querySelector('.menu-section');
+    if (menuSection && 'IntersectionObserver' in window &&
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        menuSection.classList.add('menu-motion-ready');
+        const menuObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            });
+        }, { threshold: 0.12 });
+        menuObserver.observe(menuSection);
+    }
 
     const menuItems = document.querySelectorAll('.menu-feature-product');
     let activeMenuIndex = 1;
