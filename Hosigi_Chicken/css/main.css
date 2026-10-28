@@ -732,3 +732,35 @@ body {
         font-size: 12px;
     }
 }
+
+/* PC MENU carousel: exact image sizes by current position */
+@media (min-width: 1025px) {
+    .menu-feature-product.is-prev {
+        left: 0;
+        width: 190px;
+        transform: none;
+    }
+    .menu-feature-product.is-active {
+        left: 50%;
+        width: 415px;
+        transform: translateX(-50%);
+    }
+    .menu-feature-product.is-next {
+        left: auto;
+        right: 0;
+        width: 205px;
+        transform: none;
+    }
+    .menu-feature-product.is-prev .menu-product-image {
+        width: 190px;
+        height: 142px;
+    }
+    .menu-feature-product.is-active .menu-product-image {
+        width: 415px;
+        height: 311px;
+    }
+    .menu-feature-product.is-next .menu-product-image {
+        width: 205px;
+        height: 153px;
+    }
+}
