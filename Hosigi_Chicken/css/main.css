@@ -70,7 +70,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.header-nav ul {
+.header-nav > ul {
     display: flex;
     align-items: center;
     gap: clamp(40px, 7.8vw, 150px);
@@ -129,7 +129,7 @@
     .header-logo {
         margin-left: 0;
     }
-    .header-nav ul {
+    .header-nav > ul {
         gap: clamp(24px, 4vw, 60px);
     }
 }
@@ -183,7 +183,7 @@
     .site-header.menu-open .header-nav {
         display: block;
     }
-    .header-nav ul {
+    .header-nav > ul {
         flex-direction: column;
         align-items: stretch;
         gap: 0;
@@ -309,3 +309,79 @@ body {
     }
 }
 
+
+/* Menu dropdown — reference screenshot */
+@media (min-width: 1025px) {
+    .header-nav > ul > li {
+        position: relative;
+        padding: 40px 0;
+    }
+
+    .header-nav .has-submenu:hover > a,
+    .header-nav .has-submenu:focus-within > a {
+        color: var(--action-primary);
+    }
+
+    .header-submenu {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        z-index: 30;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 216px;
+        padding: 18px 16px;
+        border-radius: 0 0 16px 16px;
+        background: rgba(255, 248, 241, .96);
+        box-shadow: 0 12px 18px rgba(34, 23, 20, .12);
+        transform: translateX(-50%);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity .18s ease, visibility .18s ease;
+    }
+
+    .has-submenu:hover > .header-submenu,
+    .has-submenu:focus-within > .header-submenu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .header-submenu li a {
+        display: block;
+        padding: 18px 0;
+        text-align: center;
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 1.2;
+        white-space: nowrap;
+        color: var(--text-primary);
+    }
+
+    .header-submenu li a:hover,
+    .header-submenu li a:focus-visible {
+        color: var(--action-primary);
+    }
+}
+
+@media (max-width: 1024px) {
+    .header-submenu {
+        display: block;
+        padding: 0 0 8px 18px;
+        border-left: 2px solid var(--border-default);
+    }
+
+    .header-submenu a {
+        display: block;
+        padding: 10px 0;
+        font-size: 16px;
+        color: var(--text-primary);
+    }
+
+    .header-submenu a:hover,
+    .header-submenu a:focus-visible {
+        color: var(--action-primary);
+    }
+}
