@@ -334,7 +334,7 @@ body {
 
     .header-submenu {
         position: absolute;
-        top: 100%;
+        top: calc(100% + 30px);
         left: 50%;
         z-index: 30;
         display: flex;
@@ -351,6 +351,15 @@ body {
         visibility: hidden;
         pointer-events: none;
         transition: opacity .18s ease, visibility .18s ease;
+    }
+
+    .header-submenu::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -30px;
+        height: 30px;
     }
 
     .has-submenu:hover > .header-submenu,
