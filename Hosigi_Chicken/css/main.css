@@ -108,7 +108,8 @@
     display: block;
     width: 1px;
     height: 16px;
-    background: var(--border-default);
+    background: var(--brand-brown);
+    opacity: 0.9;
 }
 .header-menu-toggle {
     display: none;
