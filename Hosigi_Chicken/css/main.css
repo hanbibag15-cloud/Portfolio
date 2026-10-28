@@ -966,3 +966,29 @@ body {
         transition: none;
     }
 }
+
+/* MENU side products are slightly subdued; active center remains fully visible. */
+.menu-feature-product.is-prev,
+.menu-feature-product.is-next {
+    opacity: .6;
+}
+.menu-feature-product.is-active {
+    opacity: 1;
+}
+.menu-feature-products {
+    touch-action: pan-y;
+}
+.menu-feature-arrow {
+    z-index: 5;
+    cursor: pointer;
+}
+@media (max-width: 600px) {
+    .menu-feature {
+        position: relative;
+    }
+    .menu-feature-prev,
+    .menu-feature-next {
+        position: relative;
+        z-index: 5;
+    }
+}
