@@ -800,3 +800,33 @@ body {
         transition: none;
     }
 }
+
+/* Scroll reveal: MENU title slides upward, followed by subtitle and tabs. */
+.menu-section.menu-motion-ready .menu-section-heading h2,
+.menu-section.menu-motion-ready .menu-section-heading p,
+.menu-section.menu-motion-ready .menu-category-tabs {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 750ms ease, transform 750ms cubic-bezier(.22, 1, .36, 1);
+}
+.menu-section.menu-motion-ready .menu-section-heading p {
+    transition-delay: 120ms;
+}
+.menu-section.menu-motion-ready .menu-category-tabs {
+    transition-delay: 240ms;
+}
+.menu-section.menu-motion-ready.is-visible .menu-section-heading h2,
+.menu-section.menu-motion-ready.is-visible .menu-section-heading p,
+.menu-section.menu-motion-ready.is-visible .menu-category-tabs {
+    opacity: 1;
+    transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+    .menu-section.menu-motion-ready .menu-section-heading h2,
+    .menu-section.menu-motion-ready .menu-section-heading p,
+    .menu-section.menu-motion-ready .menu-category-tabs {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
