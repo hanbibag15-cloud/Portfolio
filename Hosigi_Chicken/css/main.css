@@ -35,7 +35,7 @@
     position: relative;
     z-index: 20;
     width: 100%;
-    height: 100px;
+    height: 90px;
     padding: 0 20px;
     background: var(--surface-default);
     color: var(--text-primary);
@@ -314,7 +314,6 @@ body {
 @media (min-width: 1025px) {
     .header-nav > ul > li {
         position: relative;
-        padding: 40px 0;
     }
 
     .header-nav .has-submenu:hover > a,
