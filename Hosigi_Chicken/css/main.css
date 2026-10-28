@@ -770,3 +770,33 @@ body {
     visibility: hidden;
     pointer-events: none;
 }
+
+/* Scroll reveal for MENU section: gently rise and fade in once. */
+.menu-section.menu-reveal-ready .menu-section-heading h2,
+.menu-section.menu-reveal-ready .menu-section-heading p,
+.menu-section.menu-reveal-ready .menu-category-tabs {
+    opacity: 0;
+    transform: translateY(44px);
+    transition: opacity .85s ease, transform .85s cubic-bezier(.22, 1, .36, 1);
+}
+.menu-section.menu-reveal-ready .menu-section-heading p {
+    transition-delay: .12s;
+}
+.menu-section.menu-reveal-ready .menu-category-tabs {
+    transition-delay: .24s;
+}
+.menu-section.menu-reveal-ready.is-revealed .menu-section-heading h2,
+.menu-section.menu-reveal-ready.is-revealed .menu-section-heading p,
+.menu-section.menu-reveal-ready.is-revealed .menu-category-tabs {
+    opacity: 1;
+    transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+    .menu-section.menu-reveal-ready .menu-section-heading h2,
+    .menu-section.menu-reveal-ready .menu-section-heading p,
+    .menu-section.menu-reveal-ready .menu-category-tabs {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
