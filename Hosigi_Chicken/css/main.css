@@ -1145,7 +1145,7 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 3px;
+    gap: 12px;
     width: 219px;
     height: 49px;
     min-height: 49px;
