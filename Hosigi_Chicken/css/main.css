@@ -1130,10 +1130,12 @@ body {
         grid-column: 1 / -1;
         grid-row: 3;
         display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-columns: minmax(0, 155px) 82px;
         align-items: center;
-        column-gap: 16px;
-        width: 100%;
+        column-gap: clamp(8px, calc(100vw - 277px), 228px);
+        width: max-content;
+        max-width: 100%;
+        margin-top: -48px;
     }
     .app-promo-benefits ul { min-width: 0; }
     .app-promo-benefits li { white-space: normal; }
@@ -1152,6 +1154,6 @@ body {
 }
 @media (max-width: 380px) {
     .app-promo-content { grid-template-columns: minmax(0, 1fr) minmax(105px, 36%); column-gap: 8px; }
-    .app-promo-benefits { column-gap: 8px; }
+    .app-promo-benefits { grid-template-columns: minmax(0, 155px) 72px; column-gap: clamp(8px, calc(100vw - 267px), 228px); }
     .app-promo-benefits .app-promo-qr { width: 72px; height: 72px; }
 }
