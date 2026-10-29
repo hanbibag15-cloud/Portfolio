@@ -1163,6 +1163,25 @@ body {
     background: var(--brand-red);
     color: var(--neutral-white);
 }
+/* Animate only the arrow when hovering or keyboard-focusing the STORE CTA. */
+.store-promo-link > span[aria-hidden="true"] {
+    display: inline-block;
+    transition: transform 300ms cubic-bezier(.22, 1, .36, 1);
+}
+@media (hover: hover) {
+    .store-promo-link:hover > span[aria-hidden="true"] {
+        transform: translateX(6px);
+    }
+}
+.store-promo-link:focus-visible > span[aria-hidden="true"] {
+    transform: translateX(6px);
+}
+@media (prefers-reduced-motion: reduce) {
+    .store-promo-link > span[aria-hidden="true"] {
+        transition: none;
+    }
+}
+
 .store-promo-art {
     display: block;
     flex: 0 0 auto;
