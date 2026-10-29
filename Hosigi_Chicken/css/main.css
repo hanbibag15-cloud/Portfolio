@@ -1124,12 +1124,12 @@ body {
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        gap: clamp(6px, 1.5vw, 12px);
-        width: 100%;
+        gap: 20px;
+        width: max-content;
         max-width: 100%;
         margin-top: 0;
     }
-    .app-promo-benefits ul { flex: 1 1 auto; min-width: 0; }
+    .app-promo-benefits ul { flex: 0 1 auto; min-width: 0; }
     .app-promo-benefits li { white-space: normal; }
     .app-promo-benefits .app-promo-qr {
         display: block;
@@ -1143,7 +1143,7 @@ body {
 }
 @media (max-width: 420px) {
     .app-promo-content { grid-template-columns: minmax(0, 1fr) minmax(90px, 30%); column-gap: 8px; }
-    .app-promo-benefits { gap: 6px; }
+    .app-promo-benefits { gap: 20px; }
     .app-promo-benefits .app-promo-qr { flex-basis: 56px; width: 56px; height: 56px; }
     .app-promo-benefits li { font-size: 12px; gap: 5px; }
 }
