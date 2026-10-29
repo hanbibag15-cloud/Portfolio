@@ -975,6 +975,13 @@ body {
 .menu-feature-product.is-active {
     opacity: 1;
 }
+/* Tablet/mobile layout: dim only the side products to 70%. */
+@media (max-width: 1024px) {
+    .menu-feature-product.is-prev,
+    .menu-feature-product.is-next {
+        opacity: .7;
+    }
+}
 .menu-feature-products {
     touch-action: pan-y;
 }
