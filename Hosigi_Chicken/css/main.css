@@ -32,8 +32,10 @@
 
 /* Header — Figma node 12:246 */
 .site-header {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 20;
     width: 100%;
     height: 90px;
@@ -135,8 +137,9 @@
     }
 }
 @media (max-width: 1024px) {
+    body { padding-top: 70px; }
     .site-header {
-        position: sticky;
+        position: fixed;
         height: 70px;
         padding: 0 20px;
     }
@@ -214,6 +217,7 @@
 }
 
 body {
+    padding-top: 90px; /* Reserve space for fixed desktop header. */
     background-color: var(--surface-default);
     font-family: var(--font);
 }
