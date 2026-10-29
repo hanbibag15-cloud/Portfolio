@@ -1127,3 +1127,21 @@ body {
     }
     .app-promo-art { display: none; }
 }
+
+/* Mobile only: place smaller QR at left and app artwork at right, next to benefits. */
+.app-promo-mobile-visual {display:contents;}
+.app-promo-mobile-art {display:none;}
+@media (max-width:767px) {
+    .app-promo-benefits {align-items:center;gap:10px;}
+    .app-promo-mobile-visual {display:flex;flex:0 0 auto;align-items:center;gap:8px;}
+    .app-promo-benefits .app-promo-qr {flex:0 0 64px;width:64px;height:64px;}
+    .app-promo-mobile-art {display:block;width:clamp(96px,28vw,160px);height:auto;object-fit:contain;}
+    .app-promo-inner > .app-promo-art {display:none;}
+    .app-promo-benefits ul {flex:1 1 auto;min-width:0;}
+    .app-promo-benefits li {white-space:normal;}
+}
+@media (max-width:390px) {
+    .app-promo-mobile-visual {gap:5px;}
+    .app-promo-benefits .app-promo-qr {flex-basis:52px;width:52px;height:52px;}
+    .app-promo-mobile-art {width:96px;}
+}
