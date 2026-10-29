@@ -341,6 +341,22 @@
         requestAnimationFrame(() => requestAnimationFrame(updateAppReveal));
     }
 
+    // STORE: replay MENU/APP slide-up reveal for the heading, description and button.
+    const storePromoSection = document.querySelector('.store-promo-section');
+    if (storePromoSection && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        storePromoSection.classList.add('store-motion-ready');
+        const updateStoreReveal = () => {
+            const revealLine = window.innerHeight * 0.78;
+            storePromoSection.classList.toggle(
+                'is-visible',
+                storePromoSection.getBoundingClientRect().top <= revealLine
+            );
+        };
+        window.addEventListener('scroll', updateStoreReveal, { passive: true });
+        window.addEventListener('resize', updateStoreReveal);
+        requestAnimationFrame(() => requestAnimationFrame(updateStoreReveal));
+    }
+
     document.querySelectorAll('.menu-feature').forEach(panel => {
         const items = [...panel.querySelectorAll('.menu-feature-product')];
         let activeIndex = 1;
