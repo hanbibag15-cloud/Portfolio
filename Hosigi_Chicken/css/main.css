@@ -1201,7 +1201,7 @@ body {
     box-sizing: border-box;
     margin: 0 auto;
     padding: 0 20px 219px;
-    background: #FFE965;
+    background: linear-gradient(to bottom, #FFE965 0 380px, transparent 380px);
 }
 .store-promo-inner {
     position: relative;
@@ -1270,7 +1270,7 @@ body {
     .store-promo-art { width: min(43%, 380px); margin-top: -72px; }
 }
 @media (max-width: 767px) {
-    .store-promo-section { height: auto; padding: 0 20px; }
+    .store-promo-section { height: auto; padding: 0 20px; background: #FFE965; }
     .store-promo-inner {
         width: 100%;
         height: auto;
