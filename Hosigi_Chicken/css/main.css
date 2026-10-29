@@ -1177,7 +1177,7 @@ body {
         opacity: 0;
         transform: translateY(36px);
         transition: opacity 750ms ease, transform 750ms cubic-bezier(.22, 1, .36, 1);
-        transition-delay: 360ms;
+        transition-delay: 0ms;
     }
     .app-promo-section.app-motion-ready.is-visible .app-promo-art-mobile {
         opacity: 1;
