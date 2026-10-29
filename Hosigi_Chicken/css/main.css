@@ -1193,6 +1193,32 @@ body {
 }
 
 
+/* STORE reveal: same slide-up/fade motion as MENU and APP; text and CTA only. */
+.store-promo-section.store-motion-ready .store-promo-copy h2,
+.store-promo-section.store-motion-ready .store-promo-copy p,
+.store-promo-section.store-motion-ready .store-promo-link {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 750ms ease, transform 750ms cubic-bezier(.22, 1, .36, 1);
+}
+.store-promo-section.store-motion-ready .store-promo-copy p { transition-delay: 120ms; }
+.store-promo-section.store-motion-ready .store-promo-link { transition-delay: 240ms; }
+.store-promo-section.store-motion-ready.is-visible .store-promo-copy h2,
+.store-promo-section.store-motion-ready.is-visible .store-promo-copy p,
+.store-promo-section.store-motion-ready.is-visible .store-promo-link {
+    opacity: 1;
+    transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+    .store-promo-section.store-motion-ready .store-promo-copy h2,
+    .store-promo-section.store-motion-ready .store-promo-copy p,
+    .store-promo-section.store-motion-ready .store-promo-link {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
 /* STORE promotional banner — Figma-inspired third section. */
 .store-promo-section {
     width: 100%;
