@@ -32,7 +32,8 @@
 
 /* Header — Figma node 12:246 */
 .site-header {
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: 20;
     width: 100%;
     height: 90px;
@@ -135,7 +136,7 @@
 }
 @media (max-width: 1024px) {
     .site-header {
-        position: relative;
+        position: sticky;
         height: 70px;
         padding: 0 20px;
     }
