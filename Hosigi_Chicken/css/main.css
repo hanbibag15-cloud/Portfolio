@@ -1281,10 +1281,10 @@ body {
     .store-promo-section {
         height: auto;
         padding: 0 20px 24px;
-        background: linear-gradient(to bottom, #FFE45C 0 190px, transparent 190px);
+        background: linear-gradient(to bottom, #FFE45C 0 175px, transparent 175px);
         background-position: 0 0;
         background-repeat: no-repeat;
-        background-size: 100% 190px;
+        background-size: 100% 175px;
     }
     .store-promo-inner {
         width: 100%;
