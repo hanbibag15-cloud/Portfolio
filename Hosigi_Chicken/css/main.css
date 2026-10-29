@@ -1211,7 +1211,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
+    width: min(100%, 1240px);
     height: 224px;
     min-height: 0;
     margin: 0 auto;
@@ -1265,11 +1265,11 @@ body {
     flex: 0 0 auto;
     width: min(42%, 490px);
     height: auto;
-    margin-top: -88px;
+    margin-top: 0;
     object-fit: contain;
 }
 @media (min-width: 768px) and (max-width: 1200px) {
-    .store-promo-inner { width: 100%; }
+    .store-promo-inner { width: min(100%, 900px); }
     .store-promo-copy { margin-top: 76px; }
     .store-promo-copy h2 { font-size: 56px; }
     .store-promo-copy p { font-size: 17px; }
