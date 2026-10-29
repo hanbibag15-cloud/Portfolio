@@ -999,3 +999,10 @@ body {
         z-index: 5;
     }
 }
+
+/* Brand dropdown contains three items rather than four. */
+@media (min-width: 1025px) {
+    #brand-submenu {
+        height: 157px;
+    }
+}
