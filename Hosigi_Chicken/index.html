@@ -31,9 +31,36 @@
                                 <li><a href="#side-menu">사이드 메뉴</a></li>
                             </ul>
                         </li>
-                        <li><a href="#brand">브랜드</a></li>
-                        <li><a href="#stores">매장찾기</a></li>
-                        <li><a href="#events">이벤트</a></li>
+                        <li class="has-submenu">
+                            <a href="#brand" aria-expanded="false" aria-controls="brand-submenu">브랜드</a>
+                            <ul class="header-submenu" id="brand-submenu" aria-label="브랜드 상세">
+                                <!-- 아래 임시 항목의 텍스트와 링크를 실제 브랜드 목록으로 교체 -->
+                                <li><a href="#brand-item-1">항목 1</a></li>
+                                <li><a href="#brand-item-2">항목 2</a></li>
+                                <li><a href="#brand-item-3">항목 3</a></li>
+                                <li><a href="#brand-item-4">항목 4</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#stores" aria-expanded="false" aria-controls="stores-submenu">매장찾기</a>
+                            <ul class="header-submenu" id="stores-submenu" aria-label="매장찾기 상세">
+                                <!-- 아래 임시 항목의 텍스트와 링크를 실제 매장찾기 목록으로 교체 -->
+                                <li><a href="#stores-item-1">항목 1</a></li>
+                                <li><a href="#stores-item-2">항목 2</a></li>
+                                <li><a href="#stores-item-3">항목 3</a></li>
+                                <li><a href="#stores-item-4">항목 4</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#events" aria-expanded="false" aria-controls="events-submenu">이벤트</a>
+                            <ul class="header-submenu" id="events-submenu" aria-label="이벤트 상세">
+                                <!-- 아래 임시 항목의 텍스트와 링크를 실제 이벤트 목록으로 교체 -->
+                                <li><a href="#events-item-1">항목 1</a></li>
+                                <li><a href="#events-item-2">항목 2</a></li>
+                                <li><a href="#events-item-3">항목 3</a></li>
+                                <li><a href="#events-item-4">항목 4</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
 
@@ -198,22 +225,42 @@
         menuToggle.setAttribute('aria-expanded', String(isOpen));
         menuToggle.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
     });
-    const menuMainLink = document.querySelector('.has-submenu > a');
-    const submenuContainer = document.querySelector('.has-submenu');
+    // Shared dropdown behavior for MENU, Brand, Stores, and Events.
+    const headerSubmenus = document.querySelectorAll('.header-nav .has-submenu');
 
-    menuMainLink.addEventListener('click', (event) => {
-        if (window.matchMedia('(max-width: 1024px)').matches) {
+    function closeHeaderSubmenus(except = null) {
+        headerSubmenus.forEach(item => {
+            if (item === except) return;
+            item.classList.remove('submenu-open');
+            item.querySelector(':scope > a').setAttribute('aria-expanded', 'false');
+        });
+    }
+
+    headerSubmenus.forEach(item => {
+        const trigger = item.querySelector(':scope > a');
+        trigger.addEventListener('click', event => {
+            if (!window.matchMedia('(max-width: 1024px)').matches) return;
             event.preventDefault();
-            const isOpen = submenuContainer.classList.toggle('submenu-open');
-            menuMainLink.setAttribute('aria-expanded', String(isOpen));
-        }
+            const wasOpen = item.classList.contains('submenu-open');
+            closeHeaderSubmenus(item);
+            item.classList.toggle('submenu-open', !wasOpen);
+            trigger.setAttribute('aria-expanded', String(!wasOpen));
+        });
+        item.addEventListener('mouseenter', () => {
+            if (window.matchMedia('(min-width: 1025px)').matches) {
+                trigger.setAttribute('aria-expanded', 'true');
+            }
+        });
+        item.addEventListener('mouseleave', () => {
+            if (window.matchMedia('(min-width: 1025px)').matches) {
+                trigger.setAttribute('aria-expanded', 'false');
+            }
+        });
     });
 
-    document.querySelectorAll('.header-nav a').forEach(link => {
-        link.addEventListener('click', (event) => {
-            if (link === menuMainLink && window.matchMedia('(max-width: 1024px)').matches) return;
-            submenuContainer.classList.remove('submenu-open');
-            menuMainLink.setAttribute('aria-expanded', 'false');
+    document.querySelectorAll('.header-nav .header-submenu a').forEach(link => {
+        link.addEventListener('click', () => {
+            closeHeaderSubmenus();
             siteHeader.classList.remove('menu-open');
             menuToggle.setAttribute('aria-expanded', 'false');
             menuToggle.setAttribute('aria-label', '메뉴 열기');
