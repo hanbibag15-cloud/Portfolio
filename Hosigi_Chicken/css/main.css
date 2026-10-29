@@ -1142,10 +1142,11 @@ body {
     line-height: 1.5;
 }
 .store-promo-link {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 0;
     width: 219px;
     height: 49px;
     min-height: 49px;
@@ -1165,6 +1166,8 @@ body {
 }
 /* Animate only the arrow when hovering or keyboard-focusing the STORE CTA. */
 .store-promo-link > span[aria-hidden="true"] {
+    position: absolute;
+    left: calc(50% - 4em);
     display: inline-block;
     transition: transform 300ms cubic-bezier(.22, 1, .36, 1);
 }
