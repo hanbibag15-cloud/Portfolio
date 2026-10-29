@@ -1244,8 +1244,9 @@ body {
     align-items: center;
     justify-content: center;
     gap: 3px;
-    width: 185px;
-    min-height: 42px;
+    width: 219px;
+    height: 49px;
+    min-height: 49px;
     margin-top: 20px;
     border: 2px solid var(--brand-red);
     border-radius: 999px;
@@ -1265,7 +1266,7 @@ body {
     flex: 0 0 auto;
     width: min(42%, 490px);
     height: auto;
-    margin-top: 0;
+    margin-top: -30px;
     object-fit: contain;
 }
 @media (min-width: 768px) and (max-width: 1200px) {
