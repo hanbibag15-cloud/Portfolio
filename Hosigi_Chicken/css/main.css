@@ -1251,7 +1251,7 @@ body {
     border: 2px solid var(--brand-red);
     border-radius: 999px;
     color: var(--brand-red);
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 600;
     text-decoration: none;
     transition: background .2s ease, color .2s ease;
