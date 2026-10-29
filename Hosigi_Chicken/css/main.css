@@ -1211,7 +1211,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: min(100%, 1240px);
+    width: 100%;
     height: 224px;
     min-height: 0;
     margin: 0 auto;
@@ -1221,18 +1221,21 @@ body {
     z-index: 1;
     flex: 0 0 auto;
     padding: 0;
+    align-self: flex-start;
+    margin-top: 72px;
+    margin-left: 14px;
 }
 .store-promo-copy h2 {
     color: var(--brand-red);
-    font-size: 72px;
+    font-size: 60px;
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: -.03em;
 }
 .store-promo-copy p {
-    margin-top: 12px;
+    margin-top: 8px;
     color: var(--text-primary);
-    font-size: 23px;
+    font-size: 20px;
     font-weight: 600;
     line-height: 1.5;
 }
@@ -1241,13 +1244,13 @@ body {
     align-items: center;
     justify-content: center;
     gap: 3px;
-    width: 240px;
-    min-height: 54px;
-    margin-top: 24px;
+    width: 185px;
+    min-height: 42px;
+    margin-top: 20px;
     border: 2px solid var(--brand-red);
     border-radius: 999px;
     color: var(--brand-red);
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 600;
     text-decoration: none;
     transition: background .2s ease, color .2s ease;
@@ -1266,7 +1269,8 @@ body {
     object-fit: contain;
 }
 @media (min-width: 768px) and (max-width: 1200px) {
-    .store-promo-inner { width: min(100%, 900px); }
+    .store-promo-inner { width: 100%; }
+    .store-promo-copy { margin-top: 76px; }
     .store-promo-copy h2 { font-size: 56px; }
     .store-promo-copy p { font-size: 17px; }
     .store-promo-link { width: 180px; min-height: 44px; font-size: 13px; }
@@ -1280,7 +1284,7 @@ body {
         min-height: 240px;
         gap: 8px;
     }
-    .store-promo-copy { padding: 32px 0; }
+    .store-promo-copy { padding: 32px 0; margin: 0; align-self: auto; }
     .store-promo-link { width: 121px; min-height: 30px; margin-top: 12px; border-width: 1px; font-size: 10px; }
     .store-promo-copy h2 { font-size: clamp(30px, 7vw, 40px); }
     .store-promo-copy p { font-size: 12px; }
@@ -1303,5 +1307,6 @@ body {
     .store-promo-copy {
         align-self: flex-start;
         padding: 0;
+        margin: 0;
     }
 }
