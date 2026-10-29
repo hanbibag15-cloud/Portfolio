@@ -1222,7 +1222,7 @@ body {
 /* STORE promotional banner — Figma-inspired third section. */
 .store-promo-section {
     width: 100%;
-    max-width: 1920px;
+    max-width: none;
     height: 443px;
     box-sizing: border-box;
     margin: 0 auto;
