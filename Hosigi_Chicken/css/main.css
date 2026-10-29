@@ -1191,3 +1191,101 @@ body {
         transition: none;
     }
 }
+
+
+/* STORE promotional banner — Figma-inspired third section. */
+.store-promo-section {
+    width: 100%;
+    margin: 0;
+    padding: 0 20px;
+    background: #FFE965;
+}
+.store-promo-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(100%, 620px);
+    min-height: 166px;
+    margin: 0 auto;
+}
+.store-promo-copy {
+    position: relative;
+    z-index: 1;
+    flex: 0 0 auto;
+    padding: 26px 0 28px;
+}
+.store-promo-copy h2 {
+    color: var(--brand-red);
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -.03em;
+}
+.store-promo-copy p {
+    margin-top: 6px;
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+.store-promo-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    width: 121px;
+    min-height: 28px;
+    margin-top: 12px;
+    border: 1px solid var(--brand-red);
+    border-radius: 999px;
+    color: var(--brand-red);
+    font-size: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background .2s ease, color .2s ease;
+}
+.store-promo-link:hover,
+.store-promo-link:focus-visible {
+    background: var(--brand-red);
+    color: var(--neutral-white);
+}
+.store-promo-art {
+    display: block;
+    flex: 0 1 245px;
+    width: min(40%, 245px);
+    height: auto;
+    margin-top: -44px;
+    object-fit: contain;
+}
+@media (max-width: 767px) {
+    .store-promo-section { padding: 0 20px; }
+    .store-promo-inner {
+        width: 100%;
+        min-height: 240px;
+        gap: 8px;
+    }
+    .store-promo-copy { padding: 32px 0; }
+    .store-promo-copy h2 { font-size: clamp(30px, 7vw, 40px); }
+    .store-promo-copy p { font-size: 12px; }
+    .store-promo-art { width: min(46%, 210px); margin-top: -24px; }
+}
+@media (max-width: 420px) {
+    .store-promo-inner {
+        min-height: 300px;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        padding-bottom: 22px;
+    }
+    .store-promo-art {
+        flex: 0 0 auto;
+        width: min(65%, 200px);
+        margin: -20px auto 0;
+    }
+    .store-promo-copy {
+        align-self: flex-start;
+        padding: 0;
+    }
+}
