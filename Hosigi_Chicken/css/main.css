@@ -1196,8 +1196,11 @@ body {
 /* STORE promotional banner — Figma-inspired third section. */
 .store-promo-section {
     width: 100%;
-    margin: 0;
-    padding: 0 20px;
+    max-width: 1920px;
+    height: 443px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0 20px 219px;
     background: #FFE965;
 }
 .store-promo-inner {
@@ -1206,14 +1209,15 @@ body {
     align-items: center;
     justify-content: space-between;
     width: min(100%, 1240px);
-    min-height: 320px;
+    height: 224px;
+    min-height: 0;
     margin: 0 auto;
 }
 .store-promo-copy {
     position: relative;
     z-index: 1;
     flex: 0 0 auto;
-    padding: 50px 0 54px;
+    padding: 0;
 }
 .store-promo-copy h2 {
     color: var(--brand-red);
@@ -1259,16 +1263,17 @@ body {
     object-fit: contain;
 }
 @media (min-width: 768px) and (max-width: 1200px) {
-    .store-promo-inner { width: min(100%, 900px); min-height: 270px; }
+    .store-promo-inner { width: min(100%, 900px); }
     .store-promo-copy h2 { font-size: 56px; }
     .store-promo-copy p { font-size: 17px; }
     .store-promo-link { width: 180px; min-height: 44px; font-size: 13px; }
     .store-promo-art { width: min(43%, 380px); margin-top: -72px; }
 }
 @media (max-width: 767px) {
-    .store-promo-section { padding: 0 20px; }
+    .store-promo-section { height: auto; padding: 0 20px; }
     .store-promo-inner {
         width: 100%;
+        height: auto;
         min-height: 240px;
         gap: 8px;
     }
