@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/default.css">
     <link rel="stylesheet" href="../npm/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
-    <link rel="stylesheet" href="css/main.css?v=45">
+    <link rel="stylesheet" href="css/main.css?v=46">
     <script src="../npm/swiper/swiper-bundle.min.js"></script>
 </head>
 <body>
@@ -309,6 +309,22 @@
             window.addEventListener('resize', updateMenuReveal);
             updateMenuReveal();
         }
+    }
+
+    // APP section: replay the same slide-up reveal when scrolling back and forth.
+    const appPromoSection = document.querySelector('.app-promo-section');
+    if (appPromoSection && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        appPromoSection.classList.add('app-motion-ready');
+        const updateAppReveal = () => {
+            const revealLine = window.innerHeight * 0.78;
+            appPromoSection.classList.toggle(
+                'is-visible',
+                appPromoSection.getBoundingClientRect().top <= revealLine
+            );
+        };
+        window.addEventListener('scroll', updateAppReveal, { passive: true });
+        window.addEventListener('resize', updateAppReveal);
+        updateAppReveal();
     }
 
     document.querySelectorAll('.menu-feature').forEach(panel => {
