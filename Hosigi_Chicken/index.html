@@ -303,6 +303,22 @@
         });
     });
 
+    // MENU: same scroll reveal pattern as STORE, without changing the carousel.
+    const menuSection = document.querySelector('.menu-section');
+    if (menuSection && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        menuSection.classList.add('menu-motion-ready');
+        const updateMenuReveal = () => {
+            const revealLine = window.innerHeight * 0.78;
+            menuSection.classList.toggle(
+                'is-visible',
+                menuSection.getBoundingClientRect().top <= revealLine
+            );
+        };
+        window.addEventListener('scroll', updateMenuReveal, { passive: true });
+        window.addEventListener('resize', updateMenuReveal);
+        requestAnimationFrame(() => requestAnimationFrame(updateMenuReveal));
+    }
+
     // APP section: replay the same slide-up reveal when scrolling back and forth.
     const appPromoSection = document.querySelector('.app-promo-section');
     if (appPromoSection && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
