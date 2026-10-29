@@ -205,7 +205,7 @@
 <div class="menu-feature-product is-hidden" data-product-index="11"><div class="menu-product-image"><img src="img/Side_Menu12.png?v=a27232d4" alt="로제비앤나떡볶이" loading="lazy"></div><div class="menu-product-caption" hidden><h3>로제비앤나떡볶이</h3></div></div>
 </div><button type="button" class="menu-feature-arrow menu-feature-next" aria-label="다음 사이드 상품"></button></div>
             </section>
-            <section class="app-promo-section app-motion-ready" id="app" aria-labelledby="app-title">
+            <section class="app-promo-section" id="app" aria-labelledby="app-title">
                 <div class="app-promo-inner">
                     <div class="app-promo-content">
                         <div class="app-promo-intro">
@@ -306,6 +306,7 @@
     // APP section: replay the same slide-up reveal when scrolling back and forth.
     const appPromoSection = document.querySelector('.app-promo-section');
     if (appPromoSection && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        appPromoSection.classList.add('app-motion-ready');
         const updateAppReveal = () => {
             const revealLine = window.innerHeight * 0.78;
             appPromoSection.classList.toggle(
