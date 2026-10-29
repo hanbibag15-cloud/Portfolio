@@ -1147,3 +1147,26 @@ body {
     .app-promo-benefits .app-promo-qr { flex-basis: 56px; width: 56px; height: 56px; }
     .app-promo-benefits li { font-size: 12px; gap: 5px; }
 }
+
+/* Mobile: display:contents has no visual box, so reveal the intro children directly. */
+@media (max-width: 767px) {
+    .app-promo-section.app-motion-ready .app-promo-intro h2,
+    .app-promo-section.app-motion-ready .app-promo-intro p {
+        opacity: 0;
+        transform: translateY(36px);
+        transition: opacity 750ms ease, transform 750ms cubic-bezier(.22, 1, .36, 1);
+    }
+    .app-promo-section.app-motion-ready.is-visible .app-promo-intro h2,
+    .app-promo-section.app-motion-ready.is-visible .app-promo-intro p {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+    .app-promo-section.app-motion-ready .app-promo-intro h2,
+    .app-promo-section.app-motion-ready .app-promo-intro p {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
