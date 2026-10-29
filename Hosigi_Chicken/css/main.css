@@ -1006,3 +1006,57 @@ body {
         height: 157px;
     }
 }
+
+/* Figma node 128:40 – app promotion */
+.app-promo-section {padding:110px 20px;background:var(--background-subtle);}
+.app-promo-inner {display:flex;align-items:center;justify-content:center;gap:clamp(48px,6.77vw,130px);max-width:1720px;margin:0 auto;}
+.app-promo-content {display:flex;flex:0 1 594px;min-width:0;flex-direction:column;align-items:flex-start;gap:45px;}
+.app-promo-intro h2 {font-size:clamp(40px,3.4vw,65px);font-weight:700;letter-spacing:-.023em;line-height:1.08;color:var(--text-primary);word-break:keep-all;}
+.app-promo-intro h2 span {display:block;color:var(--brand-red);}
+.app-promo-intro p {margin-top:16px;font-size:clamp(17px,1.2vw,23px);font-weight:500;line-height:1.21;letter-spacing:-.023em;color:var(--brand-brown);}
+.app-promo-benefits {display:flex;justify-content:space-between;align-items:center;gap:20px;width:min(100%,563px);margin-top:16px;}
+.app-promo-benefits ul {display:flex;flex-direction:column;gap:15px;}
+.app-promo-benefits li {display:flex;align-items:center;gap:13px;font-size:18px;font-weight:500;letter-spacing:-.023em;white-space:nowrap;color:#606060;}
+.app-promo-benefits li::before {content:"✓";display:grid;place-items:center;width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:var(--brand-red);color:white;font-size:14px;}
+.app-promo-qr {width:150px;height:150px;flex:0 0 150px;object-fit:contain;}
+.app-promo-stores {display:flex;align-items:center;gap:30px;width:100%;}
+.app-store-link {display:flex;align-items:center;justify-content:center;gap:12px;flex:1 1 0;min-width:0;height:88px;padding:15px 18px;border-radius:40px;background:var(--brand-brown);color:white;}
+.app-store-link img {width:40px;height:44px;flex:0 0 40px;object-fit:contain;}
+.app-store-link:last-child img {width:47px;height:47px;flex-basis:47px;}
+.app-store-link span {display:flex;flex-direction:column;line-height:1.18;white-space:nowrap;}
+.app-store-link small {font-size:17px;font-weight:400;letter-spacing:-.023em;}
+.app-store-link strong {font-size:clamp(20px,1.67vw,32px);font-weight:500;letter-spacing:-.023em;}
+.app-store-link:hover,.app-store-link:focus-visible {background:var(--brand-red);}
+.app-promo-art {flex:0 1 580px;min-width:0;}
+.app-promo-art img {width:100%;height:auto;object-fit:contain;}
+@media (max-width:1100px) {
+ .app-promo-section {padding:80px 24px;}
+ .app-promo-inner {gap:32px;}
+ .app-promo-content {gap:28px;}
+ .app-promo-benefits li {font-size:15px;}
+ .app-promo-qr {width:110px;height:110px;flex-basis:110px;}
+ .app-promo-stores {gap:12px;}
+ .app-store-link {height:68px;padding:10px 12px;}
+ .app-store-link img {width:30px;height:34px;flex-basis:30px;}
+ .app-store-link:last-child img {width:33px;height:33px;flex-basis:33px;}
+ .app-store-link small {font-size:12px;}
+}
+@media (max-width:767px) {
+ .app-promo-section {padding:70px 20px;}
+ .app-promo-inner {flex-direction:column;gap:36px;}
+ .app-promo-content {flex:auto;width:100%;gap:26px;}
+ .app-promo-intro h2 {font-size:clamp(30px,7.5vw,45px);}
+ .app-promo-intro p {font-size:15px;line-height:1.5;}
+ .app-promo-benefits {gap:12px;margin-top:0;}
+ .app-promo-benefits li {font-size:13px;gap:8px;}
+ .app-promo-benefits li::before {width:19px;height:19px;flex-basis:19px;font-size:12px;}
+ .app-promo-qr {width:100px;height:100px;flex-basis:100px;}
+ .app-promo-stores {gap:10px;}
+ .app-store-link {height:auto;min-height:58px;border-radius:32px;padding:10px 8px;gap:6px;}
+ .app-store-link img {width:24px;height:26px;flex-basis:24px;}
+ .app-store-link:last-child img {width:27px;height:27px;flex-basis:27px;}
+ .app-store-link small {font-size:10px;}
+ .app-store-link strong {font-size:clamp(15px,4vw,20px);}
+ .app-promo-art {flex:auto;width:min(100%,480px);}
+}
+@media (max-width:380px) {.app-promo-qr {width:84px;height:84px;flex-basis:84px;}.app-promo-benefits li {font-size:12px;}}
