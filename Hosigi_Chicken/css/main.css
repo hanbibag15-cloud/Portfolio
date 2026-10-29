@@ -1197,7 +1197,7 @@ body {
 /* Animate only the arrow when hovering or keyboard-focusing the STORE CTA. */
 .store-promo-link > span[aria-hidden="true"] {
     position: absolute;
-    left: calc(50% - 3.7em);
+    left: calc(50% - 3.5em);
     display: inline-block;
     transition: transform 300ms cubic-bezier(.22, 1, .36, 1);
 }
