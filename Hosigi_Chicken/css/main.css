@@ -1222,8 +1222,8 @@ body {
     flex: 0 0 auto;
     padding: 0;
     align-self: flex-start;
-    margin-top: 72px;
-    margin-left: 14px;
+    margin-top: 54.5px;
+    margin-left: 27px;
 }
 .store-promo-copy h2 {
     color: var(--brand-red);
@@ -1271,7 +1271,7 @@ body {
 }
 @media (min-width: 768px) and (max-width: 1200px) {
     .store-promo-inner { width: min(100%, 900px); }
-    .store-promo-copy { margin-top: 76px; }
+    .store-promo-copy { margin-top: 54.5px; margin-left: 14px; }
     .store-promo-copy h2 { font-size: 56px; }
     .store-promo-copy p { font-size: 17px; }
     .store-promo-link { width: 180px; min-height: 44px; font-size: 13px; }
