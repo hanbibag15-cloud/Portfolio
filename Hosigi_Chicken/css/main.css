@@ -1205,27 +1205,27 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: min(100%, 620px);
-    min-height: 166px;
+    width: min(100%, 1240px);
+    min-height: 320px;
     margin: 0 auto;
 }
 .store-promo-copy {
     position: relative;
     z-index: 1;
     flex: 0 0 auto;
-    padding: 26px 0 28px;
+    padding: 50px 0 54px;
 }
 .store-promo-copy h2 {
     color: var(--brand-red);
-    font-size: 40px;
+    font-size: 72px;
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: -.03em;
 }
 .store-promo-copy p {
-    margin-top: 6px;
+    margin-top: 12px;
     color: var(--text-primary);
-    font-size: 13px;
+    font-size: 23px;
     font-weight: 600;
     line-height: 1.5;
 }
@@ -1234,13 +1234,13 @@ body {
     align-items: center;
     justify-content: center;
     gap: 3px;
-    width: 121px;
-    min-height: 28px;
-    margin-top: 12px;
-    border: 1px solid var(--brand-red);
+    width: 240px;
+    min-height: 54px;
+    margin-top: 24px;
+    border: 2px solid var(--brand-red);
     border-radius: 999px;
     color: var(--brand-red);
-    font-size: 10px;
+    font-size: 16px;
     font-weight: 600;
     text-decoration: none;
     transition: background .2s ease, color .2s ease;
@@ -1252,11 +1252,18 @@ body {
 }
 .store-promo-art {
     display: block;
-    flex: 0 1 245px;
-    width: min(40%, 245px);
+    flex: 0 0 auto;
+    width: min(42%, 490px);
     height: auto;
-    margin-top: -44px;
+    margin-top: -88px;
     object-fit: contain;
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+    .store-promo-inner { width: min(100%, 900px); min-height: 270px; }
+    .store-promo-copy h2 { font-size: 56px; }
+    .store-promo-copy p { font-size: 17px; }
+    .store-promo-link { width: 180px; min-height: 44px; font-size: 13px; }
+    .store-promo-art { width: min(43%, 380px); margin-top: -72px; }
 }
 @media (max-width: 767px) {
     .store-promo-section { padding: 0 20px; }
@@ -1266,6 +1273,7 @@ body {
         gap: 8px;
     }
     .store-promo-copy { padding: 32px 0; }
+    .store-promo-link { width: 121px; min-height: 30px; margin-top: 12px; border-width: 1px; font-size: 10px; }
     .store-promo-copy h2 { font-size: clamp(30px, 7vw, 40px); }
     .store-promo-copy p { font-size: 12px; }
     .store-promo-art { width: min(46%, 210px); margin-top: -24px; }
