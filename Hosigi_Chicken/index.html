@@ -192,7 +192,19 @@
                     </div>
                     <button type="button" class="menu-feature-arrow menu-feature-next" aria-label="다음 상품"></button>
                 </div>
-                <p class="menu-side-notice" data-menu-panel="side" hidden>사이드 메뉴 이미지를 추가하면 이곳에 표시됩니다.</p>
+                <div class="menu-feature" data-menu-panel="side" hidden><button type="button" class="menu-feature-arrow menu-feature-prev" aria-label="이전 사이드 상품"></button><div class="menu-feature-products" aria-live="polite"><div class="menu-feature-product is-prev" data-product-index="0"><div class="menu-product-image"><img src="img/Side_Menu01.png?v=2ce9ff7f" alt="사이드 메뉴 01" loading="lazy"></div><div class="menu-product-caption" hidden><h3>사이드 메뉴 01</h3></div></div>
+<div class="menu-feature-product is-active" data-product-index="1"><div class="menu-product-image"><img src="img/Side_Menu02.png?v=71a3387a" alt="사이드 메뉴 02" loading="lazy"></div><div class="menu-product-caption" ><h3>사이드 메뉴 02</h3></div></div>
+<div class="menu-feature-product is-next" data-product-index="2"><div class="menu-product-image"><img src="img/Side_Menu03.png?v=43a516d1" alt="사이드 메뉴 03" loading="lazy"></div><div class="menu-product-caption" hidden><h3>사이드 메뉴 03</h3></div></div>
+<div class="menu-feature-product is-hidden" data-product-index="3"><div class="menu-product-image"><img src="img/Side_Menu04.png?v=9a2388e9" alt="사이드 메뉴 04" loading="lazy"></div><div class="menu-product-caption" hidden><h3>사이드 메뉴 04</h3></div></div>
+<div class="menu-feature-product is-hidden" data-product-index="4"><div class="menu-product-image"><img src="img/Side_Menu05.png?v=2348158a" alt="사이드 메뉴 05" loading="lazy"></div><div class="menu-product-caption" hidden><h3>사이드 메뉴 05</h3></div></div>
+<div class="menu-feature-product is-hidden" data-product-index="5"><div class="menu-product-image"><img src="img/Side_Menu06.png?v=1725a935" alt="사이드 메뉴 06" loading="lazy"></div><div class="menu-product-caption" hidden><h3>사이드 메뉴 06</h3></div></div>
+<div class="menu-feature-product is-hidden" data-product-index="6"><div class="menu-product-image"><img src="img/Side_Menu07.png?v=ed41ae52" alt="사이드 메뉴 07" loading="lazy"></div><div class="menu-product-caption" hidden><h3>사이드 메뉴 07</h3></div></div>
+<div class="menu-feature-product is-hidden" data-product-index="7"><div class="menu-product-image"><img src="img/Side_Menu08.png?v=3d30ccef" alt="사이드 메뉴 08" loading="lazy"></div><div class="menu-product-caption" hidden><h3>사이드 메뉴 08</h3></div></div>
+<div class="menu-feature-product is-hidden" data-product-index="8"><div class="menu-product-image"><img src="img/Side_Menu09.png?v=91766cdf" alt="사이드 메뉴 09" loading="lazy"></div><div class="menu-product-caption" hidden><h3>사이드 메뉴 09</h3></div></div>
+<div class="menu-feature-product is-hidden" data-product-index="9"><div class="menu-product-image"><img src="img/Side_Menu10.png?v=04787b10" alt="사이드 메뉴 10" loading="lazy"></div><div class="menu-product-caption" hidden><h3>사이드 메뉴 10</h3></div></div>
+<div class="menu-feature-product is-hidden" data-product-index="10"><div class="menu-product-image"><img src="img/Side_Menu11.png?v=bd32ddbd" alt="사이드 메뉴 11" loading="lazy"></div><div class="menu-product-caption" hidden><h3>사이드 메뉴 11</h3></div></div>
+<div class="menu-feature-product is-hidden" data-product-index="11"><div class="menu-product-image"><img src="img/Side_Menu12.png?v=a27232d4" alt="사이드 메뉴 12" loading="lazy"></div><div class="menu-product-caption" hidden><h3>사이드 메뉴 12</h3></div></div>
+</div><button type="button" class="menu-feature-arrow menu-feature-next" aria-label="다음 사이드 상품"></button></div>
             </section>
         </main>
         <footer>&copy;</footer>
@@ -277,68 +289,39 @@
         }
     }
 
-    const menuItems = document.querySelectorAll('.menu-feature-product');
-    let activeMenuIndex = 1;
-
-    function updateFeaturedMenu() {
-        menuItems.forEach((item, index) => {
-            item.classList.remove('is-prev', 'is-active', 'is-next', 'is-hidden', 'is-before', 'is-after');
-            const distance = (index - activeMenuIndex + menuItems.length) % menuItems.length;
-            if (distance === 0) item.classList.add('is-active');
-            else if (distance === 1) item.classList.add('is-next');
-            else if (distance === menuItems.length - 1) item.classList.add('is-prev');
-            else {
-                item.classList.add('is-hidden');
-                item.classList.add(distance <= menuItems.length / 2 ? 'is-after' : 'is-before');
-            }
-            const caption = item.querySelector('.menu-product-caption');
-            if (caption) caption.hidden = distance !== 0;
-        });
-    }
-
-    // Place offscreen items on the correct side before the first interaction.
-    updateFeaturedMenu();
-
-    document.querySelector('.menu-feature-prev').addEventListener('click', () => {
-        activeMenuIndex = (activeMenuIndex - 1 + menuItems.length) % menuItems.length;
-        updateFeaturedMenu();
+    document.querySelectorAll('.menu-feature').forEach(panel => {
+        const items = [...panel.querySelectorAll('.menu-feature-product')];
+        let activeIndex = 1;
+        function update() {
+            items.forEach((item, index) => {
+                const dist = (index - activeIndex + items.length) % items.length;
+                item.classList.remove('is-prev','is-active','is-next','is-hidden','is-before','is-after');
+                if(dist === 0) item.classList.add('is-active');
+                else if(dist === 1) item.classList.add('is-next');
+                else if(dist === items.length-1) item.classList.add('is-prev');
+                else {item.classList.add('is-hidden',dist <= items.length/2 ? 'is-after':'is-before');}
+                const caption = item.querySelector('.menu-product-caption');
+                if(caption) caption.hidden = dist !== 0;
+            });
+        }
+        function move(step){activeIndex=(activeIndex+step+items.length)%items.length;update();}
+        panel.querySelector('.menu-feature-prev').addEventListener('click',()=>move(-1));
+        panel.querySelector('.menu-feature-next').addEventListener('click',()=>move(1));
+        let x=0,y=0;
+        const area=panel.querySelector('.menu-feature-products');
+        area.addEventListener('touchstart',e=>{if(e.touches.length!==1)return;x=e.touches[0].clientX;y=e.touches[0].clientY;},{passive:true});
+        area.addEventListener('touchend',e=>{if(e.changedTouches.length!==1)return;const dx=e.changedTouches[0].clientX-x,dy=e.changedTouches[0].clientY-y;if(Math.abs(dx)>=45&&Math.abs(dx)>Math.abs(dy)*1.2)move(dx<0?1:-1);},{passive:true});
+        update();
     });
-    document.querySelector('.menu-feature-next').addEventListener('click', () => {
-        activeMenuIndex = (activeMenuIndex + 1) % menuItems.length;
-        updateFeaturedMenu();
-    });
-
-    // Mobile: swipe horizontally on the product area without blocking vertical scrolling.
-    const menuSwipeArea = document.querySelector('.menu-feature-products');
-    let swipeStartX = 0;
-    let swipeStartY = 0;
-
-    menuSwipeArea.addEventListener('touchstart', (event) => {
-        if (event.touches.length !== 1) return;
-        swipeStartX = event.touches[0].clientX;
-        swipeStartY = event.touches[0].clientY;
-    }, { passive: true });
-
-    menuSwipeArea.addEventListener('touchend', (event) => {
-        if (event.changedTouches.length !== 1) return;
-        const deltaX = event.changedTouches[0].clientX - swipeStartX;
-        const deltaY = event.changedTouches[0].clientY - swipeStartY;
-        if (Math.abs(deltaX) < 45 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.2) return;
-
-        activeMenuIndex = (activeMenuIndex + (deltaX < 0 ? 1 : -1) + menuItems.length) % menuItems.length;
-        updateFeaturedMenu();
-    }, { passive: true });
-
     document.querySelectorAll('.menu-category').forEach(button => {
         button.addEventListener('click', () => {
-            const isChicken = button.dataset.menuType === 'chicken';
+            const type=button.dataset.menuType;
             document.querySelectorAll('.menu-category').forEach(tab => {
-                const selected = tab === button;
-                tab.classList.toggle('is-active', selected);
-                tab.setAttribute('aria-pressed', String(selected));
+                const selected=tab===button;
+                tab.classList.toggle('is-active',selected);
+                tab.setAttribute('aria-pressed',String(selected));
             });
-            document.querySelector('[data-menu-panel="chicken"]').hidden = !isChicken;
-            document.querySelector('[data-menu-panel="side"]').hidden = isChicken;
+            document.querySelectorAll('.menu-feature').forEach(panel => {panel.hidden=panel.dataset.menuPanel!==type;});
         });
     });
 
