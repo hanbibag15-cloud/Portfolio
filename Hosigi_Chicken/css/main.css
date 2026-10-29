@@ -1090,3 +1090,40 @@ body {
         transition: none;
     }
 }
+
+/* Mobile APP arrangement: compact QR on the left, app artwork on the right. */
+.app-promo-mobile-media { display: contents; }
+.app-promo-mobile-app { display: none; }
+@media (max-width: 767px) {
+    .app-promo-benefits {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(135px, 42%);
+        gap: 12px 16px;
+        align-items: center;
+        width: 100%;
+    }
+    .app-promo-benefits > ul {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    .app-promo-mobile-media { display: contents; }
+    .app-promo-mobile-app {
+        display: block;
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        align-self: center;
+    }
+    .app-promo-mobile-qr {
+        grid-column: 1;
+        grid-row: 2;
+        width: 76px;
+        height: 76px;
+        max-width: 100%;
+        justify-self: start;
+        margin-top: 10px;
+    }
+    .app-promo-art { display: none; }
+}
