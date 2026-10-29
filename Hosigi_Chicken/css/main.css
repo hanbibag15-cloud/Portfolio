@@ -1060,3 +1060,33 @@ body {
  .app-promo-art {flex:auto;width:min(100%,480px);}
 }
 @media (max-width:380px) {.app-promo-qr {width:84px;height:84px;flex-basis:84px;}.app-promo-benefits li {font-size:12px;}}
+
+/* APP scroll reveal — same motion and repeat behavior as MENU. */
+.app-promo-section.app-motion-ready .app-promo-intro,
+.app-promo-section.app-motion-ready .app-promo-benefits,
+.app-promo-section.app-motion-ready .app-promo-stores,
+.app-promo-section.app-motion-ready .app-promo-art {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 750ms ease, transform 750ms cubic-bezier(.22, 1, .36, 1);
+}
+.app-promo-section.app-motion-ready .app-promo-benefits { transition-delay: 120ms; }
+.app-promo-section.app-motion-ready .app-promo-stores { transition-delay: 240ms; }
+.app-promo-section.app-motion-ready .app-promo-art { transition-delay: 360ms; }
+.app-promo-section.app-motion-ready.is-visible .app-promo-intro,
+.app-promo-section.app-motion-ready.is-visible .app-promo-benefits,
+.app-promo-section.app-motion-ready.is-visible .app-promo-stores,
+.app-promo-section.app-motion-ready.is-visible .app-promo-art {
+    opacity: 1;
+    transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+    .app-promo-section.app-motion-ready .app-promo-intro,
+    .app-promo-section.app-motion-ready .app-promo-benefits,
+    .app-promo-section.app-motion-ready .app-promo-stores,
+    .app-promo-section.app-motion-ready .app-promo-art {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
