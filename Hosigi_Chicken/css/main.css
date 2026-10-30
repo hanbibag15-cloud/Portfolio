@@ -1331,7 +1331,7 @@ body {
 .event-more > span[aria-hidden="true"] {
     font-size: 16px;
     position: absolute;
-    left: calc(50% - 4.35em);
+    left: calc(50% - 4.15em);
     display: inline-block;
     transition: transform 300ms cubic-bezier(.22, 1, .36, 1);
 }
@@ -1343,7 +1343,7 @@ body {
     .event-more > span[aria-hidden="true"] { transition: none; }
 }
 @media (max-width: 767px) {
-    .event-more > span[aria-hidden="true"] { left: calc(50% - 4.2em); }
+    .event-more > span[aria-hidden="true"] { left: calc(50% - 4em); }
 }
 .event-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 31px; }
 .event-card { min-width: 0; overflow: hidden; border-radius: 20px; background: #fff; box-shadow: 0 4px 9.8px -2px rgba(0,0,0,.05); }
