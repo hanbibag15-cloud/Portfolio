@@ -1156,7 +1156,7 @@ body {
     padding: 0;
     align-self: flex-start;
     margin-top: 54.5px;
-    margin-left: 27px;
+    margin-left: 0;
 }
 .store-promo-copy h2 {
     color: var(--brand-red);
@@ -1166,7 +1166,7 @@ body {
     letter-spacing: -.03em;
 }
 .store-promo-copy p {
-    margin-top: 8px;
+    margin-top: 15px;
     color: var(--text-primary);
     font-size: 23px;
     font-weight: 600;
@@ -1226,7 +1226,7 @@ body {
 }
 @media (min-width: 768px) and (max-width: 1200px) {
     .store-promo-inner { width: min(100%, 900px); }
-    .store-promo-copy { margin-top: 54.5px; margin-left: 14px; }
+    .store-promo-copy { margin-top: 54.5px; margin-left: 0; }
     .store-promo-copy h2 { font-size: 56px; }
     .store-promo-copy p { font-size: 17px; }
     .store-promo-link { width: 180px; min-height: 44px; font-size: 13px; }
@@ -1280,6 +1280,37 @@ body {
         align-self: flex-start;
         padding: 0;
         margin: 0;
+    }
+}
+
+/* EVENT reveal — reuse STORE's slide-up/fade timing on both desktop and mobile. */
+.event-section.event-motion-ready .event-heading h2,
+.event-section.event-motion-ready .event-heading p,
+.event-section.event-motion-ready .event-more,
+.event-section.event-motion-ready .event-card {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 750ms ease, transform 750ms cubic-bezier(.22, 1, .36, 1);
+}
+.event-section.event-motion-ready .event-heading p { transition-delay: 120ms; }
+.event-section.event-motion-ready .event-more { transition-delay: 240ms; }
+.event-section.event-motion-ready .event-card { transition-delay: 360ms; }
+.event-section.event-motion-ready .event-card:nth-child(2) { transition-delay: 480ms; }
+.event-section.event-motion-ready.is-visible .event-heading h2,
+.event-section.event-motion-ready.is-visible .event-heading p,
+.event-section.event-motion-ready.is-visible .event-more,
+.event-section.event-motion-ready.is-visible .event-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+    .event-section.event-motion-ready .event-heading h2,
+    .event-section.event-motion-ready .event-heading p,
+    .event-section.event-motion-ready .event-more,
+    .event-section.event-motion-ready .event-card {
+        opacity: 1;
+        transform: none;
+        transition: none;
     }
 }
 
