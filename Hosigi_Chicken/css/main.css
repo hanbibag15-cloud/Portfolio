@@ -1382,7 +1382,9 @@ body {
 /* Footer — reference-inspired horizontal brand and company details. */
 .site-footer {
     width: 100%;
-    min-height: 300px;
+    max-width: 1920px;
+    height: 300px;
+    margin: 0 auto;
     padding: 70px 28px;
     background: var(--brand-brown);
     color: var(--neutral-white);
@@ -1428,7 +1430,7 @@ body {
     vertical-align: -1px;
 }
 @media (max-width: 767px) {
-    .site-footer { min-height: 0; padding: 44px 20px; }
+    .site-footer { height: auto; min-height: 0; padding: 44px 20px; }
     .footer-inner { flex-direction: column; align-items: flex-start; gap: 26px; }
     .footer-logo { flex-basis: auto; }
     .footer-logo img { width: 120px; max-height: 90px; }
