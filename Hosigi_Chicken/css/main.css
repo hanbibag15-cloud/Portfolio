@@ -1394,7 +1394,7 @@ body {
     margin: 0;
     display: flex;
     align-items: center;
-    gap: 68px;
+    gap: 56px;
 }
 .footer-logo { display: block; flex: 0 0 200px; }
 .footer-logo img { display: block; width: 200px; height: 173px; max-height: none; object-fit: contain; }
@@ -1413,7 +1413,7 @@ body {
     content: "";
     display: inline-block;
     width: 1px;
-    height: 12px;
+    height: 19px;
     margin: 0 18px;
     background: var(--brand-red);
 }
@@ -1424,7 +1424,7 @@ body {
     content: "";
     display: inline-block;
     width: 1px;
-    height: 12px;
+    height: 19px;
     margin: 0 18px;
     background: var(--brand-red);
     vertical-align: -1px;
@@ -1435,8 +1435,8 @@ body {
     .footer-logo { flex-basis: auto; }
     .footer-logo img { width: 200px; height: 173px; max-height: none; }
     .footer-links { gap: 10px 0; font-size: 16px; }
-    .footer-links a + a::before { height: 10px; margin: 0 10px; }
+    .footer-links a + a::before { height: 19px; margin: 0 10px; }
     .footer-info { gap: 10px; margin-top: 20px; }
     .footer-info p { gap: 6px 0; font-size: 16px; }
-    .footer-info p span + span::before { height: 10px; margin: 0 10px; }
+    .footer-info p span + span::before { height: 19px; margin: 0 10px; }
 }
