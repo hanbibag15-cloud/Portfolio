@@ -1104,6 +1104,7 @@ body {
 
 /* Mobile APP: compact typography and checks; QR aligned beside membership benefit. */
 @media (max-width: 767px) {
+    .app-promo-section { padding-top: 52px; }
     .app-promo-intro h2 { font-size: clamp(24px, 5.8vw, 33px); }
     .app-promo-intro p { font-size: 12px; line-height: 1.45; }
     .app-promo-content {
@@ -1123,7 +1124,7 @@ body {
         display: flex;
         align-items: flex-end;
         justify-content: flex-start;
-        gap: 6px;
+        gap: 2px;
     }
     .app-promo-benefits li { gap: 6px; font-size: 12px; }
     .app-promo-benefits li::before {
@@ -1145,7 +1146,7 @@ body {
 }
 @media (max-width: 420px) {
     .app-promo-content { grid-template-columns: minmax(0, 1fr) minmax(120px, 43%); }
-    .app-promo-benefits { gap: 5px; }
+    .app-promo-benefits { gap: 2px; }
     .app-promo-benefits li { gap: 5px; font-size: 11px; }
     .app-promo-benefits .app-promo-qr { flex-basis: 30px; width: 30px; height: 30px; }
 }
