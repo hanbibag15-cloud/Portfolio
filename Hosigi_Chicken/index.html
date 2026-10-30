@@ -390,6 +390,22 @@
         requestAnimationFrame(() => requestAnimationFrame(updateStoreReveal));
     }
 
+    // EVENT: same scroll/reload reveal behavior as STORE.
+    const eventSection = document.querySelector('.event-section');
+    if (eventSection && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        eventSection.classList.add('event-motion-ready');
+        const updateEventReveal = () => {
+            const revealLine = window.innerHeight * 0.78;
+            eventSection.classList.toggle(
+                'is-visible',
+                eventSection.getBoundingClientRect().top <= revealLine
+            );
+        };
+        window.addEventListener('scroll', updateEventReveal, { passive: true });
+        window.addEventListener('resize', updateEventReveal);
+        requestAnimationFrame(() => requestAnimationFrame(updateEventReveal));
+    }
+
     document.querySelectorAll('.menu-feature').forEach(panel => {
         const items = [...panel.querySelectorAll('.menu-feature-product')];
         let activeIndex = 1;
