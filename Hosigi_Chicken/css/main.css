@@ -815,6 +815,13 @@ body {
     }
 }
 
+/* Desktop: indicate that MENU chicken cards support mouse dragging. */
+@media (min-width: 768px) {
+    .menu-feature-products { cursor: grab; user-select: none; }
+    .menu-feature-products:active { cursor: grabbing; }
+    .menu-feature-products img { -webkit-user-drag: none; user-select: none; }
+}
+
 /* Mobile: use one transform origin for all three positions. */
 @media (max-width: 1024px) {
     .menu-feature-product.is-prev {
