@@ -1469,9 +1469,9 @@ body {
     .event-card-ended { padding: 8px; font-size: 12px; text-align: center; }
 }
 @media (max-width: 420px) {
-    .event-header { align-items: flex-start; flex-direction: column; gap: 12px; }
-    .event-heading { top: 0; }
-    .event-more { align-self: flex-end; }
+    .event-header { flex-direction: row; align-items: center; justify-content: space-between; gap: 8px; }
+    .event-heading { flex: 1 1 auto; min-width: 0; top: 0; }
+    .event-more { flex: 0 0 132px; align-self: center; margin-left: auto; }
     .event-grid { gap: 10px; }
     .event-card-info { padding: 10px 8px 12px; }
     .event-card-info p { font-size: 9px; }
