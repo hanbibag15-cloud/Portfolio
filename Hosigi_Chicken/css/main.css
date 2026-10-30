@@ -1287,11 +1287,11 @@ body {
     /* Match desktop composition: copy left, building right, on the yellow banner. */
     .store-promo-section {
         height: auto;
-        padding: 0 20px 28px;
-        background: linear-gradient(to bottom, #FFE45C 0 170px, transparent 170px);
+        padding: 0 20px 16px;
+        background: linear-gradient(to bottom, #FFE45C 0 155px, transparent 155px);
         background-position: 0 0;
         background-repeat: no-repeat;
-        background-size: 100% 170px;
+        background-size: 100% 155px;
     }
     .store-promo-inner {
         display: flex;
@@ -1300,7 +1300,7 @@ body {
         justify-content: space-between;
         width: 100%;
         height: auto;
-        min-height: 170px;
+        min-height: 155px;
         gap: 8px;
         padding: 0;
     }
@@ -1323,9 +1323,9 @@ body {
         line-height: 1;
     }
     .store-promo-art {
-        flex: 0 1 46%;
-        width: 46%;
-        max-width: 210px;
+        flex: 0 1 52%;
+        width: 52%;
+        max-width: 240px;
         height: auto;
         margin: -18px 0 0;
         object-fit: contain;
@@ -1333,15 +1333,15 @@ body {
 }
 @media (max-width: 420px) {
     .store-promo-section {
-        padding: 0 14px 18px;
-        background: linear-gradient(to bottom, #FFE45C 0 140px, transparent 140px);
-        background-size: 100% 140px;
+        padding: 0 14px 12px;
+        background: linear-gradient(to bottom, #FFE45C 0 125px, transparent 125px);
+        background-size: 100% 125px;
     }
     .store-promo-inner {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        min-height: 140px;
+        min-height: 125px;
         gap: 6px;
         padding: 0;
     }
@@ -1355,9 +1355,9 @@ body {
     .store-promo-copy p { font-size: 10px; }
     .store-promo-link { width: 112px; height: 30px; min-height: 30px; font-size: 10px; }
     .store-promo-art {
-        flex: 0 1 45%;
-        width: 45%;
-        max-width: 180px;
+        flex: 0 1 51%;
+        width: 51%;
+        max-width: 205px;
         margin: -14px 0 0;
     }
 }
