@@ -1330,7 +1330,7 @@ body {
 /* EVENT arrow: animate separately so the centered label never shifts or overlaps. */
 .event-more > span[aria-hidden="true"] {
     position: absolute;
-    left: 12px;
+    left: calc(50% - 4.85em);
     display: inline-block;
     transition: transform 300ms cubic-bezier(.22, 1, .36, 1);
 }
@@ -1342,7 +1342,7 @@ body {
     .event-more > span[aria-hidden="true"] { transition: none; }
 }
 @media (max-width: 767px) {
-    .event-more > span[aria-hidden="true"] { left: 6px; }
+    .event-more > span[aria-hidden="true"] { left: calc(50% - 4.7em); }
 }
 .event-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 31px; }
 .event-card { min-width: 0; overflow: hidden; border-radius: 20px; background: #fff; box-shadow: 0 4px 9.8px -2px rgba(0,0,0,.05); }
