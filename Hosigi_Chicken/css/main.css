@@ -1606,10 +1606,10 @@ body {
     height: 62px;
     gap: 0;
     background: var(--brand-brown);
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
 }
-.quick-menu-top span:first-child { font-size: 21px; line-height: 1.1; }
+.quick-menu-top span:first-child { font-size: 19px; line-height: 1.1; }
 .quick-menu-sns:hover, .quick-menu-sns:focus-visible,
 .quick-menu-top:hover, .quick-menu-top:focus-visible {
     transform: translateY(-3px);
