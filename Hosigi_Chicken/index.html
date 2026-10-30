@@ -448,6 +448,34 @@
         const area=panel.querySelector('.menu-feature-products');
         area.addEventListener('touchstart',e=>{if(e.touches.length!==1)return;x=e.touches[0].clientX;y=e.touches[0].clientY;},{passive:true});
         area.addEventListener('touchend',e=>{if(e.changedTouches.length!==1)return;const dx=e.changedTouches[0].clientX-x,dy=e.changedTouches[0].clientY-y;if(Math.abs(dx)>=45&&Math.abs(dx)>Math.abs(dy)*1.2)move(dx<0?1:-1);},{passive:true});
+        // Desktop mouse drag: swipe the chicken lineup without changing touch behavior.
+        let dragStartX = null;
+        let dragStartY = null;
+        let suppressClick = false;
+        area.addEventListener('mousedown', e => {
+            if (window.innerWidth <= 767 || e.button !== 0) return;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            suppressClick = false;
+        });
+        window.addEventListener('mouseup', e => {
+            if (dragStartX === null) return;
+            const dx = e.clientX - dragStartX;
+            const dy = e.clientY - dragStartY;
+            dragStartX = null;
+            dragStartY = null;
+            if (Math.abs(dx) >= 45 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+                move(dx < 0 ? 1 : -1);
+                suppressClick = true;
+            }
+        });
+        area.addEventListener('click', e => {
+            if (!suppressClick) return;
+            e.preventDefault();
+            e.stopPropagation();
+            suppressClick = false;
+        }, true);
+        area.addEventListener('dragstart', e => e.preventDefault());
         update();
     });
     document.querySelectorAll('.menu-category').forEach(button => {
