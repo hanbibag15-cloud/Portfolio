@@ -1102,20 +1102,27 @@ body {
     .app-promo-benefits li { font-size: 12px; gap: 5px; }
 }
 
-/* Samsung-size mobile APP layout: compact checks, larger phone and QR below app badges. */
+/* Mobile APP balance: smaller headings, QR beside benefits and larger phone. */
 @media (max-width: 767px) {
+    .app-promo-intro h2 { font-size: clamp(26px, 6.4vw, 37px); }
+    .app-promo-intro p { font-size: 13px; line-height: 1.45; }
     .app-promo-content {
-        grid-template-columns: minmax(0, 1fr) minmax(110px, 39%);
-        column-gap: 10px;
-        row-gap: 16px;
+        grid-template-columns: minmax(0, 1fr) minmax(125px, 43%);
+        column-gap: 8px;
+        row-gap: 15px;
     }
     .app-promo-art-mobile {
         grid-column: 2;
         grid-row: 2 / 4;
-        width: 100%;
-        max-width: 220px;
+        width: 110%;
+        max-width: 250px;
         align-self: center;
         justify-self: end;
+    }
+    .app-promo-benefits {
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
     }
     .app-promo-benefits li::before {
         width: 15px;
@@ -1123,26 +1130,21 @@ body {
         flex: 0 0 15px;
         font-size: 10px;
     }
-    .app-promo-benefits .app-promo-qr { display: none; }
-    .app-promo-stores { grid-column: 1 / -1; grid-row: 4; }
-    .app-promo-qr-mobile {
-        display: flex;
-        justify-content: center;
-        grid-column: 1 / -1;
-        grid-row: 5;
-        margin-top: 2px;
-    }
-    .app-promo-qr-mobile img {
+    .app-promo-benefits .app-promo-qr {
         display: block;
-        width: 66px;
-        height: 66px;
+        flex: 0 0 46px;
+        width: 46px;
+        height: 46px;
         object-fit: contain;
     }
+    .app-promo-qr-mobile { display: none; }
+    .app-promo-stores { grid-column: 1 / -1; grid-row: 4; }
 }
 @media (max-width: 420px) {
-    .app-promo-content { grid-template-columns: minmax(0, 1fr) minmax(110px, 39%); }
-    .app-promo-benefits { gap: 8px; }
-    .app-promo-benefits li { gap: 6px; }
+    .app-promo-content { grid-template-columns: minmax(0, 1fr) minmax(120px, 43%); }
+    .app-promo-benefits { gap: 6px; }
+    .app-promo-benefits li { gap: 5px; font-size: 11px; }
+    .app-promo-benefits .app-promo-qr { flex-basis: 42px; width: 42px; height: 42px; }
 }
 
 /* STORE reveal: same slide-up/fade motion as MENU and APP; text and CTA only. */
