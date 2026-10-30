@@ -1565,3 +1565,65 @@ body {
 @media (max-width: 767px) {
     .footer-copyright { display: none; }
 }
+
+/* PC fixed quick menu — SNS / back to top. */
+.quick-menu {
+    position: fixed;
+    top: 50%;
+    right: clamp(16px, 2.5vw, 48px);
+    transform: translateY(-50%);
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font);
+}
+.quick-menu-label {
+    color: #aaa;
+    font-size: 12px;
+    line-height: 1.2;
+}
+.quick-menu-sns,
+.quick-menu-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: none;
+    border-radius: 50%;
+    color: var(--neutral-white);
+    text-decoration: none;
+    cursor: pointer;
+    line-height: 1.2;
+    font-family: inherit;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+.quick-menu-sns {
+    width: 92px;
+    height: 92px;
+    gap: 3px;
+    background: var(--brand-red);
+    font-size: 16px;
+    font-weight: 600;
+}
+.quick-menu-top {
+    width: 62px;
+    height: 62px;
+    gap: 0;
+    background: var(--brand-brown);
+    font-size: 14px;
+    font-weight: 500;
+}
+.quick-menu-top span:first-child { font-size: 21px; line-height: 1.1; }
+.quick-menu-sns:hover, .quick-menu-sns:focus-visible,
+.quick-menu-top:hover, .quick-menu-top:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 16px rgba(0, 0, 0, .18);
+}
+@media (prefers-reduced-motion: reduce) {
+    .quick-menu-sns, .quick-menu-top { transition: none; }
+}
+@media (max-width: 1024px) {
+    .quick-menu { display: none; }
+}
