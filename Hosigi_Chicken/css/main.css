@@ -1317,7 +1317,7 @@ body {
 /* EVENT — Figma node 91:77; temporary image slots until original assets are available. */
 .event-section {
     width: 100%;
-    padding: 110px 20px;
+    padding: 110px 20px 120px;
     background: var(--surface-default);
 }
 .event-inner { width: min(100%, 1240px); margin: 0 auto; }
