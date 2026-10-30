@@ -1445,17 +1445,27 @@ body {
 .event-card-info p { color: #767676; font-size: 14px; }
 .event-card-ended { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(34,23,20,.8); color: #fff; font-size: 18px; font-weight: 600; }
 @media (max-width: 767px) {
-    .event-section { padding: 65px 20px; }
-    .event-header { align-items: flex-start; margin-bottom: 30px; }
-    .event-heading h2 { font-size: clamp(36px, 8vw, 48px); }
-    .event-heading p { margin-top: 8px; font-size: 13px; }
-    .event-more { width: 172px; height: 38px; font-size: 16px; }
-    .event-grid { grid-template-columns: 1fr; gap: 24px; }
-    .event-card-info { min-height: 105px; padding: 18px 22px 20px; }
+    .event-section { padding: 55px 16px 65px; }
+    .event-header { align-items: flex-end; gap: 10px; margin-bottom: 24px; }
+    .event-heading h2 { font-size: clamp(34px, 8vw, 44px); }
+    .event-heading p { margin-top: 7px; font-size: 12px; }
+    .event-more { width: 132px; height: 34px; border-radius: 17px; font-size: 12px; }
+    .event-more > span[aria-hidden="true"] { font-size: 12px; left: calc(50% - 4em); }
+    .event-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .event-card { border-radius: 12px; }
+    .event-card-image { border-radius: 12px 12px 0 0; }
+    .event-card-info { min-height: 90px; gap: 6px; padding: 12px 10px 14px; }
+    .event-card-category { font-size: 11px; }
+    .event-card-info h3 { font-size: 12px; line-height: 1.35; word-break: keep-all; }
+    .event-card-info p { font-size: 10px; line-height: 1.4; }
+    .event-card-ended { padding: 8px; font-size: 12px; text-align: center; }
 }
 @media (max-width: 420px) {
-    .event-header { flex-direction: column; gap: 18px; }
+    .event-header { align-items: flex-start; flex-direction: column; gap: 12px; }
     .event-more { align-self: flex-start; }
+    .event-grid { gap: 10px; }
+    .event-card-info { padding: 10px 8px 12px; }
+    .event-card-info p { font-size: 9px; }
 }
 
 /* Footer — reference-inspired horizontal brand and company details. */
