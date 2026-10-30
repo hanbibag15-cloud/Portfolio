@@ -1288,10 +1288,10 @@ body {
     .store-promo-section {
         height: auto;
         padding: 0 20px 28px;
-        background: linear-gradient(to bottom, #FFE45C 0 210px, transparent 210px);
+        background: linear-gradient(to bottom, #FFE45C 0 190px, transparent 190px);
         background-position: 0 0;
         background-repeat: no-repeat;
-        background-size: 100% 210px;
+        background-size: 100% 190px;
     }
     .store-promo-inner {
         display: flex;
@@ -1300,7 +1300,7 @@ body {
         justify-content: space-between;
         width: 100%;
         height: auto;
-        min-height: 210px;
+        min-height: 190px;
         gap: 8px;
         padding: 0;
     }
@@ -1334,14 +1334,14 @@ body {
 @media (max-width: 420px) {
     .store-promo-section {
         padding: 0 14px 18px;
-        background: linear-gradient(to bottom, #FFE45C 0 180px, transparent 180px);
-        background-size: 100% 180px;
+        background: linear-gradient(to bottom, #FFE45C 0 160px, transparent 160px);
+        background-size: 100% 160px;
     }
     .store-promo-inner {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        min-height: 180px;
+        min-height: 160px;
         gap: 6px;
         padding: 0;
     }
