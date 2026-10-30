@@ -1378,3 +1378,29 @@ body {
     .event-header { flex-direction: column; gap: 18px; }
     .event-more { align-self: flex-start; }
 }
+
+/* Footer — provisional design until Figma node 156:227 is accessible. */
+.site-footer {
+    width: 100%;
+    padding: 60px 20px 28px;
+    background: var(--brand-brown);
+    color: var(--neutral-white);
+}
+.footer-inner { width: min(100%, 1240px); margin: 0 auto; }
+.footer-main { display: flex; justify-content: space-between; align-items: flex-start; gap: 36px; }
+.footer-brand img { width: 112px; height: auto; object-fit: contain; }
+.footer-brand p { margin-top: 12px; font-size: 15px; opacity: .82; }
+.footer-nav { display: flex; flex-wrap: wrap; gap: 20px 34px; font-size: 15px; font-weight: 600; }
+.footer-nav a, .footer-bottom a { transition: opacity .2s ease; }
+.footer-nav a:hover, .footer-nav a:focus-visible,
+.footer-bottom a:hover, .footer-bottom a:focus-visible { opacity: .65; }
+.footer-bottom { display: flex; justify-content: space-between; gap: 16px; align-items: center; flex-wrap: wrap; margin-top: 56px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.25); font-size: 13px; }
+.footer-bottom small { font-size: inherit; opacity: .75; }
+@media (max-width: 767px) {
+    .site-footer { padding: 42px 20px 24px; }
+    .footer-main { flex-direction: column; gap: 30px; }
+    .footer-brand img { width: 95px; }
+    .footer-brand p { font-size: 13px; }
+    .footer-nav { gap: 14px 26px; font-size: 14px; }
+    .footer-bottom { align-items: flex-start; flex-direction: column; gap: 12px; margin-top: 35px; font-size: 12px; }
+}
