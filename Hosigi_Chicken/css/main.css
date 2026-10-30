@@ -1325,8 +1325,25 @@ body {
 .event-heading { text-align: left; }
 .event-heading h2 { color: var(--brand-red); font-size: 68px; font-weight: 700; line-height: 1.1; letter-spacing: -.023em; }
 .event-heading p { margin-top: 15px; color: var(--brand-brown); font-size: 20px; font-weight: 600; letter-spacing: -.023em; }
-.event-more { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 176px; height: 49px; flex: 0 0 auto; border: 2px solid var(--brand-red); border-radius: 22px; color: var(--brand-red); font-size: 16px; font-weight: 500; transition: background .2s ease, color .2s ease; }
+.event-more { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 176px; height: 49px; flex: 0 0 auto; border: 2px solid var(--brand-red); border-radius: 22px; color: var(--brand-red); font-size: 16px; font-weight: 500; transition: background .2s ease, color .2s ease; }
 .event-more:hover, .event-more:focus-visible { background: var(--brand-red); color: #fff; }
+/* EVENT arrow: animate separately so the centered label never shifts or overlaps. */
+.event-more > span[aria-hidden="true"] {
+    position: absolute;
+    left: 12px;
+    display: inline-block;
+    transition: transform 300ms cubic-bezier(.22, 1, .36, 1);
+}
+@media (hover: hover) {
+    .event-more:hover > span[aria-hidden="true"] { transform: translateX(6px); }
+}
+.event-more:focus-visible > span[aria-hidden="true"] { transform: translateX(6px); }
+@media (prefers-reduced-motion: reduce) {
+    .event-more > span[aria-hidden="true"] { transition: none; }
+}
+@media (max-width: 767px) {
+    .event-more > span[aria-hidden="true"] { left: 6px; }
+}
 .event-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 31px; }
 .event-card { min-width: 0; overflow: hidden; border-radius: 20px; background: #fff; box-shadow: 0 4px 9.8px -2px rgba(0,0,0,.05); }
 .event-card-image { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 600 / 309; overflow: hidden; border-radius: 20px 20px 0 0; background: #fff3e4; color: var(--brand-red); }
