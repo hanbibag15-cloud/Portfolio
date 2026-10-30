@@ -1443,8 +1443,8 @@ body {
     align-items: center;
     gap: 56px;
 }
-.footer-logo { display: block; flex: 0 0 200px; }
-.footer-logo img { display: block; width: 200px; height: 173px; max-height: none; object-fit: contain; }
+.footer-logo { display: block; flex: 0 0 150px; }
+.footer-logo img { display: block; width: 150px; height: auto; max-height: none; object-fit: contain; }
 .footer-details { min-width: 0; }
 .footer-links {
     display: flex;
@@ -1459,21 +1459,21 @@ body {
     content: "";
     display: inline-block;
     width: 1px;
-    height: 19px;
-    margin: 0 18px;
-    background: var(--brand-red);
+    height: 14px;
+    margin: 0 12px;
+    background: var(--neutral-white);
 }
 .footer-links a:hover, .footer-links a:focus-visible { color: var(--brand-red); text-decoration: none; }
-.footer-info { display: flex; flex-direction: column; gap: 18px; margin-top: 28px; }
+.footer-info { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
 .footer-info p { display: flex; flex-wrap: wrap; gap: 0; font-size: 16px; line-height: 1.6; }
 .footer-info p span { display: inline-flex; align-items: center; }
 .footer-info p span + span::before {
     content: "";
     display: inline-block;
     width: 1px;
-    height: 19px;
-    margin: 0 18px;
-    background: var(--brand-red);
+    height: 14px;
+    margin: 0 12px;
+    background: var(--neutral-white);
     vertical-align: middle;
 }
 @media (max-width: 767px) {
@@ -1482,8 +1482,15 @@ body {
     .footer-logo { flex-basis: auto; }
     .footer-logo img { width: 200px; height: 173px; max-height: none; }
     .footer-links { gap: 10px 0; font-size: 16px; }
-    .footer-links a + a::before { height: 19px; margin: 0 10px; }
+    .footer-links a + a::before { height: 19px; margin: 0 10px; background: var(--brand-red); }
     .footer-info { gap: 10px; margin-top: 20px; }
     .footer-info p { gap: 6px 0; font-size: 16px; }
-    .footer-info p span + span::before { height: 19px; margin: 0 10px; }
+    .footer-info p span + span::before { height: 19px; margin: 0 10px; background: var(--brand-red); }
+}
+
+@media (min-width: 768px) {
+    .footer-copyright { display: block; font-size: 12px; line-height: 1.5; color: var(--neutral-white); opacity: .7; }
+}
+@media (max-width: 767px) {
+    .footer-copyright { display: none; }
 }
