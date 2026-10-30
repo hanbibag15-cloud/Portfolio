@@ -300,8 +300,26 @@
                 </div>
             </div>
         </footer>
+        <aside class="quick-menu" aria-label="퀵 메뉴">
+            <span class="quick-menu-label">Quick Menu</span>
+            <a class="quick-menu-sns" href="https://www.instagram.com/hosigi1999/" target="_blank" rel="noopener noreferrer" aria-label="호식이두마리치킨 인스타그램 열기">
+                <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="6"></rect>
+                    <circle cx="12" cy="12" r="4.5"></circle>
+                    <circle cx="18" cy="6" r="1" fill="currentColor" stroke="none"></circle>
+                </svg>
+                <span>SNS</span>
+            </a>
+            <button class="quick-menu-top" type="button" aria-label="페이지 맨 위로 이동">
+                <span aria-hidden="true">↑</span>
+                <span>TOP</span>
+            </button>
+        </aside>
     </div>
     <script>
+    document.querySelector('.quick-menu-top')?.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
     const menuToggle = document.querySelector('.header-menu-toggle');
     const siteHeader = document.querySelector('.site-header');
     menuToggle.addEventListener('click', () => {
