@@ -1282,3 +1282,40 @@ body {
         margin: 0;
     }
 }
+
+/* EVENT — Figma node 91:77; temporary image slots until original assets are available. */
+.event-section {
+    width: 100%;
+    padding: 110px 20px;
+    background: var(--surface-default);
+}
+.event-inner { width: min(100%, 1240px); margin: 0 auto; }
+.event-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 54px; }
+.event-heading { text-align: left; }
+.event-heading h2 { color: var(--brand-red); font-size: 68px; font-weight: 700; line-height: 1.1; letter-spacing: -.023em; }
+.event-heading p { margin-top: 15px; color: var(--brand-brown); font-size: 20px; font-weight: 600; letter-spacing: -.023em; }
+.event-more { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 176px; height: 49px; flex: 0 0 auto; border: 2px solid var(--brand-red); border-radius: 22px; color: var(--brand-red); font-size: 16px; font-weight: 500; transition: background .2s ease, color .2s ease; }
+.event-more:hover, .event-more:focus-visible { background: var(--brand-red); color: #fff; }
+.event-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 31px; }
+.event-card { min-width: 0; overflow: hidden; border-radius: 20px; background: #fff; box-shadow: 0 4px 9.8px -2px rgba(0,0,0,.05); }
+.event-card-image { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 600 / 309; overflow: hidden; border-radius: 20px 20px 0 0; background: #fff3e4; color: var(--brand-red); }
+.event-card-image--sns { background: #ffe9ea; }
+.event-card-image > span { font-size: clamp(28px, 4vw, 54px); font-weight: 800; letter-spacing: -.04em; }
+.event-card-info { display: flex; flex-direction: column; justify-content: center; gap: 9px; min-height: 125px; padding: 20px 30px 24px; }
+.event-card-category { color: var(--brand-red); font-size: 15px; font-weight: 500; }
+.event-card-info h3 { color: var(--brand-brown); font-size: 18px; font-weight: 600; }
+.event-card-info p { color: #767676; font-size: 14px; }
+.event-card-ended { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(34,23,20,.8); color: #fff; font-size: 18px; font-weight: 600; }
+@media (max-width: 767px) {
+    .event-section { padding: 65px 20px; }
+    .event-header { align-items: flex-start; margin-bottom: 30px; }
+    .event-heading h2 { font-size: clamp(36px, 8vw, 48px); }
+    .event-heading p { margin-top: 8px; font-size: 13px; }
+    .event-more { width: 132px; height: 38px; font-size: 12px; }
+    .event-grid { grid-template-columns: 1fr; gap: 24px; }
+    .event-card-info { min-height: 105px; padding: 18px 22px 20px; }
+}
+@media (max-width: 420px) {
+    .event-header { flex-direction: column; gap: 18px; }
+    .event-more { align-self: flex-start; }
+}
