@@ -1013,6 +1013,8 @@ body {
 }
 @media (max-width:380px) {.app-promo-qr {width:84px;height:84px;flex-basis:84px;}.app-promo-benefits li {font-size:12px;}}
 
+.app-promo-qr-mobile { display: none; }
+
 /* APP reveal — same text-only, staggered motion as STORE. */
 .app-promo-section.app-motion-ready .app-promo-intro h2,
 .app-promo-section.app-motion-ready .app-promo-intro p,
@@ -1098,6 +1100,49 @@ body {
     .app-promo-benefits { gap: 20px; }
     .app-promo-benefits .app-promo-qr { flex-basis: 56px; width: 56px; height: 56px; }
     .app-promo-benefits li { font-size: 12px; gap: 5px; }
+}
+
+/* Samsung-size mobile APP layout: compact checks, larger phone and QR below app badges. */
+@media (max-width: 767px) {
+    .app-promo-content {
+        grid-template-columns: minmax(0, 1fr) minmax(110px, 39%);
+        column-gap: 10px;
+        row-gap: 16px;
+    }
+    .app-promo-art-mobile {
+        grid-column: 2;
+        grid-row: 2 / 4;
+        width: 100%;
+        max-width: 220px;
+        align-self: center;
+        justify-self: end;
+    }
+    .app-promo-benefits li::before {
+        width: 15px;
+        height: 15px;
+        flex: 0 0 15px;
+        font-size: 10px;
+    }
+    .app-promo-benefits .app-promo-qr { display: none; }
+    .app-promo-stores { grid-column: 1 / -1; grid-row: 4; }
+    .app-promo-qr-mobile {
+        display: flex;
+        justify-content: center;
+        grid-column: 1 / -1;
+        grid-row: 5;
+        margin-top: 2px;
+    }
+    .app-promo-qr-mobile img {
+        display: block;
+        width: 66px;
+        height: 66px;
+        object-fit: contain;
+    }
+}
+@media (max-width: 420px) {
+    .app-promo-content { grid-template-columns: minmax(0, 1fr) minmax(110px, 39%); }
+    .app-promo-benefits { gap: 8px; }
+    .app-promo-benefits li { gap: 6px; }
 }
 
 /* STORE reveal: same slide-up/fade motion as MENU and APP; text and CTA only. */
