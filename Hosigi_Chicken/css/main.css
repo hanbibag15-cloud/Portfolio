@@ -1134,7 +1134,7 @@ body {
         font-size: 9px;
     }
     .app-promo-benefits .app-promo-qr {
-        display: block;
+        display: none;
         flex: 0 0 34px;
         width: 34px;
         height: 34px;
