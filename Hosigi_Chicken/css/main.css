@@ -1385,13 +1385,13 @@ body {
     max-width: 1920px;
     height: 300px;
     margin: 0 auto;
-    padding: 70px 28px;
+    padding: 87px 70px 76px;
     background: var(--brand-brown);
     color: var(--neutral-white);
 }
 .footer-inner {
-    width: min(100%, 1720px);
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
     display: flex;
     align-items: center;
     gap: 68px;
