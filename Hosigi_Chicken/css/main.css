@@ -1284,53 +1284,81 @@ body {
     .store-promo-art { width: min(43%, 380px); margin-top: -72px; }
 }
 @media (max-width: 767px) {
+    /* Match desktop composition: copy left, building right, on the yellow banner. */
     .store-promo-section {
         height: auto;
-        padding: 0 20px 24px;
-        background: linear-gradient(to bottom, #FFE45C 0 175px, transparent 175px);
+        padding: 0 20px 28px;
+        background: linear-gradient(to bottom, #FFE45C 0 210px, transparent 210px);
         background-position: 0 0;
         background-repeat: no-repeat;
-        background-size: 100% 175px;
+        background-size: 100% 210px;
     }
     .store-promo-inner {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
         width: 100%;
         height: auto;
-        min-height: 220px;
+        min-height: 210px;
         gap: 8px;
-        align-items: flex-start;
-    }
-    .store-promo-copy { padding: 28px 0 0; margin: 0; align-self: auto; }
-    .store-promo-link {
-        width: 110px;
-        height: 24px;
-        min-height: 24px;
-        margin-top: 12px;
-        border-width: 1px;
-        font-size: 10px;
-        line-height: 1;
-    }
-    .store-promo-copy h2 { font-size: clamp(30px, 7vw, 40px); }
-    .store-promo-copy p { font-size: 12px; }
-    .store-promo-art { width: min(46%, 210px); margin-top: -8px; }
-}
-@media (max-width: 420px) {
-    .store-promo-inner {
-        min-height: 300px;
-        flex-direction: column-reverse;
-        align-items: center;
-        justify-content: center;
-        gap: 0;
-        padding-bottom: 22px;
-    }
-    .store-promo-art {
-        flex: 0 0 auto;
-        width: min(65%, 200px);
-        margin: -20px auto 0;
+        padding: 0;
     }
     .store-promo-copy {
-        align-self: flex-start;
+        flex: 1 1 52%;
+        min-width: 0;
+        align-self: center;
         padding: 0;
         margin: 0;
+    }
+    .store-promo-copy h2 { font-size: clamp(30px, 8vw, 40px); }
+    .store-promo-copy p { margin-top: 8px; font-size: clamp(10px, 2.7vw, 12px); }
+    .store-promo-link {
+        width: 124px;
+        height: 32px;
+        min-height: 32px;
+        margin-top: 13px;
+        border-width: 1px;
+        font-size: 11px;
+        line-height: 1;
+    }
+    .store-promo-art {
+        flex: 0 1 46%;
+        width: 46%;
+        max-width: 210px;
+        height: auto;
+        margin: -18px 0 0;
+        object-fit: contain;
+    }
+}
+@media (max-width: 420px) {
+    .store-promo-section {
+        padding: 0 14px 18px;
+        background: linear-gradient(to bottom, #FFE45C 0 180px, transparent 180px);
+        background-size: 100% 180px;
+    }
+    .store-promo-inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 180px;
+        gap: 6px;
+        padding: 0;
+    }
+    .store-promo-copy {
+        flex: 1 1 53%;
+        align-self: center;
+        padding: 0;
+        margin: 0;
+    }
+    .store-promo-copy h2 { font-size: clamp(28px, 8vw, 34px); }
+    .store-promo-copy p { font-size: 10px; }
+    .store-promo-link { width: 112px; height: 30px; min-height: 30px; font-size: 10px; }
+    .store-promo-art {
+        flex: 0 1 45%;
+        width: 45%;
+        max-width: 180px;
+        margin: -14px 0 0;
     }
 }
 
