@@ -1408,7 +1408,9 @@ body {
     line-height: 1.5;
 }
 .footer-links a { display: inline-flex; align-items: center; color: var(--neutral-white); text-decoration: none; }
-.footer-links a:first-child { color: var(--brand-red); }
+.footer-links a:first-child { color: var(--neutral-white); }
+.footer-links a:first-child:hover,
+.footer-links a:first-child:focus-visible { color: var(--brand-red); text-decoration: none; }
 .footer-links a + a::before {
     content: "";
     display: inline-block;
