@@ -20,3 +20,9 @@
 @media (prefers-reduced-motion: reduce) {
     .entry-panel::after { transition: none; }
 }
+
+/* Highlight BRAND / FRANCHISE headings in brand red on hover. */
+.entry-panel:hover .entry-content strong,
+.entry-panel:focus-visible .entry-content strong {
+    color: #E60012;
+}
