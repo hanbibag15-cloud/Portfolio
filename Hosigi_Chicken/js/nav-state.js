@@ -19,7 +19,7 @@
     if(hash==='#menu'){mark(0);}
     else if(hash==='#stores'){mark(2);}
     else if(hash==='#events'){mark(3);}
-    else{mark(1);}
+    else{mark(-1);} // No active GNB item on initial brand-home load.
   }
   sync();
   window.addEventListener('hashchange',sync);
