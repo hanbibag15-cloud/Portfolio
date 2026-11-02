@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', function () {
     maximalism: 'maximalism.css',
     'kinetic-typography': 'kinetic-typography.css',
     'grainy-gradient': 'grainy-gradient.css',
-    bauhaus: 'bauhaus.css'
+    bauhaus: 'bauhaus.css',
+    'pop-art': 'pop-art.css'
   };
   const buttons = picker.querySelectorAll('[data-theme]');
   const themeNames = Object.keys(themes);
@@ -38,8 +39,8 @@ document.addEventListener('DOMContentLoaded', function () {
     try { localStorage.setItem('naver-login-theme', theme); } catch (_) {}
   }
   buttons.forEach(button => button.addEventListener('click', () => activate(button.dataset.theme)));
-  let saved = 'bauhaus';
+  let saved = 'pop-art';
   try { saved = localStorage.getItem('naver-login-theme') || saved; } catch (_) {}
-  activate(Object.prototype.hasOwnProperty.call(themes, saved) ? saved : 'bauhaus');
+  activate(Object.prototype.hasOwnProperty.call(themes, saved) ? saved : 'pop-art');
   picker.open = true;
 });
