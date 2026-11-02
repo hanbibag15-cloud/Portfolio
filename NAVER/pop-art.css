@@ -1,0 +1,26 @@
+/* Pop Art: comic halftone, speech burst, thick outlined text */
+body:has(.pop-art){background:#ffe34f}
+.pop-art{--pop-black:#171717;min-height:100dvh;color:var(--pop-black);overflow:hidden;background:radial-gradient(circle,#f54b83 2px,transparent 2.6px) 0 0/20px 20px,#ffe45a}
+.pop-art header{height:182px;background:#69d6ff;border-bottom:5px solid var(--pop-black)}
+.pop-art header::after{content:"WOW!";position:absolute;right:26px;top:47px;display:grid;place-items:center;width:99px;height:79px;background:#ffec46;color:#f13b55;font:900 2.2rem Arial,sans-serif;-webkit-text-stroke:1.5px var(--pop-black);text-shadow:3px 3px 0 #fff;clip-path:polygon(50% 0,60% 20%,84% 4%,79% 29%,100% 39%,79% 53%,96% 77%,70% 75%,55% 100%,44% 78%,17% 92%,21% 63%,0 54%,22% 40%,8% 15%,37% 23%);pointer-events:none}
+.pop-art .logo{bottom:20px}.pop-art .logo span{font-size:3.5rem;font-weight:900;color:#fff;-webkit-text-stroke:1.3px var(--pop-black);text-shadow:3px 3px 0 #f63a76,6px 6px 0 var(--pop-black)}
+.pop-art .back_btn{border:3px solid var(--pop-black);border-radius:0;background-color:#fff;box-shadow:4px 4px 0 var(--pop-black)}
+.pop-art main{padding-top:37px}
+.pop-art .login{max-width:455px;margin:0 auto;padding:28px 20px 35px;background:#fff9ec;border:4px solid var(--pop-black);box-shadow:10px 10px 0 #f3427b}
+.pop-art .input_group+.input_group{margin-top:22px}
+.pop-art .input_group input,.pop-art .state_input_group input,.pop-art.screen2_page .input_group input,.pop-art.screen2_page .screen2_id_input{box-sizing:border-box;width:100%;height:55px;padding:0 15px;border:3px solid var(--pop-black)!important;border-radius:0;background:#fff;color:var(--pop-black);outline:0;font-weight:750;box-shadow:4px 4px 0 #61d6ff}
+.pop-art .input_group input:focus,.pop-art .state_input_group input:focus{background:#fff5bd;box-shadow:4px 4px 0 #f3427b}
+.pop-art .input_group input::placeholder{color:#515151;opacity:1}
+.pop-art .state_input_group+.state_input_group{margin-top:24px}
+.pop-art .state_input_group>label,.pop-art.screen2_page .input_group>label{color:var(--pop-black);font-weight:900;margin-bottom:11px}
+.pop-art .password_input input{padding-right:46px}.pop-art .password_view{right:14px;bottom:18px}
+.pop-art .login_btn,.pop-art .passkey_btn{height:58px;border:3px solid var(--pop-black);border-radius:0;color:var(--pop-black);font-size:1.7rem;font-weight:900;cursor:pointer;box-shadow:5px 5px 0 var(--pop-black);transition:transform .15s,box-shadow .15s}
+.pop-art .login_btn{margin-top:40px;background:#ffe347}.pop-art .passkey_btn{margin-top:16px;background:#ff8cb4}
+.pop-art .login_btn:hover,.pop-art .passkey_btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--pop-black)}
+.pop-art .login_btn:active,.pop-art .passkey_btn:active{transform:translate(4px,4px);box-shadow:1px 1px 0 var(--pop-black)}
+.pop-art .login_links{margin-top:42px;flex-wrap:wrap;row-gap:12px}.pop-art .login_links a{color:var(--pop-black);font-weight:850;text-decoration:underline;text-underline-offset:3px}
+.pop-art .login_links a:last-child{color:#a31353}.pop-art .login_links a+a::before{background:var(--pop-black)}
+.pop-art .state_input_group.error input{border-color:#c3224c!important;background:#ffeef2}.pop-art .error_message{color:#a31a43;font-weight:800;line-height:1.5}
+.pop-art button:focus-visible,.pop-art a:focus-visible{outline:3px dashed #a31353;outline-offset:4px}
+@media(max-width:389px){.pop-art .login{padding:25px 14px 30px}.pop-art .logo span{font-size:2.9rem}.pop-art header::after{right:13px;width:76px;height:64px;font-size:1.7rem}}
+@media(prefers-reduced-motion:reduce){.pop-art .login_btn,.pop-art .passkey_btn{transition:none}}
