@@ -1,0 +1,97 @@
+/* Y2K Chrome theme: load after login.css */
+body:has(.y2k-chrome) {
+  background: linear-gradient(125deg,#efd7ff,#b7eaff 38%,#ffe3f2 72%,#e8ffea);
+}
+.y2k-chrome {
+  --chrome-ink: #39304f;
+  --chrome-edge: #ffffff;
+  --chrome-glow: #a78de6;
+  min-height: 100dvh;
+  color: var(--chrome-ink);
+  background:
+    radial-gradient(circle at 90% 8%,#fff6b4 0,transparent 34%),
+    radial-gradient(circle at 4% 45%,#dfbdff 0,transparent 38%),
+    linear-gradient(145deg,#c0f5ff 0%,#f9dcfa 48%,#d1d4ff 100%);
+  box-shadow: 0 0 45px #9276bd42;
+}
+.y2k-chrome header { height: 176px; }
+.y2k-chrome header::after {
+  content: "✦"; position: absolute; right: 34px; top: 54px;
+  font-size: 4rem; line-height: 1; color: #fff;
+  text-shadow: 1px 2px 0 #ad8be5,0 0 16px #fff;
+  pointer-events: none;
+}
+.y2k-chrome .logo { bottom: 12px; }
+.y2k-chrome .logo span {
+  font-size: 3.4rem; font-weight: 900; letter-spacing: -.06em;
+  color: #65708f; /* fallback */
+  background: linear-gradient(180deg,#fff 4%,#d4ebff 18%,#6a7393 42%,#fefeff 53%,#8c9cbe 70%,#fff 87%,#75819d);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(1px 2px 0 #7e80aa);
+}
+.y2k-chrome .back_btn {
+  background-color: #ffffffb8;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px #8473b54d, inset 0 2px 3px #fff;
+  cursor: pointer;
+}
+.y2k-chrome main { padding-top: 28px; }
+.y2k-chrome .login { max-width: 440px; margin-inline: auto; }
+.y2k-chrome .input_group input,
+.y2k-chrome .state_input_group input,
+.y2k-chrome.screen2_page .input_group input,
+.y2k-chrome.screen2_page .screen2_id_input {
+  box-sizing: border-box;
+  height: 56px; padding: 0 18px;
+  border: 2px solid #ffffffd9 !important;
+  border-radius: 19px;
+  outline: 0;
+  background: #ffffffa6;
+  color: var(--chrome-ink);
+  box-shadow: inset 0 2px 4px #ffffff,0 5px 15px #8f76b333;
+}
+.y2k-chrome .input_group + .input_group { margin-top: 18px; }
+.y2k-chrome .state_input_group + .state_input_group { margin-top: 23px; }
+.y2k-chrome .input_group input:focus,
+.y2k-chrome .state_input_group input:focus {
+  border-color: #bda4fa !important;
+  box-shadow: 0 0 0 3px #ffffffa6,0 0 18px #9c8be2a8;
+}
+.y2k-chrome .state_input_group > label,
+.y2k-chrome.screen2_page .input_group > label { color: #52486d; font-weight: 700; margin-bottom: 10px; }
+.y2k-chrome .input_group input::placeholder { color: #6e6881; }
+.y2k-chrome .password_input input { padding-right: 50px; }
+.y2k-chrome .password_view { right: 17px; bottom: 19px; }
+.y2k-chrome .login_btn,
+.y2k-chrome .passkey_btn {
+  height: 58px; border-radius: 999px;
+  border: 2px solid #ffffffed;
+  font-size: 1.6rem; font-weight: 800;
+  color: #39304f;
+  box-shadow: inset 0 3px 5px #ffffffda,inset 0 -5px 10px #8f72bb40,0 8px 18px #7b6b9e56;
+  cursor: pointer;
+  transition: transform .2s ease,box-shadow .2s ease;
+}
+.y2k-chrome .login_btn { margin-top: 36px; background: linear-gradient(180deg,#fff 0%,#bdeeff 26%,#a7b5ff 56%,#e8c0ff 100%); }
+.y2k-chrome .passkey_btn { margin-top: 14px; background: linear-gradient(180deg,#fff 0%,#ffe7fa 36%,#d3c3ff 100%); }
+.y2k-chrome .login_btn:hover,
+.y2k-chrome .passkey_btn:hover { transform: translateY(-3px); box-shadow: inset 0 3px 5px #fff,0 12px 24px #7b6b9e80; }
+.y2k-chrome .login_btn:active,
+.y2k-chrome .passkey_btn:active { transform: translateY(1px); }
+.y2k-chrome .login_links { margin-top: 35px; }
+.y2k-chrome .login_links a { color: #4a4266; font-weight: 700; }
+.y2k-chrome .login_links a:last-child { color: #7054ba; }
+.y2k-chrome .login_links a + a::before { background: #aaa0c6; }
+.y2k-chrome .state_input_group.error input { border-color: #d65d91 !important; background: #fff0f8; }
+.y2k-chrome .error_message { color: #a22562; font-weight: 700; }
+.y2k-chrome button:focus-visible,
+.y2k-chrome a:focus-visible { outline: 3px solid #7054ba; outline-offset: 3px; }
+@media (max-width: 389px) {
+  .y2k-chrome .logo span { font-size: 2.9rem; }
+  .y2k-chrome header::after { right: 20px; font-size: 3.2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .y2k-chrome .login_btn,.y2k-chrome .passkey_btn { transition: none; }
+}
