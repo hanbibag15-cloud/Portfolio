@@ -34,10 +34,22 @@
   const header = document.querySelector('.site-header');
 
   function updateOnScroll() {
-    if (selected < 0 || !targets[selected]) return;
-    const rect = targets[selected].getBoundingClientRect();
     const headerBottom = header?.getBoundingClientRect().bottom || 0;
     const viewportThreshold = Math.min(window.innerHeight * 0.35, 220);
+    const menuRect = targets[0]?.getBoundingClientRect();
+    const menuVisible = menuRect &&
+      menuRect.bottom > headerBottom + 8 &&
+      menuRect.top < window.innerHeight - viewportThreshold;
+
+    // Scrolling into MENU from either direction activates its GNB marker.
+    if (menuVisible && (selected === -1 || selected === 0)) {
+      selected = 0;
+      hasEnteredSelectedSection = true;
+      mark(0);
+      return;
+    }
+    if (selected < 0 || !targets[selected]) return;
+    const rect = targets[selected].getBoundingClientRect();
     const isVisible = rect.bottom > headerBottom + 8 &&
                       rect.top < window.innerHeight - viewportThreshold;
     // On first click, keep the indicator visible while smooth scrolling
@@ -81,4 +93,5 @@
   window.addEventListener('hashchange', syncHash);
   window.addEventListener('scroll', updateOnScroll, { passive: true });
   window.addEventListener('resize', updateOnScroll);
+  updateOnScroll();
 })();
