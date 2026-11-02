@@ -1,0 +1,79 @@
+/* Pixel Art theme. Existing layout and HTML structure stay intact. */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+body:has(.pixel-art) { background: #222943; }
+.pixel-art {
+  --pixel-ink:#22233b; --pixel-dark:#10152e; --pixel-cream:#fff9dc;
+  min-height:100dvh;
+  color:var(--pixel-ink);
+  background-color:#b8e6f2;
+  background-image:linear-gradient(#ffffff48 1px,transparent 1px),linear-gradient(90deg,#ffffff48 1px,transparent 1px);
+  background-size:20px 20px;
+}
+.pixel-art header {
+  height:175px;
+  border-bottom:5px solid var(--pixel-ink);
+  background:#ffdc6e;
+}
+.pixel-art header::after {
+  content:"★";position:absolute;right:30px;top:54px;
+  font-size:46px;color:#ff6295;
+  text-shadow:4px 0 var(--pixel-ink),-4px 0 var(--pixel-ink),0 4px var(--pixel-ink),0 -4px var(--pixel-ink);
+  pointer-events:none;
+}
+.pixel-art .logo {bottom:19px}
+.pixel-art .logo span {font-weight:900;letter-spacing:-.06em;font-size:3rem;text-shadow:3px 3px 0 #ff8a71}
+.pixel-art .back_btn {
+  border:3px solid var(--pixel-ink);
+  border-radius:0;background-color:var(--pixel-cream);
+  background-size:24px 24px;
+  box-shadow:4px 4px 0 var(--pixel-ink);
+}
+.pixel-art main {padding-top:32px}
+.pixel-art .login {max-width:440px;margin-inline:auto}
+.pixel-art .input_group + .input_group {margin-top:20px}
+.pixel-art .input_group input,
+.pixel-art .state_input_group input,
+.pixel-art.screen2_page .input_group input,
+.pixel-art.screen2_page .screen2_id_input {
+  box-sizing:border-box;
+  width:100%;height:55px;padding:0 14px;
+  border:3px solid var(--pixel-ink)!important;
+  border-radius:0;
+  outline:0;
+  background:var(--pixel-cream);color:var(--pixel-ink);
+  box-shadow:5px 5px 0 var(--pixel-ink);
+  font-weight:700;
+}
+.pixel-art .input_group input:focus,
+.pixel-art .state_input_group input:focus {background:#fff5a9;box-shadow:5px 5px 0 #f35d94}
+.pixel-art .state_input_group + .state_input_group {margin-top:25px}
+.pixel-art .state_input_group > label,
+.pixel-art.screen2_page .input_group > label {font-weight:800;color:var(--pixel-ink);margin-bottom:11px}
+.pixel-art .password_input input {padding-right:45px}
+.pixel-art .password_view {right:15px;bottom:17px;z-index:1}
+.pixel-art .login_btn,
+.pixel-art .passkey_btn {
+  height:56px;border:3px solid var(--pixel-ink);
+  border-radius:0;color:var(--pixel-dark);
+  font-size:1.6rem;font-weight:900;
+  box-shadow:inset -4px -4px 0 #0000002a,5px 5px 0 var(--pixel-dark);
+  transition:none;cursor:pointer;
+}
+.pixel-art .login_btn {background:#7bea9d;margin-top:39px}
+.pixel-art .passkey_btn {background:#ffa3cb;margin-top:17px}
+.pixel-art .login_btn:hover,.pixel-art .passkey_btn:hover {filter:brightness(1.06)}
+.pixel-art .login_btn:active,.pixel-art .passkey_btn:active {
+  transform:translate(4px,4px);
+  box-shadow:inset 4px 4px 0 #00000036,1px 1px 0 var(--pixel-dark);
+}
+.pixel-art .login_links {margin-top:40px;flex-wrap:wrap;row-gap:12px}
+.pixel-art .login_links a {color:var(--pixel-dark);font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.pixel-art .login_links a:last-child {color:#a21d65}
+.pixel-art .login_links a + a::before {background:var(--pixel-ink);width:2px}
+.pixel-art .state_input_group.error input {border-color:#cc2857!important;background:#fff0f5}
+.pixel-art .error_message {font-weight:700;color:#a31341;line-height:1.5}
+.pixel-art button:focus-visible,.pixel-art a:focus-visible {outline:3px dashed #be235b;outline-offset:5px}
+@media(max-width:389px){
+  .pixel-art header::after {right:19px;font-size:32px}
+  .pixel-art .logo span {font-size:2.7rem}
+}
