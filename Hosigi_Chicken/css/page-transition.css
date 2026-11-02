@@ -1,0 +1,5 @@
+/* Page transition: a brief white fade keeps the existing design unchanged. */
+.page-fade-layer{position:fixed;inset:0;z-index:9999;background:var(--surface-default,#FFFFFF);opacity:0;pointer-events:none;transition:opacity 300ms ease}
+html.page-is-leaving .page-fade-layer{opacity:1;pointer-events:auto}
+html.page-is-entering .page-fade-layer{opacity:1}
+@media(prefers-reduced-motion:reduce){.page-fade-layer{transition:none}}
