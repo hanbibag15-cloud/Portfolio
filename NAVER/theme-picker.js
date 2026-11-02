@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
     'grainy-gradient': 'grainy-gradient.css',
     bauhaus: 'bauhaus.css',
     'pop-art': 'pop-art.css',
-    risograph: 'risograph.css'
+    risograph: 'risograph.css',
+    isometric: 'isometric.css'
   };
   const buttons = picker.querySelectorAll('[data-theme]');
   const themeNames = Object.keys(themes);
@@ -40,8 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
     try { localStorage.setItem('naver-login-theme', theme); } catch (_) {}
   }
   buttons.forEach(button => button.addEventListener('click', () => activate(button.dataset.theme)));
-  let saved = 'risograph';
+  let saved = 'isometric';
   try { saved = localStorage.getItem('naver-login-theme') || saved; } catch (_) {}
-  activate(Object.prototype.hasOwnProperty.call(themes, saved) ? saved : 'risograph');
+  activate(Object.prototype.hasOwnProperty.call(themes, saved) ? saved : 'isometric');
   picker.open = true;
 });
