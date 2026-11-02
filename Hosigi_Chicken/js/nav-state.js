@@ -5,6 +5,7 @@
   const links = [...nav.querySelectorAll(':scope > ul > li > a')];
   const page = location.pathname.split('/').pop();
   let selected = -1;
+  let hasEnteredSelectedSection = false;
 
   function mark(index) {
     links.forEach((link, i) => {
@@ -37,9 +38,15 @@
     const rect = targets[selected].getBoundingClientRect();
     const headerBottom = header?.getBoundingClientRect().bottom || 0;
     const viewportThreshold = Math.min(window.innerHeight * 0.35, 220);
-    // Hide when the chosen section is no longer the section being viewed.
-    if (rect.bottom <= headerBottom + 8 || rect.top >= window.innerHeight - viewportThreshold) {
+    const isVisible = rect.bottom > headerBottom + 8 &&
+                      rect.top < window.innerHeight - viewportThreshold;
+    // On first click, keep the indicator visible while smooth scrolling
+    // toward the section. Hide it only AFTER the section was reached.
+    if (isVisible) {
+      hasEnteredSelectedSection = true;
+    } else if (hasEnteredSelectedSection) {
       selected = -1;
+      hasEnteredSelectedSection = false;
       mark(-1);
     }
   }
@@ -47,6 +54,7 @@
   links.forEach((link, index) => {
     link.addEventListener('click', () => {
       selected = targets[index] ? index : -1;
+      hasEnteredSelectedSection = false;
       mark(index);
     });
   });
@@ -56,6 +64,7 @@
       const parent = link.closest('.has-submenu');
       const index = parent === links[0]?.parentElement ? 0 : 1;
       selected = targets[index] ? index : -1;
+      hasEnteredSelectedSection = false;
       mark(index);
     });
   });
@@ -65,6 +74,7 @@
     const index = ({ '#menu': 0, '#stores': 2, '#events': 3 })[location.hash];
     if (index === undefined) { selected = -1; mark(-1); return; }
     selected = index;
+    hasEnteredSelectedSection = false;
     mark(index);
   }
   syncHash();
