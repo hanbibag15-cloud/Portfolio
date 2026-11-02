@@ -1,36 +1,89 @@
-/* Swiss Style: rigid grid, left alignment, bold sans serif, red and black */
-body:has(.swiss-style){background:#dedede}
-.swiss-style{--sw-red:#eb252b;--sw-black:#121212;min-height:100dvh;color:var(--sw-black);
-background:linear-gradient(90deg,var(--sw-red) 0 27%,#f6f4ee 27% 100%);}
-.swiss-style header{height:177px;background:#f6f4ee;border-bottom:4px solid var(--sw-black);}
-.swiss-style header::before{content:"";position:absolute;left:0;top:0;bottom:0;width:14px;background:var(--sw-red)}
-.swiss-style header::after{content:"01 / LOGIN";position:absolute;right:24px;top:48px;font:800 1.2rem Arial,sans-serif;letter-spacing:.15em;color:var(--sw-red)}
-.swiss-style .logo{bottom:19px;left:25px}.swiss-style .logo span{font-size:3.6rem;font-weight:900;letter-spacing:-.075em;color:var(--sw-black)}
-.swiss-style .back_btn{background-color:#fff;border:2px solid var(--sw-black);border-radius:0;background-size:25px;cursor:pointer}
-.swiss-style main{padding:36px 23px 46px;}
-.swiss-style .login{max-width:440px;margin:0 auto;padding:30px 22px 35px;background:#fff;border:3px solid var(--sw-black);box-shadow:8px 8px 0 var(--sw-black);}
-.swiss-style fieldset{text-align:left}
-.swiss-style .input_group + .input_group{margin-top:22px}
-.swiss-style .input_group input,.swiss-style .state_input_group input,.swiss-style.screen2_page .input_group input,.swiss-style.screen2_page .screen2_id_input{
-box-sizing:border-box;width:100%;height:54px;padding:0 14px;border:2px solid var(--sw-black)!important;border-radius:0;
-background:#fff;color:var(--sw-black);font-size:1.7rem;font-weight:700;outline:0;box-shadow:none;}
-.swiss-style .input_group input:focus,.swiss-style .state_input_group input:focus{border-color:var(--sw-red)!important;outline:2px solid var(--sw-red);outline-offset:2px}
-.swiss-style .input_group input::placeholder{color:#555;opacity:1}
-.swiss-style .state_input_group + .state_input_group{margin-top:23px}
-.swiss-style .state_input_group > label,.swiss-style.screen2_page .input_group > label{display:block;color:var(--sw-black);font-weight:900;letter-spacing:.04em;margin-bottom:10px}
-.swiss-style .password_input input{padding-right:45px}.swiss-style .password_view{right:14px;bottom:17px}
-.swiss-style .login_btn,.swiss-style .passkey_btn{height:56px;border:2px solid var(--sw-black);border-radius:0;
-font-size:1.6rem;font-weight:900;letter-spacing:.025em;cursor:pointer;box-shadow:none;transition:background .15s,color .15s}
-.swiss-style .login_btn{margin-top:38px;color:#fff;background:var(--sw-red)}
-.swiss-style .passkey_btn{margin-top:12px;color:var(--sw-black);background:#fff}
-.swiss-style .login_btn:hover{background:#bc1219}
-.swiss-style .passkey_btn:hover{background:#f1f1f1}
-.swiss-style .login_links{justify-content:flex-start;margin-top:35px;flex-wrap:wrap;row-gap:12px}
-.swiss-style .login_links a{font-size:1.2rem;color:var(--sw-black);font-weight:800;padding:0 11px}
-.swiss-style .login_links a:first-child{padding-left:0}.swiss-style .login_links a:last-child{color:var(--sw-red)}
-.swiss-style .login_links a + a::before{background:var(--sw-black)}
-.swiss-style .state_input_group.error input{border-color:var(--sw-red)!important}
-.swiss-style .error_message{color:#b5151d;font-weight:700;line-height:1.5}
-.swiss-style button:focus-visible,.swiss-style a:focus-visible{outline:3px solid var(--sw-red);outline-offset:3px}
-@media(max-width:389px){.swiss-style .login{padding:25px 14px 30px}.swiss-style .logo span{font-size:3rem}.swiss-style header::after{right:15px;font-size:1rem}}
+/* SWISS STYLE — redesigned from scratch: typographic grid / red panel / strict alignment */
+body:has(.swiss-style){background:#e4e4e4}
+.swiss-style{
+  --sw-red:#e52329;--sw-ink:#101010;--sw-paper:#f7f7f3;
+  color:var(--sw-ink);background:var(--sw-paper);min-height:100dvh;
+  font-family:"Pretendard Variable",Arial,sans-serif;
+}
+/* A broad red graphic panel occupies the left edge, like a Swiss poster. */
+.swiss-style header{
+  height:230px;position:relative;padding:0 32px;
+  background:linear-gradient(90deg,var(--sw-red) 0 34%,var(--sw-paper) 34% 100%);
+  border-bottom:2px solid var(--sw-ink);
+}
+.swiss-style header::before{
+  content:"SWISS / 001";position:absolute;left:32px;bottom:26px;
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font:900 1.2rem/1 Arial,sans-serif;letter-spacing:.16em;color:#fff;
+}
+.swiss-style header::after{
+  content:"IDENTITY  /  ACCOUNT";position:absolute;right:32px;top:52px;
+  padding-bottom:10px;border-bottom:2px solid var(--sw-ink);
+  font:800 1.1rem/1.4 Arial,sans-serif;letter-spacing:.13em;color:var(--sw-ink);
+}
+.swiss-style .back_btn{top:35px;left:32px;background-color:#fff;border:2px solid var(--sw-ink);border-radius:0;box-shadow:none;cursor:pointer;}
+.swiss-style .logo{left:37%;bottom:28px;gap:13px}
+.swiss-style .logo span{
+  color:var(--sw-ink);font-size:clamp(3.5rem,6vw,6rem);font-weight:900;
+  line-height:1;letter-spacing:-.09em;text-transform:uppercase;
+}
+.swiss-style main{padding:48px 32px 72px;background:var(--sw-paper)}
+.swiss-style .login{width:100%;max-width:550px;margin:0 auto;padding:0;background:transparent;border:0;box-shadow:none}
+.swiss-style .login form{border-top:5px solid var(--sw-ink);padding-top:25px}
+.swiss-style .input_group + .input_group{margin-top:29px}
+.swiss-style .input_group input,
+.swiss-style .state_input_group input,
+.swiss-style.screen2_page .input_group input,
+.swiss-style.screen2_page .screen2_id_input{
+  box-sizing:border-box;width:100%;height:62px;padding:0 3px;
+  border:0!important;border-bottom:2px solid var(--sw-ink)!important;
+  border-radius:0;outline:0;background:transparent;box-shadow:none;
+  color:var(--sw-ink);font-size:1.9rem;font-weight:700;
+}
+.swiss-style .input_group input::placeholder{color:#585858;opacity:1}
+.swiss-style .input_group input:focus,.swiss-style .state_input_group input:focus{
+  border-bottom-color:var(--sw-red)!important;box-shadow:none;
+}
+.swiss-style .state_input_group+.state_input_group{margin-top:29px}
+.swiss-style .state_input_group>label,.swiss-style.screen2_page .input_group>label{
+  display:block;margin-bottom:6px;color:var(--sw-ink);
+  font-size:1.3rem;font-weight:900;letter-spacing:.11em;
+}
+.swiss-style .password_input input{padding-right:35px}
+.swiss-style .password_view{right:5px;bottom:20px}
+.swiss-style .login_btn,.swiss-style .passkey_btn{
+  width:100%;height:60px;border-radius:0;border:2px solid var(--sw-ink);
+  box-shadow:none;font-family:inherit;font-size:1.6rem;font-weight:900;
+  letter-spacing:.035em;cursor:pointer;transition:background-color .15s ease,color .15s ease;
+}
+.swiss-style .login_btn{margin-top:43px;background:var(--sw-red);color:#fff}
+.swiss-style .login_btn:hover{background:#a9161d}
+.swiss-style .passkey_btn{margin-top:12px;background:var(--sw-paper);color:var(--sw-ink)}
+.swiss-style .passkey_btn:hover{background:#e1e1dc}
+.swiss-style .login_links{
+  justify-content:flex-start;align-items:center;flex-wrap:wrap;
+  margin-top:38px;padding-top:20px;border-top:1px solid var(--sw-ink);
+}
+.swiss-style .login_links a{font-size:1.3rem;font-weight:750;color:var(--sw-ink)}
+.swiss-style .login_links a:first-child{padding-left:0}
+.swiss-style .login_links a:last-child{color:var(--sw-red)}
+.swiss-style .login_links a+a::before{background:var(--sw-ink)}
+.swiss-style .state_input_group.error input{border-bottom-color:var(--sw-red)!important}
+.swiss-style .error_message{color:#b51e24;font-weight:700;line-height:1.5}
+.swiss-style button:focus-visible,.swiss-style a:focus-visible{outline:3px solid var(--sw-red);outline-offset:4px}
+/* The screen2_page width rule stays intact. Avoid the long title colliding at mobile sizes. */
+@media(max-width:600px){
+  .swiss-style header{height:205px;padding:0 23px;background:linear-gradient(90deg,var(--sw-red) 0 25%,var(--sw-paper) 25% 100%)}
+  .swiss-style .logo{left:29%;bottom:22px}
+  .swiss-style .logo span{font-size:3.7rem}
+  .swiss-style .back_btn{left:18px}
+  .swiss-style header::before{left:16px;bottom:17px;font-size:1rem}
+  .swiss-style header::after{right:18px;top:72px;font-size:.9rem}
+  .swiss-style main{padding:38px 23px 60px}
+}
+@media(max-width:389px){
+  .swiss-style .logo span{font-size:3.1rem}
+  .swiss-style main{padding-left:23px;padding-right:23px}
+  .swiss-style .login_links a{font-size:1.15rem;padding:0 8px}
+}
 @media(prefers-reduced-motion:reduce){.swiss-style .login_btn,.swiss-style .passkey_btn{transition:none}}
