@@ -31,5 +31,5 @@ document.addEventListener('DOMContentLoaded', function () {
   let saved = 'memphis';
   try { saved = localStorage.getItem('naver-login-theme') || saved; } catch (_) {}
   activate(Object.prototype.hasOwnProperty.call(themes, saved) ? saved : 'memphis');
-  if (window.matchMedia('(max-width:700px)').matches) picker.open = false;
+  picker.open = true;
 });
