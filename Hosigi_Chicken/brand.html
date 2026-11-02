@@ -354,6 +354,12 @@
         });
         item.addEventListener('mouseleave', () => {
             if (window.matchMedia('(min-width: 1025px)').matches) {
+                // A mouse click leaves focus on the trigger and keeps :focus-within open.
+                // Clear pointer focus on exit, but preserve keyboard focus-visible.
+                if (item.contains(document.activeElement) &&
+                    !document.activeElement.matches(':focus-visible')) {
+                    document.activeElement.blur();
+                }
                 trigger.setAttribute('aria-expanded', 'false');
             }
         });
