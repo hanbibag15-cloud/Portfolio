@@ -1,0 +1,111 @@
+/* Neo Brutalism - 별도 테마 (기존 login.css 유지) */
+body:has(.neo-brutalism) { background: #181818; }
+.neo-brutalism {
+  --neo-ink: #111111;
+  --neo-yellow: #fff176;
+  --neo-pink: #ff70b8;
+  --neo-blue: #74dcff;
+  --neo-green: #a5f24c;
+  --neo-paper: #fffdf5;
+  --neo-shadow: 6px 6px 0 var(--neo-ink);
+  color: var(--neo-ink);
+  background: var(--neo-yellow) !important;
+  overflow: hidden;
+}
+.neo-brutalism * { box-sizing: border-box; }
+.neo-brutalism header {
+  height: 180px;
+  background: var(--neo-blue);
+  border-bottom: 4px solid var(--neo-ink);
+}
+.neo-brutalism header::after {
+  content: "";
+  position: absolute;
+  right: 33px;
+  top: 50px;
+  width: 55px;
+  height: 55px;
+  background: var(--neo-pink);
+  border: 3px solid var(--neo-ink);
+  transform: rotate(16deg);
+  box-shadow: 5px 5px 0 var(--neo-ink);
+  pointer-events: none;
+}
+.neo-brutalism .logo { bottom: 26px; z-index: 1; }
+.neo-brutalism .logo span { font-size: 3.2rem; font-weight: 900; letter-spacing: -0.06em; }
+.neo-brutalism .back_btn {
+  background-color: var(--neo-paper);
+  background-size: 24px 24px;
+  border: 3px solid var(--neo-ink);
+  box-shadow: 3px 3px 0 var(--neo-ink);
+  cursor: pointer;
+}
+.neo-brutalism main { padding-top: 42px; }
+.neo-brutalism .login { max-width: 440px; margin: 0 auto; }
+.neo-brutalism .input_group + .input_group { margin-top: 22px; }
+.neo-brutalism .input_group input,
+.neo-brutalism .state_input_group input,
+.neo-brutalism.screen2_page .input_group input,
+.neo-brutalism.screen2_page .screen2_id_input {
+  width: 100%;
+  min-height: 56px;
+  height: 56px;
+  padding: 0 16px;
+  border: 3px solid var(--neo-ink) !important;
+  border-radius: 0;
+  outline: 0;
+  background: var(--neo-paper);
+  color: var(--neo-ink);
+  box-shadow: 4px 4px 0 var(--neo-ink);
+  font-weight: 700;
+}
+.neo-brutalism .input_group input:focus,
+.neo-brutalism .state_input_group input:focus {
+  background: var(--neo-blue);
+  box-shadow: 6px 6px 0 var(--neo-ink);
+}
+.neo-brutalism .input_group input::placeholder { color: #515151; }
+.neo-brutalism .state_input_group > label,
+.neo-brutalism.screen2_page .input_group > label {
+  margin-bottom: 12px;
+  font-weight: 800;
+  color: var(--neo-ink);
+}
+.neo-brutalism .state_input_group + .state_input_group { margin-top: 24px; }
+.neo-brutalism .password_input input { padding-right: 46px; }
+.neo-brutalism .password_view { right: 14px; bottom: 19px; z-index: 1; }
+.neo-brutalism .login_btn,
+.neo-brutalism .passkey_btn {
+  min-height: 56px;
+  height: 56px;
+  border: 3px solid var(--neo-ink);
+  border-radius: 0;
+  box-shadow: var(--neo-shadow);
+  color: var(--neo-ink);
+  font-size: 1.7rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease;
+}
+.neo-brutalism .login_btn { margin-top: 40px; background: var(--neo-green); }
+.neo-brutalism .passkey_btn { margin-top: 17px; background: var(--neo-pink); }
+.neo-brutalism .login_btn:hover,
+.neo-brutalism .passkey_btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--neo-ink); }
+.neo-brutalism .login_btn:active,
+.neo-brutalism .passkey_btn:active { transform: translate(5px, 5px); box-shadow: 1px 1px 0 var(--neo-ink); }
+.neo-brutalism .login_links { margin-top: 46px; flex-wrap: wrap; row-gap: 12px; }
+.neo-brutalism .login_links a { font-weight: 800; font-size: 1.3rem; color: var(--neo-ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.neo-brutalism .login_links a + a::before { width: 2px; background: var(--neo-ink); }
+.neo-brutalism .login_links a:last-child { color: #a71860; }
+.neo-brutalism .state_input_group.error input { border-color: #e52a51 !important; background: #ffe6ec; }
+.neo-brutalism .error_message { color: #b71337; font-weight: 800; line-height: 1.5; }
+.neo-brutalism button:focus-visible,
+.neo-brutalism a:focus-visible { outline: 3px dashed #b71337; outline-offset: 5px; }
+@media (max-width: 389px) {
+  .neo-brutalism header::after { right: 22px; width: 44px; height: 44px; }
+  .neo-brutalism .logo span { font-size: 2.8rem; }
+  .neo-brutalism .login_links a { padding: 0 8px; font-size: 1.2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .neo-brutalism .login_btn, .neo-brutalism .passkey_btn { transition: none; }
+}
