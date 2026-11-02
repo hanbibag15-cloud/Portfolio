@@ -1,0 +1,4 @@
+/* Active GNB marker — reuse Hosigi semantic color tokens. */
+.header-nav > ul > li > a.is-current{position:relative;color:var(--action-primary);font-weight:700}
+.header-nav > ul > li > a.is-current::after{content:"";position:absolute;left:0;right:0;bottom:-18px;height:3px;background:var(--action-primary);border-radius:3px}
+@media(max-width:1024px){.header-nav > ul > li > a.is-current::after{bottom:0;height:2px}}
