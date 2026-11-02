@@ -1,0 +1,55 @@
+/* Memphis theme: colorful geometry, dots and sharp playful forms */
+body:has(.memphis){background:#293060;}
+.memphis{
+  --m-ink:#22223d;--m-yellow:#ffe36b;--m-pink:#ff83af;--m-blue:#66d8f5;
+  min-height:100dvh;color:var(--m-ink);overflow:hidden;
+  background:radial-gradient(circle,#252545 1.6px,transparent 2px) 0 0/23px 23px,
+    linear-gradient(130deg,#fff8dc 0%,#ffdbec 55%,#cbf3f9 100%);
+}
+.memphis header{height:180px;background:var(--m-yellow);border-bottom:4px solid var(--m-ink);}
+.memphis header::before{content:"";position:absolute;right:32px;top:42px;width:71px;height:71px;
+  border:4px solid var(--m-ink);border-radius:50%;background:var(--m-blue);pointer-events:none;}
+.memphis header::after{content:"";position:absolute;right:77px;top:61px;width:50px;height:52px;
+  background:var(--m-pink);clip-path:polygon(50% 0,100% 100%,0 100%);transform:rotate(16deg);
+  filter:drop-shadow(3px 3px 0 #22223d);pointer-events:none;}
+.memphis .logo{bottom:22px}.memphis .logo span{font-size:3.1rem;font-weight:900;letter-spacing:-.05em}
+.memphis .back_btn{border:3px solid var(--m-ink);border-radius:50%;background-color:#fff;
+  box-shadow:4px 4px 0 var(--m-pink);cursor:pointer;}
+.memphis main{padding-top:35px}
+.memphis .login{position:relative;max-width:440px;margin:0 auto;padding:28px 20px 34px;
+  background:#fffdf2;border:3px solid var(--m-ink);border-radius:0 22px 0 22px;
+  box-shadow:9px 9px 0 var(--m-blue);}
+.memphis .login::before{content:"";position:absolute;right:22px;top:-23px;width:52px;height:52px;
+  background:var(--m-pink);border:3px solid var(--m-ink);transform:rotate(25deg);pointer-events:none;}
+.memphis .input_group + .input_group{margin-top:20px}
+.memphis .input_group input,.memphis .state_input_group input,
+.memphis.screen2_page .input_group input,.memphis.screen2_page .screen2_id_input{
+  box-sizing:border-box;width:100%;height:55px;padding:0 14px;
+  border:3px solid var(--m-ink)!important;border-radius:10px 0 10px 0;
+  outline:0;background:#fff;color:var(--m-ink);font-weight:650;
+  box-shadow:4px 4px 0 #b4e7f2;}
+.memphis .input_group input:focus,.memphis .state_input_group input:focus{
+  background:#fff9da;box-shadow:4px 4px 0 var(--m-pink);}
+.memphis .input_group input::placeholder{color:#5a586b}
+.memphis .state_input_group + .state_input_group{margin-top:24px}
+.memphis .state_input_group > label,.memphis.screen2_page .input_group > label{
+  color:var(--m-ink);font-weight:800;margin-bottom:11px}
+.memphis .password_input input{padding-right:45px}
+.memphis .password_view{right:14px;bottom:18px;z-index:1}
+.memphis .login_btn,.memphis .passkey_btn{
+  height:56px;border:3px solid var(--m-ink);border-radius:0 14px 0 14px;
+  color:var(--m-ink);font-weight:900;font-size:1.6rem;cursor:pointer;
+  box-shadow:5px 5px 0 var(--m-ink);transition:transform .15s,box-shadow .15s;}
+.memphis .login_btn{margin-top:38px;background:var(--m-yellow)}
+.memphis .passkey_btn{margin-top:17px;background:var(--m-pink)}
+.memphis .login_btn:hover,.memphis .passkey_btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--m-ink)}
+.memphis .login_btn:active,.memphis .passkey_btn:active{transform:translate(4px,4px);box-shadow:1px 1px 0 var(--m-ink)}
+.memphis .login_links{margin-top:39px;flex-wrap:wrap;row-gap:12px}
+.memphis .login_links a{color:var(--m-ink);font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.memphis .login_links a:last-child{color:#bb255b}
+.memphis .login_links a + a::before{background:var(--m-ink)}
+.memphis .state_input_group.error input{border-color:#cf2851!important;background:#fff0f4}
+.memphis .error_message{color:#a31e45;font-weight:800;line-height:1.5}
+.memphis button:focus-visible,.memphis a:focus-visible{outline:3px dashed #bb255b;outline-offset:4px}
+@media(max-width:389px){.memphis .login{padding:25px 14px 30px}.memphis header::before{right:18px;width:55px;height:55px}.memphis header::after{right:49px}.memphis .logo span{font-size:2.7rem}}
+@media(prefers-reduced-motion:reduce){.memphis .login_btn,.memphis .passkey_btn{transition:none}}
