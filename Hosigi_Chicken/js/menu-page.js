@@ -29,3 +29,9 @@ renderMenu(location.hash.slice(1));
 const toggle=document.querySelector(".header-menu-toggle"),header=document.querySelector(".site-header");
 toggle?.addEventListener("click",()=>{const open=header.classList.toggle("menu-open");toggle.setAttribute("aria-expanded",String(open));toggle.setAttribute("aria-label",open?"메뉴 닫기":"메뉴 열기");});
 document.querySelectorAll(".header-nav .has-submenu > a").forEach(a=>a.addEventListener("click",()=>{if(window.innerWidth>1024)return;document.querySelectorAll(".has-submenu").forEach(item=>item.classList.remove("submenu-open"));a.parentElement.classList.add("submenu-open");}));
+
+// Scroll back to top, respecting reduced-motion preference.
+document.querySelector('.quick-menu-top')?.addEventListener('click', () => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+});
