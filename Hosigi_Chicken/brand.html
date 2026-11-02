@@ -325,14 +325,11 @@
             </a>
             <button class="quick-menu-top" type="button" aria-label="페이지 맨 위로 이동">
                 <span aria-hidden="true">↑</span>
-                <span>TOP</span>
+                <span class="quick-menu-direction">TOP</span>
             </button>
         </aside>
     </div>
     <script>
-    document.querySelector('.quick-menu-top')?.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-    });
     const menuToggle = document.querySelector('.header-menu-toggle');
     const siteHeader = document.querySelector('.site-header');
     menuToggle.addEventListener('click', () => {
@@ -565,5 +562,6 @@
         document.querySelector('.header-menu-toggle')?.setAttribute('aria-expanded', 'false');
     }));
 </script>
+<script src="js/quick-menu.js" defer></script>
 </body>
 </html>
