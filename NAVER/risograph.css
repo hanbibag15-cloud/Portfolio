@@ -1,0 +1,30 @@
+/* Risograph: pink + blue spot inks, misregistration and multiply overlay */
+body:has(.risograph){background:#f5efe4}
+.risograph{--r-pink:#ec4f91;--r-blue:#2468bb;--r-paper:#fff8ed;min-height:100dvh;position:relative;isolation:isolate;color:#233b68;background:var(--r-paper)}
+.risograph::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.15;background:radial-gradient(circle,var(--r-blue) .7px,transparent 1px) 0 0/7px 7px;mix-blend-mode:multiply}
+.risograph>header,.risograph>main{position:relative;z-index:1}
+.risograph header{height:185px;background:#fce5ed;border-bottom:4px solid var(--r-blue)}
+.risograph header::after{content:"RISO / 02";position:absolute;right:27px;top:54px;color:var(--r-pink);font:900 1.5rem Arial,sans-serif;letter-spacing:.12em;transform:rotate(5deg);text-shadow:2px 2px 0 var(--r-blue)}
+.risograph .logo{bottom:20px}.risograph .logo span{font-size:3.2rem;font-weight:900;color:var(--r-blue);text-shadow:3px 2px 0 var(--r-pink)}
+.risograph .back_btn{background-color:var(--r-paper);border:2px solid var(--r-blue);border-radius:0;box-shadow:3px 3px 0 var(--r-pink)}
+.risograph main{padding-top:38px}
+.risograph .login{max-width:450px;margin:0 auto;padding:29px 20px 36px;background:var(--r-paper);border:3px solid var(--r-blue);box-shadow:8px 7px 0 var(--r-pink);position:relative}
+.risograph .login::after{content:"";position:absolute;inset:10px;z-index:-1;background:var(--r-pink);opacity:.12;mix-blend-mode:multiply;pointer-events:none}
+.risograph .input_group+.input_group{margin-top:23px}
+.risograph .input_group input,.risograph .state_input_group input,.risograph.screen2_page .input_group input,.risograph.screen2_page .screen2_id_input{box-sizing:border-box;width:100%;height:55px;padding:0 15px;border:2px solid var(--r-blue)!important;border-radius:0;outline:0;background:#fffaf2;color:#233b68;font-weight:700;box-shadow:3px 3px 0 var(--r-pink)}
+.risograph .input_group input:focus,.risograph .state_input_group input:focus{background:#ffe8f2;box-shadow:4px 4px 0 var(--r-blue)}
+.risograph .input_group input::placeholder{color:#62667f;opacity:1}
+.risograph .state_input_group+.state_input_group{margin-top:24px}
+.risograph .state_input_group>label,.risograph.screen2_page .input_group>label{color:var(--r-blue);font-weight:850;margin-bottom:11px}
+.risograph .password_input input{padding-right:47px}.risograph .password_view{right:14px;bottom:18px}
+.risograph .login_btn,.risograph .passkey_btn{height:57px;border:2px solid var(--r-blue);border-radius:0;font-size:1.6rem;font-weight:850;cursor:pointer;box-shadow:4px 4px 0 var(--r-blue);transition:transform .15s,box-shadow .15s}
+.risograph .login_btn{margin-top:39px;background:var(--r-pink);color:#fff}
+.risograph .passkey_btn{margin-top:16px;background:var(--r-blue);color:#fff;border-color:var(--r-pink);box-shadow:4px 4px 0 var(--r-pink)}
+.risograph .login_btn:hover,.risograph .passkey_btn:hover{transform:translate(-2px,-2px)}
+.risograph .login_btn:active,.risograph .passkey_btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--r-blue)}
+.risograph .login_links{margin-top:40px;flex-wrap:wrap;row-gap:12px}.risograph .login_links a{font-weight:800;color:var(--r-blue)}
+.risograph .login_links a:last-child{color:#b52e69}.risograph .login_links a+a::before{background:var(--r-pink)}
+.risograph .state_input_group.error input{border-color:#c73168!important;background:#ffe9f0}.risograph .error_message{color:#ab255d;font-weight:750;line-height:1.5}
+.risograph button:focus-visible,.risograph a:focus-visible{outline:3px dashed var(--r-pink);outline-offset:4px}
+@media(max-width:389px){.risograph .login{padding:25px 14px 30px}.risograph .logo span{font-size:2.8rem}.risograph header::after{right:12px;font-size:1.2rem}}
+@media(prefers-reduced-motion:reduce){.risograph .login_btn,.risograph .passkey_btn{transition:none}}
