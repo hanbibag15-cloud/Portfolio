@@ -1,0 +1,39 @@
+/* Editorial — magazine-inspired serif headline, fine rules, and double borders */
+body:has(.editorial){background:#d8d5ce}
+.editorial{--ed-ink:#22201d;--ed-paper:#f8f6ef;min-height:100dvh;color:var(--ed-ink);background:var(--ed-paper)}
+.editorial header{height:205px;border-bottom:1px solid var(--ed-ink);background:transparent}
+.editorial header::before{content:"THE LOGIN EDITION";position:absolute;top:47px;right:24px;font:700 1rem Georgia,serif;letter-spacing:.22em;color:#534d43}
+.editorial header::after{content:"No. 01 — NAVER";position:absolute;bottom:17px;right:24px;font:italic 1.2rem Georgia,serif;color:#70675a}
+.editorial .logo{bottom:22px;gap:12px}
+.editorial .logo span{font-family:Georgia,"Times New Roman",serif;font-size:4.7rem;font-weight:700;font-style:italic;letter-spacing:-.055em;line-height:1;color:var(--ed-ink)}
+.editorial .back_btn{border:1px solid #3c3933;border-radius:0;background-color:var(--ed-paper);background-size:22px 22px}
+.editorial main{padding-top:43px}
+.editorial .login{max-width:470px;margin:0 auto;padding:32px 22px 37px;border:3px double var(--ed-ink);background:#fffefa}
+.editorial .login form{border-top:1px solid #b5aea2;padding-top:24px}
+.editorial .input_group + .input_group{margin-top:23px}
+.editorial .input_group input,.editorial .state_input_group input,.editorial.screen2_page .input_group input,.editorial.screen2_page .screen2_id_input{
+box-sizing:border-box;width:100%;height:52px;padding:0 5px;border:0!important;border-bottom:1px solid #514d46!important;border-radius:0;outline:0;
+background:transparent;color:var(--ed-ink);font-weight:550;box-shadow:none}
+.editorial .input_group input:focus,.editorial .state_input_group input:focus{border-bottom:2px solid #1f1d1a!important}
+.editorial .input_group input::placeholder{color:#6e685d;opacity:1}
+.editorial .state_input_group + .state_input_group{margin-top:24px}
+.editorial .state_input_group > label,.editorial.screen2_page .input_group > label{
+display:block;margin-bottom:10px;font-family:Georgia,"Times New Roman",serif;font-size:1.2rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#514b43}
+.editorial .password_input input{padding-right:35px}
+.editorial .password_view{right:6px;bottom:15px}
+.editorial .login_btn,.editorial .passkey_btn{
+height:54px;border:1px solid var(--ed-ink);border-radius:0;font-family:Georgia,"Times New Roman",serif;
+font-weight:700;font-size:1.6rem;letter-spacing:.08em;cursor:pointer;box-shadow:none;transition:background .15s,color .15s}
+.editorial .login_btn{margin-top:42px;background:var(--ed-ink);color:#fffefa}
+.editorial .passkey_btn{margin-top:13px;background:#fffefa;color:var(--ed-ink);border:3px double var(--ed-ink)}
+.editorial .login_btn:hover{background:#4c463e}
+.editorial .passkey_btn:hover{background:#ece8df}
+.editorial .login_links{margin-top:33px;border-top:1px solid #a7a094;padding-top:23px;flex-wrap:wrap;row-gap:13px}
+.editorial .login_links a{color:var(--ed-ink);font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:1.2rem;letter-spacing:.035em}
+.editorial .login_links a:last-child{color:#765a40}
+.editorial .login_links a+a::before{background:#8a8175}
+.editorial .state_input_group.error input{border-bottom:2px solid #b34c42!important}
+.editorial .error_message{color:#9b4039;font-weight:700;line-height:1.5}
+.editorial button:focus-visible,.editorial a:focus-visible{outline:2px solid #222;outline-offset:4px}
+@media(max-width:389px){.editorial .logo span{font-size:4rem}.editorial .login{padding:26px 15px 30px}.editorial header::before{right:14px;font-size:.9rem}}
+@media(prefers-reduced-motion:reduce){.editorial .login_btn,.editorial .passkey_btn{transition:none}}
