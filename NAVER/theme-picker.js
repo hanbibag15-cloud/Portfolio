@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
     try { localStorage.setItem('naver-login-theme', theme); } catch (_) {}
   }
   buttons.forEach(button => button.addEventListener('click', () => activate(button.dataset.theme)));
-  let saved = 'memphis';
+  let saved = 'glassmorphism';
   try { saved = localStorage.getItem('naver-login-theme') || saved; } catch (_) {}
-  activate(Object.prototype.hasOwnProperty.call(themes, saved) ? saved : 'memphis');
+  activate(Object.prototype.hasOwnProperty.call(themes, saved) ? saved : 'glassmorphism');
   picker.open = true;
 });
