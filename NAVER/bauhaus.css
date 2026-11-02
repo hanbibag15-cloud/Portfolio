@@ -1,0 +1,30 @@
+/* Bauhaus: primary geometry, functional layout, asymmetric rounded corners */
+body:has(.bauhaus){background:#e6e2d7}
+.bauhaus{--bh-ink:#171717;--bh-red:#e63b31;--bh-blue:#2457ba;--bh-yellow:#f6cd3e;min-height:100dvh;color:var(--bh-ink);background:linear-gradient(90deg,var(--bh-blue) 0 14px,#f4f0e6 14px 100%)}
+.bauhaus header{height:185px;background:#f4f0e6;border-bottom:5px solid var(--bh-ink)}
+.bauhaus header::before{content:"";position:absolute;right:30px;top:44px;width:65px;height:65px;border-radius:50%;background:var(--bh-red);border:3px solid var(--bh-ink);pointer-events:none}
+.bauhaus header::after{content:"";position:absolute;right:86px;top:53px;width:53px;height:58px;background:var(--bh-yellow);border:3px solid var(--bh-ink);clip-path:polygon(50% 0,100% 100%,0 100%);pointer-events:none}
+.bauhaus .logo{bottom:20px}.bauhaus .logo span{font-size:3.3rem;font-weight:900;letter-spacing:-.06em;text-transform:uppercase}
+.bauhaus .back_btn{border:3px solid var(--bh-ink);border-radius:0;background-color:#fff;cursor:pointer}
+.bauhaus main{padding-top:38px}
+.bauhaus .login{max-width:450px;margin:0 auto;padding:29px 20px 35px;background:#fff;border:4px solid var(--bh-ink);border-radius:0 34px 0 0;box-shadow:9px 9px 0 var(--bh-blue)}
+.bauhaus .input_group+.input_group{margin-top:21px}
+.bauhaus .input_group input,.bauhaus .state_input_group input,.bauhaus.screen2_page .input_group input,.bauhaus.screen2_page .screen2_id_input{box-sizing:border-box;width:100%;height:56px;padding:0 14px;border:2px solid var(--bh-ink)!important;border-radius:0;background:#faf8f1;color:var(--bh-ink);outline:0;font-weight:700}
+.bauhaus .input_group input:focus,.bauhaus .state_input_group input:focus{border-color:var(--bh-blue)!important;box-shadow:0 0 0 3px #2457ba40}
+.bauhaus .input_group input::placeholder{color:#565656;opacity:1}
+.bauhaus .state_input_group+.state_input_group{margin-top:24px}
+.bauhaus .state_input_group>label,.bauhaus.screen2_page .input_group>label{color:var(--bh-ink);font-weight:800;margin-bottom:11px}
+.bauhaus .password_input input{padding-right:46px}.bauhaus .password_view{right:14px;bottom:18px}
+.bauhaus .login_btn,.bauhaus .passkey_btn{height:57px;border:3px solid var(--bh-ink);border-radius:0 17px 0 0;font-size:1.6rem;font-weight:900;letter-spacing:.04em;cursor:pointer;box-shadow:4px 4px 0 var(--bh-ink);transition:transform .15s,box-shadow .15s}
+.bauhaus .login_btn{margin-top:39px;background:var(--bh-red);color:#fff}
+.bauhaus .passkey_btn{margin-top:16px;background:var(--bh-yellow);color:var(--bh-ink)}
+.bauhaus .login_btn:hover,.bauhaus .passkey_btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--bh-ink)}
+.bauhaus .login_btn:active,.bauhaus .passkey_btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--bh-ink)}
+.bauhaus .login_links{margin-top:38px;flex-wrap:wrap;row-gap:12px}
+.bauhaus .login_links a{color:var(--bh-ink);font-weight:750}.bauhaus .login_links a:last-child{color:var(--bh-blue)}
+.bauhaus .login_links a+a::before{background:var(--bh-ink)}
+.bauhaus .state_input_group.error input{border-color:#be2222!important;background:#fff1ee}
+.bauhaus .error_message{color:#a52323;font-weight:700;line-height:1.5}
+.bauhaus button:focus-visible,.bauhaus a:focus-visible{outline:3px solid var(--bh-blue);outline-offset:3px}
+@media(max-width:389px){.bauhaus .login{padding:25px 14px 30px}.bauhaus .logo span{font-size:2.8rem}.bauhaus header::before{right:16px;width:49px;height:49px}.bauhaus header::after{right:55px;width:43px;height:48px}}
+@media(prefers-reduced-motion:reduce){.bauhaus .login_btn,.bauhaus .passkey_btn{transition:none}}
