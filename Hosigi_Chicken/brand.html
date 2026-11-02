@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>호식이두마리치킨리뉴얼포트폴리오</title>
+    <link rel="stylesheet" href="../css/default.css">
+    <link rel="stylesheet" href="../npm/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
+    <link rel="stylesheet" href="css/main.css?v=47">
+    <script src="../npm/swiper/swiper-bundle.min.js"></script>
+</head>
+<body>
+    <div id="wrap">
+                <header class="site-header">
+            <div class="header-inner">
+                <h1 class="header-logo">
+                    <a href="index.html" aria-label="브랜드·창업 선택 화면">
+                        <img src="img/log.png" alt="호식이두마리치킨">
+                    </a>
+                </h1>
+
+                <nav class="header-nav" id="header-nav" aria-label="주요 메뉴">
+                    <ul>
+                        <li class="has-submenu">
+                            <a href="#menu" aria-expanded="false" aria-controls="mobile-submenu">메뉴</a>
+                            <ul class="header-submenu" id="mobile-submenu" aria-label="메뉴 상세">
+                                <li><a href="#all-menu">전체 메뉴</a></li>
+                                <li><a href="#chicken-menu">치킨 메뉴</a></li>
+                                <li><a href="#parts-menu">부위별 메뉴</a></li>
+                                <li><a href="#side-menu">사이드 메뉴</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#brand" aria-expanded="false" aria-controls="brand-submenu">브랜드</a>
+                            <ul class="header-submenu" id="brand-submenu" aria-label="브랜드 상세">
+                                <li><a href="#brand-story">호식이 이야기</a></li>
+                                <li><a href="#brand-philosophy">브랜드 철학</a></li>
+                                <li><a href="#brand-social">사회공헌</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#stores">매장찾기</a></li>
+                        <li><a href="#events">이벤트</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-utils">
+                    <a href="#franchise">
+                        <img src="img/store 2.svg" alt="">
+                        <span>창업안내</span>
+                    </a>
+                    <span class="header-utils-divider" aria-hidden="true"></span>
+                    <a href="#gift-card">
+                        <img src="img/ticket 2.svg" alt="">
+                        <span>상품권</span>
+                    </a>
+                </div>
+
+                <button class="header-menu-toggle" type="button" aria-label="메뉴 열기" aria-controls="header-nav" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </header>
+        <main>
+            <div class="hero-sec">
+                <!-- Slider main container -->
+                <div class="swiper visual">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide">
+                            <img src="img/vlsual01.png" alt="맵시크치킨배너" class="pc">
+                            <img src="img/m_vlsual01.jpg?v=e0479c61" alt="모바일맵시크치킨배너" class="mo">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="img/vlsual02.png" alt="수라깐풍치킨배너" class="pc">
+                            <img src="img/m_vlsual02.jpg?v=54672407" alt="모바일수라깐풍치킨배너" class= "mo">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="img/vlsual03.png?v=ba0c692b" alt="세 번째 치킨 프로모션 배너" class="pc">
+                            <img src="img/m_vlsual03.png?v=7ba61503" alt="세 번째 치킨 모바일 프로모션 배너" class="mo">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="img/vlsual04.png?v=5affe127" alt="네 번째 치킨 프로모션 배너" class="pc">
+                            <img src="img/m_vlsual04.png?v=e21f9d76" alt="네 번째 치킨 모바일 프로모션 배너" class="mo">
+                        </div>
+                    </div>
+                    <!-- Hero pagination: 실제 슬라이드 개수에 맞춰 생성 -->
+                    <div class="swiper-pagination"></div>
+
+                    <!-- Hero navigation -->
+                    <div class="swiper-button-prev" aria-label="이전 배너"></div>
+                    <div class="swiper-button-next" aria-label="다음 배너"></div>
+
+                </div>
+            </div>
+            <section class="menu-section" id="menu" aria-labelledby="menu-section-title">
+                <div class="menu-section-heading">
+                    <h2 id="menu-section-title">MENU</h2>
+                    <p>두 마리의 즐거움, 다양한 맛의 선택</p>
+                </div>
+
+                <div class="menu-category-tabs" role="group" aria-label="상품 분류">
+                    <button type="button" class="menu-category is-active" data-menu-type="chicken" aria-pressed="true">치킨 메뉴</button>
+                    <button type="button" class="menu-category" data-menu-type="side" aria-pressed="false">사이드 메뉴</button>
+                </div>
+
+                <div class="menu-feature" data-menu-panel="chicken">
+                    <button type="button" class="menu-feature-arrow menu-feature-prev" aria-label="이전 상품"></button>
+                    <div class="menu-feature-products" aria-live="polite">
+                        <div class="menu-feature-product is-prev" data-product-index="0">
+                            <div class="menu-product-image"><img src="img/chicken_img02.png?v=9e0126c8" alt="딥블랙갈릭 치킨"></div>
+                            <div class="menu-product-caption" hidden>
+                                <span class="menu-product-new">NEW</span>
+                                <h3>딥블랙갈릭 치킨</h3>
+                            </div>
+                        </div>
+                        <div class="menu-feature-product is-active" data-product-index="1">
+                            <div class="menu-product-image"><img src="img/chicken_img01.png?v=6c7591a1" alt="깐쇼킹 치킨"></div>
+                            <div class="menu-product-caption">
+                                <span class="menu-product-new">NEW</span>
+                                <h3>깐쇼킹 치킨</h3>
+                            </div>
+                        </div>
+                        <div class="menu-feature-product is-next" data-product-index="2">
+                            <div class="menu-product-image"><img src="img/chicken_img03.png?v=3d77b515" alt="맵시크 치킨"></div>
+                            <div class="menu-product-caption" hidden>
+                                <span class="menu-product-new">NEW</span>
+                                <h3>맵시크 치킨</h3>
+                            </div>
+                        </div>
+                        <div class="menu-feature-product is-hidden" data-product-index="3">
+                            <div class="menu-product-image"><img src="img/chicken_img04.png?v=603abffa" alt="크리스피 골드" loading="lazy"></div>
+                            <div class="menu-product-caption" hidden>
+                                <h3>크리스피 골드</h3>
+                            </div>
+                        </div>
+                        <div class="menu-feature-product is-hidden" data-product-index="4">
+                            <div class="menu-product-image"><img src="img/chicken_img05.png?v=66641d06" alt="수라깐풍 치킨" loading="lazy"></div>
+                            <div class="menu-product-caption" hidden>
+                                <h3>수라깐풍 치킨</h3>
+                            </div>
+                        </div>
+                        <div class="menu-feature-product is-hidden" data-product-index="5">
+                            <div class="menu-product-image"><img src="img/chicken_img06.png?v=c10381f9" alt="양념 치킨" loading="lazy"></div>
+                            <div class="menu-product-caption" hidden>
+                                <h3>양념 치킨</h3>
+                            </div>
+                        </div>
+                        <div class="menu-feature-product is-hidden" data-product-index="6">
+                            <div class="menu-product-image"><img src="img/chicken_img07.png?v=7c08cf3f" alt="요거치즈닝 치킨" loading="lazy"></div>
+                            <div class="menu-product-caption" hidden>
+                                <h3>요거치즈닝 치킨</h3>
+                            </div>
+                        </div>
+                        <div class="menu-feature-product is-hidden" data-product-index="7">
+                            <div class="menu-product-image"><img src="img/chicken_img08.png?v=d2a1829d" alt="간장 치킨" loading="lazy"></div>
+                            <div class="menu-product-caption" hidden>
+                                <h3>간장 치킨</h3>
+                            </div>
+                        </div>
+                        <div class="menu-feature-product is-hidden" data-product-index="8">
+                            <div class="menu-product-image"><img src="img/chicken_img09.png?v=8c3f7746" alt="청양고추마요 치킨" loading="lazy"></div>
+                            <div class="menu-product-caption" hidden>
+                                <h3>청양고추마요 치킨</h3>
+                            </div>
+                        </div>
+                        <div class="menu-feature-product is-hidden" data-product-index="9">
+                            <div class="menu-product-image"><img src="img/chicken_img10.png?v=6fee6dc5" alt="타코마요 치킨" loading="lazy"></div>
+                            <div class="menu-product-caption" hidden>
+                                <h3>타코마요 치킨</h3>
+                            </div>
+                        </div>
+                        <div class="menu-feature-product is-hidden" data-product-index="10">
+                            <div class="menu-product-image"><img src="img/chicken_img11.png?v=868e77d6" alt="후라이드 치킨" loading="lazy"></div>
+                            <div class="menu-product-caption" hidden>
+                                <h3>후라이드 치킨</h3>
+                            </div>
+                        </div>
+                        <div class="menu-feature-product is-hidden" data-product-index="11">
+                            <div class="menu-product-image"><img src="img/chicken_img12.png?v=14020a3a" alt="매운 양념 치킨" loading="lazy"></div>
+                            <div class="menu-product-caption" hidden>
+                                <h3>매운 양념 치킨</h3>
+                            </div>
+                        </div>
+                        <div class="menu-feature-product is-hidden" data-product-index="12">
+                            <div class="menu-product-image"><img src="img/chicken_img13.png?v=84b8f79f" alt="매운 간장 치킨" loading="lazy"></div>
+                            <div class="menu-product-caption" hidden>
+                                <h3>매운 간장 치킨</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="menu-feature-arrow menu-feature-next" aria-label="다음 상품"></button>
+                </div>
+                <div class="menu-feature" data-menu-panel="side" hidden><button type="button" class="menu-feature-arrow menu-feature-prev" aria-label="이전 사이드 상품"></button><div class="menu-feature-products" aria-live="polite"><div class="menu-feature-product is-prev" data-product-index="0"><div class="menu-product-image"><img src="img/Side_Menu01.png?v=2ce9ff7f" alt="쉬림프 미니튀김(칠리)" loading="lazy"></div><div class="menu-product-caption" hidden><h3>쉬림프 미니튀김(칠리)</h3></div></div>
+<div class="menu-feature-product is-active" data-product-index="1"><div class="menu-product-image"><img src="img/Side_Menu02.png?v=71a3387a" alt="쉬림프 미니튀김(레몬크림)" loading="lazy"></div><div class="menu-product-caption" ><h3>쉬림프 미니튀김(레몬크림)</h3></div></div>
+<div class="menu-feature-product is-next" data-product-index="2"><div class="menu-product-image"><img src="img/Side_Menu03.png?v=43a516d1" alt="체다마요 감자튀김" loading="lazy"></div><div class="menu-product-caption" hidden><h3>체다마요 감자튀김</h3></div></div>
+<div class="menu-feature-product is-hidden" data-product-index="3"><div class="menu-product-image"><img src="img/Side_Menu04.png?v=9a2388e9" alt="치폴레 감자튀김" loading="lazy"></div><div class="menu-product-caption" hidden><h3>치폴레 감자튀김</h3></div></div>
+<div class="menu-feature-product is-hidden" data-product-index="4"><div class="menu-product-image"><img src="img/Side_Menu05.png?v=2348158a" alt="크리스피 치킨넥" loading="lazy"></div><div class="menu-product-caption" hidden><h3>크리스피 치킨넥</h3></div></div>
+<div class="menu-feature-product is-hidden" data-product-index="5"><div class="menu-product-image"><img src="img/Side_Menu06.png?v=1725a935" alt="통살가득 텐더킹" loading="lazy"></div><div class="menu-product-caption" hidden><h3>통살가득 텐더킹</h3></div></div>
+<div class="menu-feature-product is-hidden" data-product-index="6"><div class="menu-product-image"><img src="img/Side_Menu07.png?v=ed41ae52" alt="똥집 미니튀김" loading="lazy"></div><div class="menu-product-caption" hidden><h3>똥집 미니튀김</h3></div></div>
+<div class="menu-feature-product is-hidden" data-product-index="7"><div class="menu-product-image"><img src="img/Side_Menu08.png?v=3d30ccef" alt="감자볼튀김" loading="lazy"></div><div class="menu-product-caption" hidden><h3>감자볼튀김</h3></div></div>
+<div class="menu-feature-product is-hidden" data-product-index="9"><div class="menu-product-image"><img src="img/Side_Menu10.png?v=04787b10" alt="허니갈릭치즈볼" loading="lazy"></div><div class="menu-product-caption" hidden><h3>허니갈릭치즈볼</h3></div></div>
+<div class="menu-feature-product is-hidden" data-product-index="10"><div class="menu-product-image"><img src="img/Side_Menu11.png?v=bd32ddbd" alt="마늘떡볶이" loading="lazy"></div><div class="menu-product-caption" hidden><h3>마늘떡볶이</h3></div></div>
+<div class="menu-feature-product is-hidden" data-product-index="11"><div class="menu-product-image"><img src="img/Side_Menu12.png?v=a27232d4" alt="로제비앤나떡볶이" loading="lazy"></div><div class="menu-product-caption" hidden><h3>로제비앤나떡볶이</h3></div></div>
+</div><button type="button" class="menu-feature-arrow menu-feature-next" aria-label="다음 사이드 상품"></button></div>
+            </section>
+            <section class="app-promo-section" id="app" aria-labelledby="app-title">
+                <div class="app-promo-inner">
+                    <div class="app-promo-content">
+                        <div class="app-promo-intro">
+                            <h2 id="app-title">맛있는 호식이,<span>이제 앱으로 만나보세요!</span></h2>
+                            <p>배달부터 포장 주문까지 더 간편하게!<br>앱 전용 쿠폰과 멤버십 혜택도 만나보세요.</p>
+                        </div>
+                            <div class="app-promo-art-mobile"><img src="img/app.png?v=d242a35" alt="호식이두마리치킨 앱 화면" loading="lazy"></div>
+                        <div class="app-promo-benefits">
+                            <ul>
+                                <li>간편한 배달·포장 주문</li>
+                                <li>앱 전용 쿠폰</li>
+                                <li>멤버십 혜택</li>
+                            </ul>
+                            <img src="img/qr.svg" alt="호식이 앱 안내 QR 코드" class="app-promo-qr" loading="lazy">
+                        </div>
+                        <div class="app-promo-stores">
+                            <a href="https://play.google.com/store/search?q=%ED%98%B8%EC%8B%9D%EC%9D%B4%EB%91%90%EB%A7%88%EB%A6%AC%EC%B9%98%ED%82%A8&c=apps&hl=ko" target="_blank" rel="noopener noreferrer" class="app-store-link" aria-label="Google Play에서 호식이 앱 찾기"><img src="img/Google_Play_icon.svg" alt=""><span><small>GET IT ON</small><strong>Google Play</strong></span></a>
+                            <a href="https://apps.apple.com/kr/app/%ED%98%B8%EC%8B%9D%EC%9D%B4%EB%91%90%EB%A7%88%EB%A6%AC%EC%B9%98%ED%82%A8/id6754001698" target="_blank" rel="noopener noreferrer" class="app-store-link" aria-label="App Store에서 호식이 앱 찾기"><img src="img/simple-icons--apple.svg" alt=""><span><small>Download on the</small><strong>App Store</strong></span></a>
+                        </div>
+                        <div class="app-promo-qr-mobile"><img src="img/qr.svg" alt="호식이 앱 안내 QR 코드" loading="lazy"></div>
+                    </div>
+                    <div class="app-promo-art"><img src="img/app.png?v=d242a35" alt="호식이두마리치킨 앱 홍보 이미지" loading="lazy"></div>
+                </div>
+            </section>
+            <section class="store-promo-section" id="stores" aria-labelledby="store-promo-title">
+                <div class="store-promo-inner">
+                    <div class="store-promo-copy">
+                        <h2 id="store-promo-title">STORE</h2>
+                        <p>우리 동네 호식이를 만나보세요!</p>
+                        <a class="store-promo-link" href="https://www.9922.co.kr/" target="_blank" rel="noopener noreferrer" aria-label="호식이두마리치킨 공식 사이트에서 가까운 매장 찾기">
+                            <span aria-hidden="true">→</span> 매장 찾기
+                        </a>
+                    </div>
+                    <img class="store-promo-art" src="img/h_store.png" alt="호식이두마리치킨 매장 일러스트" loading="lazy">
+                </div>
+            </section>
+            <section class="event-section" id="events" aria-labelledby="event-title">
+                <div class="event-inner">
+                    <header class="event-header">
+                        <div class="event-heading">
+                            <h2 id="event-title">EVENT</h2>
+                            <p>맛있는 소식, 즐거운 이벤트!</p>
+                        </div>
+                        <a class="event-more" href="https://www.9922.co.kr/" target="_blank" rel="noopener noreferrer">
+                            <span aria-hidden="true">→</span> 이벤트 더보기
+                        </a>
+                    </header>
+                    <div class="event-grid">
+                        <article class="event-card">
+                            <div class="event-card-image event-card-image--promo">
+                                <img src="img/Event_img01.png" alt="쿠팡이츠 7천 원 할인 이벤트" loading="lazy">
+                            </div>
+                            <div class="event-card-info">
+                                <span class="event-card-category">할인 프로모션</span>
+                                <h3>쿠팡이츠 7천 원 할인</h3>
+                                <p>2026.10.23(금) - 2026.10.25(일)</p>
+                            </div>
+                        </article>
+                        <article class="event-card event-card--ended">
+                            <div class="event-card-image event-card-image--sns">
+                                <img src="img/Event_img02.png" alt="치킨 범인 맞히기 이벤트" loading="lazy">
+                                <div class="event-card-ended">종료된 이벤트입니다.</div>
+                            </div>
+                            <div class="event-card-info">
+                                <span class="event-card-category">SNS 이벤트</span>
+                                <h3>치킨 범인 맞히기 이벤트</h3>
+                                <p>2026.10.14(수) - 2026.10.16(금)</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <a class="footer-logo" href="index.html" aria-label="호식이두마리치킨 홈">
+                    <img src="img/h_log.png" alt="호식이두마리치킨" loading="lazy" onerror="this.onerror=null;this.src='img/log.png';">
+                </a>
+                <div class="footer-details">
+                    <nav class="footer-links" aria-label="푸터 안내">
+                        <a href="https://www.9922.co.kr/" target="_blank" rel="noopener noreferrer">이용약관</a>
+                        <a href="https://www.9922.co.kr/" target="_blank" rel="noopener noreferrer">개인정보처리방침</a>
+                        <a href="https://www.9922.co.kr/" target="_blank" rel="noopener noreferrer">공지사항</a>
+                        <a href="https://www.9922.co.kr/" target="_blank" rel="noopener noreferrer">고객센터</a>
+                    </nav>
+                    <div class="footer-info">
+                        <p><span>(주)호식이두마리치킨</span><span>대표이사 최호식</span><span>사업자등록번호 504-07-99251</span></p>
+                        <p><span>주소 서울특별시 학동로 337 H타워</span><span>대표번호 1688-9922</span></p>
+                        <small class="footer-copyright">Copyright © 호식이두마리치킨. All rights reserved.</small>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <aside class="quick-menu" aria-label="퀵 메뉴">
+            <a class="quick-menu-sns" href="https://www.instagram.com/hosigi1999/" target="_blank" rel="noopener noreferrer" aria-label="호식이두마리치킨 인스타그램 열기">
+                <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="6"></rect>
+                    <circle cx="12" cy="12" r="4.5"></circle>
+                    <circle cx="18" cy="6" r="1" fill="currentColor" stroke="none"></circle>
+                </svg>
+                <span>SNS</span>
+            </a>
+            <button class="quick-menu-top" type="button" aria-label="페이지 맨 위로 이동">
+                <span aria-hidden="true">↑</span>
+                <span>TOP</span>
+            </button>
+        </aside>
+    </div>
+    <script>
+    document.querySelector('.quick-menu-top')?.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+    const menuToggle = document.querySelector('.header-menu-toggle');
+    const siteHeader = document.querySelector('.site-header');
+    menuToggle.addEventListener('click', () => {
+        const isOpen = siteHeader.classList.toggle('menu-open');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+        menuToggle.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
+    });
+    // Shared dropdown behavior for MENU and Brand.
+    const headerSubmenus = document.querySelectorAll('.header-nav .has-submenu');
+
+    function closeHeaderSubmenus(except = null) {
+        headerSubmenus.forEach(item => {
+            if (item === except) return;
+            item.classList.remove('submenu-open');
+            item.querySelector(':scope > a').setAttribute('aria-expanded', 'false');
+        });
+    }
+
+    headerSubmenus.forEach(item => {
+        const trigger = item.querySelector(':scope > a');
+        trigger.addEventListener('click', event => {
+            if (!window.matchMedia('(max-width: 1024px)').matches) return;
+            event.preventDefault();
+            const wasOpen = item.classList.contains('submenu-open');
+            closeHeaderSubmenus(item);
+            item.classList.toggle('submenu-open', !wasOpen);
+            trigger.setAttribute('aria-expanded', String(!wasOpen));
+        });
+        item.addEventListener('mouseenter', () => {
+            if (window.matchMedia('(min-width: 1025px)').matches) {
+                trigger.setAttribute('aria-expanded', 'true');
+            }
+        });
+        item.addEventListener('mouseleave', () => {
+            if (window.matchMedia('(min-width: 1025px)').matches) {
+                trigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+    });
+
+    document.querySelectorAll('.header-nav > ul > li:not(.has-submenu) > a').forEach(link => {
+        link.addEventListener('click', () => {
+            closeHeaderSubmenus();
+            siteHeader.classList.remove('menu-open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.setAttribute('aria-label', '메뉴 열기');
+        });
+    });
+
+    document.querySelectorAll('.header-nav .header-submenu a').forEach(link => {
+        link.addEventListener('click', () => {
+            closeHeaderSubmenus();
+            siteHeader.classList.remove('menu-open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.setAttribute('aria-label', '메뉴 열기');
+        });
+    });
+
+    // MENU: same scroll reveal pattern as STORE, without changing the carousel.
+    const menuSection = document.querySelector('.menu-section');
+    if (menuSection && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        menuSection.classList.add('menu-motion-ready');
+        const updateMenuReveal = () => {
+            const revealLine = window.innerHeight * 0.78;
+            menuSection.classList.toggle(
+                'is-visible',
+                menuSection.getBoundingClientRect().top <= revealLine
+            );
+        };
+        window.addEventListener('scroll', updateMenuReveal, { passive: true });
+        window.addEventListener('resize', updateMenuReveal);
+        requestAnimationFrame(() => requestAnimationFrame(updateMenuReveal));
+    }
+
+    // APP section: replay the same slide-up reveal when scrolling back and forth.
+    const appPromoSection = document.querySelector('.app-promo-section');
+    if (appPromoSection && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        appPromoSection.classList.add('app-motion-ready');
+        const updateAppReveal = () => {
+            const revealLine = window.innerHeight * 0.78;
+            appPromoSection.classList.toggle(
+                'is-visible',
+                appPromoSection.getBoundingClientRect().top <= revealLine
+            );
+        };
+        window.addEventListener('scroll', updateAppReveal, { passive: true });
+        window.addEventListener('resize', updateAppReveal);
+        // Allow the hidden starting state to paint before showing it,
+        // including when the browser restores scroll position on reload.
+        requestAnimationFrame(() => requestAnimationFrame(updateAppReveal));
+    }
+
+    // STORE: replay MENU/APP slide-up reveal for the heading, description and button.
+    const storePromoSection = document.querySelector('.store-promo-section');
+    if (storePromoSection && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        storePromoSection.classList.add('store-motion-ready');
+        const updateStoreReveal = () => {
+            const revealLine = window.innerHeight * 0.78;
+            storePromoSection.classList.toggle(
+                'is-visible',
+                storePromoSection.getBoundingClientRect().top <= revealLine
+            );
+        };
+        window.addEventListener('scroll', updateStoreReveal, { passive: true });
+        window.addEventListener('resize', updateStoreReveal);
+        requestAnimationFrame(() => requestAnimationFrame(updateStoreReveal));
+    }
+
+    // EVENT: same scroll/reload reveal behavior as STORE.
+    const eventSection = document.querySelector('.event-section');
+    if (eventSection && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        eventSection.classList.add('event-motion-ready');
+        const updateEventReveal = () => {
+            const revealLine = window.innerHeight * 0.78;
+            eventSection.classList.toggle(
+                'is-visible',
+                eventSection.getBoundingClientRect().top <= revealLine
+            );
+        };
+        window.addEventListener('scroll', updateEventReveal, { passive: true });
+        window.addEventListener('resize', updateEventReveal);
+        requestAnimationFrame(() => requestAnimationFrame(updateEventReveal));
+    }
+
+    document.querySelectorAll('.menu-feature').forEach(panel => {
+        const items = [...panel.querySelectorAll('.menu-feature-product')];
+        let activeIndex = 1;
+        function update() {
+            items.forEach((item, index) => {
+                const dist = (index - activeIndex + items.length) % items.length;
+                item.classList.remove('is-prev','is-active','is-next','is-hidden','is-before','is-after');
+                if(dist === 0) item.classList.add('is-active');
+                else if(dist === 1) item.classList.add('is-next');
+                else if(dist === items.length-1) item.classList.add('is-prev');
+                else {item.classList.add('is-hidden',dist <= items.length/2 ? 'is-after':'is-before');}
+                const caption = item.querySelector('.menu-product-caption');
+                if(caption) caption.hidden = dist !== 0;
+            });
+        }
+        function move(step){activeIndex=(activeIndex+step+items.length)%items.length;update();}
+        panel.querySelector('.menu-feature-prev').addEventListener('click',()=>move(-1));
+        panel.querySelector('.menu-feature-next').addEventListener('click',()=>move(1));
+        let x=0,y=0;
+        const area=panel.querySelector('.menu-feature-products');
+        area.addEventListener('touchstart',e=>{if(e.touches.length!==1)return;x=e.touches[0].clientX;y=e.touches[0].clientY;},{passive:true});
+        area.addEventListener('touchend',e=>{if(e.changedTouches.length!==1)return;const dx=e.changedTouches[0].clientX-x,dy=e.changedTouches[0].clientY-y;if(Math.abs(dx)>=45&&Math.abs(dx)>Math.abs(dy)*1.2)move(dx<0?1:-1);},{passive:true});
+        // Desktop mouse drag: swipe the chicken lineup without changing touch behavior.
+        let dragStartX = null;
+        let dragStartY = null;
+        let suppressClick = false;
+        area.addEventListener('mousedown', e => {
+            if (window.innerWidth <= 767 || e.button !== 0) return;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            suppressClick = false;
+        });
+        window.addEventListener('mouseup', e => {
+            if (dragStartX === null) return;
+            const dx = e.clientX - dragStartX;
+            const dy = e.clientY - dragStartY;
+            dragStartX = null;
+            dragStartY = null;
+            if (Math.abs(dx) >= 45 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+                move(dx < 0 ? 1 : -1);
+                suppressClick = true;
+            }
+        });
+        area.addEventListener('click', e => {
+            if (!suppressClick) return;
+            e.preventDefault();
+            e.stopPropagation();
+            suppressClick = false;
+        }, true);
+        area.addEventListener('dragstart', e => e.preventDefault());
+        update();
+    });
+    document.querySelectorAll('.menu-category').forEach(button => {
+        button.addEventListener('click', () => {
+            const type=button.dataset.menuType;
+            document.querySelectorAll('.menu-category').forEach(tab => {
+                const selected=tab===button;
+                tab.classList.toggle('is-active',selected);
+                tab.setAttribute('aria-pressed',String(selected));
+            });
+            document.querySelectorAll('.menu-feature').forEach(panel => {panel.hidden=panel.dataset.menuPanel!==type;});
+        });
+    });
+
+    const swiper = new Swiper('.hero-sec > .swiper', {
+        // Optional parameters
+        direction: 'horizontal',
+        loop: true,
+        speed: 600,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+        },
+
+        // If we need pagination
+        pagination: {
+            el: '.visual .swiper-pagination',
+            clickable: true,
+        },
+
+        // Navigation arrows
+        navigation: {
+            nextEl: '.visual .swiper-button-next',
+            prevEl: '.visual .swiper-button-prev',
+        },
+    });
+    </script>
+</body>
+</html>
