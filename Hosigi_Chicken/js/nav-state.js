@@ -36,17 +36,18 @@
   function updateOnScroll() {
     const headerBottom = header?.getBoundingClientRect().bottom || 0;
     const viewportThreshold = Math.min(window.innerHeight * 0.35, 220);
-    const menuRect = targets[0]?.getBoundingClientRect();
-    const menuVisible = menuRect &&
-      menuRect.bottom > headerBottom + 8 &&
-      menuRect.top < window.innerHeight - viewportThreshold;
-
-    // Scrolling into MENU from either direction activates its GNB marker.
-    if (menuVisible && (selected === -1 || selected === 0)) {
-      selected = 0;
-      hasEnteredSelectedSection = true;
-      mark(0);
-      return;
+    // Detect MENU and STORE on manual scroll, in either direction.
+    for (const index of [0, 2]) {
+      const rect = targets[index]?.getBoundingClientRect();
+      const visible = rect &&
+        rect.bottom > headerBottom + 8 &&
+        rect.top < window.innerHeight - viewportThreshold;
+      if (visible && (selected === -1 || selected === index)) {
+        selected = index;
+        hasEnteredSelectedSection = true;
+        mark(index);
+        return;
+      }
     }
     if (selected < 0 || !targets[selected]) return;
     const rect = targets[selected].getBoundingClientRect();
