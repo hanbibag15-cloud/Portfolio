@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
     <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="memphis.css">
+    <link id="active-theme-css" rel="stylesheet" href="memphis.css">
+    <link rel="stylesheet" href="theme-picker.css">
 
 
     <title>NAVER 로그인</title>
@@ -68,5 +69,19 @@
             </section>
         </main>
     </div>
+    <details class="theme-picker" open>
+        <summary>🎨 디자인 테마</summary>
+        <ul aria-label="로그인 디자인 테마 목록">
+            <li><button type="button" data-theme="original" aria-pressed="false">원본 NAVER</button></li>
+            <li><button type="button" data-theme="neo-brutalism" aria-pressed="false">Neo Brutalism</button></li>
+            <li><button type="button" data-theme="y2k-chrome" aria-pressed="false">Y2K Chrome</button></li>
+            <li><button type="button" data-theme="pixel-art" aria-pressed="false">Pixel Art</button></li>
+            <li><button type="button" data-theme="collage" aria-pressed="false">Collage</button></li>
+            <li><button type="button" data-theme="art-deco" aria-pressed="false">Art Deco</button></li>
+            <li><button type="button" data-theme="cyberpunk" aria-pressed="false">Cyberpunk</button></li>
+            <li><button type="button" data-theme="memphis" aria-pressed="false">Memphis</button></li>
+        </ul>
+    </details>
+    <script src="theme-picker.js" defer></script>
 </body>
 </html>
