@@ -24,5 +24,5 @@
 /* Figma Orange: highlight BRAND / FRANCHISE headings on hover. */
 .entry-panel:hover .entry-content strong,
 .entry-panel:focus-visible .entry-content strong {
-    color: #E0690C;
+    color: #FFFFFF;
 }
