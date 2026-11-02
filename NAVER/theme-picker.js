@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
     collage: 'collage.css',
     'art-deco': 'art-deco.css',
     cyberpunk: 'cyberpunk.css',
-    memphis: 'memphis.css'
+    memphis: 'memphis.css',
+    glassmorphism: 'glassmorphism.css'
   };
   const buttons = picker.querySelectorAll('[data-theme]');
   const themeNames = Object.keys(themes);
