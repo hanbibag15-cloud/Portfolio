@@ -109,9 +109,6 @@ body:has(.swiss-style){background:#deded9}
   .swiss-style .logo span{font-size:1.9rem}
   .swiss-style .login_links a{font-size:1.05rem;padding:0 6px}
 }
-  .swiss-style > main::before{font-size:4.5rem}
-  .swiss-style .login_links a{font-size:1.05rem;padding:0 6px}
-}
 @media(prefers-reduced-motion:reduce){
   .swiss-style .login_btn,.swiss-style .passkey_btn{transition:none}
 }
