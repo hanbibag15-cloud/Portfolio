@@ -1,4 +1,31 @@
-/* Active GNB marker — reuse Hosigi semantic color tokens. */
-.header-nav > ul > li > a.is-current{position:relative;color:var(--action-primary);font-weight:700}
-.header-nav > ul > li > a.is-current::after{content:"";position:absolute;left:0;right:0;bottom:-18px;height:3px;background:var(--action-primary);border-radius:3px}
-@media(max-width:1024px){.header-nav > ul > li > a.is-current::after{bottom:0;height:2px}}
+/* Active GNB marker: ease the underline and label out when leaving a section. */
+.header-nav > ul > li > a{
+    position:relative;
+    transition:color .3s ease;
+}
+.header-nav > ul > li > a::after{
+    content:"";
+    position:absolute;
+    left:0;right:0;bottom:-18px;
+    height:3px;
+    border-radius:3px;
+    background:var(--action-primary);
+    transform:scaleX(0);
+    opacity:0;
+    transition:transform .32s cubic-bezier(.22,1,.36,1),opacity .3s ease;
+}
+.header-nav > ul > li > a.is-current{
+    color:var(--action-primary);
+    font-weight:700;
+}
+.header-nav > ul > li > a.is-current::after{
+    transform:scaleX(1);
+    opacity:1;
+}
+@media(max-width:1024px){
+    .header-nav > ul > li > a::after{bottom:0;height:2px}
+}
+@media(prefers-reduced-motion:reduce){
+    .header-nav > ul > li > a,
+    .header-nav > ul > li > a::after{transition:none}
+}
