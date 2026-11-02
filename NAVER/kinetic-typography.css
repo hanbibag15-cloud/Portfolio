@@ -1,0 +1,35 @@
+/* Kinetic Typography: flowing background text, animated gradient title, expanding letter spacing */
+body:has(.kinetic-typography){background:#101324}
+.kinetic-typography{--kt-ink:#f7f8ff;min-height:100dvh;position:relative;isolation:isolate;overflow:hidden;color:var(--kt-ink);background:linear-gradient(135deg,#141936,#222047 55%,#14182f)}
+.kinetic-typography::before{content:"MOVE  TYPE  MOVE  TYPE  MOVE  TYPE";position:absolute;left:0;top:40%;width:max-content;z-index:-1;white-space:nowrap;font:900 clamp(65px,12vw,145px)/1 Arial,sans-serif;letter-spacing:-.06em;color:#ffffff13;animation:kt-marquee 17s linear infinite;pointer-events:none}
+.kinetic-typography header{height:183px;border-bottom:1px solid #aab5fa55;background:#141933b8}
+.kinetic-typography .logo{bottom:17px}
+.kinetic-typography .logo span{font-size:3.4rem;font-weight:900;letter-spacing:-.06em;color:#fff;background:linear-gradient(105deg,#fff,#71f4ff,#fd7ad5,#fff);background-size:260% 100%;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:kt-shine 4s linear infinite;transition:letter-spacing .25s ease}
+.kinetic-typography .logo:hover span{letter-spacing:.08em}
+.kinetic-typography .back_btn{border:1px solid #b3c9ff;border-radius:8px;background-color:#e9efff;cursor:pointer}
+.kinetic-typography main{padding-top:37px}
+.kinetic-typography .login{max-width:440px;margin:0 auto;padding:29px 20px 35px;background:#ffffff0d;border:1px solid #d8e0ff5c;border-radius:19px;box-shadow:0 20px 40px #080b207a}
+.kinetic-typography .input_group + .input_group{margin-top:21px}
+.kinetic-typography .input_group input,.kinetic-typography .state_input_group input,.kinetic-typography.screen2_page .input_group input,.kinetic-typography.screen2_page .screen2_id_input{width:100%;box-sizing:border-box;height:55px;padding:0 15px;border:1px solid #a3b7ff85!important;border-radius:9px;outline:0;background:#101b38;color:#fff;font-weight:650}
+.kinetic-typography .input_group input:focus,.kinetic-typography .state_input_group input:focus{border-color:#79f3ff!important;box-shadow:0 0 0 3px #79f3ff35}
+.kinetic-typography .input_group input::placeholder{color:#bac7e8;opacity:1}
+.kinetic-typography .state_input_group + .state_input_group{margin-top:23px}
+.kinetic-typography .state_input_group > label,.kinetic-typography.screen2_page .input_group > label{color:#d6e5ff;font-weight:750;margin-bottom:11px}
+.kinetic-typography .password_input input{padding-right:46px}
+.kinetic-typography .password_view{right:14px;bottom:18px;background:#e7efff;border-radius:6px}
+.kinetic-typography .login_btn,.kinetic-typography .passkey_btn{height:56px;border:1px solid #ffffff85;border-radius:10px;font-size:1.6rem;font-weight:850;cursor:pointer;transition:letter-spacing .25s ease,transform .2s ease}
+.kinetic-typography .login_btn{margin-top:39px;color:#10162d;background:linear-gradient(105deg,#82eaff,#d0a5ff,#ff9bd4);background-size:220% 100%;animation:kt-shine 5s linear infinite}
+.kinetic-typography .passkey_btn{margin-top:15px;background:#35406d;color:#fff}
+.kinetic-typography .login_btn:hover,.kinetic-typography .passkey_btn:hover{letter-spacing:.14em;transform:translateY(-2px)}
+.kinetic-typography .login_links{margin-top:37px;flex-wrap:wrap;row-gap:12px}
+.kinetic-typography .login_links a{color:#e2e8ff;font-weight:700;transition:letter-spacing .2s}
+.kinetic-typography .login_links a:hover{letter-spacing:.06em}
+.kinetic-typography .login_links a:last-child{color:#ffafe3}
+.kinetic-typography .login_links a+a::before{background:#8d9ac7}
+.kinetic-typography .state_input_group.error input{border-color:#ff92ad!important}
+.kinetic-typography .error_message{color:#ffb3c5;font-weight:700;line-height:1.5}
+.kinetic-typography button:focus-visible,.kinetic-typography a:focus-visible{outline:3px solid #79f3ff;outline-offset:3px}
+@keyframes kt-marquee{from{transform:translateX(0)}to{transform:translateX(-40%)}}
+@keyframes kt-shine{from{background-position:100% 0}to{background-position:-100% 0}}
+@media(max-width:389px){.kinetic-typography .login{padding:25px 14px 30px}.kinetic-typography .logo span{font-size:2.8rem}}
+@media(prefers-reduced-motion:reduce){.kinetic-typography::before,.kinetic-typography .logo span,.kinetic-typography .login_btn{animation:none}.kinetic-typography .login_btn,.kinetic-typography .passkey_btn,.kinetic-typography .logo span{transition:none}}
