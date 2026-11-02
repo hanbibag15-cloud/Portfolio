@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
     glassmorphism: 'glassmorphism.css',
     'swiss-style': 'swiss-style.css',
     'bento-grid': 'bento-grid.css',
-    editorial: 'editorial.css'
+    editorial: 'editorial.css',
+    minimalism: 'minimalism.css'
   };
   const buttons = picker.querySelectorAll('[data-theme]');
   const themeNames = Object.keys(themes);
@@ -32,8 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
     try { localStorage.setItem('naver-login-theme', theme); } catch (_) {}
   }
   buttons.forEach(button => button.addEventListener('click', () => activate(button.dataset.theme)));
-  let saved = 'editorial';
+  let saved = 'minimalism';
   try { saved = localStorage.getItem('naver-login-theme') || saved; } catch (_) {}
-  activate(Object.prototype.hasOwnProperty.call(themes, saved) ? saved : 'editorial');
+  activate(Object.prototype.hasOwnProperty.call(themes, saved) ? saved : 'minimalism');
   picker.open = true;
 });
