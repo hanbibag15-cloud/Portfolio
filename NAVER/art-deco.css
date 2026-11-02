@@ -1,0 +1,86 @@
+/* Art Deco — gold, symmetry, double-line framing, letter spacing */
+body:has(.art-deco) {background:#101722;}
+.art-deco {
+ --deco-gold:#d6b66b;--deco-cream:#fff3d7;--deco-ink:#101b26;
+ min-height:100dvh;color:var(--deco-cream);
+ background:radial-gradient(ellipse at 50% -20%,#354553 0%,#172633 45%,#0b1721 100%);
+}
+.art-deco header {height:182px;border-bottom:1px solid var(--deco-gold);}
+.art-deco header::before {
+ content:"";position:absolute;bottom:7px;left:23px;right:23px;
+ border-bottom:1px solid var(--deco-gold);pointer-events:none;
+}
+.art-deco header::after {
+ content:"◆";position:absolute;top:53px;right:36px;
+ color:var(--deco-gold);font-size:36px;
+ text-shadow:0 0 13px #e3b95b70;pointer-events:none;
+}
+.art-deco .logo {bottom:25px;}
+.art-deco .logo span {color:var(--deco-gold);font-size:3rem;font-weight:800;letter-spacing:.17em;}
+.art-deco .back_btn {
+ border:1px solid var(--deco-gold);border-radius:0;
+ background-color:#f7ebca;box-shadow:0 0 0 3px var(--deco-ink),0 0 0 4px var(--deco-gold);
+}
+.art-deco main {padding-top:44px;}
+.art-deco .login {
+ max-width:440px;margin:0 auto;
+ padding:30px 20px 36px;position:relative;
+ border:2px solid var(--deco-gold);outline:1px solid var(--deco-gold);outline-offset:-9px;
+ background:linear-gradient(135deg,#1c2b39,#111d29);
+ box-shadow:0 12px 35px #0005;
+}
+.art-deco .login::before {
+ content:"◆";position:absolute;top:-16px;left:50%;transform:translateX(-50%);
+ background:#162432;color:var(--deco-gold);padding:0 13px;font-size:20px;
+}
+.art-deco .input_group + .input_group {margin-top:22px;}
+.art-deco .input_group input,
+.art-deco .state_input_group input,
+.art-deco.screen2_page .input_group input,
+.art-deco.screen2_page .screen2_id_input {
+ box-sizing:border-box;width:100%;height:55px;padding:0 14px;
+ border:1px solid var(--deco-gold)!important;border-radius:0;
+ background:#101b26;color:var(--deco-cream);font-weight:600;
+ outline:1px solid #a28750;outline-offset:-5px;box-shadow:none;
+}
+.art-deco .input_group input:focus,.art-deco .state_input_group input:focus {
+ background:#263746;outline:2px solid #f4db9a;outline-offset:2px;
+}
+.art-deco .input_group input::placeholder {color:#dcc99e;opacity:1;}
+.art-deco .state_input_group + .state_input_group {margin-top:24px;}
+.art-deco .state_input_group > label,.art-deco.screen2_page .input_group > label {
+ color:var(--deco-gold);font-weight:700;letter-spacing:.08em;margin-bottom:11px;
+}
+.art-deco .password_input input {padding-right:46px;}
+.art-deco .password_view {right:14px;bottom:17px;z-index:1;background:#f7ebca;border-radius:2px;}
+.art-deco .login_btn,.art-deco .passkey_btn {
+ height:55px;border:1px solid #e9d59a;border-radius:0;
+ font-size:1.5rem;font-weight:800;letter-spacing:.14em;
+ box-shadow:inset 0 0 0 4px #17232b,inset 0 0 0 5px #f4d992;
+ transition:filter .15s ease,transform .15s ease;cursor:pointer;
+}
+.art-deco .login_btn {
+ margin-top:39px;color:#181b20;
+ background:linear-gradient(110deg,#8e692e,#f8e9ab 27%,#bd8d41 51%,#fff0bb 76%,#9a712e);
+ box-shadow:inset 0 0 0 3px #e9d4a0,0 6px 15px #0006;
+}
+.art-deco .passkey_btn {
+ margin-top:15px;color:var(--deco-cream);
+ background:linear-gradient(110deg,#263744,#41505c,#1e2d3b);
+ box-shadow:inset 0 0 0 3px #21303b,inset 0 0 0 4px #d6b66b;
+}
+.art-deco .login_btn:hover,.art-deco .passkey_btn:hover {filter:brightness(1.13);transform:translateY(-2px);}
+.art-deco .login_btn:active,.art-deco .passkey_btn:active {transform:translateY(1px);}
+.art-deco .login_links {margin-top:38px;flex-wrap:wrap;row-gap:12px;}
+.art-deco .login_links a {color:var(--deco-cream);font-weight:600;letter-spacing:.04em;}
+.art-deco .login_links a:last-child {color:var(--deco-gold);}
+.art-deco .login_links a + a::before {background:var(--deco-gold);}
+.art-deco .state_input_group.error input {border-color:#f1908e!important;}
+.art-deco .error_message {color:#ffa8a1;font-weight:700;line-height:1.5;}
+.art-deco button:focus-visible,.art-deco a:focus-visible {outline:3px solid #fff0bb;outline-offset:4px;}
+@media(max-width:389px){
+ .art-deco .login {padding:26px 14px 30px;}
+ .art-deco .logo span {font-size:2.6rem;}
+ .art-deco header::after {right:22px;font-size:28px;}
+}
+@media(prefers-reduced-motion:reduce){.art-deco .login_btn,.art-deco .passkey_btn {transition:none;}}
