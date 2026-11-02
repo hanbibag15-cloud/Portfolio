@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
     minimalism: 'minimalism.css',
     claymorphism: 'claymorphism.css',
     maximalism: 'maximalism.css',
-    'kinetic-typography': 'kinetic-typography.css'
+    'kinetic-typography': 'kinetic-typography.css',
+    'grainy-gradient': 'grainy-gradient.css'
   };
   const buttons = picker.querySelectorAll('[data-theme]');
   const themeNames = Object.keys(themes);
@@ -36,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
     try { localStorage.setItem('naver-login-theme', theme); } catch (_) {}
   }
   buttons.forEach(button => button.addEventListener('click', () => activate(button.dataset.theme)));
-  let saved = 'kinetic-typography';
+  let saved = 'grainy-gradient';
   try { saved = localStorage.getItem('naver-login-theme') || saved; } catch (_) {}
-  activate(Object.prototype.hasOwnProperty.call(themes, saved) ? saved : 'kinetic-typography');
+  activate(Object.prototype.hasOwnProperty.call(themes, saved) ? saved : 'grainy-gradient');
   picker.open = true;
 });
