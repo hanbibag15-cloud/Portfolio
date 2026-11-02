@@ -1,0 +1,32 @@
+/* Maximalism: saturated conic gradient, stacked borders and layered text shadows */
+body:has(.maximalism){background:#25113c}
+.maximalism{--max-ink:#25113c;min-height:100dvh;color:var(--max-ink);overflow:hidden;
+background:conic-gradient(from 35deg at 50% 45%,#fce24e,#f88bbb,#8c81f9,#59dfdf,#fce24e);}
+.maximalism header{height:190px;background:linear-gradient(105deg,#ff8dc4,#ffd94d,#a69aff);border-bottom:5px solid var(--max-ink);box-shadow:0 6px 0 #fff,0 11px 0 var(--max-ink)}
+.maximalism header::after{content:"✦ ★ ✦";position:absolute;right:25px;top:48px;color:#fff;font-size:2.3rem;text-shadow:2px 2px #ec318b,-2px -2px #5539a6;pointer-events:none}
+.maximalism .logo{bottom:21px}.maximalism .logo span{font-size:3.5rem;font-weight:900;color:#fff;letter-spacing:-.07em;text-shadow:3px 3px 0 #ff368c,6px 6px 0 #5436a2,9px 9px 0 #2d205a}
+.maximalism .back_btn{background-color:#fff;border:3px solid var(--max-ink);border-radius:12px;box-shadow:4px 4px 0 #ff408f,7px 7px 0 var(--max-ink)}
+.maximalism main{padding-top:45px}
+.maximalism .login{max-width:450px;margin:0 auto;padding:29px 20px 36px;border:4px solid var(--max-ink);border-radius:20px;background:linear-gradient(135deg,#fff6c3,#ffdeee);
+box-shadow:0 0 0 5px #fff,0 0 0 9px #7432a9,11px 16px 0 #25113c}
+.maximalism .input_group + .input_group{margin-top:21px}
+.maximalism .input_group input,.maximalism .state_input_group input,.maximalism.screen2_page .input_group input,.maximalism.screen2_page .screen2_id_input{box-sizing:border-box;width:100%;height:55px;padding:0 15px;border:3px solid var(--max-ink)!important;border-radius:12px;outline:0;background:#fff;color:var(--max-ink);font-weight:750;box-shadow:4px 4px 0 #f472bd,7px 7px 0 #6b45c4}
+.maximalism .input_group input:focus,.maximalism .state_input_group input:focus{background:#fff6a9;box-shadow:4px 4px 0 #5fdbdf,7px 7px 0 #6b45c4}
+.maximalism .input_group input::placeholder{color:#68527c;opacity:1}
+.maximalism .state_input_group + .state_input_group{margin-top:25px}
+.maximalism .state_input_group > label,.maximalism.screen2_page .input_group > label{color:#4c2d6e;font-weight:900;margin-bottom:11px}
+.maximalism .password_input input{padding-right:46px}.maximalism .password_view{right:15px;bottom:19px;background:#fff;border-radius:50%}
+.maximalism .login_btn,.maximalism .passkey_btn{height:58px;border:3px solid var(--max-ink);border-radius:14px;color:var(--max-ink);font-size:1.7rem;font-weight:900;cursor:pointer;box-shadow:4px 4px 0 #fff,8px 8px 0 var(--max-ink);transition:transform .15s,box-shadow .15s}
+.maximalism .login_btn{margin-top:41px;background:linear-gradient(95deg,#ffdf3b,#ff90a9)}
+.maximalism .passkey_btn{margin-top:19px;background:linear-gradient(95deg,#5ce9eb,#ad9aff)}
+.maximalism .login_btn:hover,.maximalism .passkey_btn:hover{transform:translate(-2px,-2px)}
+.maximalism .login_btn:active,.maximalism .passkey_btn:active{transform:translate(4px,4px);box-shadow:0 0 0 #fff,3px 3px 0 var(--max-ink)}
+.maximalism .login_links{margin-top:45px;flex-wrap:wrap;row-gap:12px}
+.maximalism .login_links a{font-weight:850;color:#512179;text-decoration:underline;text-underline-offset:3px}
+.maximalism .login_links a:last-child{color:#a51d66}
+.maximalism .login_links a + a::before{background:#512179}
+.maximalism .state_input_group.error input{border-color:#ce2452!important;background:#ffecf0}
+.maximalism .error_message{color:#a51c4b;font-weight:800;line-height:1.5}
+.maximalism button:focus-visible,.maximalism a:focus-visible{outline:3px dashed #44267c;outline-offset:4px}
+@media(max-width:389px){.maximalism .login{padding:25px 14px 29px}.maximalism .logo span{font-size:2.9rem}.maximalism header::after{right:14px;font-size:1.7rem}}
+@media(prefers-reduced-motion:reduce){.maximalism .login_btn,.maximalism .passkey_btn{transition:none}}
