@@ -1,0 +1,13 @@
+/* Theme picker: independent of the selected login theme */
+.theme-picker{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:9999;width:154px;padding:10px;background:#fff;color:#1f2430;border:1px solid #cbd0d8;border-radius:12px;box-shadow:0 8px 26px #0002;font:13px/1.35 Arial,sans-serif}
+.theme-picker *{box-sizing:border-box}
+.theme-picker summary{cursor:pointer;list-style:none;font-weight:800;font-size:12px;padding:6px 5px}
+.theme-picker summary::-webkit-details-marker{display:none}
+.theme-picker summary::after{content:" ▾";float:right}
+.theme-picker[open] summary::after{content:" ▴"}
+.theme-picker ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:4px;max-height:55vh;overflow-y:auto}
+.theme-picker button{display:block;width:100%;min-height:32px;padding:7px 8px;border:1px solid transparent;border-radius:6px;text-align:left;font:inherit;background:transparent;color:#31333a;cursor:pointer}
+.theme-picker button:hover{background:#edf1f8}
+.theme-picker button[aria-pressed="true"]{background:#e2f2ff;border-color:#86bce9;color:#114b8c;font-weight:800}
+.theme-picker button:focus-visible,.theme-picker summary:focus-visible{outline:2px solid #245dc7;outline-offset:2px}
+@media(max-width:700px){.theme-picker{top:12px;right:12px;transform:none;width:142px;padding:6px;max-width:calc(100vw - 24px)}.theme-picker ul{max-height:45vh}}
