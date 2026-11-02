@@ -2,6 +2,16 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script>
+(function(){
+  try {
+    var current = location.pathname.split('/').pop();
+    if (sessionStorage.getItem('hosigi-page-transition') === current) {
+      document.documentElement.classList.add('page-is-entering');
+    }
+  } catch(e) {}
+})();
+</script>
 <title>전체 메뉴 | 호식이두마리치킨 리뉴얼</title>
 <link rel="stylesheet" href="../css/default.css">
 <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
