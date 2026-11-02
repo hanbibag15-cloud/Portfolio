@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
     'bento-grid': 'bento-grid.css',
     editorial: 'editorial.css',
     minimalism: 'minimalism.css',
-    claymorphism: 'claymorphism.css'
+    claymorphism: 'claymorphism.css',
+    maximalism: 'maximalism.css'
   };
   const buttons = picker.querySelectorAll('[data-theme]');
   const themeNames = Object.keys(themes);
@@ -34,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
     try { localStorage.setItem('naver-login-theme', theme); } catch (_) {}
   }
   buttons.forEach(button => button.addEventListener('click', () => activate(button.dataset.theme)));
-  let saved = 'claymorphism';
+  let saved = 'maximalism';
   try { saved = localStorage.getItem('naver-login-theme') || saved; } catch (_) {}
-  activate(Object.prototype.hasOwnProperty.call(themes, saved) ? saved : 'claymorphism');
+  activate(Object.prototype.hasOwnProperty.call(themes, saved) ? saved : 'maximalism');
   picker.open = true;
 });
