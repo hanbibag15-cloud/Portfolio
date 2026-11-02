@@ -1,0 +1,60 @@
+/* Minimalism — spacing, type, neutral palette, underline inputs */
+body:has(.minimalism){background:#eeeeee}
+.minimalism{
+  --min-ink:#202020;--min-muted:#777;--min-line:#d5d5d5;
+  min-height:100dvh;color:var(--min-ink);background:#fff;
+}
+.minimalism header{height:195px;background:#fff;border:0;}
+.minimalism header::before,.minimalism header::after{content:none}
+.minimalism .logo{bottom:12px;column-gap:11px}
+.minimalism .logo span{font-family:inherit;font-size:3rem;font-weight:700;letter-spacing:-.055em;color:var(--min-ink)}
+.minimalism .back_btn{border:0;border-radius:0;box-shadow:none;background-color:transparent}
+.minimalism main{padding:50px 23px 65px}
+.minimalism .login{max-width:440px;margin:0 auto;padding:0;background:transparent;border:0;outline:0;box-shadow:none;clip-path:none;transform:none}
+.minimalism .login form{padding:0;border:0}
+.minimalism .input_group + .input_group{margin-top:38px}
+.minimalism .input_group input,
+.minimalism .state_input_group input,
+.minimalism.screen2_page .input_group input,
+.minimalism.screen2_page .screen2_id_input{
+  width:100%;height:55px;box-sizing:border-box;padding:0 2px 6px;
+  border:0!important;border-bottom:1px solid var(--min-line)!important;
+  border-radius:0;background:transparent;box-shadow:none;outline:0;
+  font-family:inherit;font-weight:500;font-size:1.8rem;color:var(--min-ink);
+}
+.minimalism .input_group input:focus,.minimalism .state_input_group input:focus{
+  border-bottom-color:var(--min-ink)!important;box-shadow:none;outline:0;
+}
+.minimalism .input_group input::placeholder{color:var(--min-muted);opacity:1}
+.minimalism .state_input_group + .state_input_group{margin-top:36px}
+.minimalism .state_input_group > label,.minimalism.screen2_page .input_group > label{
+  display:block;margin-bottom:11px;color:var(--min-muted);font-size:1.3rem;
+  font-family:inherit;font-weight:500;letter-spacing:0;text-transform:none;
+}
+.minimalism .password_input input{padding-right:30px}
+.minimalism .password_view{right:2px;bottom:17px;background:transparent;border:0}
+.minimalism .login_btn,.minimalism .passkey_btn{
+  display:flex;align-items:center;justify-content:center;
+  width:100%;height:54px;border:1px solid var(--min-ink);border-radius:2px;
+  box-shadow:none;font-family:inherit;font-size:1.5rem;font-weight:600;
+  letter-spacing:0;cursor:pointer;transition:background-color .15s,color .15s;
+}
+.minimalism .login_btn{margin-top:55px;background:var(--min-ink);color:#fff}
+.minimalism .passkey_btn{margin-top:12px;background:#fff;color:var(--min-ink)}
+.minimalism .login_btn:hover{background:#444}
+.minimalism .passkey_btn:hover{background:#f5f5f5}
+.minimalism .login_links{
+  display:flex;justify-content:center;align-items:center;flex-wrap:wrap;
+  gap:0;margin-top:48px;padding:0;border:0;background:transparent;
+}
+.minimalism .login_links a{
+  color:#696969;font-family:inherit;font-size:1.2rem;font-weight:500;
+  letter-spacing:0;text-decoration:none;
+}
+.minimalism .login_links a:last-child{color:#404040}
+.minimalism .login_links a + a::before{background:#d6d6d6}
+.minimalism .state_input_group.error input{border-bottom-color:#b54f43!important}
+.minimalism .error_message{color:#a83d35;font-weight:500;line-height:1.5}
+.minimalism button:focus-visible,.minimalism a:focus-visible{outline:2px solid #222;outline-offset:3px}
+@media(max-width:389px){.minimalism main{padding-top:38px}.minimalism .logo span{font-size:2.7rem}}
+@media(prefers-reduced-motion:reduce){.minimalism .login_btn,.minimalism .passkey_btn{transition:none}}
