@@ -1,0 +1,57 @@
+/* Grainy Gradient — radial gradients + SVG film noise overlay */
+body:has(.grainy-gradient){background:#d9c8e5}
+.grainy-gradient{
+ --grain-ink:#31283d;position:relative;isolation:isolate;min-height:100dvh;
+ color:var(--grain-ink);
+ background:
+ radial-gradient(ellipse at 14% 14%,#ffbfa6 0%,transparent 47%),
+ radial-gradient(ellipse at 87% 27%,#a6dff0 0%,transparent 48%),
+ radial-gradient(ellipse at 44% 88%,#e8a8d2 0%,transparent 55%),
+ linear-gradient(145deg,#f1d7ae,#c5c3f2 65%,#b8ddc9);
+}
+.grainy-gradient::before{
+ content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.32;
+ mix-blend-mode:overlay;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.8'/%3E%3C/svg%3E");
+ background-size:180px 180px;
+}
+.grainy-gradient > header,.grainy-gradient > main{position:relative;z-index:1}
+.grainy-gradient header{height:180px;background:#ffffff30;border-bottom:1px solid #ffffffad}
+.grainy-gradient .logo{bottom:16px}
+.grainy-gradient .logo span{font-size:3.1rem;font-weight:800;color:#31283d;letter-spacing:-.06em}
+.grainy-gradient .back_btn{border:1px solid #ffffffb0;border-radius:14px;background-color:#fff8;box-shadow:0 5px 14px #51406828}
+.grainy-gradient main{padding-top:36px}
+.grainy-gradient .login{max-width:460px;margin:0 auto;padding:28px 21px 35px;
+ background:#fff9;border:1px solid #ffffffce;border-radius:22px;
+ box-shadow:0 18px 40px #4a3d5c2b}
+.grainy-gradient .input_group + .input_group{margin-top:20px}
+.grainy-gradient .input_group input,.grainy-gradient .state_input_group input,
+.grainy-gradient.screen2_page .input_group input,.grainy-gradient.screen2_page .screen2_id_input{
+ box-sizing:border-box;width:100%;height:55px;padding:0 15px;
+ border:1px solid #a99bb8!important;border-radius:12px;outline:0;
+ background:#fff9;color:var(--grain-ink);font-weight:600;
+ box-shadow:0 4px 12px #594a6922}
+.grainy-gradient .input_group input:focus,.grainy-gradient .state_input_group input:focus{
+ border-color:#7461a5!important;box-shadow:0 0 0 3px #a998d84d}
+.grainy-gradient .input_group input::placeholder{color:#6f637b;opacity:1}
+.grainy-gradient .state_input_group + .state_input_group{margin-top:23px}
+.grainy-gradient .state_input_group > label,.grainy-gradient.screen2_page .input_group > label{
+ color:#554764;font-weight:750;margin-bottom:10px}
+.grainy-gradient .password_input input{padding-right:46px}
+.grainy-gradient .password_view{right:14px;bottom:18px;background:#fff8;border-radius:6px}
+.grainy-gradient .login_btn,.grainy-gradient .passkey_btn{
+ height:56px;border:1px solid #ffffffc9;border-radius:14px;
+ font-size:1.6rem;font-weight:800;color:#322c44;cursor:pointer;
+ box-shadow:0 7px 16px #55446332;transition:transform .16s,filter .16s}
+.grainy-gradient .login_btn{margin-top:37px;background:linear-gradient(110deg,#a1d9d0,#c5b4ec)}
+.grainy-gradient .passkey_btn{margin-top:15px;background:linear-gradient(110deg,#f5d1c5,#f1e1b9)}
+.grainy-gradient .login_btn:hover,.grainy-gradient .passkey_btn:hover{transform:translateY(-2px);filter:saturate(1.12)}
+.grainy-gradient .login_links{margin-top:37px;flex-wrap:wrap;row-gap:12px}
+.grainy-gradient .login_links a{color:#544968;font-weight:700}
+.grainy-gradient .login_links a:last-child{color:#7354a0}
+.grainy-gradient .login_links a + a::before{background:#a99bb8}
+.grainy-gradient .state_input_group.error input{border-color:#c75f7f!important;background:#fff0f5}
+.grainy-gradient .error_message{color:#a64064;font-weight:700;line-height:1.5}
+.grainy-gradient button:focus-visible,.grainy-gradient a:focus-visible{outline:3px solid #6b52a7;outline-offset:3px}
+@media(max-width:389px){.grainy-gradient .login{padding:25px 14px 30px}.grainy-gradient .logo span{font-size:2.8rem}}
+@media(prefers-reduced-motion:reduce){.grainy-gradient .login_btn,.grainy-gradient .passkey_btn{transition:none}}
