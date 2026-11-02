@@ -1,0 +1,64 @@
+/* Collage: torn paper, note lines, tape and cut-out layers */
+body:has(.collage) {background:#c8bba8;}
+.collage {
+ --paper:#fff9e9;--ink:#292522;--tape:#f5d66b;
+ background:repeating-linear-gradient(0deg,transparent 0 29px,#7f9db32e 30px 31px),#eee3cc;
+ color:var(--ink);min-height:100dvh;overflow:hidden;
+}
+.collage header {height:180px;background:#f6b6aa;border-bottom:2px dashed #68544a;}
+.collage header::after {
+ content:"";position:absolute;right:30px;top:48px;width:86px;height:31px;
+ background:#fff0a9ad;border:1px solid #d0b561;transform:rotate(16deg);
+ box-shadow:0 2px 3px #392e291e;pointer-events:none;
+}
+.collage .logo {bottom:18px;transform:rotate(-2deg);}
+.collage .logo span {font-weight:900;font-size:3.1rem;letter-spacing:-.05em;color:#302928;text-shadow:2px 2px 0 #fff4ce;}
+.collage .back_btn {background-color:#fff9e9;border:2px dashed #52433b;transform:rotate(-5deg);box-shadow:3px 4px 0 #7c655f55;}
+.collage main {padding-top:38px;}
+.collage .login {
+ position:relative;max-width:440px;margin:auto;padding:29px 20px 38px;
+ background:var(--paper);border:1px solid #d8c6a3;
+ box-shadow:9px 12px 0 #715d4f42;transform:rotate(-1deg);
+ clip-path:polygon(0 1.8%,4% 0,10% 1%,17% 0,24% 1.2%,33% 0,41% 1%,50% 0,58% 1%,66% 0,75% 1%,84% 0,93% 1.2%,100% 0,99% 100%,90% 99%,81% 100%,72% 99%,62% 100%,52% 99%,43% 100%,33% 99%,24% 100%,13% 99%,5% 100%,0 98%);
+}
+.collage .login::before {
+ content:"";position:absolute;z-index:2;top:0;left:50%;
+ width:104px;height:26px;transform:translateX(-50%) rotate(4deg);
+ background:#f8d769b9;border-left:1px solid #d8ae54;border-right:1px solid #d8ae54;
+ pointer-events:none;
+}
+.collage .input_group + .input_group {margin-top:20px;}
+.collage .input_group input,.collage .state_input_group input,.collage.screen2_page .input_group input,.collage.screen2_page .screen2_id_input {
+ box-sizing:border-box;width:100%;height:55px;padding:0 14px;
+ border:2px solid #433b34!important;border-radius:1px;
+ background:#fffdf7;color:#302a25;
+ box-shadow:3px 4px 0 #b4a18f;outline:0;font-weight:650;
+}
+.collage .input_group input:focus,.collage .state_input_group input:focus {
+ background:#fff7d8;outline:2px dashed #9c624a;outline-offset:3px;
+}
+.collage .input_group input::placeholder {color:#75685d;}
+.collage .state_input_group > label,.collage.screen2_page .input_group > label {color:#4d4036;font-weight:800;margin-bottom:10px;}
+.collage .state_input_group + .state_input_group {margin-top:22px;}
+.collage .password_input input {padding-right:45px;}
+.collage .password_view {right:14px;bottom:18px;z-index:3;}
+.collage .login_btn,.collage .passkey_btn {
+ height:56px;border:2px solid #40342b;border-radius:2px;
+ color:#302820;font-size:1.6rem;font-weight:850;
+ box-shadow:4px 5px 0 #59483e;cursor:pointer;
+ transition:transform .15s ease,box-shadow .15s ease;
+}
+.collage .login_btn {background:#c8e7a2;margin-top:36px;transform:rotate(1deg);}
+.collage .passkey_btn {background:#fbc6ac;margin-top:16px;transform:rotate(-1deg);}
+.collage .login_btn:hover {transform:rotate(0) translateY(-2px);}
+.collage .passkey_btn:hover {transform:rotate(0) translateY(-2px);}
+.collage .login_btn:active,.collage .passkey_btn:active {transform:translate(3px,3px);box-shadow:1px 2px 0 #59483e;}
+.collage .login_links {margin-top:37px;flex-wrap:wrap;row-gap:12px;}
+.collage .login_links a {color:#43352e;font-weight:700;text-decoration:underline;text-underline-offset:3px;}
+.collage .login_links a:last-child {color:#96533a;}
+.collage .login_links a + a::before {background:#846e60;}
+.collage .state_input_group.error input {border-color:#b83442!important;background:#fff1eb;}
+.collage .error_message {color:#a02e39;font-weight:700;line-height:1.5;}
+.collage button:focus-visible,.collage a:focus-visible {outline:3px dashed #ad5d34;outline-offset:4px;}
+@media(max-width:389px){.collage .login{padding:28px 15px 34px}.collage header::after{right:18px;width:65px}.collage .logo span{font-size:2.8rem}}
+@media(prefers-reduced-motion:reduce){.collage .login_btn,.collage .passkey_btn{transition:none}}
