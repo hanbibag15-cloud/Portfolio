@@ -1,0 +1,71 @@
+/* Glassmorphism — translucent layers, soft blur, luminous edges */
+body:has(.glassmorphism){background:#a8c7f6;}
+.glassmorphism{
+ --glass-ink:#213654;--glass-edge:#ffffffcf;
+ min-height:100dvh;color:var(--glass-ink);overflow:hidden;
+ background:
+ radial-gradient(circle at 14% 20%,#ffb9d7 0,transparent 35%),
+ radial-gradient(circle at 86% 60%,#98f5e2 0,transparent 39%),
+ linear-gradient(145deg,#9abef5,#e6c6fa 55%,#a5defb);
+}
+.glassmorphism header{
+ height:178px;background:#ffffff26;border-bottom:1px solid #ffffffb8;
+ backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+}
+.glassmorphism header::after{
+ content:"";position:absolute;right:32px;top:46px;width:68px;height:68px;
+ border:1px solid #ffffffe0;border-radius:50%;background:#ffffff4f;
+ box-shadow:inset 0 1px 0 #fff,0 8px 20px #3d609138;pointer-events:none;
+}
+.glassmorphism .logo{bottom:18px}
+.glassmorphism .logo span{font-size:3.1rem;color:#213654;font-weight:850;letter-spacing:-.05em}
+.glassmorphism .back_btn{background-color:#ffffffa3;border:1px solid #fff;border-radius:50%;
+ box-shadow:0 7px 17px #395c8740;cursor:pointer}
+.glassmorphism main{padding-top:38px}
+.glassmorphism .login{
+ max-width:440px;margin:0 auto;padding:30px 20px 37px;
+ border:1px solid #ffffffe6;border-radius:24px;
+ background:rgba(255,255,255,.28);
+ backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+ box-shadow:0 18px 42px #335b8e35,inset 0 1px 0 #ffffffcf;
+}
+.glassmorphism .input_group + .input_group{margin-top:20px}
+.glassmorphism .input_group input,.glassmorphism .state_input_group input,
+.glassmorphism.screen2_page .input_group input,.glassmorphism.screen2_page .screen2_id_input{
+ box-sizing:border-box;width:100%;height:56px;padding:0 16px;
+ border:1px solid #ffffffe8!important;border-radius:14px;outline:0;
+ background:rgba(255,255,255,.55);color:#1b3251;font-weight:650;
+ box-shadow:inset 0 1px 0 #fff,0 5px 16px #5479ad1e;
+}
+.glassmorphism .input_group input::placeholder{color:#465d75;opacity:1}
+.glassmorphism .input_group input:focus,.glassmorphism .state_input_group input:focus{
+ border-color:#ffffff!important;background:#ffffffc4;
+ box-shadow:0 0 0 3px #ffffff77,0 0 18px #b9a6f78c;
+}
+.glassmorphism .state_input_group + .state_input_group{margin-top:23px}
+.glassmorphism .state_input_group > label,.glassmorphism.screen2_page .input_group > label{
+ color:#294363;font-weight:750;margin-bottom:11px;
+}
+.glassmorphism .password_input input{padding-right:48px}
+.glassmorphism .password_view{right:15px;bottom:19px;z-index:1;background:#ffffffb0;border-radius:50%}
+.glassmorphism .login_btn,.glassmorphism .passkey_btn{
+ height:56px;border:1px solid #ffffffed;border-radius:16px;
+ font-size:1.6rem;font-weight:850;cursor:pointer;color:#243b58;
+ box-shadow:inset 0 1px 0 #fff,0 8px 20px #456a9d30;
+ transition:transform .18s ease,background .18s ease,box-shadow .18s ease;
+}
+.glassmorphism .login_btn{margin-top:37px;background:linear-gradient(135deg,#b3fff0c9,#b9d7ffdc)}
+.glassmorphism .passkey_btn{margin-top:15px;background:linear-gradient(135deg,#fffdf2b8,#f7ceffd1)}
+.glassmorphism .login_btn:hover,.glassmorphism .passkey_btn:hover{
+ transform:translateY(-2px);box-shadow:0 12px 25px #456a9d45,inset 0 1px 0 #fff;
+}
+.glassmorphism .login_btn:active,.glassmorphism .passkey_btn:active{transform:translateY(1px)}
+.glassmorphism .login_links{margin-top:38px;flex-wrap:wrap;row-gap:12px}
+.glassmorphism .login_links a{color:#2c4360;font-weight:700}
+.glassmorphism .login_links a:last-child{color:#5949a2}
+.glassmorphism .login_links a + a::before{background:#8297b4}
+.glassmorphism .state_input_group.error input{border-color:#d35677!important;background:#ffeaf0d9}
+.glassmorphism .error_message{color:#953552;font-weight:750;line-height:1.5}
+.glassmorphism button:focus-visible,.glassmorphism a:focus-visible{outline:3px solid #4854ab;outline-offset:3px}
+@media(max-width:389px){.glassmorphism .login{padding:25px 14px 30px}.glassmorphism .logo span{font-size:2.7rem}.glassmorphism header::after{right:20px;width:50px;height:50px}}
+@media(prefers-reduced-motion:reduce){.glassmorphism .login_btn,.glassmorphism .passkey_btn{transition:none}}
