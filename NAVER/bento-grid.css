@@ -1,0 +1,33 @@
+/* Bento Grid: differently sized rounded cards in a 2-column grid */
+body:has(.bento-grid){background:#dce6f1}
+.bento-grid{--b-ink:#263449;min-height:100dvh;color:var(--b-ink);background:linear-gradient(145deg,#eef4fa,#d7e5f2)}
+.bento-grid header{height:165px;background:transparent}
+.bento-grid .logo{bottom:16px}.bento-grid .logo span{font-size:3rem;font-weight:850;color:var(--b-ink)}
+.bento-grid .back_btn{background-color:#fff;border:1px solid #cbd8e5;border-radius:12px;box-shadow:0 4px 12px #455d7920}
+.bento-grid main{padding-top:24px}
+.bento-grid .login{max-width:540px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.bento-grid .login > h2.sr-only{position:absolute}
+.bento-grid .login > form{grid-column:1/-1;min-width:0}
+.bento-grid fieldset{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:13px}
+.bento-grid .input_group,.bento-grid .state_input_group{min-width:0;margin:0!important}
+.bento-grid .input_group:first-of-type,.bento-grid .state_input_group:first-of-type{grid-column:1/-1}
+.bento-grid .input_group:nth-of-type(2),.bento-grid .state_input_group:nth-of-type(2){grid-column:1/-1}
+.bento-grid .input_group,.bento-grid .state_input_group{padding:14px;background:#fff;border:1px solid #d2dce6;border-radius:22px;box-shadow:0 6px 18px #385a7b12}
+.bento-grid .input_group input,.bento-grid .state_input_group input,.bento-grid.screen2_page .input_group input,.bento-grid.screen2_page .screen2_id_input{
+box-sizing:border-box;width:100%;height:48px;padding:0 13px;background:#f1f5fa;color:var(--b-ink);
+border:1px solid #d7e1eb!important;border-radius:13px;outline:0;font-weight:650}
+.bento-grid .input_group input:focus,.bento-grid .state_input_group input:focus{border-color:#5089d8!important;box-shadow:0 0 0 3px #7aabed40}
+.bento-grid .state_input_group > label,.bento-grid.screen2_page .input_group > label{font-weight:800;color:#40556d;margin-bottom:10px}
+.bento-grid .password_input input{padding-right:43px}.bento-grid .password_view{right:13px;bottom:15px}
+.bento-grid .login_btn,.bento-grid .passkey_btn{width:100%;height:72px;margin:0!important;border:0;border-radius:22px;font-size:1.6rem;font-weight:800;cursor:pointer;box-shadow:0 6px 18px #385a7b20;transition:transform .15s ease}
+.bento-grid .login_btn{grid-column:1;background:#2969ca;color:#fff}
+.bento-grid .passkey_btn{grid-column:2;background:#cdebdc;color:#1a5043}
+.bento-grid .login_btn:hover,.bento-grid .passkey_btn:hover{transform:translateY(-3px)}
+.bento-grid .login_links{grid-column:1/-1;margin:0;padding:19px 12px;background:#fff;border:1px solid #d2dce6;border-radius:22px;display:flex;justify-content:center;flex-wrap:wrap;gap:4px}
+.bento-grid .login_links a{color:#3c536c;font-weight:650}
+.bento-grid .login_links a:last-child{color:#2466b8}
+.bento-grid .state_input_group.error input{border-color:#bd4457!important;background:#fff1f4}
+.bento-grid .error_message{color:#a62e46;font-weight:700;line-height:1.5}
+.bento-grid button:focus-visible,.bento-grid a:focus-visible{outline:3px solid #236acb;outline-offset:3px}
+@media(max-width:420px){.bento-grid .login{gap:10px}.bento-grid fieldset{gap:10px}.bento-grid .input_group,.bento-grid .state_input_group{padding:12px}.bento-grid .login_btn,.bento-grid .passkey_btn{font-size:1.3rem;height:66px}.bento-grid .login_links{padding:16px 5px}.bento-grid .login_links a{padding:0 7px}}
+@media(prefers-reduced-motion:reduce){.bento-grid .login_btn,.bento-grid .passkey_btn{transition:none}}
