@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
     memphis: 'memphis.css',
     glassmorphism: 'glassmorphism.css',
     'swiss-style': 'swiss-style.css',
-    'bento-grid': 'bento-grid.css'
+    'bento-grid': 'bento-grid.css',
+    editorial: 'editorial.css'
   };
   const buttons = picker.querySelectorAll('[data-theme]');
   const themeNames = Object.keys(themes);
@@ -31,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function () {
     try { localStorage.setItem('naver-login-theme', theme); } catch (_) {}
   }
   buttons.forEach(button => button.addEventListener('click', () => activate(button.dataset.theme)));
-  let saved = 'bento-grid';
+  let saved = 'editorial';
   try { saved = localStorage.getItem('naver-login-theme') || saved; } catch (_) {}
-  activate(Object.prototype.hasOwnProperty.call(themes, saved) ? saved : 'bento-grid');
+  activate(Object.prototype.hasOwnProperty.call(themes, saved) ? saved : 'editorial');
   picker.open = true;
 });
