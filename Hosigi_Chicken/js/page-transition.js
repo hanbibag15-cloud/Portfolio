@@ -28,7 +28,8 @@
     if (target.origin !== location.origin || target.pathname === location.pathname) return;
     const next = target.pathname.split('/').pop();
     if (!((page === 'brand.html' && next === 'menu.html') ||
-          (page === 'menu.html' && next === 'brand.html'))) return;
+          (page === 'menu.html' && next === 'brand.html') ||
+          (page === 'index.html' && next === 'brand.html'))) return;
     if (reduceMotion() || navigating) return;
     event.preventDefault();
     navigating = true;
