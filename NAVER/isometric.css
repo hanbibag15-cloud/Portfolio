@@ -1,0 +1,26 @@
+/* Isometric theme — angled 3D cards with stacked depth */
+body:has(.isometric){background:#cedbe5}
+.isometric{--iso-ink:#203b58;min-height:100dvh;color:var(--iso-ink);background:linear-gradient(145deg,#ecf5f8,#bfdae6 65%,#a8c6df)}
+.isometric header{height:182px;background:#e8f5f7;border-bottom:3px solid var(--iso-ink)}
+.isometric .logo{bottom:20px}.isometric .logo span{font-size:3.1rem;font-weight:850;color:var(--iso-ink);letter-spacing:-.04em}
+.isometric .back_btn{border:2px solid var(--iso-ink);background-color:#fff;border-radius:5px;box-shadow:3px 3px 0 #668ca9}
+.isometric main{padding-top:45px;perspective:900px}
+.isometric .login{max-width:440px;margin:0 auto;padding:28px 20px 36px;background:#fefdf6;border:3px solid var(--iso-ink);border-radius:8px;box-shadow:5px 5px 0 #83aaca,10px 10px 0 #638eae,15px 15px 0 #3d6688,21px 23px 24px #203b5840}
+.isometric .login::before{content:"";display:block;width:75px;height:54px;margin:0 0 12px auto;background:linear-gradient(125deg,#ffc864,#ef8359);border:2px solid var(--iso-ink);box-shadow:4px 4px 0 #9f6b51,8px 8px 0 #765a54;transform:rotate(-30deg) skewX(30deg) scaleY(.86);pointer-events:none}
+.isometric .input_group+.input_group{margin-top:23px}
+.isometric .input_group input,.isometric .state_input_group input,.isometric.screen2_page .input_group input,.isometric.screen2_page .screen2_id_input{box-sizing:border-box;width:100%;height:55px;padding:0 15px;border:2px solid var(--iso-ink)!important;border-radius:4px;background:#fff;color:var(--iso-ink);outline:0;font-weight:650;box-shadow:3px 3px 0 #8aafc6,6px 6px 0 #4d7798}
+.isometric .input_group input:focus,.isometric .state_input_group input:focus{background:#e9f9ff;border-color:#146392!important}
+.isometric .state_input_group+.state_input_group{margin-top:24px}
+.isometric .state_input_group>label,.isometric.screen2_page .input_group>label{font-weight:800;color:var(--iso-ink);margin-bottom:11px}
+.isometric .password_input input{padding-right:46px}.isometric .password_view{right:14px;bottom:18px}
+.isometric .login_btn,.isometric .passkey_btn{height:57px;border:2px solid var(--iso-ink);border-radius:5px;color:var(--iso-ink);font-weight:850;font-size:1.6rem;cursor:pointer;box-shadow:3px 3px 0 #6d97b6,6px 6px 0 #3f6887;transition:transform .16s,box-shadow .16s}
+.isometric .login_btn{margin-top:40px;background:#a9e2b6}
+.isometric .passkey_btn{margin-top:18px;background:#ffc9a8}
+.isometric .login_btn:hover,.isometric .passkey_btn:hover{transform:translate(-2px,-2px)}
+.isometric .login_btn:active,.isometric .passkey_btn:active{transform:translate(4px,4px);box-shadow:1px 1px 0 #3f6887}
+.isometric .login_links{margin-top:40px;flex-wrap:wrap;row-gap:12px}.isometric .login_links a{color:#314b65;font-weight:750}.isometric .login_links a:last-child{color:#a24d44}
+.isometric .login_links a+a::before{background:#7793aa}
+.isometric .state_input_group.error input{border-color:#c54e52!important;background:#fff1ef}.isometric .error_message{color:#a4313f;font-weight:700;line-height:1.5}
+.isometric button:focus-visible,.isometric a:focus-visible{outline:3px solid #2072a6;outline-offset:4px}
+@media(max-width:389px){.isometric .login{padding:25px 14px 30px}.isometric .logo span{font-size:2.8rem}}
+@media(prefers-reduced-motion:reduce){.isometric .login_btn,.isometric .passkey_btn{transition:none}}
