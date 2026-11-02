@@ -3,7 +3,7 @@ body:has(.swiss-style){background:#deded9}
 .swiss-style{
   --sw-red:#e52329;--sw-black:#111;--sw-paper:#f7f7f3;
   display:grid;
-  grid-template-columns:minmax(96px,24%) minmax(0,1fr);
+  grid-template-columns:clamp(150px,24%,245px) minmax(0,1fr);
   min-height:100dvh;width:100%;max-width:1024px;min-width:360px;
   margin-inline:auto;overflow-x:clip;
   color:var(--sw-black);background:var(--sw-paper);
@@ -28,32 +28,26 @@ body:has(.swiss-style){background:#deded9}
   background-color:#fff;background-size:24px 24px;box-shadow:none;cursor:pointer;
 }
 .swiss-style .logo{
-  position:absolute;left:50%;top:120px;bottom:auto;
-  width:auto;margin:0;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:18px;
+  position:absolute;left:23px;right:12px;top:125px;bottom:auto;
+  width:auto;margin:0;transform:none;
+  display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:10px;
 }
-.swiss-style .logo img{width:40px;height:40px}
+.swiss-style .logo img{width:42px;height:40px;flex:none}
 .swiss-style .logo span{
-  font-size:clamp(2.5rem,3.9vw,4.2rem);font-weight:900;line-height:1.1;
-  letter-spacing:-.08em;color:#fff;writing-mode:vertical-rl;text-orientation:upright;
+  font-size:clamp(2.2rem,2.5vw,3rem);font-weight:900;line-height:1;
+  letter-spacing:-.06em;color:#fff;writing-mode:horizontal-tb;text-orientation:mixed;
+  white-space:nowrap;
 }
 /* Other two columns: oversized editorial heading and a practical login form. */
 .swiss-style > main{
   grid-column:2;grid-row:1;min-width:0;
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);
-  align-content:center;column-gap:clamp(18px,3vw,42px);
-  padding:65px clamp(18px,3vw,44px);
+  display:flex;align-items:center;justify-content:center;
+  padding:65px clamp(22px,5vw,72px);
   background:var(--sw-paper);
 }
-.swiss-style > main::before{
-  content:"LOG\\A IN";white-space:pre;
-  display:block;align-self:start;
-  padding-top:3px;border-top:7px solid var(--sw-black);
-  font:900 clamp(4.8rem,7vw,8.2rem)/.91 Arial,sans-serif;
-  letter-spacing:-.11em;text-align:left;color:var(--sw-black);
-}
+.swiss-style > main::before{content:none;}
 .swiss-style .login{
-  min-width:0;width:100%;max-width:none;margin:0;
+  min-width:0;width:100%;max-width:510px;margin:0;
   padding:0;border:0;outline:0;box-shadow:none;background:transparent;
 }
 .swiss-style .login form{border-top:2px solid var(--sw-black);padding-top:19px}
@@ -100,15 +94,21 @@ body:has(.swiss-style){background:#deded9}
 .swiss-style button:focus-visible,.swiss-style a:focus-visible{outline:3px solid var(--sw-red);outline-offset:3px}
 /* At narrower widths, keep the full-height left rail and stack the typography above the form. */
 @media(max-width:760px){
-  .swiss-style,.swiss-style.screen2_page{grid-template-columns:88px minmax(0,1fr)}
-  .swiss-style > main{grid-template-columns:minmax(0,1fr);row-gap:28px;padding:75px clamp(15px,5vw,36px)}
-  .swiss-style > main::before{font-size:clamp(4rem,12vw,6.6rem);line-height:.85}
-  .swiss-style .logo{top:112px}
-  .swiss-style .logo span{font-size:2.5rem}
+  .swiss-style,.swiss-style.screen2_page{grid-template-columns:112px minmax(0,1fr)}
+  .swiss-style > main{padding:50px clamp(15px,4vw,30px)}
+  .swiss-style .logo{left:10px;right:6px;top:110px;gap:5px;flex-wrap:wrap}
+  .swiss-style .logo img{width:31px;height:31px}
+  .swiss-style .logo span{font-size:2.1rem}
   .swiss-style .back_btn{left:15px;top:32px}
 }
 @media(max-width:389px){
-  .swiss-style > main{padding:55px 14px}
+  .swiss-style,.swiss-style.screen2_page{grid-template-columns:96px minmax(0,1fr)}
+  .swiss-style > main{padding:40px 14px}
+  .swiss-style .logo{left:9px;right:5px;gap:4px}
+  .swiss-style .logo img{width:25px;height:25px}
+  .swiss-style .logo span{font-size:1.9rem}
+  .swiss-style .login_links a{font-size:1.05rem;padding:0 6px}
+}
   .swiss-style > main::before{font-size:4.5rem}
   .swiss-style .login_links a{font-size:1.05rem;padding:0 6px}
 }
