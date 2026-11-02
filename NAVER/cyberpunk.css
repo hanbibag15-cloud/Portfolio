@@ -1,0 +1,57 @@
+/* Cyberpunk: neon cyan/magenta, glitch, cut corners, scanlines */
+body:has(.cyberpunk){background:#050713;}
+.cyberpunk{
+ --cy-cyan:#00f4ff;--cy-pink:#ff2bbf;--cy-text:#eafaff;
+ min-height:100dvh;color:var(--cy-text);position:relative;isolation:isolate;
+ background:radial-gradient(circle at 85% 12%,#63205d66,transparent 40%),
+ radial-gradient(circle at 15% 80%,#064d6766,transparent 50%),#090e22;
+}
+.cyberpunk::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:repeating-linear-gradient(to bottom,transparent 0 3px,#00000026 3px 5px);}
+.cyberpunk header{height:175px;border-bottom:2px solid var(--cy-cyan);box-shadow:0 5px 16px #00f4ff55;}
+.cyberpunk header::after{content:"SYSTEM // 2077";position:absolute;top:53px;right:22px;
+ font:700 1rem monospace;letter-spacing:.12em;color:var(--cy-pink);text-shadow:0 0 9px var(--cy-pink);}
+.cyberpunk .logo{bottom:17px;}
+.cyberpunk .logo span{font-size:3.2rem;font-weight:900;color:var(--cy-text);letter-spacing:.04em;
+ text-shadow:-3px 0 var(--cy-pink),3px 0 var(--cy-cyan),0 0 14px #00f4ff7a;}
+.cyberpunk .back_btn{background-color:#c8faff;border:2px solid var(--cy-cyan);
+ clip-path:polygon(0 0,100% 0,100% 75%,75% 100%,0 100%);box-shadow:none;}
+.cyberpunk main{padding-top:37px;}
+.cyberpunk .login{max-width:440px;margin:0 auto;padding:28px 20px 35px;
+ border:2px solid var(--cy-cyan);background:#111a34ed;
+ box-shadow:8px 8px 0 #ff2bbf66,0 0 22px #00f4ff40;
+ clip-path:polygon(0 0,calc(100% - 26px) 0,100% 26px,100% 100%,26px 100%,0 calc(100% - 26px));}
+.cyberpunk .input_group + .input_group{margin-top:20px;}
+.cyberpunk .input_group input,.cyberpunk .state_input_group input,
+.cyberpunk.screen2_page .input_group input,.cyberpunk.screen2_page .screen2_id_input{
+ box-sizing:border-box;width:100%;height:55px;padding:0 14px;border:2px solid var(--cy-cyan)!important;
+ border-radius:0;outline:0;background:#0a1328;color:var(--cy-text);
+ font-weight:700;box-shadow:inset 0 0 12px #00f4ff1c,0 0 10px #00f4ff35;}
+.cyberpunk .input_group input::placeholder{color:#b6c9dd;}
+.cyberpunk .input_group input:focus,.cyberpunk .state_input_group input:focus{
+ border-color:var(--cy-pink)!important;box-shadow:0 0 0 2px #ff2bbf55,0 0 16px #ff2bbf80;}
+.cyberpunk .state_input_group + .state_input_group{margin-top:23px;}
+.cyberpunk .state_input_group > label,.cyberpunk.screen2_page .input_group > label{
+ margin-bottom:11px;color:var(--cy-cyan);font-weight:800;letter-spacing:.05em;}
+.cyberpunk .password_input input{padding-right:47px;}
+.cyberpunk .password_view{right:14px;bottom:18px;z-index:1;background:#d9faff;border:1px solid var(--cy-cyan);}
+.cyberpunk .login_btn,.cyberpunk .passkey_btn{
+ height:55px;border:2px solid var(--cy-cyan);border-radius:0;
+ font-size:1.6rem;font-weight:900;letter-spacing:.04em;cursor:pointer;
+ clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));
+ transition:filter .15s ease,transform .15s ease;}
+.cyberpunk .login_btn{margin-top:38px;color:#071021;background:linear-gradient(100deg,var(--cy-cyan),#a2ffff);
+ box-shadow:0 0 14px #00f4ff88;}
+.cyberpunk .passkey_btn{margin-top:16px;color:#fff;background:linear-gradient(110deg,#67205d,var(--cy-pink));
+ border-color:var(--cy-pink);box-shadow:0 0 13px #ff2bbf75;}
+.cyberpunk .login_btn:hover,.cyberpunk .passkey_btn:hover{filter:brightness(1.18);transform:translateY(-2px);}
+.cyberpunk .login_btn:active,.cyberpunk .passkey_btn:active{transform:translateY(1px);}
+.cyberpunk .login_links{margin-top:35px;flex-wrap:wrap;row-gap:12px;}
+.cyberpunk .login_links a{color:var(--cy-text);font-weight:700;}
+.cyberpunk .login_links a:last-child{color:var(--cy-pink);}
+.cyberpunk .login_links a + a::before{background:var(--cy-cyan);}
+.cyberpunk .state_input_group.error input{border-color:#ff668e!important;}
+.cyberpunk .error_message{color:#ff9db5;font-weight:700;line-height:1.5;}
+.cyberpunk button:focus-visible,.cyberpunk a:focus-visible{outline:3px dashed #fff;outline-offset:3px;}
+@media(max-width:389px){.cyberpunk .login{padding:24px 14px 30px}.cyberpunk .logo span{font-size:2.8rem}.cyberpunk header::after{right:15px;font-size:.8rem}}
+@media(prefers-reduced-motion:reduce){.cyberpunk .login_btn,.cyberpunk .passkey_btn{transition:none}}
