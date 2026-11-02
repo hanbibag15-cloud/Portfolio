@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
     'art-deco': 'art-deco.css',
     cyberpunk: 'cyberpunk.css',
     memphis: 'memphis.css',
-    glassmorphism: 'glassmorphism.css'
+    glassmorphism: 'glassmorphism.css',
+    'swiss-style': 'swiss-style.css'
   };
   const buttons = picker.querySelectorAll('[data-theme]');
   const themeNames = Object.keys(themes);
@@ -29,8 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
     try { localStorage.setItem('naver-login-theme', theme); } catch (_) {}
   }
   buttons.forEach(button => button.addEventListener('click', () => activate(button.dataset.theme)));
-  let saved = 'glassmorphism';
+  let saved = 'swiss-style';
   try { saved = localStorage.getItem('naver-login-theme') || saved; } catch (_) {}
-  activate(Object.prototype.hasOwnProperty.call(themes, saved) ? saved : 'glassmorphism');
+  activate(Object.prototype.hasOwnProperty.call(themes, saved) ? saved : 'swiss-style');
   picker.open = true;
 });
