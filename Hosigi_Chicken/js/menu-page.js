@@ -35,7 +35,7 @@ const menuItems = [
 ];
 // Product-to-image paths explicitly provided by the project author.
 // Side_Menu09.png is not in the repository yet; retain its placeholder until uploaded.
-const newMenuNames = new Set(["딥블랙갈릭 치킨"]);
+const newMenuNames = new Set(["딥블랙갈릭 치킨", "깐쇼킹 치킨", "맵시크 치킨"]);
 const menuPhotos = {
     "딥블랙갈릭 치킨": "chicken_img02.png",
     "깐쇼킹 치킨": "chicken_img01.png",
