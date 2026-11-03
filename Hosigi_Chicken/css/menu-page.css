@@ -46,7 +46,7 @@
     .all-menu-photo img { transition: none; }
 }
 
-/* Reference-inspired menu image tiles: a warm surface fills orange on hover. */
+/* Menu image tiles: Figma light gray, filling with brand red on hover. */
 .all-menu-card {
     background: transparent;
     border: none;
@@ -61,7 +61,7 @@
     margin: 0;
     border: 0;
     border-radius: 20px;
-    background: var(--surface-accent-soft);
+    background: var(--neutral-light-gray);
     overflow: hidden;
     color: var(--text-primary);
 }
@@ -70,7 +70,7 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: var(--brand-orange);
+    background: var(--brand-red);
     transform: scaleY(0);
     transform-origin: bottom;
     transition: transform 550ms cubic-bezier(.22,1,.36,1);
