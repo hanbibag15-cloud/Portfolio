@@ -80,7 +80,9 @@
     width: 92%;
     height: 92%;
     object-fit: contain;
-    transition: transform 550ms cubic-bezier(.22,1,.36,1);
+    filter: brightness(1);
+    transition: transform 550ms cubic-bezier(.22,1,.36,1),
+                filter 450ms ease;
 }
 .all-menu-card:where(:hover,:focus-within) .all-menu-photo::before {
     clip-path: circle(150% at 50% 100%);
@@ -88,6 +90,7 @@
 .all-menu-card:hover .all-menu-photo img,
 .all-menu-card:focus-within .all-menu-photo img {
     transform: translateY(-8px) scale(1.045);
+    filter: brightness(.88);
 }
 @media (max-width: 767px) {
     .all-menu-photo { margin: 0; border-radius: 12px; }
