@@ -10,6 +10,12 @@
 
   // The head bootstrap sets page-is-entering BEFORE the destination's first paint.
   if (root.classList.contains('page-is-entering')) {
+    // The entry marker is only for this navigation, not for reloads.
+    if (new URLSearchParams(location.search).get('from') === 'entry') {
+      const cleanUrl = new URL(location.href);
+      cleanUrl.searchParams.delete('from');
+      history.replaceState(history.state, '', cleanUrl.pathname + cleanUrl.search + cleanUrl.hash);
+    }
     try { sessionStorage.removeItem('hosigi-page-transition'); } catch (error) {}
     if (reduceMotion()) root.classList.remove('page-is-entering');
     else requestAnimationFrame(() => requestAnimationFrame(() => {
