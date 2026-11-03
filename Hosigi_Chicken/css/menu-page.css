@@ -97,11 +97,11 @@
 }
 /* The seasoned chicken source has more transparent padding than the fried chicken. */
 .all-menu-photo img[src$="chicken_img15.png"] {
-    transform: scale(1.28);
+    transform: scale(1.5);
 }
 .all-menu-card:hover .all-menu-photo img[src$="chicken_img15.png"],
 .all-menu-card:focus-within .all-menu-photo img[src$="chicken_img15.png"] {
-    transform: translateY(-8px) scale(1.335);
+    transform: translateY(-8px) scale(1.565);
 }
 @media (max-width: 767px) {
     .all-menu-photo { margin: 0; border-radius: 12px; }
