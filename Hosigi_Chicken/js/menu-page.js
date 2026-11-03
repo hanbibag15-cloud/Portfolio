@@ -56,14 +56,6 @@ function renderMenu(category) {
         } else {
             fallback();
         }
-        // The reference-style VIEW MORE control opens the product's existing details.
-        const viewMore = document.createElement("button");
-        viewMore.type = "button";
-        viewMore.className = "all-menu-view-more";
-        viewMore.textContent = "VIEW MORE";
-        viewMore.setAttribute("aria-label", name + " 자세히 보기");
-        viewMore.addEventListener("click", () => openMenuDetail(name, description, src));
-        photo.append(viewMore);
         const body = document.createElement("div");
         body.className = "all-menu-card-body";
         const tag = document.createElement("span");
@@ -77,27 +69,6 @@ function renderMenu(category) {
         article.append(photo, body);
         return article;
     }));
-}
-// Reuse one accessible native dialog for all menu cards.
-const detailDialog = document.createElement("dialog");
-detailDialog.className = "all-menu-dialog";
-detailDialog.innerHTML = '<button type="button" class="all-menu-dialog-close" aria-label="상세 정보 닫기">×</button><div class="all-menu-dialog-image"></div><div class="all-menu-dialog-copy"><h3></h3><p></p></div>';
-document.body.append(detailDialog);
-detailDialog.querySelector(".all-menu-dialog-close").addEventListener("click", () => detailDialog.close());
-detailDialog.addEventListener("click", event => { if (event.target === detailDialog) detailDialog.close(); });
-function openMenuDetail(name, description, src) {
-    const imageBox = detailDialog.querySelector(".all-menu-dialog-image");
-    imageBox.replaceChildren();
-    if (src) {
-        const image = document.createElement("img");
-        image.src = src;
-        image.alt = name + " 메뉴 사진 (임시 순서 연결)";
-        image.addEventListener("error", () => imageBox.replaceChildren(), {once:true});
-        imageBox.append(image);
-    }
-    detailDialog.querySelector("h3").textContent = name;
-    detailDialog.querySelector("p").textContent = description;
-    detailDialog.showModal();
 }
 tabs.forEach((tab,index)=>{tab.addEventListener("click",()=>{const category=tab.dataset.filter;history.replaceState(null,"","#"+category);renderMenu(category);});tab.addEventListener("keydown",e=>{if(!["ArrowRight","ArrowLeft","Home","End"].includes(e.key))return;e.preventDefault();let next=e.key==="Home"?0:e.key==="End"?tabs.length-1:(index+(e.key==="ArrowRight"?1:-1)+tabs.length)%tabs.length;tabs[next].click();tabs[next].focus();});});
 window.addEventListener("hashchange",()=>renderMenu(location.hash.slice(1)));
