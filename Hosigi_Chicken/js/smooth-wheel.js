@@ -1,7 +1,7 @@
 // Desktop wheel easing for the brand and all-menu pages.
 // Mobile touch, keyboard navigation and reduced-motion preferences stay native.
 (() => {
-  const desktop = window.matchMedia('(min-width: 1025px) and (hover: hover) and (pointer: fine)');
+  const desktop = window.matchMedia('(hover: hover) and (pointer: fine)');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   let frame = 0;
   let current = 0;
@@ -16,7 +16,7 @@
 
   function animate() {
     const difference = target - current;
-    current += difference * 0.13;
+    current += difference * 0.10;
     if (Math.abs(difference) < 0.6) {
       window.scrollTo(0, target);
       frame = 0;
@@ -51,7 +51,7 @@
     event.preventDefault();
 
     if (!frame) current = target = window.scrollY;
-    target = Math.max(0, Math.min(maxScroll(), target + delta * 0.9));
+    target = Math.max(0, Math.min(maxScroll(), target + delta * 0.85));
     if (!frame && Math.abs(target - current) > 0.5) frame = requestAnimationFrame(animate);
   }, { passive: false });
 
@@ -60,6 +60,7 @@
   window.addEventListener('keydown', stop);
   window.addEventListener('resize', stop);
   window.addEventListener('pagehide', stop);
+  window.addEventListener('pageshow', stop);
   document.addEventListener('click', stop);
   desktop.addEventListener('change', stop);
   reduced.addEventListener('change', stop);
