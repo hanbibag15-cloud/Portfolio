@@ -10,7 +10,8 @@
     .quick-menu-top > span { transition: none; }
 }
 
-/* SNS flyout: three official channel links unfold to the left of the SNS circle. */
+/* SNS flyout: fan shaped placement around the existing SNS button.
+   YouTube: upper left; Facebook: upper center; Blog: upper right. */
 .quick-menu-social {
     position: relative;
     display: flex;
@@ -18,31 +19,23 @@
     justify-content: flex-end;
     isolation: isolate;
 }
-.quick-menu-social::before {
-    content: "";
-    position: absolute;
-    inset: -16px -16px -16px -10px;
-    z-index: -1;
-}
 .quick-menu-social-links {
     position: absolute;
-    top: 50%;
-    right: calc(100% - 2px);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 18px 18px 18px 0;
-    transform: translateY(-50%);
+    left: -174px;
+    top: -168px;
+    width: 274px;
+    height: 235px;
+    z-index: 2;
     visibility: hidden;
     pointer-events: none;
     transition: visibility 0s linear 350ms;
 }
 .quick-menu-social-link {
+    position: absolute;
     display: grid;
     place-items: center;
     width: 58px;
     height: 58px;
-    flex: 0 0 58px;
     border: 2px solid var(--brand-red);
     border-radius: 50%;
     background: var(--neutral-white);
@@ -50,12 +43,27 @@
     text-decoration: none;
     font: 800 28px/1 var(--font);
     opacity: 0;
-    transform: translateX(28px) scale(.75);
+    transform: translateY(22px) scale(.72);
     transition:
         opacity 300ms ease,
         transform 480ms cubic-bezier(.22,1,.36,1),
         color 180ms ease,
         background-color 180ms ease;
+}
+.quick-menu-youtube { left: 14px; top: 82px; }
+.quick-menu-facebook { left: 108px; top: 8px; }
+.quick-menu-blog { left: 204px; top: 72px; }
+
+/* Uploaded SVG paths are white, so tint them red inside the existing white button. */
+.quick-menu-youtube img {
+    display: block;
+    width: 28px;
+    height: 28px;
+    filter: brightness(0) saturate(100%) invert(19%) sepia(100%) saturate(6903%) hue-rotate(351deg) brightness(94%) contrast(110%);
+}
+.quick-menu-youtube:hover img,
+.quick-menu-youtube:focus-visible img {
+    filter: brightness(0) invert(1);
 }
 .quick-menu-social-link:hover,
 .quick-menu-social-link:focus-visible {
@@ -72,14 +80,14 @@
 .quick-menu-social:hover .quick-menu-social-link,
 .quick-menu-social:focus-within .quick-menu-social-link {
     opacity: 1;
-    transform: translateX(0) scale(1);
+    transform: translateY(0) scale(1);
 }
-.quick-menu-social:hover .quick-menu-social-link:nth-child(1),
-.quick-menu-social:focus-within .quick-menu-social-link:nth-child(1) { transition-delay: 120ms; }
-.quick-menu-social:hover .quick-menu-social-link:nth-child(2),
-.quick-menu-social:focus-within .quick-menu-social-link:nth-child(2) { transition-delay: 70ms; }
-.quick-menu-social:hover .quick-menu-social-link:nth-child(3),
-.quick-menu-social:focus-within .quick-menu-social-link:nth-child(3) { transition-delay: 0ms; }
+.quick-menu-social:hover .quick-menu-youtube,
+.quick-menu-social:focus-within .quick-menu-youtube { transition-delay: 0ms; }
+.quick-menu-social:hover .quick-menu-facebook,
+.quick-menu-social:focus-within .quick-menu-facebook { transition-delay: 75ms; }
+.quick-menu-social:hover .quick-menu-blog,
+.quick-menu-social:focus-within .quick-menu-blog { transition-delay: 150ms; }
 @media (prefers-reduced-motion: reduce) {
     .quick-menu-social-links,
     .quick-menu-social-link { transition: none; }
