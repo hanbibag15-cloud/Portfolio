@@ -2,6 +2,7 @@
 const menuItems = [["chicken","딥블랙갈릭 치킨","진한 블랙갈릭 풍미"],["chicken","깐쇼킹 치킨","깐쇼 스타일의 매콤달콤한 치킨"],["chicken","맵시크 치킨","매콤한 풍미를 강조한 치킨"],["chicken","크리스피골드","바삭한 순살 치킨"],["chicken","수라깐풍 치킨","깐풍 소스 풍미의 치킨"],["chicken","요거치즈닝치킨","요거트와 치즈 시즈닝 조합"],["chicken","타코마요 치킨","치폴레와 마요의 조합"],["chicken","레몬크림탕슈","레몬크림 소스를 곁들이는 순살"],["chicken","간장 치킨","달콤짭짤한 간장 소스"],["chicken","매운 간장 치킨","매콤한 간장 소스"],["chicken","후라이드 치킨","기본 후라이드 치킨"],["chicken","양념 치킨","달콤한 양념 치킨"],["chicken","매운 양념 치킨","매콤달콤한 양념"],["chicken","청양고추마요 치킨","청양고추와 마요 소스"],["chicken","뿌라이드 치킨","시즈닝을 선택하는 크리스피 치킨"],["parts","플라윙 세트 (윙+봉)","윙과 봉으로 구성"],["parts","다리 (스틱)","닭다리 중심 구성"],["parts","윙+다리","날개와 다리 조합"],["parts","호식이 안심텐더","부드러운 안심살 텐더"],["parts","닭발 튀김","바삭한 닭발 튀김"],["parts","똥집 튀김","바삭한 닭똥집 튀김"],["side","쉬림프 미니튀김(칠리)","칠리소스와 함께 즐기는 새우튀김"],["side","쉬림프 미니튀김(레몬크림)","레몬크림 소스 새우튀김"],["side","체다마요 감자튀김","체다와 마요 소스를 곁들인 감자튀김"],["side","치폴레 감자튀김","치폴레 소스 감자튀김"],["side","크리스피 치킨넥","바삭한 닭목살 메뉴"],["side","통살가득 텐더킹","안심 통살 튀김"],["side","똥집 미니튀김","작은 크기의 똥집 튀김"],["side","감자볼튀김","한입 크기 감자볼"],["side","치즈볼 2종세트","두 가지 치즈볼 구성"],["side","허니갈릭치즈볼(6개)","허니갈릭 풍미 치즈볼"],["side","트리플 치즈볼(6개)","세 가지 치즈 풍미"],["side","마늘떡볶이","마늘 풍미 떡볶이"],["side","로제비엔나떡볶이","로제 소스 떡볶이"],["side","감자튀김","치킨과 곁들이는 감자튀김"],["side","치킨무","치킨과 함께 곁들이는 무"]];
 // Verified image filenames. Side_Menu09.png does not exist; Side_Menu12.png does.
 // Image order is provisional until the photographed products are matched by name.
+const newMenuNames = new Set(["딥블랙갈릭 치킨"]); // 2026-06-17 출시 확인
 const menuPhotos = {
   chicken: Array.from({ length: 13 }, (_, i) => "img/chicken_img" + String(i + 1).padStart(2, "0") + ".png"),
   side: [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12].map(n => "img/Side_Menu" + String(n).padStart(2, "0") + ".png")
@@ -38,10 +39,13 @@ function renderMenu(category) {
         const index = type in imageOffset ? imageOffset[type]++ : -1;
         const src = menuPhotos[type]?.[index];
         const fallback = () => {
-            photo.replaceChildren();
-            const span = document.createElement("span");
-            span.textContent = "IMAGE";
-            photo.append(span);
+            photo.querySelector("img")?.remove();
+            if (!photo.querySelector(".all-menu-placeholder")) {
+                const span = document.createElement("span");
+                span.className = "all-menu-placeholder";
+                span.textContent = "IMAGE";
+                photo.append(span);
+            }
             photo.setAttribute("role", "img");
             photo.setAttribute("aria-label", name + " 이미지 준비 중");
         };
@@ -55,6 +59,13 @@ function renderMenu(category) {
             photo.append(image);
         } else {
             fallback();
+        }
+        if (newMenuNames.has(name)) {
+            const badge = document.createElement("span");
+            badge.className = "all-menu-new-badge";
+            badge.textContent = "NEW";
+            badge.setAttribute("aria-label", "신메뉴");
+            photo.append(badge);
         }
         const body = document.createElement("div");
         body.className = "all-menu-card-body";
