@@ -92,7 +92,7 @@ const count = document.querySelector("#menu-count");
 let lastRenderedCategory = null;
 function renderMenu(category) {
     const current = Object.hasOwn(categoryNames, category) ? category : "all";
-    const shouldAnimateText = lastRenderedCategory !== null && lastRenderedCategory !== current;
+    const shouldAnimateContent = lastRenderedCategory !== null && lastRenderedCategory !== current;
     lastRenderedCategory = current;
     const categoryOrder = { chicken: 0, parts: 1, side: 2 };
     const shown = current === "all"
@@ -158,12 +158,12 @@ function renderMenu(category) {
         article.append(photo, body);
         return article;
     }));
-    // Animate only the typography when switching tabs; never animate photos here.
+    // Animate each new card as a unit, including its photo, badge and text.
     const page = document.querySelector(".all-menu-page");
-    if (shouldAnimateText && page) {
-        page.classList.remove("is-tab-text-entering");
-        void page.offsetWidth; // Restart CSS text animation for each category change.
-        page.classList.add("is-tab-text-entering");
+    if (shouldAnimateContent && page) {
+        page.classList.remove("is-tab-content-entering");
+        void page.offsetWidth; // Restart the card entrance for each category change.
+        page.classList.add("is-tab-content-entering");
     }
 }
 tabs.forEach((tab,index)=>{tab.addEventListener("click",()=>{const category=tab.dataset.filter;history.replaceState(null,"","#"+category);renderMenu(category);});tab.addEventListener("keydown",e=>{if(!["ArrowRight","ArrowLeft","Home","End"].includes(e.key))return;e.preventDefault();let next=e.key==="Home"?0:e.key==="End"?tabs.length-1:(index+(e.key==="ArrowRight"?1:-1)+tabs.length)%tabs.length;tabs[next].click();tabs[next].focus();});});
@@ -173,7 +173,17 @@ const toggle=document.querySelector(".header-menu-toggle"),header=document.query
 toggle?.addEventListener("click",()=>{const open=header.classList.toggle("menu-open");toggle.setAttribute("aria-expanded",String(open));toggle.setAttribute("aria-label",open?"메뉴 닫기":"메뉴 열기");});
 // The current-page MENU label is display-only: no navigation or mobile submenu on click.
 const menuNavLabel = document.querySelector('.header-nav .has-submenu > a[href="menu.html"]');
-menuNavLabel?.addEventListener("click", event => event.preventDefault());
+const menuNavItem = menuNavLabel?.closest(".has-submenu");
+menuNavLabel?.addEventListener("click", event => {
+    event.preventDefault();
+    menuNavItem?.classList.remove("submenu-open");
+    menuNavItem?.classList.add("menu-dropdown-dismissed");
+    menuNavLabel.setAttribute("aria-expanded", "false");
+    menuNavLabel.blur();
+});
+menuNavItem?.addEventListener("mouseleave", () => {
+    menuNavItem.classList.remove("menu-dropdown-dismissed");
+});
 document.querySelectorAll(".header-nav .has-submenu > a").forEach(a=>a.addEventListener("click",event=>{
     if (a === menuNavLabel) return;
     if (window.innerWidth > 1024) return;
