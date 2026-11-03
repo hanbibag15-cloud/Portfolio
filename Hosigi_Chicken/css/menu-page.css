@@ -22,3 +22,7 @@
 @media(max-width:767px){.all-menu-intro{padding:60px 16px 48px}.all-menu-intro h2{font-size:44px}.all-menu-subtitle{font-size:15px}.all-menu-description{font-size:13px}.all-menu-listing{padding:35px 16px 70px}.all-menu-tabs{gap:8px;margin-bottom:40px}.all-menu-tabs button{min-width:0;flex:1 1 calc(50% - 8px);padding:10px 8px;font-size:13px}.all-menu-grid{gap:12px}.all-menu-card{border-radius:12px}.all-menu-card-body{padding:14px 12px 18px}.all-menu-card h4{font-size:14px}.all-menu-card-category{font-size:11px}.all-menu-card p{font-size:12px}.all-menu-photo{font-size:11px}.all-menu-results h3{font-size:20px}.all-menu-results p{font-size:12px}}
 @media(max-width:380px){.all-menu-grid{grid-template-columns:1fr}.all-menu-tabs button{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.all-menu-tabs button{transition:none}}
+
+/* Longer English menu category titles fit on desktop and mobile. */
+.all-menu-intro h2 { font-size: clamp(36px, 5vw, 68px); overflow-wrap: anywhere; }
+@media (max-width: 767px) { .all-menu-intro h2 { font-size: clamp(30px, 7vw, 44px); } }
