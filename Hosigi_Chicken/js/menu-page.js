@@ -30,13 +30,14 @@ const menuItems = [
     ["side","감자볼튀김","한입에 쏙 들어가는 짭짤한 감자볼!"],
     ["side","치즈볼 2종세트","겉바속쫀 치즈볼 두 가지를 한 번에!"],
     ["side","허니갈릭치즈볼","진한 마늘 풍미와 달콤함의 조화!"],
-    ["side","트리플치즈볼","크림·모짜렐라·고다치즈의 쫀득한 만남!"],
+    ["side","트리플치즈볼","크림·모짜렐라·체다치즈의 쫀득한 조화!"],
     ["side","마늘떡볶이","매콤알싸한 마늘 풍미의 떡볶이!"],
     ["side","로제비앤나떡볶이","진한 로제크림과 쫀득한 떡, 비앤나의 조화!"],
-    ["side","감자튀김","쌀가루 튀김옷으로 더 바삭한 감자튀김!"]
+    ["side","감자튀김","쌀가루로 더 바삭하게 튀긴 감자튀김!"],
+    ["side","치킨무",""]
 ];
 // Product-to-image paths explicitly provided by the project author.
-// Side_Menu09.png is not in the repository yet; retain its placeholder until uploaded.
+// Side menu images 09, 13, 14 and 15 verified in the repository.
 const newMenuNames = new Set(["딥블랙갈릭 치킨", "깐쇼킹 치킨", "맵시크 치킨"]);
 const menuPhotos = {
     "딥블랙갈릭 치킨": "chicken_img02.png",
@@ -69,8 +70,11 @@ const menuPhotos = {
     "감자볼튀김": "Side_Menu08.png",
     "치즈볼 2종세트": "Side_Menu09.png",
     "허니갈릭치즈볼": "Side_Menu10.png",
+    "트리플치즈볼": "Side_Menu13.png",
     "마늘떡볶이": "Side_Menu11.png",
-    "로제비앤나떡볶이": "Side_Menu12.png"
+    "로제비앤나떡볶이": "Side_Menu12.png",
+    "감자튀김": "Side_Menu14.png",
+    "치킨무": "Side_Menu15.png"
 };
 const categoryNames = {all:"전체 메뉴",chicken:"치킨 메뉴",parts:"부위별 메뉴",side:"사이드 메뉴"};
 const categoryHeadings = {
@@ -105,7 +109,7 @@ function renderMenu(category) {
         photo.className = "all-menu-photo";
         // Match by product name, not the position in a filtered tab.
         const filename = menuPhotos[name];
-        const src = filename && filename !== "Side_Menu09.png" ? "img/" + filename : null;
+        const src = filename ? "img/" + filename : null;
         const fallback = () => {
             photo.querySelector("img")?.remove();
             if (!photo.querySelector(".all-menu-placeholder")) {
@@ -142,9 +146,12 @@ function renderMenu(category) {
         tag.textContent = categoryNames[type];
         const heading = document.createElement("h4");
         heading.textContent = name;
-        const desc = document.createElement("p");
-        desc.textContent = description;
-        body.append(tag, heading, desc);
+        body.append(tag, heading);
+        if (description) {
+            const desc = document.createElement("p");
+            desc.textContent = description;
+            body.append(desc);
+        }
         article.append(photo, body);
         return article;
     }));
