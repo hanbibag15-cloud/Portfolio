@@ -1621,3 +1621,31 @@ body {
 @media (max-width: 1024px) {
     .quick-menu { display: none; }
 }
+
+/* Informational footer labels and in-page CTAs have no outbound destination. */
+.footer-links > span {
+    display: inline-flex;
+    align-items: center;
+    color: var(--neutral-white);
+}
+.footer-links > span + span::before {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 14px;
+    margin: 0 12px;
+    background: var(--neutral-white);
+}
+.store-promo-link:not(a), .event-more:not(a) {
+    cursor: default;
+}
+.store-promo-link:not(a):hover, .event-more:not(a):hover {
+    background: transparent;
+    color: var(--brand-red);
+}
+@media (max-width: 767px) {
+    .footer-links > span + span::before { height: 10px; margin: 0 7px; }
+}
+@media (max-width: 420px) {
+    .footer-links > span + span::before { margin: 0 5px; }
+}
