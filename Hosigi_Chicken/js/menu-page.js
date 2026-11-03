@@ -9,7 +9,6 @@ const categoryHeadings = {
 };
 const heroTitle = document.querySelector("#all-menu-title");
 const heroSubtitle = document.querySelector("#all-menu-subtitle");
-const heroDescription = document.querySelector("#all-menu-description");
 const tabs = [...document.querySelectorAll(".all-menu-tabs [role=tab]")];
 const grid = document.querySelector("#menu-products");
 const title = document.querySelector("#menu-category-title");
@@ -19,10 +18,9 @@ function renderMenu(category) {
     const shown = current === "all" ? menuItems : menuItems.filter(item => item[0] === current);
     tabs.forEach(tab => {const active = tab.dataset.filter === current;tab.classList.toggle("is-active",active);tab.setAttribute("aria-selected",String(active));tab.tabIndex = active ? 0 : -1;});
     grid.setAttribute("aria-labelledby","tab-"+current);
-    const [heading, subtitle, description] = categoryHeadings[current];
+    const [heading, subtitle] = categoryHeadings[current];
     heroTitle.textContent = heading;
     heroSubtitle.textContent = subtitle;
-    heroDescription.textContent = description;
     title.textContent = categoryNames[current];
     count.textContent = shown.length + "개의 메뉴";
     grid.replaceChildren(...shown.map(([type,name,description]) => {
