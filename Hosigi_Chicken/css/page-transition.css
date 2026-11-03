@@ -1,15 +1,1 @@
-/* Cross-document fade: cover departure and reveal arrival without a hard cut. */
-.page-fade-layer{position:fixed;inset:0;z-index:9999;background:var(--surface-default,#FFFFFF);opacity:0;pointer-events:none;transition:opacity 420ms cubic-bezier(.4,0,.2,1)}
-html.page-is-leaving .page-fade-layer{opacity:1;pointer-events:auto}
-html.page-is-entering body{opacity:0}
-html.page-is-entering.page-is-revealing body{opacity:1;transition:opacity 620ms cubic-bezier(.22,1,.36,1)}
-@media(prefers-reduced-motion:reduce){.page-fade-layer,html.page-is-entering.page-is-revealing body{transition:none}html.page-is-entering body{opacity:1}}
-
-/* The two-panel entry page fades as a whole when BRAND is selected. */
-html.page-is-leaving .entry {
-    opacity: 0;
-    transition: opacity 420ms cubic-bezier(.4, 0, .2, 1);
-}
-@media (prefers-reduced-motion: reduce) {
-    html.page-is-leaving .entry { transition: none; }
-}
+/* Deprecated: page-to-page fade is disabled. Navigation uses native page loading. */
