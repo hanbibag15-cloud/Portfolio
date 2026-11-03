@@ -104,7 +104,8 @@
 .all-menu-card:where(:hover,:focus-within) .all-menu-photo::before {
     transform: scaleY(1);
 }
-.all-menu-card:where(:hover,:focus-within) .all-menu-photo img {
+.all-menu-card:hover .all-menu-photo img,
+.all-menu-card:focus-within .all-menu-photo img {
     transform: translateY(-12px) scale(1.035);
 }
 .all-menu-card:where(:hover,:focus-within) .all-menu-view-more {
