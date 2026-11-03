@@ -1,7 +1,7 @@
 // Desktop wheel easing for the brand and all-menu pages.
 // Mobile touch, keyboard navigation and reduced-motion preferences stay native.
 (() => {
-  const desktop = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const desktop = window.matchMedia('(min-width: 768px)'); // Wheel events are handled even on hybrid laptops.
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   let frame = 0;
   let current = 0;
@@ -16,7 +16,7 @@
 
   function animate() {
     const difference = target - current;
-    current += difference * 0.10;
+    current += difference * 0.09;
     if (Math.abs(difference) < 0.6) {
       window.scrollTo(0, target);
       frame = 0;
@@ -38,11 +38,12 @@
     return false;
   }
 
-  window.addEventListener('wheel', (event) => {
+  document.addEventListener('wheel', (event) => {
+    const origin = event.target instanceof Element ? event.target : event.target?.parentElement;
     if (!desktop.matches || reduced.matches || event.ctrlKey || event.metaKey ||
         event.defaultPrevented || Math.abs(event.deltaX) > Math.abs(event.deltaY) ||
-        event.target.closest('textarea, select, [role="dialog"]') ||
-        insideScrollable(event.target, event.deltaY)) return;
+        origin?.closest('textarea, select, [role="dialog"]') ||
+        (origin && insideScrollable(origin, event.deltaY))) return;
 
     // Normalize wheel lines/pages; cap large mouse-wheel jumps.
     const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1;
@@ -53,7 +54,7 @@
     if (!frame) current = target = window.scrollY;
     target = Math.max(0, Math.min(maxScroll(), target + delta * 0.85));
     if (!frame && Math.abs(target - current) > 0.5) frame = requestAnimationFrame(animate);
-  }, { passive: false });
+  }, { passive: false, capture: true });
 
   // A click on an anchor, keyboard scrolling, or viewport change should not
   // compete with a previous wheel animation.
