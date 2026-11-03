@@ -33,9 +33,12 @@
     const target = new URL(link.href, location.href);
     if (target.origin !== location.origin || target.pathname === location.pathname) return;
     const next = target.pathname.split('/').pop();
+    const logoToEntry = (page === 'brand.html' || page === 'menu.html') &&
+      next === 'index.html' && !!link.closest('.header-logo');
     if (!((page === 'brand.html' && next === 'menu.html') ||
           (page === 'menu.html' && next === 'brand.html') ||
-          (page === 'index.html' && next === 'brand.html'))) return;
+          (page === 'index.html' && next === 'brand.html') ||
+          logoToEntry)) return;
     if (reduceMotion() || navigating) return;
     event.preventDefault();
     navigating = true;
