@@ -1,0 +1,11 @@
+/* DOWN / TOP: fade and slide the label during direction changes. */
+.quick-menu-top > span {
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+.quick-menu-top.is-switching > span {
+    opacity: 0;
+    transform: translateY(6px);
+}
+@media (prefers-reduced-motion: reduce) {
+    .quick-menu-top > span { transition: none; }
+}
