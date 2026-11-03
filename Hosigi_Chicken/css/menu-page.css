@@ -161,21 +161,36 @@
     .all-menu-new-badge { transition: none; }
 }
 
-/* Tab changes: only copy rises into place; photos and their hover effects stay unchanged. */
-@keyframes menu-tab-text-rise {
-    from { opacity: 0; transform: translateY(18px); }
+/* Category changes: image tile, NEW badge and copy rise together. */
+@keyframes menu-tab-content-rise {
+    from { opacity: 0; transform: translateY(24px); }
     to { opacity: 1; transform: translateY(0); }
 }
 @media (prefers-reduced-motion: no-preference) {
-    .all-menu-page.is-tab-text-entering .all-menu-intro h2,
-    .all-menu-page.is-tab-text-entering .all-menu-subtitle,
-    .all-menu-page.is-tab-text-entering .all-menu-results h3,
-    .all-menu-page.is-tab-text-entering .all-menu-results p,
-    .all-menu-page.is-tab-text-entering .all-menu-card-body > * {
-        animation: menu-tab-text-rise 520ms cubic-bezier(.22,1,.36,1) both;
+    .all-menu-page.is-tab-content-entering .all-menu-intro h2,
+    .all-menu-page.is-tab-content-entering .all-menu-subtitle,
+    .all-menu-page.is-tab-content-entering .all-menu-results h3,
+    .all-menu-page.is-tab-content-entering .all-menu-results p,
+    .all-menu-page.is-tab-content-entering .all-menu-card {
+        animation: menu-tab-content-rise 560ms cubic-bezier(.22,1,.36,1) both;
     }
-    .all-menu-page.is-tab-text-entering .all-menu-subtitle,
-    .all-menu-page.is-tab-text-entering .all-menu-results p,
-    .all-menu-page.is-tab-text-entering .all-menu-card-body h4 { animation-delay: 65ms; }
-    .all-menu-page.is-tab-text-entering .all-menu-card-body p { animation-delay: 125ms; }
+    .all-menu-page.is-tab-content-entering .all-menu-subtitle,
+    .all-menu-page.is-tab-content-entering .all-menu-results p { animation-delay: 70ms; }
+    .all-menu-page.is-tab-content-entering .all-menu-card:nth-child(3n + 2) { animation-delay: 70ms; }
+    .all-menu-page.is-tab-content-entering .all-menu-card:nth-child(3n) { animation-delay: 140ms; }
+}
+/* The header MENU label doesn't open its dropdown again on click/focus. */
+.header-nav .has-submenu.menu-dropdown-dismissed > .header-submenu,
+.header-nav .has-submenu.menu-dropdown-dismissed:hover > .header-submenu,
+.header-nav .has-submenu.menu-dropdown-dismissed:focus-within > .header-submenu {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+@media (max-width: 1024px) {
+    .header-nav .has-submenu.menu-dropdown-dismissed > .header-submenu,
+    .header-nav .has-submenu.menu-dropdown-dismissed:hover > .header-submenu,
+    .header-nav .has-submenu.menu-dropdown-dismissed:focus-within > .header-submenu {
+        display: none;
+    }
 }
