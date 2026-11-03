@@ -3,16 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>
-(function(){
-  try {
-    var current = location.pathname.split('/').pop();
-    if (new URLSearchParams(location.search).get('from') === 'entry' || sessionStorage.getItem('hosigi-page-transition') === current) {
-      document.documentElement.classList.add('page-is-entering');
-    }
-  } catch(e) {}
-})();
-</script>
+
     <title>호식이두마리치킨리뉴얼포트폴리오</title>
     <link rel="stylesheet" href="../css/default.css">
     <link rel="stylesheet" href="../npm/swiper/swiper-bundle.min.css">
@@ -21,8 +12,8 @@
     <link rel="stylesheet" href="css/nav-state.css">
     <script src="../npm/swiper/swiper-bundle.min.js"></script>
 <script src="js/nav-state.js" defer></script>
-<link rel="stylesheet" href="css/page-transition.css?v=3">
-<script src="js/page-transition.js?v=4" defer></script>
+
+
 <link rel="stylesheet" href="css/quick-menu-motion.css">
 <script src="js/smooth-wheel.js?v=3" defer></script>
 </head>
