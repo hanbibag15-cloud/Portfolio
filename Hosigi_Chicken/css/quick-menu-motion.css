@@ -9,3 +9,78 @@
 @media (prefers-reduced-motion: reduce) {
     .quick-menu-top > span { transition: none; }
 }
+
+/* SNS flyout: three official channel links unfold to the left of the SNS circle. */
+.quick-menu-social {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    isolation: isolate;
+}
+.quick-menu-social::before {
+    content: "";
+    position: absolute;
+    inset: -16px -16px -16px -10px;
+    z-index: -1;
+}
+.quick-menu-social-links {
+    position: absolute;
+    top: 50%;
+    right: calc(100% - 2px);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 18px 18px 0;
+    transform: translateY(-50%);
+    visibility: hidden;
+    pointer-events: none;
+    transition: visibility 0s linear 350ms;
+}
+.quick-menu-social-link {
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 58px;
+    flex: 0 0 58px;
+    border: 2px solid var(--brand-red);
+    border-radius: 50%;
+    background: var(--neutral-white);
+    color: var(--brand-red);
+    text-decoration: none;
+    font: 800 28px/1 var(--font);
+    opacity: 0;
+    transform: translateX(28px) scale(.75);
+    transition:
+        opacity 300ms ease,
+        transform 480ms cubic-bezier(.22,1,.36,1),
+        color 180ms ease,
+        background-color 180ms ease;
+}
+.quick-menu-social-link:hover,
+.quick-menu-social-link:focus-visible {
+    background: var(--brand-red);
+    color: var(--neutral-white);
+    outline-offset: 4px;
+}
+.quick-menu-social:hover .quick-menu-social-links,
+.quick-menu-social:focus-within .quick-menu-social-links {
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+}
+.quick-menu-social:hover .quick-menu-social-link,
+.quick-menu-social:focus-within .quick-menu-social-link {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+.quick-menu-social:hover .quick-menu-social-link:nth-child(1),
+.quick-menu-social:focus-within .quick-menu-social-link:nth-child(1) { transition-delay: 120ms; }
+.quick-menu-social:hover .quick-menu-social-link:nth-child(2),
+.quick-menu-social:focus-within .quick-menu-social-link:nth-child(2) { transition-delay: 70ms; }
+.quick-menu-social:hover .quick-menu-social-link:nth-child(3),
+.quick-menu-social:focus-within .quick-menu-social-link:nth-child(3) { transition-delay: 0ms; }
+@media (prefers-reduced-motion: reduce) {
+    .quick-menu-social-links,
+    .quick-menu-social-link { transition: none; }
+}
