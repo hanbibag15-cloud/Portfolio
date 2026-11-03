@@ -77,9 +77,12 @@
 .all-menu-photo img {
     position: relative;
     z-index: 1;
-    width: 92%;
-    height: 92%;
+    width: 84%;
+    height: 84%;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
+    object-position: center;
     filter: brightness(1);
     transition: transform 550ms cubic-bezier(.22,1,.36,1),
                 filter 450ms ease;
