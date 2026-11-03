@@ -33,12 +33,32 @@ const menuItems = [
     ["side","로제비앤나떡볶이","진한 로제크림과 쫀득한 떡, 비앤나의 조화!"],
     ["side","감자튀김","쌀가루 튀김옷으로 더 바삭한 감자튀김!"]
 ];
-// Verified image filenames. Side_Menu09.png does not exist; Side_Menu12.png does.
-// Image order is provisional until the photographed products are matched by name.
-const newMenuNames = new Set(["딥블랙갈릭 치킨"]); // 2026-06-17 출시 확인
+// Product-to-image paths explicitly provided by the project author.
+// Side_Menu09.png is not in the repository yet; retain its placeholder until uploaded.
+const newMenuNames = new Set(["딥블랙갈릭 치킨"]);
 const menuPhotos = {
-  chicken: Array.from({ length: 13 }, (_, i) => "img/chicken_img" + String(i + 1).padStart(2, "0") + ".png"),
-  side: [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12].map(n => "img/Side_Menu" + String(n).padStart(2, "0") + ".png")
+    "딥블랙갈릭 치킨": "chicken_img02.png",
+    "깐쇼킹 치킨": "chicken_img01.png",
+    "맵시크 치킨": "chicken_img03.png",
+    "크리스피 골드": "chicken_img04.png",
+    "수라깐풍 치킨": "chicken_img05.png",
+    "요거시즈닝 치킨": "chicken_img07.png",
+    "타코마요 치킨": "chicken_img10.png",
+    "간장 치킨": "chicken_img08.png",
+    "매운 간장 치킨": "chicken_img13.png",
+    "후라이드 치킨": "chicken_img11.png",
+    "매운 양념 치킨": "chicken_img12.png",
+    "청양고추마요 치킨": "chicken_img09.png",
+    "체다마요 감자튀김": "Side_Menu03.png",
+    "치폴레 감자튀김": "Side_Menu04.png",
+    "크리스피 치킨넥": "Side_Menu05.png",
+    "통살가득 텐더킹": "Side_Menu06.png",
+    "똥집미니튀김": "Side_Menu07.png",
+    "감자볼튀김": "Side_Menu08.png",
+    "치즈볼 2종세트": "Side_Menu09.png",
+    "허니갈릭치즈볼": "Side_Menu10.png",
+    "마늘 떡볶이": "Side_Menu11.png",
+    "로제비앤나떡볶이": "Side_Menu12.png"
 };
 const categoryNames = {all:"전체 메뉴",chicken:"치킨 메뉴",parts:"부위별 메뉴",side:"사이드 메뉴"};
 const categoryHeadings = {
@@ -63,14 +83,14 @@ function renderMenu(category) {
     heroSubtitle.textContent = subtitle;
     title.textContent = categoryNames[current];
     count.textContent = shown.length + "개의 메뉴";
-    const imageOffset = { chicken: 0, side: 0 };
     grid.replaceChildren(...shown.map(([type,name,description]) => {
         const article = document.createElement("article");
         article.className = "all-menu-card";
         const photo = document.createElement("div");
         photo.className = "all-menu-photo";
-        const index = type in imageOffset ? imageOffset[type]++ : -1;
-        const src = menuPhotos[type]?.[index];
+        // Match by product name, not the position in a filtered tab.
+        const filename = menuPhotos[name];
+        const src = filename && filename !== "Side_Menu09.png" ? "img/" + filename : null;
         const fallback = () => {
             photo.querySelector("img")?.remove();
             if (!photo.querySelector(".all-menu-placeholder")) {
@@ -85,7 +105,7 @@ function renderMenu(category) {
         if (src) {
             const image = document.createElement("img");
             image.src = src;
-            image.alt = name + " 메뉴 사진 (임시 순서 연결)";
+            image.alt = name + " 메뉴 사진";
             image.loading = "lazy";
             image.decoding = "async";
             image.addEventListener("error", fallback, {once: true});
