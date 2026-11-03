@@ -71,8 +71,8 @@
     inset: 0;
     z-index: 0;
     background: var(--brand-red);
-    clip-path: inset(100% 0 0 0);
-    transition: clip-path 650ms cubic-bezier(.22,1,.36,1);
+    clip-path: circle(0% at 50% 100%);
+    transition: clip-path 700ms cubic-bezier(.22,1,.36,1);
 }
 .all-menu-photo img {
     position: relative;
@@ -83,7 +83,7 @@
     transition: transform 550ms cubic-bezier(.22,1,.36,1);
 }
 .all-menu-card:where(:hover,:focus-within) .all-menu-photo::before {
-    clip-path: inset(0 0 0 0);
+    clip-path: circle(150% at 50% 100%);
 }
 .all-menu-card:hover .all-menu-photo img,
 .all-menu-card:focus-within .all-menu-photo img {
@@ -108,7 +108,7 @@
     min-height: 42px;
     padding: 8px 16px;
     border-radius: 999px;
-    background: var(--brand-orange);
+    background: var(--brand-red);
     color: var(--neutral-white);
     font: 700 18px/1 var(--font);
     letter-spacing: .01em;
@@ -123,4 +123,18 @@
         padding: 6px 10px;
         font-size: 12px;
     }
+}
+
+/* Center the product metadata and invert the NEW badge on card hover. */
+.all-menu-card-body { text-align: center; }
+.all-menu-new-badge {
+    transition: background-color 300ms ease, color 300ms ease;
+}
+.all-menu-card:hover .all-menu-new-badge,
+.all-menu-card:focus-within .all-menu-new-badge {
+    background: var(--neutral-white);
+    color: var(--brand-red);
+}
+@media (prefers-reduced-motion: reduce) {
+    .all-menu-new-badge { transition: none; }
 }
