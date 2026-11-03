@@ -90,7 +90,7 @@
 .all-menu-card:hover .all-menu-photo img,
 .all-menu-card:focus-within .all-menu-photo img {
     transform: translateY(-8px) scale(1.045);
-    filter: brightness(.88);
+    filter: brightness(.65);
 }
 @media (max-width: 767px) {
     .all-menu-photo { margin: 0; border-radius: 12px; }
