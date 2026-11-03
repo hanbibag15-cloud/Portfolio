@@ -7,7 +7,7 @@
 (function(){
   try {
     var current = location.pathname.split('/').pop();
-    if (sessionStorage.getItem('hosigi-page-transition') === current) {
+    if (new URLSearchParams(location.search).get('from') === 'entry' || sessionStorage.getItem('hosigi-page-transition') === current) {
       document.documentElement.classList.add('page-is-entering');
     }
   } catch(e) {}
@@ -21,8 +21,8 @@
     <link rel="stylesheet" href="css/nav-state.css">
     <script src="../npm/swiper/swiper-bundle.min.js"></script>
 <script src="js/nav-state.js" defer></script>
-<link rel="stylesheet" href="css/page-transition.css?v=2">
-<script src="js/page-transition.js?v=2" defer></script>
+<link rel="stylesheet" href="css/page-transition.css?v=3">
+<script src="js/page-transition.js?v=3" defer></script>
 <link rel="stylesheet" href="css/quick-menu-motion.css">
 </head>
 <body>
