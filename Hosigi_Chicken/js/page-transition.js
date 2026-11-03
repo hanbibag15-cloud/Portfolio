@@ -1,57 +1,6 @@
-// Cross-document transition for the brand and menu pages.
+// Deprecated: page-to-page fade is disabled.
+// Keep only legacy transition-state cleanup for older cached entry points.
 (() => {
-  const root = document.documentElement;
-  const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const page = location.pathname.split('/').pop();
-  const overlay = document.createElement('div');
-  overlay.className = 'page-fade-layer';
-  overlay.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(overlay);
-
-  // The head bootstrap sets page-is-entering BEFORE the destination's first paint.
-  if (root.classList.contains('page-is-entering')) {
-    // The entry marker is only for this navigation, not for reloads.
-    if (new URLSearchParams(location.search).get('from') === 'entry') {
-      const cleanUrl = new URL(location.href);
-      cleanUrl.searchParams.delete('from');
-      history.replaceState(history.state, '', cleanUrl.pathname + cleanUrl.search + cleanUrl.hash);
-    }
-    try { sessionStorage.removeItem('hosigi-page-transition'); } catch (error) {}
-    if (reduceMotion()) root.classList.remove('page-is-entering');
-    else requestAnimationFrame(() => requestAnimationFrame(() => {
-      root.classList.add('page-is-revealing');
-      window.setTimeout(() => root.classList.remove('page-is-entering', 'page-is-revealing'), 660);
-    }));
-  }
-
-  let navigating = false;
-  document.addEventListener('click', event => {
-    const link = event.target.closest('a[href]');
-    if (!link || event.defaultPrevented || event.button !== 0 ||
-        event.metaKey || event.ctrlKey || event.shiftKey || event.altKey ||
-        link.target === '_blank' || link.hasAttribute('download')) return;
-    const target = new URL(link.href, location.href);
-    if (target.origin !== location.origin || target.pathname === location.pathname) return;
-    const next = target.pathname.split('/').pop();
-    const logoToEntry = (page === 'brand.html' || page === 'menu.html') &&
-      next === 'index.html' && !!link.closest('.header-logo');
-    if (!((page === 'brand.html' && next === 'menu.html') ||
-          (page === 'menu.html' && next === 'brand.html') ||
-          (page === 'index.html' && next === 'brand.html') ||
-          logoToEntry)) return;
-    if (reduceMotion() || navigating) return;
-    event.preventDefault();
-    navigating = true;
-    root.classList.add('page-is-leaving');
-    try { sessionStorage.setItem('hosigi-page-transition', next); } catch (error) {
-      // Navigation must still work when session storage is unavailable.
-    }
-    window.setTimeout(() => { location.assign(target.href); }, 440);
-  });
-
-  window.addEventListener('pageshow', () => {
-    // When a previous document is restored from the back/forward cache.
-    root.classList.remove('page-is-leaving');
-    navigating = false;
-  });
+  document.documentElement.classList.remove('page-is-entering', 'page-is-revealing', 'page-is-leaving');
+  try { sessionStorage.removeItem('hosigi-page-transition'); } catch (error) { /* storage unavailable */ }
 })();
