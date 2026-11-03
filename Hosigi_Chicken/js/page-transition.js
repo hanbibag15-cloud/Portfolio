@@ -10,7 +10,7 @@
 
   // The head bootstrap sets page-is-entering BEFORE the destination's first paint.
   if (root.classList.contains('page-is-entering')) {
-    sessionStorage.removeItem('hosigi-page-transition');
+    try { sessionStorage.removeItem('hosigi-page-transition'); } catch (error) {}
     if (reduceMotion()) root.classList.remove('page-is-entering');
     else requestAnimationFrame(() => requestAnimationFrame(() => {
       root.classList.add('page-is-revealing');
@@ -34,7 +34,9 @@
     event.preventDefault();
     navigating = true;
     root.classList.add('page-is-leaving');
-    sessionStorage.setItem('hosigi-page-transition', next);
+    try { sessionStorage.setItem('hosigi-page-transition', next); } catch (error) {
+      // Navigation must still work when session storage is unavailable.
+    }
     window.setTimeout(() => { location.assign(target.href); }, 440);
   });
 
