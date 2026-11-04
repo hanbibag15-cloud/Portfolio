@@ -53,9 +53,9 @@
     if(pts.length===0) {
       map.setView([37.5665,126.9780],11);
     } else if (pts.length===1) {
-      map.setView(pts[0],15,{animate:!reduceMotion()});
+      map.setView(pts[0],14,{animate:!reduceMotion()});
     } else {
-      map.fitBounds(L.latLngBounds(pts),{padding:[45,45],maxZoom:14,animate:!reduceMotion()});
+      map.fitBounds(L.latLngBounds(pts),{padding:[45,45],maxZoom:13,animate:!reduceMotion()});
     }
   }
   function refreshMarkers(){
@@ -87,7 +87,7 @@
     refreshMarkers();
     const pt=coords.get(id);
     if(!map || !pt)return;
-    map.flyTo(pt,15,{animate:!reduceMotion(),duration:.65});
+    map.flyTo(pt,14,{animate:!reduceMotion(),duration:.65});
     markers.get(id)?.openPopup();
   }
   function renderCards(){
