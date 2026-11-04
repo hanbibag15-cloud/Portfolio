@@ -21,10 +21,10 @@
 }
 .quick-menu-social-links {
     position: absolute;
-    left: -155px;
-    top: -112px;
-    width: 235px;
-    height: 205px;
+    left: -30px;
+    top: -120px;
+    width: 170px;
+    height: 210px;
     z-index: 2;
     visibility: hidden;
     pointer-events: none;
@@ -34,14 +34,14 @@
     position: absolute;
     display: grid;
     place-items: center;
-    width: 58px;
-    height: 58px;
+    width: 40px;
+    height: 40px;
     border: 2px solid var(--brand-red);
     border-radius: 50%;
     background: var(--neutral-white);
     color: var(--brand-red);
     text-decoration: none;
-    font: 800 28px/1 var(--font);
+    font: 800 23px/1 var(--font);
     opacity: 0;
     transform: translateY(22px) scale(.72);
     transition:
@@ -50,15 +50,15 @@
         color 180ms ease,
         background-color 180ms ease;
 }
-.quick-menu-youtube { left: 20px; top: 65px; }
-.quick-menu-facebook { left: 88px; top: 10px; }
-.quick-menu-blog { left: 156px; top: 65px; }
+.quick-menu-youtube { left: 10px; top: 64px; }
+.quick-menu-facebook { left: 56px; top: 12px; }
+.quick-menu-blog { left: 102px; top: 64px; }
 
 /* Uploaded SVG paths are white, so tint them red inside the existing white button. */
 .quick-menu-youtube img {
     display: block;
-    width: 28px;
-    height: 28px;
+    width: 23px;
+    height: 23px;
     filter: brightness(0) saturate(100%) invert(19%) sepia(100%) saturate(6903%) hue-rotate(351deg) brightness(94%) contrast(110%);
 }
 .quick-menu-youtube:hover img,
