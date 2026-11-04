@@ -145,8 +145,15 @@
     maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>'
   }).addTo(map);
   markerLayer=L.layerGroup().addTo(map);
-  const mapResize=new ResizeObserver(()=>map.invalidateSize());
-  mapResize.observe(mapElement);
+  const refreshMapSize=()=>map.invalidateSize({pan:false});
+  if("ResizeObserver" in window){
+    const mapResize=new ResizeObserver(refreshMapSize);
+    mapResize.observe(mapElement);
+  }
+  window.addEventListener("load",refreshMapSize,{once:true});
+  window.addEventListener("resize",refreshMapSize,{passive:true});
+  // Run again once CSS and map tiles have settled after the initial render.
+  requestAnimationFrame(()=>requestAnimationFrame(refreshMapSize));
   refreshMarkers();fitPoints();
 
   // Public Nominatim requires at most one lookup per second.
