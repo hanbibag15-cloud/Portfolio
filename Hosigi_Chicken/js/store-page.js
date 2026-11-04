@@ -20,6 +20,7 @@
   const mapElement=document.querySelector("#store-map");
   const mapMessage=document.querySelector("#store-map-message");
   const fallback=document.querySelector("#store-map-fallback");
+  const gpsButton=document.querySelector("#store-gps-button");
   if(!form || !keyword || !district || !list || !count || !mapElement) return;
   let filtered=stores.slice();
   let selected=null;
@@ -44,7 +45,7 @@
     mapMessage.hidden=false;mapMessage.textContent=message;
   };
   function markerIcon(active) {
-    return L.divIcon({className:"store-leaflet-marker",html:'<span class="store-marker-pin'+(active?' is-active':'')+'"></span>',iconSize:[32,42],iconAnchor:[16,40]});
+    return L.divIcon({className:"store-leaflet-marker",html:'<span class="store-marker-pin'+(active?' is-active':'')+'" aria-hidden="true">호식이</span>',iconSize:[54,67],iconAnchor:[27,65],popupAnchor:[0,-61]});
   }
   function fitPoints() {
     if(!map)return;
@@ -141,10 +142,65 @@
     fallback?.classList.add("is-visible");return;
   }
   map=L.map(mapElement,{zoomControl:true,scrollWheelZoom:false}).setView([37.5665,126.9780],11);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
-    maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>'
+  // Use a stable raster tile map with a fallback when the tile server is blocked.
+  // Both providers use real geographic tiles; GPS and store pins remain interactive.
+  const osmTiles="https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+  const cartoTiles="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
+  let usingFallback=false;
+  let tileErrors=0;
+  const tiles=L.tileLayer(cartoTiles,{
+    subdomains:"abcd",maxZoom:19,detectRetina:false,
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>'
   }).addTo(map);
+  tiles.on("tileerror",()=>{
+    tileErrors+=1;
+    if(tileErrors>=3 && !usingFallback){
+      usingFallback=true;
+      tiles.setUrl(osmTiles);
+      tiles.options.attribution='&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>';
+      showMessage("기본 지도를 다시 불러오는 중입니다.");
+    } else if(tileErrors>=6 && usingFallback){
+      showMessage("지도 일부가 로딩되지 않습니다. 잠시 후 다시 시도해 주세요.");
+    }
+  });
+  tiles.on("load",()=>{if(tileErrors<6)showMessage("");});
   markerLayer=L.layerGroup().addTo(map);
+  let userLocationMarker=null;
+  let userAccuracyCircle=null;
+  if(gpsButton){
+    gpsButton.addEventListener("click",()=>{
+      if(!navigator.geolocation){
+        showMessage("이 브라우저에서는 현재 위치 기능을 사용할 수 없습니다.");
+        return;
+      }
+      gpsButton.disabled=true;
+      gpsButton.setAttribute("aria-busy","true");
+      showMessage("현재 위치를 확인하는 중입니다.");
+      navigator.geolocation.getCurrentPosition(position=>{
+        gpsButton.disabled=false;
+        gpsButton.removeAttribute("aria-busy");
+        const point=[position.coords.latitude,position.coords.longitude];
+        if(userLocationMarker)map.removeLayer(userLocationMarker);
+        if(userAccuracyCircle)map.removeLayer(userAccuracyCircle);
+        const icon=L.divIcon({className:"store-leaflet-marker",html:'<span class="store-current-location" aria-hidden="true"></span>',iconSize:[22,22],iconAnchor:[11,11]});
+        userLocationMarker=L.marker(point,{icon,title:"내 현재 위치",zIndexOffset:1000}).addTo(map);
+        userLocationMarker.bindPopup("현재 위치").openPopup();
+        userAccuracyCircle=L.circle(point,{
+          radius:Math.min(Math.max(position.coords.accuracy,10),2000),
+          color:"#1674db",fillColor:"#1674db",fillOpacity:.07,weight:1
+        }).addTo(map);
+        map.flyTo(point,14,{animate:!reduceMotion(),duration:.75});
+        showMessage("내 현재 위치를 표시했어요.");
+      },error=>{
+        gpsButton.disabled=false;
+        gpsButton.removeAttribute("aria-busy");
+        const msg=error.code===1 ? "위치 권한이 허용되지 않았습니다. 브라우저 위치 설정을 확인해 주세요."
+          : error.code===2 ? "현재 위치를 확인할 수 없습니다. 위치 서비스를 확인해 주세요."
+          : "위치 확인 시간이 초과됐습니다. 다시 시도해 주세요.";
+        showMessage(msg);
+      },{enableHighAccuracy:true,timeout:12000,maximumAge:60000});
+    });
+  }
   const refreshMapSize=()=>map.invalidateSize({pan:false});
   if("ResizeObserver" in window){
     const mapResize=new ResizeObserver(refreshMapSize);
