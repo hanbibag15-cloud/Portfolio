@@ -43,6 +43,7 @@
     if (!desktop.matches || reduced.matches || event.ctrlKey || event.metaKey ||
         event.defaultPrevented || Math.abs(event.deltaX) > Math.abs(event.deltaY) ||
         origin?.closest('textarea, select, [role="dialog"]') ||
+        origin?.closest('.store-map-panel') ||
         (origin && insideScrollable(origin, event.deltaY))) return;
 
     // Normalize wheel lines/pages; cap large mouse-wheel jumps.
