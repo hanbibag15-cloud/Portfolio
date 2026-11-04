@@ -15,7 +15,7 @@
   let map=null,naverMarkers=[],currentMarker=null,accuracyCircle=null,latest=[],coords=null,selected=null;
   function ll(point){return new naver.maps.LatLng(point[0],point[1]);}
   function markerHTML(active) {
-    return '<div class="store-naver-pin'+(active?' is-active':'')+'"><span>호식이</span></div>';
+    return '<div class="store-naver-pin'+(active?' is-active':'')+'"><svg class="store-pin-symbol" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10V20H20V10"/><path d="M3 10L5.2 4H18.8L21 10"/><path d="M3 10C3 12 6 12 6 10C6 12 9 12 9 10C9 12 12 12 12 10C12 12 15 12 15 10C15 12 18 12 18 10C18 12 21 12 21 10"/><path d="M9 20V14H15V20"/></svg><span class="store-pin-wave" aria-hidden="true"></span><span class="store-pin-wave store-pin-wave--delayed" aria-hidden="true"></span></div>';
   }
   function sync(stores,positions,activeId) {
     latest=stores;coords=positions;selected=activeId;
