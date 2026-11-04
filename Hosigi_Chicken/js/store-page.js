@@ -142,28 +142,23 @@
     fallback?.classList.add("is-visible");return;
   }
   map=L.map(mapElement,{zoomControl:true,scrollWheelZoom:false}).setView([37.5665,126.9780],11);
-  // Use a stable raster tile map with a fallback when the tile server is blocked.
-  // Both providers use real geographic tiles; GPS and store pins remain interactive.
-  const osmTiles="https://tile.openstreetmap.org/{z}/{x}/{y}.png";
-  const cartoTiles="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
-  let usingFallback=false;
-  let tileErrors=0;
-  const tiles=L.tileLayer(cartoTiles,{
-    subdomains:"abcd",maxZoom:19,detectRetina:false,
-    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>'
+  // OpenStreetMap's public raster tiles need no commercial API key.
+  // Keep Leaflet attribution visible and do not use a provider that watermarks
+  // tiles with "API KEY REQUIRED".
+  const tiles=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{
+    maxZoom:19,
+    tileSize:256,
+    detectRetina:false,
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>'
   }).addTo(map);
-  tiles.on("tileerror",()=>{
-    tileErrors+=1;
-    if(tileErrors>=3 && !usingFallback){
-      usingFallback=true;
-      tiles.setUrl(osmTiles);
-      tiles.options.attribution='&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>';
-      showMessage("기본 지도를 다시 불러오는 중입니다.");
-    } else if(tileErrors>=6 && usingFallback){
-      showMessage("지도 일부가 로딩되지 않습니다. 잠시 후 다시 시도해 주세요.");
-    }
+  let hasLoadedTiles=false;
+  tiles.on("load",()=>{
+    hasLoadedTiles=true;
+    // Geocoding progress and location status own the message area independently.
   });
-  tiles.on("load",()=>{if(tileErrors<6)showMessage("");});
+  tiles.on("tileerror",()=>{
+    if(!hasLoadedTiles)showMessage("지도 타일을 불러올 수 없습니다. 네트워크 연결을 확인하고 다시 새로고침해 주세요.");
+  });
   markerLayer=L.layerGroup().addTo(map);
   let userLocationMarker=null;
   let userAccuracyCircle=null;
