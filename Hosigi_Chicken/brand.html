@@ -30,7 +30,7 @@
                 <nav class="header-nav" id="header-nav" aria-label="주요 메뉴">
                     <ul>
                         <li class="has-submenu">
-                            <a href="#menu" aria-expanded="false" aria-controls="mobile-submenu" class="gnb-menu-scroll">메뉴</a>
+                            <a role="button" tabindex="0" aria-expanded="false" aria-controls="mobile-submenu">메뉴</a>
                             <ul class="header-submenu" id="mobile-submenu" aria-label="메뉴 상세">
                                 <li><a href="menu.html#all">전체 메뉴</a></li>
                                 <li><a href="menu.html#chicken">치킨 메뉴</a></li>
@@ -554,19 +554,13 @@
         },
     });
     
-    // Smoothly move from the header MENU link to the chicken showcase.
-    document.querySelectorAll('.gnb-menu-scroll, .gnb-store-scroll').forEach(link => link.addEventListener('click', function (event) {
-        const section = document.querySelector(link.classList.contains('gnb-store-scroll') ? '#stores' : '#menu');
-        if (!section) return;
-        event.preventDefault();
-        const headerHeight = document.querySelector('.site-header')?.getBoundingClientRect().height || 0;
-        const destination = window.scrollY + section.getBoundingClientRect().top - headerHeight;
-        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        window.scrollTo({ top: Math.max(0, destination), behavior: reduceMotion ? 'auto' : 'smooth' });
-        const header = document.querySelector('.site-header');
-        header?.classList.remove('menu-open');
-        document.querySelector('.header-menu-toggle')?.setAttribute('aria-expanded', 'false');
-    }));
+    // MENU is a submenu trigger only; no in-page scroll or navigation.
+    document.querySelector('.header-nav .has-submenu > a[aria-controls="mobile-submenu"]')?.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            event.currentTarget.click();
+        }
+    });
 </script>
 <script src="js/quick-menu.js" defer></script>
 </body>
