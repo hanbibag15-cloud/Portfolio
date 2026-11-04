@@ -129,46 +129,48 @@
 @media(prefers-reduced-motion:reduce){.store-search-button,.store-card,.store-card-view,.store-field input,.store-field select{transition:none}}
 
 
-/* Reference-inspired placement: full-width region search, map, then branch directory.
-   Changes are scoped to the store page; shared brand styles stay untouched. */
+/* Store locator: map on the left and the original vertically scrolling cards on the right. */
 @media (min-width:768px) {
   .store-content {padding-top:58px;}
   .store-search {
     grid-template-columns:minmax(175px,240px) minmax(0,1fr) 160px;
     gap:16px;
-    margin-bottom:52px;
+    margin-bottom:32px;
     padding:22px 24px;
     border:1px solid var(--border-default);
     border-radius:20px;
     background:var(--background-subtle);
   }
-  .store-results-heading {margin-bottom:24px;}
-  .store-layout {display:flex;flex-direction:column;gap:30px;}
-  .store-map-panel {order:0;width:100%;height:460px;flex:none;}
-  .store-list {
-    order:1;
-    width:100%;
-    height:auto;
-    max-height:none;
-    overflow:visible;
-    padding:0;
+  .store-results-heading {margin-bottom:20px;}
+  .store-layout {
     display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:18px;
+    grid-template-columns:minmax(0,1fr) minmax(300px,410px);
+    gap:24px;
+    align-items:stretch;
   }
-  .store-card {min-width:0;padding:26px 28px;}
-}
-@media (min-width:1100px) {
-  .store-list {grid-template-columns:repeat(3,minmax(0,1fr));}
+  .store-map-panel {grid-column:1;grid-row:1;order:0;width:100%;height:590px;min-height:0;}
+  .store-list {
+    grid-column:2;grid-row:1;order:1;
+    display:flex;flex-direction:column;
+    width:100%;height:590px;max-height:590px;
+    overflow-y:auto;overflow-x:hidden;
+    padding:0 8px 0 0;gap:12px;
+  }
+  .store-card {flex:0 0 auto;min-width:0;padding:23px 22px;}
 }
 @media (min-width:768px) and (max-width:1024px) {
-  .store-map-panel {height:420px;}
+  .store-layout {grid-template-columns:minmax(0,1fr) minmax(265px,38%);gap:18px;}
+  .store-list,.store-map-panel {height:520px;}
+  .store-list {max-height:520px;}
 }
 @media (max-width:767px) {
   .store-search {margin-bottom:30px;}
-  .store-layout {gap:22px;}
-  .store-map-panel {height:350px;min-height:350px;}
-  .store-list {gap:12px;}
+  .store-layout {display:flex;flex-direction:column;gap:16px;}
+  .store-map-panel {order:0;height:365px;min-height:365px;}
+  .store-list {
+    order:1;display:flex;flex-direction:column;gap:12px;
+    height:auto;max-height:none;overflow:visible;padding:0;
+  }
 }
 @media (max-width:420px) {
   .store-map-panel {height:315px;min-height:315px;}
