@@ -33,6 +33,21 @@
 .store-card-phone-link{font-size:13px;font-weight:600;color:var(--text-primary);text-underline-offset:3px;}
 .store-map-panel{position:relative;min-width:0;height:590px;overflow:hidden;border-radius:20px;background:var(--background-subtle);border:1px solid var(--border-default);}
 .store-map{height:100%;min-height:100%;width:100%;z-index:0;}
+/* Leaflet tiles must keep their native 256px dimensions.
+   The project's global img reset (max-width:100%; height:auto) otherwise
+   shrinks individual map tiles and leaves empty gaps in the map panel. */
+.store-map .leaflet-tile,
+.store-map .leaflet-tile-pane img {
+    max-width: none !important;
+    max-height: none !important;
+    width: 256px;
+    height: 256px;
+}
+.store-map .leaflet-container,
+.store-map .leaflet-map-pane,
+.store-map .leaflet-tile-pane { overflow: visible; }
+.store-map.leaflet-container { overflow: hidden; }
+
 .store-map-message{position:absolute;top:16px;left:16px;right:16px;z-index:5;width:max-content;max-width:calc(100% - 32px);padding:9px 14px;border-radius:999px;background:var(--surface-default);box-shadow:0 4px 16px rgba(34,23,20,.10);color:var(--text-primary);font-size:12px;line-height:1.45;pointer-events:none;}
 .store-map-message[hidden]{display:none;}
 .store-map-fallback{position:absolute;inset:0;z-index:1;display:none;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:30px;text-align:center;color:var(--text-primary);}
