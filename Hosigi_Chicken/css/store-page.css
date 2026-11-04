@@ -223,3 +223,18 @@
 @media(prefers-contrast:more) {
   .store-map .leaflet-tile-pane {filter:none;}
 }
+
+/* NAVER basemap uses its own tiles. Retain the existing two-column layout. */
+.store-map-panel .store-naver-pin {
+  position:relative;display:flex;align-items:center;justify-content:center;
+  width:70px;height:70px;border-radius:50%;border:4px solid #fff;
+  background:var(--brand-red);color:#fff;font:800 16px/1 var(--font);
+  box-shadow:0 4px 16px rgba(34,23,20,.3);
+}
+.store-map-panel .store-naver-pin:after {
+  content:"";position:absolute;left:50%;bottom:-12px;transform:translateX(-50%);
+  border-left:10px solid transparent;border-right:10px solid transparent;border-top:14px solid var(--brand-red);
+}
+.store-map-panel .store-naver-pin.is-active {background:var(--brand-brown);box-shadow:0 0 0 6px rgba(230,0,18,.22),0 4px 16px rgba(34,23,20,.32);}
+.store-map-panel .store-naver-pin.is-active:after {border-top-color:var(--brand-brown);}
+.store-map-panel .store-naver-current {width:24px;height:24px;border:4px solid #fff;border-radius:50%;background:#1674db;box-shadow:0 0 0 2px #1674db;}
