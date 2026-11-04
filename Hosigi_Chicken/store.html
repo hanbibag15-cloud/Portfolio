@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="호식이두마리치킨 리뉴얼 포트폴리오의 매장찾기. 지역 및 지점명으로 찾아보고 지도에서 위치를 확인하세요.">
+<title>매장찾기 | 호식이두마리치킨 리뉴얼</title>
+<link rel="stylesheet" href="../css/default.css">
+<link rel="stylesheet" href="../Font/css/pretendardvariable.css">
+<link rel="stylesheet" href="css/main.css?v=49">
+<link rel="stylesheet" href="css/nav-state.css">
+<link rel="stylesheet" href="css/store-page.css?v=1">
+<link rel="stylesheet" href="css/quick-menu-motion.css?v=10">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoF5d+8VvYG8Lw=" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+<script src="js/store-page.js?v=1" defer></script>
+<script src="js/store-nav.js?v=1" defer></script>
+</head>
+<body>
+<div id="wrap">
+<header class="site-header">
+            <div class="header-inner">
+                <h1 class="header-logo">
+                    <a href="brand.html" aria-label="호식이두마리치킨 메인페이지">
+                        <img src="img/log.png" alt="호식이두마리치킨">
+                    </a>
+                </h1>
+
+                <nav class="header-nav" id="header-nav" aria-label="주요 메뉴">
+                    <ul>
+                        <li class="has-submenu">
+                            <a aria-expanded="false" aria-controls="mobile-submenu">메뉴</a>
+                            <ul class="header-submenu" id="mobile-submenu" aria-label="메뉴 상세">
+                                <li><a href="menu.html#all">전체 메뉴</a></li>
+                                <li><a href="menu.html#chicken">치킨 메뉴</a></li>
+                                <li><a href="menu.html#parts">부위별 메뉴</a></li>
+                                <li><a href="menu.html#side">사이드 메뉴</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a aria-expanded="false" aria-controls="brand-submenu">브랜드</a>
+                            <ul class="header-submenu" id="brand-submenu" aria-label="브랜드 상세">
+                                <li><a href="brand.html">호식이 이야기</a></li>
+                                <li><a href="brand.html">브랜드 철학</a></li>
+                                <li><a href="brand.html">사회공헌</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="is-current" aria-current="page">매장찾기</a></li>
+                        <li><a>이벤트</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-utils">
+                    <a href="franchise.html">
+                        <img src="img/store 2.svg" alt="">
+                        <span>창업안내</span>
+                    </a>
+                    <span class="header-utils-divider" aria-hidden="true"></span>
+                    <a href="index.html"><img src="img/ticket 2.svg" alt=""><span>상품권</span></a>
+                </div>
+
+                <button class="header-menu-toggle" type="button" aria-label="메뉴 열기" aria-controls="header-nav" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </header>
+<main class="store-page">
+  <section class="store-intro" aria-labelledby="store-intro-title">
+    <div class="store-container">
+      <h2 id="store-intro-title">STORE</h2>
+      <p>우리 동네 호식이를 찾아보세요!</p>
+    </div>
+  </section>
+  <section class="store-content" aria-label="매장 위치 검색">
+    <div class="store-container">
+      <form class="store-search" id="store-search-form" role="search">
+        <div class="store-field">
+          <label for="store-district">지역 선택</label>
+          <select id="store-district" name="district">
+            <option value="all">서울 전체</option>
+            <option value="강남구">강남구</option>
+            <option value="관악구">관악구</option>
+            <option value="마포구">마포구</option>
+            <option value="송파구">송파구</option>
+            <option value="용산구">용산구</option>
+          </select>
+        </div>
+        <div class="store-field">
+          <label for="store-keyword">매장명 또는 주소</label>
+          <input id="store-keyword" name="keyword" type="search" placeholder="매장명이나 지역을 검색하세요" autocomplete="off">
+        </div>
+        <button class="store-search-button" type="submit">매장 검색</button>
+      </form>
+      <div class="store-results-heading">
+        <h3>매장 목록</h3>
+        <p>검색 결과 <strong id="store-result-count">7</strong>개</p>
+      </div>
+      <div class="store-layout">
+        <div class="store-list" id="store-results" aria-live="polite" aria-label="검색된 호식이 매장 목록"></div>
+        <section class="store-map-panel" aria-label="매장 위치 지도">
+          <div id="store-map" class="store-map" role="region" aria-label="선택한 매장의 위치가 표시되는 지도"></div>
+          <div class="store-map-message" id="store-map-message" role="status">매장 지도 준비 중</div>
+          <div class="store-map-fallback" id="store-map-fallback" aria-live="polite">
+            <strong>지도 이미지 준비 중</strong>
+            <p>지도를 표시할 수 없을 때에도 왼쪽 매장 목록과 주소를 확인할 수 있어요.</p>
+          </div>
+        </section>
+      </div>
+      <p class="store-note">※ 이 페이지는 웹디자인 학습용 리뉴얼 포트폴리오입니다. 서울 일부 매장을 예시로 소개하며 전국 지점 전체를 제공하지 않습니다. 지점 정보는 변경될 수 있고 지도 위치는 외부 지도 서비스의 주소 검색 결과를 사용합니다.</p>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+            <div class="footer-inner">
+                <a class="footer-logo" href="brand.html" aria-label="호식이두마리치킨 메인페이지">
+                    <img src="img/h_log.png" alt="호식이두마리치킨" loading="lazy" onerror="this.onerror=null;this.src='img/log.png';">
+                </a>
+                <div class="footer-details">
+                    <nav class="footer-links" aria-label="푸터 안내">
+                        <span>이용약관</span>
+                        <span>개인정보처리방침</span>
+                        <span>공지사항</span>
+                        <span>고객센터</span>
+                    </nav>
+                    <div class="footer-info">
+                        <p><span>(주)호식이두마리치킨</span><span>대표이사 최호식</span><span>사업자등록번호 504-07-99251</span></p>
+                        <p><span>주소 서울특별시 학동로 337 H타워</span><span>대표번호 1688-9922</span></p>
+                        <small class="footer-copyright">Copyright © 호식이두마리치킨. All rights reserved.</small>
+                    </div>
+                </div>
+            </div>
+        </footer>
+<aside class="quick-menu" aria-label="퀵 메뉴">
+            <div class="quick-menu-social">
+            <div class="quick-menu-social-links" role="group" aria-label="SNS 아이콘">
+                <button class="quick-menu-social-link quick-menu-youtube" type="button" aria-label="호식이두마리치킨 유튜브" title="YouTube">
+                    <img src="img/youtube%201.svg" width="28" height="28" alt="" aria-hidden="true">
+                </button>
+                <button class="quick-menu-social-link quick-menu-facebook" type="button" aria-label="호식이두마리치킨 페이스북" title="Facebook">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M14.2 21V12.8H17l.4-3.2h-3.2V7.5c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.3 0-1.3-.1-2.5-.1-2.6 0-4.4 1.6-4.4 4.5v2.1H8v3.2h2.6V21h3.6Z"/></svg>
+                </button>
+                <button class="quick-menu-social-link quick-menu-blog" type="button" aria-label="호식이두마리치킨 네이버 블로그" title="Naver Blog">
+                    <span aria-hidden="true">N</span>
+                </button>
+            </div>
+            <button class="quick-menu-sns" type="button" aria-label="호식이두마리치킨 인스타그램">
+                <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="6"></rect>
+                    <circle cx="12" cy="12" r="4.5"></circle>
+                    <circle cx="18" cy="6" r="1" fill="currentColor" stroke="none"></circle>
+                </svg>
+                <span>SNS</span>
+            </button>
+        </div>
+            <button class="quick-menu-top" type="button" aria-label="페이지 맨 위로 이동">
+                <span aria-hidden="true">↑</span>
+                <span class="quick-menu-direction">TOP</span>
+            </button>
+        </aside>
+</div>
+<script src="js/quick-menu.js" defer></script>
+</body>
+</html>
