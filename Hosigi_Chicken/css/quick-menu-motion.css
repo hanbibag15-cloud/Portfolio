@@ -21,10 +21,11 @@
 }
 .quick-menu-social-links {
     position: absolute;
-    left: -30px;
-    top: -120px;
-    width: 170px;
-    height: 210px;
+    /* 3 x 40px circles, 9px gaps; centered on the 92px SNS button. */
+    left: -23px;
+    top: -84px;
+    width: 138px;
+    height: 100px;
     z-index: 2;
     visibility: hidden;
     pointer-events: none;
@@ -41,6 +42,8 @@
     background: var(--neutral-white);
     color: var(--brand-red);
     text-decoration: none;
+    padding: 0;
+    cursor: pointer;
     font: 800 18px/1 var(--font);
     opacity: 0;
     transform: translateY(22px) scale(.72);
@@ -50,9 +53,9 @@
         color 180ms ease,
         background-color 180ms ease;
 }
-.quick-menu-youtube { left: 10px; top: 64px; }
-.quick-menu-facebook { left: 56px; top: 64px; }
-.quick-menu-blog { left: 102px; top: 64px; }
+.quick-menu-youtube { left: 0; top: 20px; }
+.quick-menu-facebook { left: 49px; top: 20px; }
+.quick-menu-blog { left: 98px; top: 20px; }
 
 .quick-menu-facebook svg {
     width: 20px;
@@ -76,23 +79,40 @@
     color: var(--neutral-white);
     outline-offset: 4px;
 }
-.quick-menu-social:hover .quick-menu-social-links,
-.quick-menu-social:focus-within .quick-menu-social-links {
+.quick-menu-social:hover .quick-menu-social-links {
     visibility: visible;
     pointer-events: auto;
     transition-delay: 0s;
 }
-.quick-menu-social:hover .quick-menu-social-link,
-.quick-menu-social:focus-within .quick-menu-social-link {
+.quick-menu-social:hover .quick-menu-social-link {
     opacity: 1;
     transform: translateY(0) scale(1);
 }
-.quick-menu-social:hover .quick-menu-youtube,
-.quick-menu-social:focus-within .quick-menu-youtube { transition-delay: 0ms; }
-.quick-menu-social:hover .quick-menu-facebook,
-.quick-menu-social:focus-within .quick-menu-facebook { transition-delay: 75ms; }
-.quick-menu-social:hover .quick-menu-blog,
-.quick-menu-social:focus-within .quick-menu-blog { transition-delay: 150ms; }
+.quick-menu-social:hover .quick-menu-youtube { transition-delay: 0ms; }
+.quick-menu-social:hover .quick-menu-facebook { transition-delay: 75ms; }
+.quick-menu-social:hover .quick-menu-blog { transition-delay: 150ms; }
+/* Button press feedback only; no SNS button navigates anywhere. */
+.quick-menu-social:hover .quick-menu-social-link:active {
+    transform: translateY(0) scale(.88);
+}
+.quick-menu-sns {
+    padding: 0;
+}
+.quick-menu-sns:active {
+    transform: translateY(-3px) scale(.94);
+}
+/* Keyboard focus exposes the controls without retaining hover after a mouse click. */
+.quick-menu-social:has(.quick-menu-sns:focus-visible) .quick-menu-social-links,
+.quick-menu-social:has(.quick-menu-social-link:focus-visible) .quick-menu-social-links {
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+}
+.quick-menu-social:has(.quick-menu-sns:focus-visible) .quick-menu-social-link,
+.quick-menu-social:has(.quick-menu-social-link:focus-visible) .quick-menu-social-link {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
 @media (prefers-reduced-motion: reduce) {
     .quick-menu-social-links,
     .quick-menu-social-link { transition: none; }
