@@ -23,7 +23,7 @@
     position: absolute;
     /* 3 x 40px circles, 9px gaps; centered on the 92px SNS button. */
     left: -23px;
-    top: -84px;
+    top: -74px;
     width: 138px;
     height: 100px;
     z-index: 2;
