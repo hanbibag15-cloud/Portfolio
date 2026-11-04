@@ -1639,9 +1639,11 @@ body {
 .store-promo-link:not(a), .event-more:not(a) {
     cursor: default;
 }
-.store-promo-link:not(a):hover, .event-more:not(a):hover {
-    background: transparent;
-    color: var(--brand-red);
+/* These CTAs remain non-navigating, but still display their original hover fill. */
+.store-promo-link:not(a):hover,
+.event-more:not(a):hover {
+    background: var(--brand-red);
+    color: var(--neutral-white);
 }
 @media (max-width: 767px) {
     .footer-links > span + span::before { height: 10px; margin: 0 7px; }
