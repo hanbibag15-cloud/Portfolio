@@ -38,7 +38,7 @@
     transition: transform 450ms cubic-bezier(.22, 1, .36, 1);
 }
 @media (hover: hover) {
-    .all-menu-card:hover .all-menu-photo img {
+    .all-menu-photo:hover img {
         transform: scale(1.055);
     }
 }
@@ -87,11 +87,11 @@
     transition: transform 550ms cubic-bezier(.22,1,.36,1),
                 filter 450ms ease;
 }
-.all-menu-card:where(:hover,:focus-within) .all-menu-photo::before {
+.all-menu-photo:is(:hover,:focus-within)::before {
     clip-path: circle(150% at 50% 100%);
 }
-.all-menu-card:hover .all-menu-photo img,
-.all-menu-card:focus-within .all-menu-photo img {
+.all-menu-photo:hover img,
+.all-menu-photo:focus-within img {
     transform: translateY(-8px) scale(1.045);
     filter: brightness(.65);
 }
@@ -99,16 +99,16 @@
 .all-menu-photo img[src$="chicken_img15.png"] {
     transform: scale(1.42);
 }
-.all-menu-card:hover .all-menu-photo img[src$="chicken_img15.png"],
-.all-menu-card:focus-within .all-menu-photo img[src$="chicken_img15.png"] {
+.all-menu-photo:hover img[src$="chicken_img15.png"],
+.all-menu-photo:focus-within img[src$="chicken_img15.png"] {
     transform: translateY(-8px) scale(1.48);
 }
 /* The Plawing Set image has extra internal padding; enlarge only this item. */
 .all-menu-photo img[src$="part_img01.png"] {
     transform: scale(1.22);
 }
-.all-menu-card:hover .all-menu-photo img[src$="part_img01.png"],
-.all-menu-card:focus-within .all-menu-photo img[src$="part_img01.png"] {
+.all-menu-photo:hover img[src$="part_img01.png"],
+.all-menu-photo:focus-within img[src$="part_img01.png"] {
     transform: translateY(-8px) scale(1.27);
 }
 @media (max-width: 767px) {
@@ -152,8 +152,8 @@
 .all-menu-new-badge {
     transition: background-color 300ms ease, color 300ms ease;
 }
-.all-menu-card:hover .all-menu-new-badge,
-.all-menu-card:focus-within .all-menu-new-badge {
+.all-menu-photo:hover .all-menu-new-badge,
+.all-menu-photo:focus-within .all-menu-new-badge {
     background: var(--neutral-white);
     color: var(--brand-red);
 }
