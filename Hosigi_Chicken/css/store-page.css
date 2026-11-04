@@ -309,3 +309,10 @@
   .store-district-option{font-size:13px;min-height:42px;padding:9px 14px;}
 }
 @media(prefers-reduced-motion:reduce){.store-district-chevron{transition:none;}}
+
+/* Center selected region and each dropdown option; keep arrow at the right. */
+.store-district-trigger{position:relative;justify-content:center;}
+.store-district-current{display:block;flex:1;min-width:0;text-align:center;}
+.store-district-chevron{position:absolute;right:18px;top:50%;margin-top:-5px;}
+.store-district-option{text-align:center;}
+@media(max-width:767px){.store-district-chevron{right:12px;}}
