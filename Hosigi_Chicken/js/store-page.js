@@ -45,7 +45,7 @@
     mapMessage.hidden=false;mapMessage.textContent=message;
   };
   function markerIcon(active) {
-    return L.divIcon({className:"store-leaflet-marker",html:'<span class="store-marker-pin'+(active?' is-active':'')+'" aria-hidden="true">호식이</span>',iconSize:[54,67],iconAnchor:[27,65],popupAnchor:[0,-61]});
+    return L.divIcon({className:"store-leaflet-marker",html:'<span class="store-marker-pin'+(active?' is-active':'')+'" aria-hidden="true">호식이</span>',iconSize:[64,78],iconAnchor:[32,76],popupAnchor:[0,-70]});
   }
   function fitPoints() {
     if(!map)return;
@@ -196,7 +196,10 @@
       },{enableHighAccuracy:true,timeout:12000,maximumAge:60000});
     });
   }
-  const refreshMapSize=()=>map.invalidateSize({pan:false});
+  const refreshMapSize=()=>{
+    if(!mapElement.isConnected || !mapElement.clientWidth || !mapElement.clientHeight)return;
+    map.invalidateSize({pan:false,debounceMoveend:true});
+  };
   if("ResizeObserver" in window){
     const mapResize=new ResizeObserver(refreshMapSize);
     mapResize.observe(mapElement);
@@ -204,7 +207,12 @@
   window.addEventListener("load",refreshMapSize,{once:true});
   window.addEventListener("resize",refreshMapSize,{passive:true});
   // Run again once CSS and map tiles have settled after the initial render.
-  requestAnimationFrame(()=>requestAnimationFrame(refreshMapSize));
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    refreshMapSize();
+    fitPoints();
+  }));
+  // Recheck after fonts/layout are settled (especially on GitHub Pages).
+  if(document.fonts?.ready)document.fonts.ready.then(()=>{refreshMapSize();fitPoints();});
   refreshMarkers();fitPoints();
 
   // Public Nominatim requires at most one lookup per second.
