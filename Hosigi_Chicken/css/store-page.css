@@ -238,3 +238,54 @@
 .store-map-panel .store-naver-pin.is-active {background:var(--brand-brown);box-shadow:0 0 0 6px rgba(230,0,18,.22),0 4px 16px rgba(34,23,20,.32);}
 .store-map-panel .store-naver-pin.is-active:after {border-top-color:var(--brand-brown);}
 .store-map-panel .store-naver-current {width:24px;height:24px;border:4px solid #fff;border-radius:50%;background:#1674db;box-shadow:0 0 0 2px #1674db;}
+
+/* Brand storefront markers + outward ground pulse, shared by Leaflet and NAVER. */
+.store-marker-pin,
+.store-map-panel .store-naver-pin {
+  isolation:isolate;
+  overflow:visible;
+  width:64px;
+  height:64px;
+  background:var(--brand-red);
+  color:#fff;
+  border:4px solid #fff;
+}
+.store-pin-symbol {
+  position:relative;
+  z-index:2;
+  display:block;
+  width:32px;
+  height:32px;
+  max-width:none;
+  flex:none;
+  pointer-events:none;
+}
+.store-pin-wave {
+  position:absolute;
+  left:50%;
+  bottom:-20px;
+  width:26px;
+  height:12px;
+  border:2px solid rgba(230,0,18,.85);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:-1;
+  opacity:0;
+  transform:translateX(-50%) scale(.35);
+  transform-origin:center;
+  animation:hosigi-pin-wave 2.6s ease-out infinite;
+}
+.store-pin-wave--delayed {animation-delay:1.3s;}
+@keyframes hosigi-pin-wave {
+  0% {opacity:.85;transform:translateX(-50%) scale(.35);}
+  75% {opacity:.20;}
+  100% {opacity:0;transform:translateX(-50%) scale(3.2);}
+}
+.store-marker-pin.is-active .store-pin-wave,
+.store-map-panel .store-naver-pin.is-active .store-pin-wave {
+  border-color:rgba(230,0,18,.95);
+}
+@media(prefers-reduced-motion:reduce) {
+  .store-pin-wave {animation:none;opacity:.35;transform:translateX(-50%) scale(1.25);}
+  .store-pin-wave--delayed {display:none;}
+}
