@@ -41,7 +41,7 @@
     background: var(--neutral-white);
     color: var(--brand-red);
     text-decoration: none;
-    font: 800 23px/1 var(--font);
+    font: 800 18px/1 var(--font);
     opacity: 0;
     transform: translateY(22px) scale(.72);
     transition:
@@ -51,14 +51,19 @@
         background-color 180ms ease;
 }
 .quick-menu-youtube { left: 10px; top: 64px; }
-.quick-menu-facebook { left: 56px; top: 12px; }
+.quick-menu-facebook { left: 56px; top: 64px; }
 .quick-menu-blog { left: 102px; top: 64px; }
+
+.quick-menu-facebook svg {
+    width: 20px;
+    height: 20px;
+}
 
 /* Uploaded SVG paths are white, so tint them red inside the existing white button. */
 .quick-menu-youtube img {
     display: block;
-    width: 23px;
-    height: 23px;
+    width: 18px;
+    height: 18px;
     filter: brightness(0) saturate(100%) invert(19%) sepia(100%) saturate(6903%) hue-rotate(351deg) brightness(94%) contrast(110%);
 }
 .quick-menu-youtube:hover img,
