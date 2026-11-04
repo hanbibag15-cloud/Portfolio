@@ -260,8 +260,7 @@
   flex:none;
   pointer-events:none;
 }
-/* Filled, slower ripples start below the pointed tip and grow downward.
-   Keeping their top edge anchored prevents overlap with the store symbol. */
+/* Filled rings expand concentrically from the marker tip, underneath the symbol. */
 .store-pin-wave {
   position:absolute;
   left:50%;
@@ -275,15 +274,15 @@
   pointer-events:none;
   z-index:-1;
   opacity:0;
-  transform:translateX(-50%) scale(.15);
-  transform-origin:50% 0%;
+  transform:translate(-50%,-50%) scale(.15);
+  transform-origin:center center;
   animation:hosigi-pin-wave 5.8s ease-out infinite;
 }
 .store-pin-wave--delayed {animation-delay:2.9s;}
 @keyframes hosigi-pin-wave {
-  0% {opacity:.65;transform:translateX(-50%) scale(.15);}
+  0% {opacity:.65;transform:translate(-50%,-50%) scale(.15);}
   65% {opacity:.24;}
-  100% {opacity:0;transform:translateX(-50%) scale(1.55);}
+  100% {opacity:0;transform:translate(-50%,-50%) scale(1.55);}
 }
 .store-marker-pin.is-active .store-pin-wave,
 .store-map-panel .store-naver-pin.is-active .store-pin-wave {
@@ -291,6 +290,12 @@
   background:rgba(230,0,18,.25);
 }
 @media(prefers-reduced-motion:reduce) {
-  .store-pin-wave {animation:none;opacity:.35;transform:translateX(-50%) scale(.85);}
+  .store-pin-wave {animation:none;opacity:.35;transform:translate(-50%,-50%) scale(.85);}
   .store-pin-wave--delayed {display:none;}
 }
+
+/* Ensure the pointed tip and store glyph remain in front of the ripple. */
+.store-marker-pin::after,
+.store-map-panel .store-naver-pin::after {z-index:2;}
+.store-marker-pin .store-pin-symbol,
+.store-map-panel .store-naver-pin .store-pin-symbol {z-index:3;}
