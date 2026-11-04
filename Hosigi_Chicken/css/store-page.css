@@ -265,3 +265,47 @@
 .store-map-panel .store-naver-pin::after {z-index:2;}
 .store-marker-pin .store-pin-symbol,
 .store-map-panel .store-naver-pin .store-pin-symbol {z-index:3;}
+
+/* Region dropdown styled like the main navigation submenu. */
+.store-field:has(.store-district-dropdown){position:relative;z-index:15;}
+.store-district-native-hidden{display:none!important;}
+.store-district-dropdown{position:relative;width:100%;}
+.store-district-trigger{
+  width:100%;height:54px;padding:0 18px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  border:1px solid var(--border-default);border-radius:14px;
+  background:var(--surface-default);color:var(--text-primary);
+  font:500 16px var(--font);text-align:left;cursor:pointer;
+}
+.store-district-trigger:hover,.store-district-trigger:focus-visible,
+.store-district-dropdown.is-open .store-district-trigger{
+  border-color:var(--brand-red);
+}
+.store-district-trigger:focus-visible{outline:2px solid var(--brand-red);outline-offset:2px;}
+.store-district-chevron{
+  width:8px;height:8px;flex:none;
+  border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:translateY(-2px) rotate(45deg);transition:transform .2s;
+}
+.store-district-dropdown.is-open .store-district-chevron{transform:translateY(2px) rotate(225deg);}
+.store-district-options{
+  display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);
+  padding:9px 0;background:#fff;border:1px solid var(--border-default);
+  border-radius:16px;box-shadow:0 12px 28px rgba(34,23,20,.13);
+  max-height:290px;overflow-y:auto;z-index:30;
+}
+.store-district-dropdown.is-open .store-district-options{display:block;}
+.store-district-option{
+  display:block;width:100%;min-height:44px;padding:10px 18px;
+  background:transparent;border:0;border-radius:0;text-align:left;
+  color:var(--text-primary);font:500 15px var(--font);cursor:pointer;
+}
+.store-district-option:hover,.store-district-option:focus-visible{
+  background:var(--background-subtle);color:var(--brand-red);outline:none;
+}
+.store-district-option.is-active{color:var(--brand-red);font-weight:700;}
+@media(max-width:767px){
+  .store-district-trigger{height:48px;padding:0 12px;font-size:13px;}
+  .store-district-option{font-size:13px;min-height:42px;padding:9px 14px;}
+}
+@media(prefers-reduced-motion:reduce){.store-district-chevron{transition:none;}}
