@@ -22,6 +22,82 @@
   const fallback=document.querySelector("#store-map-fallback");
   const gpsButton=document.querySelector("#store-gps-button");
   if(!form || !keyword || !district || !list || !count || !mapElement) return;
+  // Match the header submenu visually while retaining the native select as form state.
+  const districtField=district.closest(".store-field");
+  if(districtField){
+    const dropdown=document.createElement("div");
+    dropdown.className="store-district-dropdown";
+    const trigger=document.createElement("button");
+    trigger.type="button";
+    trigger.className="store-district-trigger";
+    trigger.setAttribute("aria-haspopup","listbox");
+    trigger.setAttribute("aria-expanded","false");
+    trigger.setAttribute("aria-label","지역 선택");
+    const text=document.createElement("span");
+    text.className="store-district-current";
+    const chevron=document.createElement("span");
+    chevron.className="store-district-chevron";
+    chevron.setAttribute("aria-hidden","true");
+    trigger.append(text,chevron);
+    const options=document.createElement("div");
+    options.className="store-district-options";
+    options.setAttribute("role","listbox");
+    options.setAttribute("aria-label","지역 선택 목록");
+    options.id="store-district-options";
+    trigger.setAttribute("aria-controls",options.id);
+    const items=[];
+    const close=()=>{
+      dropdown.classList.remove("is-open");
+      trigger.setAttribute("aria-expanded","false");
+    };
+    const sync=()=>{
+      text.textContent=district.selectedOptions[0]?.textContent||"서울 전체";
+      items.forEach(item=>{
+        const chosen=item.dataset.value===district.value;
+        item.classList.toggle("is-active",chosen);
+        item.setAttribute("aria-selected",String(chosen));
+      });
+    };
+    for(const option of district.options){
+      const item=document.createElement("button");
+      item.type="button";
+      item.className="store-district-option";
+      item.setAttribute("role","option");
+      item.dataset.value=option.value;
+      item.textContent=option.textContent;
+      item.addEventListener("click",()=>{
+        district.value=option.value;
+        district.dispatchEvent(new Event("change",{bubbles:true}));
+        close();
+        trigger.focus();
+      });
+      items.push(item);
+      options.append(item);
+    }
+    dropdown.append(trigger,options);
+    district.insertAdjacentElement("afterend",dropdown);
+    district.classList.add("store-district-native-hidden");
+    trigger.addEventListener("click",()=>{
+      const opening=!dropdown.classList.contains("is-open");
+      dropdown.classList.toggle("is-open",opening);
+      trigger.setAttribute("aria-expanded",String(opening));
+      if(opening)items.find(item=>item.dataset.value===district.value)?.focus();
+    });
+    dropdown.addEventListener("keydown",event=>{
+      if(event.key==="Escape"){close();trigger.focus();}
+      if(event.key==="ArrowDown"||event.key==="ArrowUp"){
+        event.preventDefault();
+        if(!dropdown.classList.contains("is-open")){trigger.click();return;}
+        const current=items.indexOf(document.activeElement);
+        items[(current+(event.key==="ArrowDown"?1:-1)+items.length)%items.length].focus();
+      }
+    });
+    document.addEventListener("pointerdown",event=>{
+      if(!dropdown.contains(event.target))close();
+    });
+    district.addEventListener("change",sync);
+    sync();
+  }
   let filtered=stores.slice();
   let selected=null;
   let map=null;
