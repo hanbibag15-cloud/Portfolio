@@ -316,3 +316,24 @@
 .store-district-chevron{position:absolute;right:18px;top:50%;margin-top:-5px;}
 .store-district-option{text-align:center;}
 @media(max-width:767px){.store-district-chevron{right:12px;}}
+
+/* Match the home page's scroll reveal without moving the live map canvas. */
+.store-page .store-scroll-reveal.is-reveal-ready {
+  opacity:0;
+  transform:translateY(36px);
+  transition:opacity 750ms ease,transform 750ms cubic-bezier(.22,1,.36,1);
+}
+.store-page .store-scroll-reveal.is-reveal-ready.is-visible {
+  opacity:1;
+  transform:translateY(0);
+}
+.store-page .store-map-panel.store-scroll-reveal.is-reveal-ready {
+  transform:none;
+}
+@media(prefers-reduced-motion:reduce){
+  .store-page .store-scroll-reveal.is-reveal-ready {
+    opacity:1;
+    transform:none;
+    transition:none;
+  }
+}
