@@ -62,7 +62,7 @@
   script.onload=()=>{
     if(!window.naver?.maps)return;
     try{
-      map=new naver.maps.Map(overlay,{center:new naver.maps.LatLng(37.5665,126.978),zoom:11,zoomControl:true,zoomControlOptions:{position:naver.maps.Position.TOP_LEFT}});
+      map=new naver.maps.Map(overlay,{center:new naver.maps.LatLng(37.5665,126.978),zoom:11,zoomControl:false,scrollWheel:true});
       overlay.style.display="block";
       host.style.visibility="hidden";
       sync(latest,coords||new Map(),selected);
