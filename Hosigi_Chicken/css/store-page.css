@@ -198,3 +198,28 @@
   box-shadow:0 0 0 7px rgba(230,0,18,.23),0 7px 22px rgba(34,23,20,.43);
 }
 .store-marker-pin::after {bottom:-12px;border-left-width:10px;border-right-width:10px;border-top-width:13px;}
+
+/* Calm, low-noise map treatment inspired by the reference.
+   The tile provider stays OpenStreetMap (no API key required). */
+.store-map-panel {background:#f5f6f4;}
+.store-map .leaflet-tile-pane {
+  filter:saturate(.55) contrast(.84) brightness(1.065);
+}
+.store-map .leaflet-control-zoom a {
+  color:var(--brand-brown);
+}
+.store-map .leaflet-control-attribution {
+  background:rgba(255,255,255,.9);
+}
+.store-marker-pin {
+  background:var(--brand-red);
+  border-color:#fff;
+  box-shadow:0 0 0 3px rgba(230,0,18,.13),0 5px 16px rgba(34,23,20,.28);
+}
+.store-marker-pin.is-active {
+  background:var(--brand-brown);
+  box-shadow:0 0 0 6px rgba(230,0,18,.24),0 5px 18px rgba(34,23,20,.32);
+}
+@media(prefers-contrast:more) {
+  .store-map .leaflet-tile-pane {filter:none;}
+}
