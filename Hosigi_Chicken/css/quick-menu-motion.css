@@ -21,9 +21,9 @@
 }
 .quick-menu-social-links {
     position: absolute;
-    left: -105px;
+    left: -155px;
     top: -112px;
-    width: 310px;
+    width: 235px;
     height: 205px;
     z-index: 2;
     visibility: hidden;
@@ -50,9 +50,9 @@
         color 180ms ease,
         background-color 180ms ease;
 }
-.quick-menu-youtube { left: 10px; top: 65px; }
-.quick-menu-facebook { left: 122px; top: 10px; }
-.quick-menu-blog { left: 232px; top: 65px; }
+.quick-menu-youtube { left: 20px; top: 65px; }
+.quick-menu-facebook { left: 88px; top: 10px; }
+.quick-menu-blog { left: 156px; top: 65px; }
 
 /* Uploaded SVG paths are white, so tint them red inside the existing white button. */
 .quick-menu-youtube img {
