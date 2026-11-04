@@ -260,40 +260,6 @@
   flex:none;
   pointer-events:none;
 }
-/* One stronger filled pulse from the pointed tip, no overlap with icon. */
-.store-pin-wave {
-  position:absolute;
-  left:50%;
-  top:calc(100% + 12px);
-  bottom:auto;
-  width:42px;
-  height:42px;
-  border:2px solid rgba(230,0,18,.55);
-  background:rgba(230,0,18,.38);
-  border-radius:50%;
-  pointer-events:none;
-  z-index:-1;
-  /* Keep the expanding circle intact; z-index keeps it behind the pin. */
-  opacity:0;
-  transform:translate(-50%,-50%) scale(.15);
-  transform-origin:center center;
-  animation:hosigi-pin-wave 4.6s ease-out infinite;
-}
-.store-pin-wave--delayed {display:none;}
-@keyframes hosigi-pin-wave {
-  0% {opacity:.85;transform:translate(-50%,-50%) scale(.15);}
-  70% {opacity:0;transform:translate(-50%,-50%) scale(1.55);}
-  71%,100% {opacity:0;transform:translate(-50%,-50%) scale(1.55);}
-}
-.store-marker-pin.is-active .store-pin-wave,
-.store-map-panel .store-naver-pin.is-active .store-pin-wave {
-  border-color:rgba(230,0,18,.65);
-  background:rgba(230,0,18,.43);
-}
-@media(prefers-reduced-motion:reduce) {
-  .store-pin-wave {animation:none;display:none;}
-}
-
 /* Ensure the pointed tip and store glyph remain in front of the ripple. */
 .store-marker-pin::after,
 .store-map-panel .store-naver-pin::after {z-index:2;}
