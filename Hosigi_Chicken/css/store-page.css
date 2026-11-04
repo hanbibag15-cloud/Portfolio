@@ -273,7 +273,7 @@
   border-radius:50%;
   pointer-events:none;
   z-index:-1;
-  clip-path:inset(50% -100% -100% -100%);
+  /* Keep the expanding circle intact; z-index keeps it behind the pin. */
   opacity:0;
   transform:translate(-50%,-50%) scale(.15);
   transform-origin:center center;
