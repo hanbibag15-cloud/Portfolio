@@ -141,7 +141,7 @@
     showMessage("지도를 불러올 수 없습니다. 아래 지점 주소를 확인해 주세요.");
     fallback?.classList.add("is-visible");return;
   }
-  map=L.map(mapElement,{zoomControl:true,scrollWheelZoom:false}).setView([37.5665,126.9780],11);
+  map=L.map(mapElement,{zoomControl:false,scrollWheelZoom:true}).setView([37.5665,126.9780],11);
   // OpenStreetMap's public raster tiles need no commercial API key.
   // Keep Leaflet attribution visible and do not use a provider that watermarks
   // tiles with "API KEY REQUIRED".
