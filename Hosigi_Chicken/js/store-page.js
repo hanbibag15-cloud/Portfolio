@@ -60,7 +60,8 @@
   }
   function refreshMarkers(){
     if(!map || !markerLayer)return;
-    markerLayer.clearLayers();markers.clear();\n    window.hosigiNaverMap?.sync?.(filtered,coords,selected);
+    markerLayer.clearLayers();markers.clear();
+    window.hosigiNaverMap?.sync?.(filtered,coords,selected);
     for(const store of filtered){
       const point=coords.get(store.id);
       if(!point)continue;
@@ -174,7 +175,8 @@
       navigator.geolocation.getCurrentPosition(position=>{
         gpsButton.disabled=false;
         gpsButton.removeAttribute("aria-busy");
-        const point=[position.coords.latitude,position.coords.longitude];\n        window.hosigiNaverMap?.locate?.(point,position.coords.accuracy);
+        const point=[position.coords.latitude,position.coords.longitude];
+        window.hosigiNaverMap?.locate?.(point,position.coords.accuracy);
         if(userLocationMarker)map.removeLayer(userLocationMarker);
         if(userAccuracyCircle)map.removeLayer(userAccuracyCircle);
         const icon=L.divIcon({className:"store-leaflet-marker",html:'<span class="store-current-location" aria-hidden="true"></span>',iconSize:[22,22],iconAnchor:[11,11]});
@@ -246,5 +248,6 @@
       showMessage("일부 매장의 위치는 확인 중입니다. 목록의 주소를 참고해 주세요.");
     }else showMessage("");
   }
-  window.hosigiStoreMapState={sync:()=>window.hosigiNaverMap?.sync?.(filtered,coords,selected),selectStore};\n  geocodeStores();
+  window.hosigiStoreMapState={sync:()=>window.hosigiNaverMap?.sync?.(filtered,coords,selected),selectStore};
+  geocodeStores();
 })();
