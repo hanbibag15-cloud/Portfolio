@@ -19,6 +19,23 @@
     {id:"busan-beomcheon",name:"범천점",district:"부산진구",address:"부산광역시 부산진구 신암로 74",phone:"051-647-1238"},
     {id:"busan-myeongjang",name:"명장점",district:"동래구",address:"부산광역시 동래구 안락로51번길 9",phone:"051-524-8292"}
   ];
+
+  // Province/district classification from actual store addresses; no guessed locations.
+  const regionNames={"서울특별시":"서울","부산광역시":"부산","대구광역시":"대구","인천광역시":"인천","광주광역시":"광주","대전광역시":"대전","울산광역시":"울산","세종특별자치시":"세종","경기도":"경기","강원특별자치도":"강원","충청북도":"충북","충청남도":"충남","전북특별자치도":"전북","전라북도":"전북","전라남도":"전남","경상북도":"경북","경상남도":"경남","제주특별자치도":"제주"};
+  const seenBranches=new Set();
+  for(const store of stores){
+    const parts=store.address.trim().split(/\s+/);
+    store.province=regionNames[parts[0]]||"";
+    store.district=parts[1]||store.district;
+    // Format check only; this does not certify that a branch is currently open.
+    store.addressValid=Boolean(store.province && /(?:구|군|시)$/.test(store.district) &&
+      parts.length>=4 && /(?:로|길)\S*\s+\d+(?:-\d+)?$/.test(store.address));
+    const key=store.name+"|"+store.address;
+    if(seenBranches.has(key))console.warn("중복 매장:",store.name);
+    seenBranches.add(key);
+    if(!store.addressValid)console.warn("상세 주소 확인 필요:",store.name,store.address);
+  }
+
   const form=document.querySelector("#store-search-form");
   const keyword=document.querySelector("#store-keyword");
   const district=document.querySelector("#store-district");
@@ -29,6 +46,21 @@
   const fallback=document.querySelector("#store-map-fallback");
   const gpsButton=document.querySelector("#store-gps-button");
   if(!form || !keyword || !district || !list || !count || !mapElement) return;
+
+  // Build region choices from source records, so new provinces appear automatically.
+  const regions=[...new Set(stores.map(x=>x.province).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"ko"));
+  const regionOptions=[["all","등록된 매장 전체"]];
+  for(const province of regions){
+    regionOptions.push(["province:"+province,province]);
+    const names=[...new Set(stores.filter(x=>x.province===province).map(x=>x.district))].sort((a,b)=>a.localeCompare(b,"ko"));
+    for(const name of names)regionOptions.push(["district:"+province+"|"+name,province+" · "+name]);
+  }
+  district.replaceChildren(...regionOptions.map(([value,label])=>{
+    const option=document.createElement("option");
+    option.value=value;option.textContent=label;
+    return option;
+  }));
+
   // Match the header submenu visually while retaining the native select as form state.
   const districtField=district.closest(".store-field");
   if(districtField){
@@ -199,7 +231,7 @@
     for(const store of filtered){
       const card=document.createElement("article");card.className="store-card";card.dataset.id=store.id;
       if(store.id===selected)card.classList.add("is-selected");
-      const tag=document.createElement("span");tag.className="store-card-category";tag.textContent=(store.address.startsWith("부산") ? "부산" : "서울")+" · "+store.district;
+      const tag=document.createElement("span");tag.className="store-card-category";tag.textContent=store.province+" · "+store.district;
       const title=document.createElement("h4");title.textContent="호식이두마리치킨 "+store.name;
       const address=document.createElement("p");address.className="store-card-address";address.textContent=store.address;
       const actions=document.createElement("div");actions.className="store-card-actions";
@@ -211,14 +243,25 @@
         number.setAttribute("aria-label",store.name+" 전화 "+store.phone);
         actions.append(number);
       }
-      card.append(tag,title,address,actions);fragment.append(card);
+      if(!store.addressValid){
+        const warning=document.createElement("p");
+        warning.className="store-card-address-warning";
+        warning.textContent="정확한 도로명주소 확인 필요 · 지도 핀 미표시";
+        card.append(tag,title,address,warning,actions);
+      }else card.append(tag,title,address,actions);
+      fragment.append(card);
     }
     list.append(fragment);
   }
   function applySearch(){
     const term=keyword.value.trim().toLocaleLowerCase("ko");
     const region=district.value;
-    filtered=stores.filter(store=>(region==="all"||store.district===region||store.address.startsWith(region))&&(!term||[store.name,store.address,store.district].some(v=>v.toLocaleLowerCase("ko").includes(term))));
+    filtered=stores.filter(store=>{
+      const area=region==="all" ||
+        (region.startsWith("province:")&&store.province===region.slice(9)) ||
+        (region.startsWith("district:")&&store.province+"|"+store.district===region.slice(9));
+      return area&&(!term||[store.name,store.address,store.district,store.province].some(v=>v.toLocaleLowerCase("ko").includes(term)));
+    });
     if(!filtered.some(store=>store.id===selected))selected=null;
     renderCards();refreshMarkers();fitPoints();
   }
