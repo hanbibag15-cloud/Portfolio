@@ -417,8 +417,23 @@
   let userLocationMarker=null;
   let userAccuracyCircle=null;
   let gpsRequestNumber=0;
+  let gpsVisible=false;
   if(gpsButton){
+    gpsButton.setAttribute("aria-pressed","false");
     gpsButton.addEventListener("click",()=>{
+      if(gpsVisible){
+        // Second click hides the location overlays without moving the map.
+        ++gpsRequestNumber; // Invalidate any pending moveend callback.
+        map.stop();
+        if(userLocationMarker){map.removeLayer(userLocationMarker);userLocationMarker=null;}
+        if(userAccuracyCircle){map.removeLayer(userAccuracyCircle);userAccuracyCircle=null;}
+        window.hosigiNaverMap?.clearLocation?.();
+        gpsVisible=false;
+        gpsNavigationActive=false;
+        gpsButton.setAttribute("aria-pressed","false");
+        showMessage("");
+        return;
+      }
       // Lock the viewport before the asynchronous location permission request.
       // Font loading, initial geocoding and resize callbacks must not recenter it.
       gpsNavigationActive=true;
@@ -436,6 +451,8 @@
         gpsButton.disabled=false;
         gpsButton.removeAttribute("aria-busy");
         const point=[position.coords.latitude,position.coords.longitude];
+        gpsVisible=true;
+        gpsButton.setAttribute("aria-pressed","true");
         window.hosigiNaverMap?.locate?.(point,position.coords.accuracy);
         if(userLocationMarker)map.removeLayer(userLocationMarker);
         if(userAccuracyCircle)map.removeLayer(userAccuracyCircle);
@@ -471,6 +488,8 @@
         }
       },error=>{
         gpsNavigationActive=false;
+        gpsVisible=false;
+        gpsButton.setAttribute("aria-pressed","false");
         gpsButton.disabled=false;
         gpsButton.removeAttribute("aria-busy");
         const msg=error.code===1 ? "위치 권한이 허용되지 않았습니다. 브라우저 위치 설정을 확인해 주세요."
