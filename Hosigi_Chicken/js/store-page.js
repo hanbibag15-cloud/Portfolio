@@ -562,9 +562,18 @@
       closeOnClick:false,
       autoClose:false,
       autoPan:false,
-      offset:[0,-78],
+      offset:[0,-55],
       className:"store-selected-popup"
     }).setLatLng(coords.get(id)).setContent(content).openOn(map);
+  }
+  function updatePinSelection(){
+    // Do not destroy/recreate markers when a selected pin is toggled.
+    // Recreating markers during their own click handler caused a visible flicker.
+    for(const [storeId,marker] of markers){
+      const pin=marker.getElement()?.querySelector(".store-marker-pin");
+      pin?.classList.toggle("is-active",storeId===selected);
+    }
+    window.hosigiNaverMap?.setSelection?.(selected);
   }
   function selectStore(id,scrollToCard=true) {
     gpsNavigationActive=false;
@@ -578,7 +587,7 @@
         card.classList.remove("is-selected");
         card.querySelector(".store-card-hit-area")?.setAttribute("aria-pressed","false");
       }
-      refreshMarkers();
+      updatePinSelection();
       return;
     }
     selected=id;
@@ -599,7 +608,7 @@
         if(Math.abs(offset)>1)list.scrollBy({top:offset,behavior:reduceMotion()?"auto":"smooth"});
       }
     }
-    refreshMarkers();
+    updatePinSelection();
     const store=stores.find(item=>item.id===id);
     if(!map || !store)return;
     const goToPoint=(pt)=>{
