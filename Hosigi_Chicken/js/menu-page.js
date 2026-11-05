@@ -171,11 +171,10 @@ function renderMenu(category) {
         );
         if (matched) {
             pendingProductFocus = false;
-            matched.classList.add("is-deep-linked");
-            matched.tabIndex = -1;
+            // Move naturally to the requested product without decorating its card.
             requestAnimationFrame(() => requestAnimationFrame(() => {
-                matched.scrollIntoView({behavior:"auto",block:"center"});
-                matched.focus({preventScroll:true});
+                const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                matched.scrollIntoView({behavior:reduceMotion ? "auto" : "smooth",block:"center"});
             }));
         }
     }
