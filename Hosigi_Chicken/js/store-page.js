@@ -308,57 +308,57 @@
   // Distance between GPS and selected store is a straight-line estimate.
   let gpsPoint=null;
   let distanceLine=null;
-  let distanceLabel=null;
   let distanceRenderId=0;
-  const kmBetween=(a,b)=>{
-    const rad=Math.PI/180;
-    const dLat=(b[0]-a[0])*rad,dLng=(b[1]-a[1])*rad;
-    const h=Math.sin(dLat/2)**2+Math.cos(a[0]*rad)*Math.cos(b[0]*rad)*Math.sin(dLng/2)**2;
-    return 6371*2*Math.atan2(Math.sqrt(h),Math.sqrt(1-h));
-  };
-  const distanceText=(a,b)=>{
-    const km=kmBetween(a,b);
-    return km<1 ? "직선거리 "+Math.round(km*1000)+"m" : "직선거리 "+km.toFixed(1)+"km";
-  };
+  // Draw by moving the endpoint through geographic coordinates. Unlike a
+  // pixel dash animation, the line stays intact after any map zoom or pan.
   function clearDistance(){
     ++distanceRenderId;
     if(distanceLine){map?.removeLayer(distanceLine);distanceLine=null;}
-    if(distanceLabel){map?.removeLayer(distanceLabel);distanceLabel=null;}
     window.hosigiNaverMap?.clearDistance?.();
   }
   function drawDistance(fit=true){
     clearDistance();
     if(!map||!gpsVisible||!gpsPoint||!selected||!coords.has(selected))return false;
-    const destination=coords.get(selected);
-    const from=gpsPoint;
-    const middle=[(from[0]+destination[0])/2,(from[1]+destination[1])/2];
-    distanceLine=L.polyline([from,destination],{
+    const from=gpsPoint.slice();
+    const destination=coords.get(selected).slice();
+    const renderId=distanceRenderId;
+    distanceLine=L.polyline([from,from],{
       color:"#E60012",weight:4,opacity:.95,interactive:false,
       lineCap:"round",className:"store-distance-line"
     }).addTo(map);
-    const label=L.divIcon({
-      className:"store-distance-label-wrapper",
-      html:'<span class="store-distance-label">'+distanceText(from,destination)+'</span>',
-      iconSize:[150,36],iconAnchor:[75,18]
-    });
-    distanceLabel=L.marker(middle,{icon:label,interactive:false,zIndexOffset:1100}).addTo(map);
-    // Animate only opacity. A fixed pixel dash length becomes invalid when the
-    // map zooms and used to make the line appear broken or disappear.
-    const path=distanceLine.getElement();
-    if(path){
-      path.style.strokeDasharray="none";
-      path.style.strokeDashoffset="0";
-      if(reduceMotion())path.style.animation="none";
-    }
-    window.hosigiNaverMap?.setDistance?.(from,destination,distanceText(from,destination),fit);
+    const drawLine=()=>{
+      if(renderId!==distanceRenderId||!distanceLine)return;
+      if(reduceMotion()){
+        distanceLine.setLatLngs([from,destination]);
+        return;
+      }
+      const start=performance.now();
+      const duration=680;
+      const frame=now=>{
+        if(renderId!==distanceRenderId||!distanceLine)return;
+        const t=Math.min(1,(now-start)/duration);
+        const eased=1-Math.pow(1-t,3);
+        const end=[
+          from[0]+(destination[0]-from[0])*eased,
+          from[1]+(destination[1]-from[1])*eased
+        ];
+        distanceLine.setLatLngs([from,end]);
+        if(t<1)requestAnimationFrame(frame);
+        else distanceLine.setLatLngs([from,destination]);
+      };
+      requestAnimationFrame(frame);
+    };
+    // Keep the two map implementations in sync without showing any text.
+    window.hosigiNaverMap?.setDistance?.(from,destination,fit);
     if(fit){
-      // Show both points, preserving generous padding for pin and label.
       map.stop();
+      map.once("moveend",drawLine);
       map.flyToBounds(L.latLngBounds([from,destination]),{
         padding:[80,80],maxZoom:16,
-        animate:!reduceMotion(),duration:.75
+        animate:!reduceMotion(),duration:.65
       });
-    }
+      if(reduceMotion())drawLine();
+    }else drawLine();
     return true;
   }
   // Async address lookups must not override a cluster/store chosen by the visitor.
