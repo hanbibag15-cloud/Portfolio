@@ -16,14 +16,16 @@
   let activeClusterKey=null;
   let locationGeneration=0;
   let clusterMorphing=false;
-  let distanceLine=null;
+  let distanceLine=null,distanceLabel=null;
   let distanceGeneration=0;
   function clearDistance(){
     ++distanceGeneration;
     distanceLine?.setMap(null);
+    distanceLabel?.setMap(null);
     distanceLine=null;
+    distanceLabel=null;
   }
-  function setDistance(from,to,fit=true){
+  function setDistance(from,to,distanceValue,fit=true){
     if(!map)return;
     clearDistance();
     const generation=distanceGeneration;
@@ -31,6 +33,15 @@
     distanceLine=new naver.maps.Polyline({
       map,path:[ll(startPoint),ll(startPoint)],
       strokeColor:"#E60012",strokeWeight:4,strokeOpacity:.95
+    });
+    const mid=[(startPoint[0]+endPoint[0])/2,(startPoint[1]+endPoint[1])/2];
+    distanceLabel=new naver.maps.Marker({
+      map,position:ll(mid),clickable:false,zIndex:200,
+      icon:{
+        content:'<span class="store-distance-text">'+distanceValue+'</span>',
+        size:new naver.maps.Size(110,32),
+        anchor:new naver.maps.Point(55,16)
+      }
     });
     const animate=()=>{
       if(generation!==distanceGeneration||!distanceLine)return;
