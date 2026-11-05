@@ -13,6 +13,7 @@
   overlay.style.cssText="position:absolute;inset:0;z-index:2;display:none";
   panel.insertBefore(overlay,panel.firstChild);
   let map=null,naverMarkers=[],currentMarker=null,accuracyCircle=null,latest=[],coords=null,selected=null;
+  let activeClusterKey=null;
   function ll(point){return new naver.maps.LatLng(point[0],point[1]);}
   function markerHTML(active) {
     return '<div class="store-naver-pin'+(active?' is-active':'')+'"><svg class="store-location-icon" viewBox="0 0 40 52" width="40" height="52" aria-hidden="true"><path d="M20 1C9.5 1 1 9.5 1 20c0 14 19 31 19 31s19-17 19-31C39 9.5 30.5 1 20 1Z" fill="currentColor"/><circle cx="20" cy="20" r="7.5" fill="#fff"/></svg></div>';
@@ -25,11 +26,13 @@
     for(const group of groups){
       const clustered=group.items.length>1;
       const count=group.items.length;
+      const clusterKey=group.items.map(item=>item.id).sort().join("|");
+      const active=clustered&&clusterKey===activeClusterKey;
       const marker=new naver.maps.Marker({
         map,position:ll(group.point),
         title:clustered?count+"개 매장 확대해서 보기":"호식이두마리치킨 "+group.items[0].name,
         icon:clustered?{
-          content:'<div class="store-cluster-count" aria-label="'+count+'개 매장">'+count+'</div>',
+          content:'<div class="store-cluster-count'+(active?' is-selected':'')+'" aria-label="'+count+'개 매장">'+count+'</div>',
           size:new naver.maps.Size(46,46),anchor:new naver.maps.Point(23,23)
         }:{
           content:markerHTML(group.items[0].id===selected),
@@ -38,11 +41,13 @@
       });
       naver.maps.Event.addListener(marker,"click",()=>{
         if(clustered){
+          activeClusterKey=clusterKey;
+          renderMarkers(); // Immediately show selected red cluster.
           const bounds=new naver.maps.LatLngBounds(ll(group.items[0].point),ll(group.items[0].point));
           group.items.slice(1).forEach(item=>bounds.extend(ll(item.point)));
-          map.fitBounds(bounds,{top:70,right:70,bottom:70,left:70});
           const next=Math.min(18,map.getZoom()+2);
-          map.setZoom(next);
+          // morph changes center and zoom in one continuous transition.
+          map.morph(bounds.getCenter(),next,{duration:900,easing:"easeOutCubic"});
         }else window.hosigiStoreMapState?.selectStore(group.items[0].id,false);
       });
       naverMarkers.push(marker);
