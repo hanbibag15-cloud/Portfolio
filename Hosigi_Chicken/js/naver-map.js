@@ -81,7 +81,7 @@
     currentMarker?.setMap(null);accuracyCircle?.setMap(null);
     currentMarker=new naver.maps.Marker({
       map,position:ll(point),title:"내 현재 위치",
-      icon:{content:'<div class="store-naver-current"></div>',size:new naver.maps.Size(26,26),anchor:new naver.maps.Point(13,13)}
+      icon:{content:'<div class="store-naver-current"></div>',size:new naver.maps.Size(28,28),anchor:new naver.maps.Point(14,14)}
     });
     const displayAccuracy=()=>{
       accuracyCircle?.setMap(null);
