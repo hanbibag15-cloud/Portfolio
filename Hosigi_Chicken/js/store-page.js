@@ -121,7 +121,13 @@
     mapMessage.hidden=false;mapMessage.textContent=message;
   };
   function markerIcon(active) {
-    return L.divIcon({className:"store-leaflet-marker",html:'<span class="store-marker-pin'+(active?' is-active':'')+'" aria-hidden="true"><svg class="store-pin-symbol" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10V20H20V10"/><path d="M3 10L5.2 4H18.8L21 10"/><path d="M3 10C3 12 6 12 6 10C6 12 9 12 9 10C9 12 12 12 12 10C12 12 15 12 15 10C15 12 18 12 18 10C18 12 21 12 21 10"/><path d="M9 20V14H15V20"/></svg></span>',iconSize:[64,78],iconAnchor:[32,76],popupAnchor:[0,-70]});
+    return L.divIcon({
+      className:"store-leaflet-marker",
+      html:'<span class="store-marker-pin'+(active?' is-active':'')+'" aria-hidden="true"><svg class="store-location-icon" viewBox="0 0 40 52" width="40" height="52" aria-hidden="true"><path d="M20 1C9.5 1 1 9.5 1 20c0 14 19 31 19 31s19-17 19-31C39 9.5 30.5 1 20 1Z" fill="currentColor"/><circle cx="20" cy="20" r="7.5" fill="#fff"/></svg></span>',
+      iconSize:[40,52],
+      iconAnchor:[20,51],
+      popupAnchor:[0,-46]
+    });
   }
   function fitPoints() {
     if(!map)return;
