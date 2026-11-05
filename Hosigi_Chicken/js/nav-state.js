@@ -7,10 +7,11 @@
   let selected = -1;
   let hasEnteredSelectedSection = false;
 
-  function mark(index) {
+  function mark(index, fromScroll = false) {
     links.forEach((link, i) => {
-      // The main page MENU is a dropdown trigger, not an active navigation destination.
-      const active = i === index && !(page === 'brand.html' && i === 0);
+      // MENU becomes active on the homepage only when its section is in view.
+      // Clicking the header MENU trigger alone does not activate the underline.
+      const active = i === index && !(page === 'brand.html' && i === 0 && !fromScroll);
       link.classList.toggle('is-current', active);
       if (active) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
@@ -46,7 +47,7 @@
       if (visible && (selected === -1 || selected === index)) {
         selected = index;
         hasEnteredSelectedSection = true;
-        mark(index);
+        mark(index, true);
         return;
       }
     }
