@@ -16,7 +16,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
 <script src="js/naver-map-config.js?v=1" defer></script>
 <script src="js/naver-map.js?v=6" defer></script>
-<script src="js/store-page.js?v=15" defer></script>
+<script src="js/store-page.js?v=16" defer></script>
 <script src="js/store-nav.js?v=1" defer></script>
 <script src="js/smooth-wheel.js?v=4" defer></script>
 </head>
@@ -81,12 +81,17 @@
         <div class="store-field">
           <label for="store-district">지역 선택</label>
           <select id="store-district" name="district">
-            <option value="all">서울 전체</option>
+            <option value="all">등록된 매장 전체</option>
+            <option value="서울">서울</option>
+            <option value="부산">부산</option>
             <option value="강남구">강남구</option>
             <option value="관악구">관악구</option>
             <option value="마포구">마포구</option>
             <option value="송파구">송파구</option>
             <option value="용산구">용산구</option>
+            <option value="부산진구">부산진구</option>
+            <option value="사하구">사하구</option>
+            <option value="동래구">동래구</option>
           </select>
         </div>
         <div class="store-field">
@@ -97,7 +102,7 @@
       </form>
       <div class="store-results-heading">
         <h3>매장 목록</h3>
-        <p>검색 결과 <strong id="store-result-count">7</strong>개</p>
+        <p>검색 결과 <strong id="store-result-count">13</strong>개</p>
       </div>
       <div class="store-layout">
         <div class="store-list" id="store-results" aria-live="polite" aria-label="검색된 호식이 매장 목록"></div>
@@ -114,7 +119,7 @@
           </div>
         </section>
       </div>
-      <p class="store-note">※ 이 페이지는 웹디자인 학습용 리뉴얼 포트폴리오입니다. 서울 일부 매장을 예시로 소개하며 전국 지점 전체를 제공하지 않습니다. 지점 정보는 변경될 수 있고 지도 위치는 외부 지도 서비스의 주소 검색 결과를 사용합니다.</p>
+      <p class="store-note">※ 웹디자인 학습용 리뉴얼 페이지입니다. 현재 서울·부산의 주소를 확인한 일부 매장만 표시하며, 전국 모든 매장 목록은 아닙니다. 정보는 변경될 수 있으며 지도 좌표는 외부 주소 검색 결과를 사용합니다. 최신 전국 매장은 <a href="https://www.9922.co.kr/53" target="_blank" rel="noopener noreferrer" style="color:var(--brand-red);text-decoration:underline;text-underline-offset:3px">호식이 공식 매장찾기</a>에서 확인해 주세요.</p>
     </div>
   </section>
 </main>
