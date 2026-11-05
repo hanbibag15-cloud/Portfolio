@@ -232,6 +232,7 @@
     });
   }
   let activeClusterKey=null;
+  let animateClusterSplit=false;
   // GPS takes precedence over initial async geocoding and layout-driven auto-fit.
   let gpsNavigationActive=false;
   let userNavigationActive=false;
@@ -247,26 +248,28 @@
       map.fitBounds(L.latLngBounds(pts),{padding:[45,45],maxZoom:13,animate:!reduceMotion()});
     }
   }
-  function refreshMarkers(){
+  function refreshMarkers(revealSplit=false){
     if(!map || !markerLayer)return;
     markerLayer.clearLayers();markers.clear();
     window.hosigiNaverMap?.sync?.(filtered,coords,selected);
     const mapped=filtered.filter(store=>coords.has(store.id)).map(store=>({...store,point:coords.get(store.id)}));
     const groups=window.hosigiClusterStores?window.hosigiClusterStores(mapped,map.getZoom()):mapped.map(store=>({items:[store],point:store.point}));
-    for(const group of groups){
+    for(const [index,group] of groups.entries()){
+      const enterDelay=Math.min(index*55,260);
       if(group.items.length>1){
         const count=group.items.length;
         const clusterKey=group.items.map(item=>item.id).sort().join("|");
         const active=clusterKey===activeClusterKey;
         const icon=L.divIcon({
           className:"store-cluster-wrapper",
-          html:'<span class="store-cluster-count'+(active?' is-selected':'')+'" aria-label="'+count+'개 매장">'+count+'</span>',
+          html:'<span class="store-cluster-count'+(active?' is-selected':'')+(revealSplit?' is-entering':'')+'" style="--store-enter-delay:'+enterDelay+'ms" aria-label="'+count+'개 매장">'+count+'</span>',
           iconSize:[46,46],iconAnchor:[23,23]
         });
         const clustered=L.marker(group.point,{icon,title:count+"개 매장 확대해서 보기"});
         clustered.on("click",()=>{
           userNavigationActive=true;
           map.stop();
+          animateClusterSplit=true;
           activeClusterKey=clusterKey;
           clustered.getElement()?.querySelector(".store-cluster-count")?.classList.add("is-selected");
           const points=group.items.map(item=>item.point);
@@ -289,6 +292,12 @@
       const store=group.items[0];
       const point=store.point;
       const marker=L.marker(point,{icon:markerIcon(store.id===selected),title:"호식이두마리치킨 "+store.name});
+      if(revealSplit){
+        marker.on("add",()=>{
+          const pin=marker.getElement()?.querySelector(".store-marker-pin");
+          if(pin){pin.classList.add("is-entering");pin.style.setProperty("--store-enter-delay",enterDelay+"ms");}
+        });
+      }
       const popup=document.createElement("div");
       const heading=document.createElement("strong");
       heading.className="store-popup-title";heading.textContent="호식이두마리치킨 "+store.name;
@@ -401,7 +410,11 @@
     if(!hasLoadedTiles)showMessage("지도 타일을 불러올 수 없습니다. 네트워크 연결을 확인하고 다시 새로고침해 주세요.");
   });
   markerLayer=L.layerGroup().addTo(map);
-  map.on("zoomend",refreshMarkers);
+  map.on("zoomend",()=>{
+    const reveal=animateClusterSplit;
+    animateClusterSplit=false;
+    refreshMarkers(reveal);
+  });
   let userLocationMarker=null;
   let userAccuracyCircle=null;
   let gpsRequestNumber=0;
