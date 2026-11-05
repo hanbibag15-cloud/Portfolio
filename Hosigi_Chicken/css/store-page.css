@@ -654,33 +654,10 @@
 .store-card.is-location-unavailable {border-style:dashed;}
 
 
-/* Map-anchored GPS-to-store distance. Never retain a pixel dash length:
-   the line must remain solid when zooming or panning. */
+/* Solid distance connection. Its endpoint is animated in geographic space,
+   so zooming and dragging keep the red line continuous. */
 .store-distance-line {
   pointer-events:none;
   stroke-dasharray:none !important;
   stroke-dashoffset:0 !important;
-  animation:hosigi-distance-line-in .42s ease-out both;
-}
-.store-distance-label-wrapper {background:transparent;border:0;pointer-events:none;}
-.store-distance-label {
-  display:flex;align-items:center;justify-content:center;
-  width:150px;height:36px;
-  padding:0;margin:0;border:0;border-radius:0;
-  background:transparent;box-shadow:none;
-  color:#E60012;font:800 15px/1.3 var(--font);
-  text-align:center;white-space:nowrap;pointer-events:none;
-  text-shadow:0 1px 3px #fff,0 -1px 3px #fff,1px 0 3px #fff,-1px 0 3px #fff;
-  animation:hosigi-distance-text-in .35s ease-out both;
-}
-@keyframes hosigi-distance-line-in {
-  from {stroke-opacity:0;}
-  to {stroke-opacity:.95;}
-}
-@keyframes hosigi-distance-text-in {
-  from {opacity:0;transform:translateY(4px);}
-  to {opacity:1;transform:translateY(0);}
-}
-@media(prefers-reduced-motion:reduce) {
-  .store-distance-line,.store-distance-label{animation:none;}
 }
