@@ -16,6 +16,34 @@
   let activeClusterKey=null;
   let locationGeneration=0;
   let clusterMorphing=false;
+  let distanceLine=null,distanceLabel=null;
+  function clearDistance(){
+    distanceLine?.setMap(null);
+    distanceLabel?.setMap(null);
+    distanceLine=null;distanceLabel=null;
+  }
+  function setDistance(from,to,text,fit=true){
+    if(!map)return;
+    clearDistance();
+    const lineCoords=[ll(from),ll(to)];
+    distanceLine=new naver.maps.Polyline({
+      map,path:lineCoords,strokeColor:"#E60012",strokeWeight:4,strokeOpacity:.95
+    });
+    const mid=[(from[0]+to[0])/2,(from[1]+to[1])/2];
+    distanceLabel=new naver.maps.Marker({
+      map,position:ll(mid),clickable:false,
+      icon:{
+        content:'<div class="store-distance-label">'+text+'</div>',
+        size:new naver.maps.Size(150,36),anchor:new naver.maps.Point(75,18)
+      },
+      zIndex:200
+    });
+    if(fit){
+      const bounds=new naver.maps.LatLngBounds(ll(from),ll(from));
+      bounds.extend(ll(to));
+      map.fitBounds(bounds,{top:80,right:80,bottom:80,left:80});
+    }
+  }
   function ll(point){return new naver.maps.LatLng(point[0],point[1]);}
   function markerHTML(active) {
     return '<div class="store-naver-pin'+(active?' is-active':'')+'"><svg class="store-location-icon" viewBox="0 0 40 52" width="40" height="52" aria-hidden="true"><path d="M20 1C9.5 1 1 9.5 1 20c0 14 19 31 19 31s19-17 19-31C39 9.5 30.5 1 20 1Z" fill="currentColor"/><circle cx="20" cy="20" r="7.5" fill="#fff"/></svg></div>';
@@ -63,6 +91,7 @@
   }
   function resetView(){
     if(!map)return;
+    clearDistance();
     clearLocation();
     activeClusterKey=null;
     selected=null;
@@ -97,6 +126,7 @@
     map.setZoom(14);
   }
   function clearLocation(){
+    clearDistance();
     ++locationGeneration;
     currentMarker?.setMap(null);
     accuracyCircle?.setMap(null);
@@ -127,7 +157,7 @@
     map.setZoom(14);
     map.panTo(ll(point));
   }
-  window.hosigiNaverMap={sync,focus,locate,clearLocation,clearClusterSelection,resetView};
+  window.hosigiNaverMap={sync,focus,locate,clearLocation,clearClusterSelection,resetView,setDistance,clearDistance};
   window.navermap_authFailure=()=>{overlay.style.display="none";host.style.visibility="visible";window.hosigiNaverMap=null;};
   const script=document.createElement("script");
   script.src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId="+encodeURIComponent(clientId);
