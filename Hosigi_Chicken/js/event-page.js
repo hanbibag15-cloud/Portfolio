@@ -104,5 +104,5 @@
       if(event.key==="Enter"||event.key===" "){event.preventDefault();control();}
     });
   });
-  render("active");
+  render("ended");
 })();
