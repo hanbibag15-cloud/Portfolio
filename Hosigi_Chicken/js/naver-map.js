@@ -32,7 +32,8 @@
     const startPoint=from.slice(),endPoint=to.slice();
     distanceLine=new naver.maps.Polyline({
       map,path:[ll(startPoint),ll(startPoint)],
-      strokeColor:"#E60012",strokeWeight:4,strokeOpacity:.95
+      strokeColor:"#E60012",strokeWeight:4,strokeOpacity:.95,
+      strokeLineCap:"round",strokeLineJoin:"round"
     });
     const mid=[(startPoint[0]+endPoint[0])/2,(startPoint[1]+endPoint[1])/2];
     const revealDistance=()=>{
@@ -40,7 +41,7 @@
       distanceLabel=new naver.maps.Marker({
         map,position:ll(mid),clickable:false,zIndex:200,
         icon:{
-          content:'<span class="store-distance-text">'+distanceValue+'</span>',
+          content:'<div class="store-distance-text-anchor"><span class="store-distance-text">'+distanceValue+'</span></div>',
           size:new naver.maps.Size(120,36),
           anchor:new naver.maps.Point(60,18)
         }
