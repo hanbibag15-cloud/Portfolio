@@ -316,3 +316,25 @@
 .store-district-chevron{position:absolute;right:18px;top:50%;margin-top:-5px;}
 .store-district-option{text-align:center;}
 @media(max-width:767px){.store-district-chevron{right:12px;}}
+
+/* Map markers: brand red by default, dark only when selected. */
+.store-map .store-marker-pin,
+.store-map-panel .store-naver-pin {
+  background-color:var(--brand-red);
+  transition:background-color .2s ease;
+}
+.store-map .store-marker-pin::after,
+.store-map-panel .store-naver-pin::after {
+  border-top-color:var(--brand-red);
+}
+.store-map .store-marker-pin.is-active,
+.store-map-panel .store-naver-pin.is-active {
+  background-color:var(--brand-brown);
+}
+.store-map .store-marker-pin.is-active::after,
+.store-map-panel .store-naver-pin.is-active::after {
+  border-top-color:var(--brand-brown);
+}
+@media(prefers-reduced-motion:reduce){
+  .store-map .store-marker-pin,.store-map-panel .store-naver-pin{transition:none;}
+}
