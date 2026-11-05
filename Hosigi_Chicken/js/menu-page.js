@@ -164,54 +164,60 @@ function renderMenu(category) {
         article.append(photo, body);
         return article;
     }));
-    // Main-page deep link: wait until scrolling settles before highlighting.
-    // A fixed delay would end before distant products have reached the viewport.
+    // Highlight only after the linked menu has reached the viewport.
     if (pendingProductFocus && requestedProduct) {
+        const aliases = {"크리스피골드":"크리스피골드"};
+        const normalize = name => aliases[normalizeProductName(name)] || normalizeProductName(name);
         const matched = [...grid.querySelectorAll(".all-menu-card")].find(card =>
-            normalizeProductName(card.dataset.productName) === normalizeProductName(requestedProduct)
+            normalize(card.dataset.productName) === normalize(requestedProduct)
         );
         if (matched) {
             pendingProductFocus = false;
             requestAnimationFrame(() => requestAnimationFrame(() => {
-                const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-                let started = false;
-                let fallbackTimer = null;
-                let settledTimer = null;
-                const visible = () => {
+                const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                if(reduced){
+                    matched.scrollIntoView({behavior:"auto",block:"center"});
+                    return;
+                }
+                let done=false,observer=null,deadline=null,settle=null;
+                const centered=()=>{
                     const rect=matched.getBoundingClientRect();
-                    const height=window.innerHeight;
-                    return rect.top < height * .78 && rect.bottom > height * .22;
+                    const middle=(rect.top+rect.bottom)/2;
+                    return middle>window.innerHeight*.15 && middle<window.innerHeight*.85;
                 };
-                const reveal = () => {
-                    if(started || !matched.isConnected || !visible())return;
-                    started=true;
-                    window.removeEventListener("scroll",onScroll);
-                    window.removeEventListener("scrollend",onSettled);
-                    clearTimeout(settledTimer);
-                    clearTimeout(fallbackTimer);
-                    if(reduceMotion)return;
+                const highlight=()=>{
+                    if(done || !matched.isConnected || !centered())return;
+                    done=true;
+                    observer?.disconnect();
+                    clearTimeout(deadline);clearTimeout(settle);
+                    window.removeEventListener("scrollend",onEnd);
+                    const photo=matched.querySelector(".all-menu-photo");
+                    if(!photo)return;
                     matched.classList.add("is-product-arrival-highlight");
-                    matched.addEventListener("animationend",event=>{
-                        if(event.target===matched.querySelector(".all-menu-photo") &&
-                           event.animationName==="hosigi-product-arrival"){
+                    photo.addEventListener("animationend",e=>{
+                        if(e.animationName==="hosigi-product-arrival")
                             matched.classList.remove("is-product-arrival-highlight");
-                        }
                     },{once:true});
                 };
-                const onSettled=()=>{requestAnimationFrame(reveal);};
-                const onScroll=()=>{
-                    clearTimeout(settledTimer);
-                    settledTimer=setTimeout(reveal,130);
-                };
-                if(!reduceMotion){
-                    window.addEventListener("scroll",onScroll,{passive:true});
-                    window.addEventListener("scrollend",onSettled,{once:true});
-                    // Ensures first-viewport products and browsers without scrollend work.
-                    fallbackTimer=setTimeout(reveal,2600);
+                const onEnd=()=>highlight();
+                window.addEventListener("scrollend",onEnd);
+                if("IntersectionObserver" in window){
+                    observer=new IntersectionObserver(entries=>{
+                        if(entries.some(e=>e.isIntersecting) && centered()){
+                            clearTimeout(settle);
+                            settle=setTimeout(highlight,180);
+                        }
+                    },{threshold:[0,.25,.5]});
+                    observer.observe(matched);
                 }
-                matched.scrollIntoView({behavior:reduceMotion?"auto":"smooth",block:"center"});
-                if(reduceMotion)reveal();
-                else settledTimer=setTimeout(reveal,250);
+                matched.scrollIntoView({behavior:"smooth",block:"center"});
+                if(centered())settle=setTimeout(highlight,250);
+                // Fallback: ensure long scrolls still show the highlight.
+                deadline=setTimeout(()=>{
+                    if(done)return;
+                    if(!centered())matched.scrollIntoView({behavior:"auto",block:"center"});
+                    requestAnimationFrame(highlight);
+                },2000);
             }));
         }
     }
