@@ -735,3 +735,26 @@
     animation:none!important;
   }
 }
+
+/* Leaflet's speech-bubble tail is a rotated square. Preserve rotate(45deg)
+   during entrance/exit: the preceding translate-only animation flattened it. */
+.store-map-panel .store-selected-popup .leaflet-popup-tip-container {
+  overflow:visible;
+}
+.store-map-panel .store-selected-popup .leaflet-popup-tip {
+  display:block;
+  background:#fff;
+  transform:rotate(45deg);
+  animation:hosigi-popup-tail-enter .2s ease-out both;
+}
+.store-map-panel .store-selected-popup.is-dismissing .leaflet-popup-tip {
+  animation:hosigi-popup-tail-exit .18s ease-in both;
+}
+@keyframes hosigi-popup-tail-enter {
+  from {opacity:0;transform:translateY(5px) rotate(45deg);}
+  to {opacity:1;transform:translateY(0) rotate(45deg);}
+}
+@keyframes hosigi-popup-tail-exit {
+  from {opacity:1;transform:translateY(0) rotate(45deg);}
+  to {opacity:0;transform:translateY(5px) rotate(45deg);}
+}
