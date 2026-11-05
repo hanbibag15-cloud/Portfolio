@@ -4,6 +4,13 @@
 (() => {
   "use strict";
   const stores = [
+    {id:"expand-20261105-1",name:"풍무점",address:"경기도 김포시 풍무2로 59",phone:""}, // turn865450search9
+    {id:"expand-20261105-2",name:"청라1호점",address:"인천광역시 서구 청라에메랄드로 99",phone:"032-623-4343"}, // turn865450search1
+    {id:"expand-20261105-3",name:"성서2호점",address:"대구광역시 달서구 성지로18길 10-4",phone:"053-586-9982"}, // turn202210search2
+    {id:"expand-20261105-4",name:"본리점",address:"대구광역시 달서구 대명천로42길 22",phone:""}, // turn202210search0
+    {id:"expand-20261105-5",name:"명촌점",address:"울산광역시 북구 명촌20길 33",phone:""}, // turn865450search2
+    {id:"expand-20261105-6",name:"김해율하점",address:"경상남도 김해시 율하3로8번길 8-24",phone:"055-724-2223"}, // turn189625search3
+    {id:"expand-20261105-7",name:"건입점",address:"제주특별자치도 제주시 동문로 101",phone:"0508-9591-3319"}, // turn189625search9
     {id:"nonhyeon",name:"논현1호점", district:"강남구",address:"서울특별시 강남구 언주로 605",phone:"02-511-9987"},
     {id:"sillim",name:"신림점",district:"관악구",address:"서울특별시 관악구 남부순환로153길 53",phone:"02-855-9923"},
     {id:"macheon",name:"마천점",district:"송파구",address:"서울특별시 송파구 마천로51가길 21",phone:""},
