@@ -231,6 +231,7 @@
       popupAnchor:[0,-46]
     });
   }
+  let activeClusterKey=null;
   function fitPoints() {
     if(!map)return;
     const pts=filtered.map(store=>coords.get(store.id)).filter(Boolean);
@@ -251,20 +252,29 @@
     for(const group of groups){
       if(group.items.length>1){
         const count=group.items.length;
+        const clusterKey=group.items.map(item=>item.id).sort().join("|");
+        const active=clusterKey===activeClusterKey;
         const icon=L.divIcon({
           className:"store-cluster-wrapper",
-          html:'<span class="store-cluster-count" aria-label="'+count+'개 매장">'+count+'</span>',
+          html:'<span class="store-cluster-count'+(active?' is-selected':'')+'" aria-label="'+count+'개 매장">'+count+'</span>',
           iconSize:[46,46],iconAnchor:[23,23]
         });
         const clustered=L.marker(group.point,{icon,title:count+"개 매장 확대해서 보기"});
         clustered.on("click",()=>{
+          activeClusterKey=clusterKey;
+          clustered.getElement()?.querySelector(".store-cluster-count")?.classList.add("is-selected");
           const points=group.items.map(item=>item.point);
           const bounds=L.latLngBounds(points);
+          const nextZoom=Math.min(18,map.getZoom()+2);
+          // A single animated flight avoids the jump caused by fitting bounds
+          // and then immediately calling setZoom.
           if(bounds.getNorthEast().equals(bounds.getSouthWest())){
-            map.setView(group.point,Math.min(map.getZoom()+2,18),{animate:!reduceMotion()});
+            map.flyTo(bounds.getCenter(),nextZoom,{animate:!reduceMotion(),duration:0.9});
           }else{
-            map.fitBounds(bounds,{padding:[70,70],maxZoom:Math.min(18,map.getZoom()+3),animate:!reduceMotion()});
-            if(map.getZoom()<=12)map.setZoom(Math.min(14,map.getZoom()+2));
+            map.flyToBounds(bounds,{
+              padding:[65,65],maxZoom:nextZoom,
+              animate:!reduceMotion(),duration:0.9
+            });
           }
         });
         clustered.addTo(markerLayer);
