@@ -16,6 +16,10 @@
   const grid=document.getElementById("event-card-grid");
   const count=document.getElementById("event-count");
   const filters=[...document.querySelectorAll(".event-filter")];
+  const statusFilters=[...document.querySelectorAll(".event-status-filter")];
+  const notices=[]; // 공식 게시물을 검증한 뒤 등록 (가짜 공지 생성 방지)
+  let currentSection="events";
+  let currentStatus="all";
   const backdrop=document.getElementById("event-detail-backdrop");
   const closeButton=backdrop.querySelector(".event-detail-close");
   let previousFocus=null;
@@ -60,24 +64,43 @@
     button.addEventListener("click",()=>openDetail(event));
     return article;
   }
-  function render(filter){
-    const selected=events.filter(event=>event.state===filter);
+  function render(){
+    const dataset=currentSection==="events"?events:notices;
+    const selected=dataset.filter(entry=>
+      currentStatus==="all" ||
+      (currentStatus==="active"&&entry.state==="active") ||
+      (currentStatus==="ended"&&entry.state==="ended")
+    );
     grid.replaceChildren(...selected.map(makeCard));
     const heading=document.getElementById("event-list-title");
-    heading.textContent=filter==="active"?"진행중인 이벤트":"종료 이벤트";
-    count.textContent=selected.length+"개의 이벤트";
+    const sectionLabel=currentSection==="events"?"이벤트":"공지사항";
+    heading.textContent=(currentStatus==="all"?"전체 ":currentStatus==="active"?"진행중 ":"종료 ")+sectionLabel;
+    count.textContent=selected.length+"개의 "+sectionLabel;
     if(!selected.length){
       const empty=document.createElement("div");
       empty.className="event-empty";
       const title=document.createElement("strong");
-      title.textContent="현재 확인된 진행중 이벤트가 없습니다.";
       const copy=document.createElement("p");
-      copy.textContent="공식적으로 진행 여부가 확인되는 이벤트가 등록되면 이곳에서 확인할 수 있어요.";
+      if(currentSection==="notices"){
+        title.textContent="현재 등록된 공지사항이 없습니다.";
+        copy.textContent="공식 게시물이 확인되면 이곳에 안내할 예정입니다.";
+      }else if(currentStatus==="active"){
+        title.textContent="현재 확인된 진행중 이벤트가 없습니다.";
+        copy.textContent="진행 여부가 공식 확인된 이벤트만 이 카테고리에 표시합니다.";
+      }else{
+        title.textContent="해당하는 이벤트가 없습니다.";
+        copy.textContent="다른 카테고리를 선택해 주세요.";
+      }
       empty.append(title,copy);
       grid.append(empty);
     }
     filters.forEach(button=>{
-      const active=button.dataset.filter===filter;
+      const active=button.dataset.section===currentSection;
+      button.classList.toggle("is-active",active);
+      button.setAttribute("aria-pressed",String(active));
+    });
+    statusFilters.forEach(button=>{
+      const active=button.dataset.status===currentStatus;
       button.classList.toggle("is-active",active);
       button.setAttribute("aria-pressed",String(active));
     });
@@ -118,7 +141,15 @@
     document.body.classList.remove("event-dialog-open");
     previousFocus?.focus();
   }
-  filters.forEach(button=>button.addEventListener("click",()=>render(button.dataset.filter)));
+  filters.forEach(button=>button.addEventListener("click",()=>{
+    currentSection=button.dataset.section;
+    currentStatus="all";
+    render();
+  }));
+  statusFilters.forEach(button=>button.addEventListener("click",()=>{
+    currentStatus=button.dataset.status;
+    render();
+  }));
   closeButton.addEventListener("click",closeDetail);
   backdrop.addEventListener("click",event=>{if(event.target===backdrop)closeDetail();});
   document.addEventListener("keydown",event=>{
@@ -148,5 +179,5 @@
       if(event.key==="Enter"||event.key===" "){event.preventDefault();control();}
     });
   });
-  render("ended");
+  render();
 })();
