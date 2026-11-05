@@ -736,25 +736,36 @@
   }
 }
 
-/* Leaflet's speech-bubble tail is a rotated square. Preserve rotate(45deg)
-   during entrance/exit: the preceding translate-only animation flattened it. */
+/* Joined speech-bubble pointer. Clip the square into a genuine downward
+   triangle instead of exposing Leaflet's rotated diamond. */
 .store-map-panel .store-selected-popup .leaflet-popup-tip-container {
+  height:13px;
+  margin-top:-1px;
   overflow:visible;
 }
 .store-map-panel .store-selected-popup .leaflet-popup-tip {
   display:block;
+  box-sizing:border-box;
+  width:22px;
+  height:13px;
+  padding:0;
+  margin:0 auto;
   background:#fff;
-  transform:rotate(45deg);
-  animation:hosigi-popup-tail-enter .2s ease-out both;
+  border:0;
+  box-shadow:none;
+  border-radius:0;
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform:none !important;
+  animation:hosigi-popup-tail-fade-in .2s ease-out both;
 }
 .store-map-panel .store-selected-popup.is-dismissing .leaflet-popup-tip {
-  animation:hosigi-popup-tail-exit .18s ease-in both;
+  animation:hosigi-popup-tail-fade-out .18s ease-in both;
 }
-@keyframes hosigi-popup-tail-enter {
-  from {opacity:0;transform:translateY(5px) rotate(45deg);}
-  to {opacity:1;transform:translateY(0) rotate(45deg);}
+@keyframes hosigi-popup-tail-fade-in {
+  from {opacity:0;}
+  to {opacity:1;}
 }
-@keyframes hosigi-popup-tail-exit {
-  from {opacity:1;transform:translateY(0) rotate(45deg);}
-  to {opacity:0;transform:translateY(5px) rotate(45deg);}
+@keyframes hosigi-popup-tail-fade-out {
+  from {opacity:1;}
+  to {opacity:0;}
 }
