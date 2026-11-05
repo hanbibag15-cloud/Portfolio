@@ -7,7 +7,7 @@
     {id:"verified-20261105-01",name:"동탄역점",address:"경기도 화성시 동탄대로21가길 4-3",phone:""}, // source: turn747474search9
     {id:"verified-20261105-02",name:"상동1호점",address:"경기도 부천시 원미구 조마루로105번길 30",phone:""}, // source: turn747474search12
     {id:"verified-20261105-03",name:"인천갈산점",address:"인천광역시 부평구 주부토로249번길 17",phone:"032-522-1771"}, // source: turn260282search7
-    {id:"verified-20261105-04",name:"화수점",address:"인천광역시 동구 운교로 12",phone:"032-221-7772"}, // source: turn260282search4
+    {id:"verified-20261105-04",name:"화수점",address:"인천광역시 동구 운교로 12",geocodeAlt:"인천광역시 동구 화수동 287-51",phone:"032-221-7772"}, // source: turn260282search4
     {id:"verified-20261105-05",name:"인천학익점",address:"인천광역시 미추홀구 매소홀로 482",phone:"0507-1381-3085"}, // source: turn260282search0
     {id:"verified-20261105-06",name:"인천연희점",address:"인천광역시 서구 연희로14번길 9-3",phone:"032-566-6339"}, // source: turn747474search7
     {id:"verified-20261105-07",name:"인천신흥점",address:"인천광역시 중구 서해대로449번길 6-7",phone:"032-766-3755"}, // source: turn747474search13
@@ -352,6 +352,33 @@
       marker.addTo(markerLayer);markers.set(store.id,marker);
     }
   }
+  const clickGeocodeRequests=new Map();
+  async function ensureStorePoint(store) {
+    if(coords.has(store.id))return coords.get(store.id);
+    if(!store.addressValid)return null;
+    if(clickGeocodeRequests.has(store.id))return clickGeocodeRequests.get(store.id);
+    const promise=(async()=>{
+      const candidates=[store.address,...(store.geocodeAlt?[store.geocodeAlt]:[])];
+      for(const address of candidates){
+        try {
+          const endpoint="https://nominatim.openstreetmap.org/search?format=jsonv2&limit=3&countrycodes=kr&q="+encodeURIComponent(address);
+          const response=await fetch(endpoint,{headers:{"Accept":"application/json"}});
+          if(!response.ok)continue;
+          const results=await response.json();
+          for(const match of results){
+            const point=[Number(match.lat),Number(match.lon)];
+            if(validGeo(store,point)){
+              coords.set(store.id,point);saveCoords();refreshMarkers();
+              return point;
+            }
+          }
+        }catch(e){ /* Try the next verified address or show a message. */ }
+      }
+      return null;
+    })();
+    clickGeocodeRequests.set(store.id,promise);
+    try{return await promise;}finally{clickGeocodeRequests.delete(store.id);}
+  }
   function selectStore(id,scrollToCard=true) {
     gpsNavigationActive=false;
     userNavigationActive=true;
@@ -373,12 +400,35 @@
       }
     }
     refreshMarkers();
-    const pt=coords.get(id);
-    if(!map || !pt)return;
-    map.flyTo(pt,14,{animate:!reduceMotion(),duration:.65});
-    // Recalculate after flyTo so the selected store is available as an individual pin.
-    map.once("moveend",()=>{if(selected!==id)return;refreshMarkers();markers.get(id)?.openPopup();});
-    markers.get(id)?.openPopup();
+    const store=stores.find(item=>item.id===id);
+    if(!map || !store)return;
+    const goToPoint=(pt)=>{
+      if(selected!==id)return;
+      if(!pt){
+        const card=list.querySelector('.store-card[data-id="'+id+'"]');
+        card?.classList.add("is-location-unavailable");
+        card?.setAttribute("title","이 주소의 지도 좌표를 확인하지 못했습니다.");
+        return;
+      }
+      map.stop();
+      map.flyTo(pt,15,{animate:!reduceMotion(),duration:.65});
+      map.once("moveend",()=>{
+        if(selected!==id)return;
+        refreshMarkers();
+        markers.get(id)?.openPopup();
+      });
+      window.hosigiNaverMap?.focus?.(id);
+    };
+    if(coords.has(id))goToPoint(coords.get(id));
+    else {
+      // Newly imported branches may not have completed initial geocoding.
+      const card=list.querySelector('.store-card[data-id="'+id+'"]');
+      card?.classList.add("is-location-loading");
+      ensureStorePoint(store).then(pt=>{
+        card?.classList.remove("is-location-loading");
+        goToPoint(pt);
+      });
+    }
   }
   function renderCards(){
     list.replaceChildren();
