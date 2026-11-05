@@ -452,15 +452,6 @@
         const card=list.querySelector('.store-card[data-id="'+id+'"]');
         card?.classList.add("is-location-unavailable");
         card?.setAttribute("title","이 주소의 지도 좌표를 확인하지 못했습니다.");
-        if(card && !card.querySelector(".store-address-map-link")){
-          const external=document.createElement("a");
-          external.className="store-address-map-link";
-          external.href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(store.address);
-          external.target="_blank";
-          external.rel="noopener noreferrer";
-          external.textContent="외부 지도에서 주소 확인";
-          card.querySelector(".store-card-actions")?.append(external);
-        }
         return;
       }
       map.stop();
