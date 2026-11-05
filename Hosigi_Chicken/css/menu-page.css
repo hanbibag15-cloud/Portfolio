@@ -194,3 +194,6 @@
         display: none;
     }
 }
+
+/* Highlight the exact product reached from the home-page carousel. */
+.all-menu-card.is-deep-linked{outline:2px solid var(--brand-red);outline-offset:4px;scroll-margin-top:110px;}
