@@ -393,3 +393,21 @@
 @media(prefers-reduced-motion:reduce){
   .store-district-options,.store-district-option{transition:none;}
 }
+
+/* Zoomed-out store clusters: compact numeric badges, individual pins return on zoom. */
+.store-cluster-wrapper {background:transparent;border:0;}
+.store-cluster-count {
+  display:flex;align-items:center;justify-content:center;
+  width:46px;height:46px;border-radius:50%;
+  background:#E60012;color:#fff;border:4px solid #fff;
+  box-shadow:0 2px 12px rgba(34,23,20,.25);
+  font:700 15px/1 var(--font);cursor:pointer;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.store-cluster-count:hover {
+  transform:scale(1.08);
+  box-shadow:0 3px 16px rgba(34,23,20,.3);
+}
+@media(prefers-reduced-motion:reduce) {
+  .store-cluster-count{transition:none;}
+}
