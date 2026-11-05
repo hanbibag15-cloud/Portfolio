@@ -86,10 +86,9 @@
   // Build region choices from source records, so new provinces appear automatically.
   const regions=[...new Set(stores.map(x=>x.province).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"ko"));
   const regionOptions=[["all","등록된 매장 전체"]];
+  // Keep the dropdown compact: city-level choices only, not individual districts.
   for(const province of regions){
     regionOptions.push(["province:"+province,province]);
-    const names=[...new Set(stores.filter(x=>x.province===province).map(x=>x.district))].sort((a,b)=>a.localeCompare(b,"ko"));
-    for(const name of names)regionOptions.push(["district:"+province+"|"+name,province+" · "+name]);
   }
   district.replaceChildren(...regionOptions.map(([value,label])=>{
     const option=document.createElement("option");
@@ -315,8 +314,7 @@
     const region=district.value;
     filtered=stores.filter(store=>{
       const area=region==="all" ||
-        (region.startsWith("province:")&&store.province===region.slice(9)) ||
-        (region.startsWith("district:")&&store.province+"|"+store.district===region.slice(9));
+        (region.startsWith("province:")&&store.province===region.slice(9));
       return area&&(!term||[store.name,store.address,store.district,store.province].some(v=>v.toLocaleLowerCase("ko").includes(term)));
     });
     if(!filtered.some(store=>store.id===selected))selected=null;
