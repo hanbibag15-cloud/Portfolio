@@ -707,3 +707,31 @@
 .store-map-panel .store-selected-popup .leaflet-popup-close-button {
   display:none !important;
 }
+
+/* GPS + branch connection: info popup is only visible while hovering the
+   selected pin. Keep the line and km value unobstructed at rest. */
+.store-map-panel .store-selected-popup .leaflet-popup-content-wrapper,
+.store-map-panel .store-selected-popup .leaflet-popup-tip {
+  animation:hosigi-popup-enter .2s ease-out both;
+}
+.store-map-panel .store-selected-popup.is-dismissing .leaflet-popup-content-wrapper,
+.store-map-panel .store-selected-popup.is-dismissing .leaflet-popup-tip {
+  animation:hosigi-popup-exit .18s ease-in both;
+}
+.store-map-panel .store-selected-popup.is-hover-popup {
+  pointer-events:none;
+}
+@keyframes hosigi-popup-enter {
+  from {opacity:0;transform:translateY(5px);}
+  to {opacity:1;transform:translateY(0);}
+}
+@keyframes hosigi-popup-exit {
+  from {opacity:1;transform:translateY(0);}
+  to {opacity:0;transform:translateY(5px);}
+}
+@media(prefers-reduced-motion:reduce) {
+  .store-map-panel .store-selected-popup .leaflet-popup-content-wrapper,
+  .store-map-panel .store-selected-popup .leaflet-popup-tip {
+    animation:none!important;
+  }
+}
