@@ -92,7 +92,7 @@ const count = document.querySelector("#menu-count");
 let lastRenderedCategory = null;
 // Deep link from the home-page product carousel.
 const requestedProduct = new URLSearchParams(location.search).get("product");
-const normalizeProductName = name => (name || "").replace(/\\s+/g, "").trim();
+const normalizeProductName = name => (name || "").replace(/\s+/g, "").trim();
 let pendingProductFocus = Boolean(requestedProduct);
 
 function renderMenu(category) {
