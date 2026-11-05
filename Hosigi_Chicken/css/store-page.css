@@ -457,7 +457,7 @@
   transform-origin:center;
   z-index:0;
   pointer-events:none;
-  animation:hosigi-gps-ripple 4.8s ease-out infinite;
+  animation:hosigi-gps-ripple 3.2s ease-out infinite;
 }
 @keyframes hosigi-gps-ripple {
   0% {opacity:.65;transform:scale(.7);}
