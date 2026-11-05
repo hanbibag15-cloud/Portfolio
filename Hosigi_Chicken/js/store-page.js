@@ -335,7 +335,17 @@
       const active=card.dataset.id===id;
       card.classList.toggle("is-selected",active);
       card.querySelector(".store-card-hit-area")?.setAttribute("aria-pressed",String(active));
-      if(active && scrollToCard)card.scrollIntoView({block:"nearest",behavior:reduceMotion()?"auto":"smooth"});
+      if(active && scrollToCard && list.scrollHeight>list.clientHeight+1){
+        // Scroll only the card list, not the surrounding page or map.
+        // Keep 12px of space so selected borders are never clipped.
+        const outer=list.getBoundingClientRect();
+        const inner=card.getBoundingClientRect();
+        const padding=12;
+        let offset=0;
+        if(inner.top<outer.top+padding)offset=inner.top-(outer.top+padding);
+        else if(inner.bottom>outer.bottom-padding)offset=inner.bottom-(outer.bottom-padding);
+        if(Math.abs(offset)>1)list.scrollBy({top:offset,behavior:reduceMotion()?"auto":"smooth"});
+      }
     }
     refreshMarkers();
     const pt=coords.get(id);
