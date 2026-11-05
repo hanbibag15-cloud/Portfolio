@@ -430,3 +430,55 @@
 .store-map .store-current-location::after{
   border-color:rgba(230,0,18,.3);
 }
+
+/* GPS position: compact red locator with a slow, contained ripple.
+   This is a CSS-only ring, independent of the geographic accuracy circle. */
+.store-map .store-current-location,
+.store-map-panel .store-naver-current{
+  position:relative;
+  display:block;
+  box-sizing:border-box;
+  width:22px;height:22px;
+  border:3px solid #fff;
+  border-radius:50%;
+  background:#E60012;
+  overflow:visible;
+  isolation:isolate;
+  box-shadow:0 0 0 2px #E60012,0 2px 7px rgba(34,23,20,.18);
+}
+.store-map .store-current-location::before,
+.store-map-panel .store-naver-current::before{
+  content:"";
+  position:absolute;inset:-8px;
+  border:2px solid rgba(230,0,18,.24);
+  background:rgba(230,0,18,.08);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:-1;
+}
+.store-map .store-current-location::after,
+.store-map-panel .store-naver-current::after{
+  content:"";
+  position:absolute;
+  inset:-8px;
+  border:2px solid rgba(230,0,18,.48);
+  background:rgba(230,0,18,.10);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:-1;
+  opacity:0;
+  transform:scale(.55);
+  animation:hosigi-gps-ripple 4.8s ease-out infinite;
+}
+@keyframes hosigi-gps-ripple{
+  0%{opacity:.70;transform:scale(.55);}
+  62%{opacity:0;transform:scale(1.85);}
+  63%,100%{opacity:0;transform:scale(1.85);}
+}
+@media(prefers-reduced-motion:reduce){
+  .store-map .store-current-location::after,
+  .store-map-panel .store-naver-current::after{
+    animation:none;
+    opacity:0;
+  }
+}
