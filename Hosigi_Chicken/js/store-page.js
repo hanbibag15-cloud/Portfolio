@@ -309,7 +309,6 @@
   let gpsPoint=null;
   let distanceLine=null;
   let distanceLabel=null;
-  let distancePath=null;
   let distanceRenderId=0;
   const kmBetween=(a,b)=>{
     const rad=Math.PI/180;
@@ -332,7 +331,6 @@
     if(!map||!gpsVisible||!gpsPoint||!selected||!coords.has(selected))return false;
     const destination=coords.get(selected);
     const from=gpsPoint;
-    const id=distanceRenderId;
     const middle=[(from[0]+destination[0])/2,(from[1]+destination[1])/2];
     distanceLine=L.polyline([from,destination],{
       color:"#E60012",weight:4,opacity:.95,interactive:false,
@@ -344,21 +342,13 @@
       iconSize:[150,36],iconAnchor:[75,18]
     });
     distanceLabel=L.marker(middle,{icon:label,interactive:false,zIndexOffset:1100}).addTo(map);
-    // Animate SVG stroke itself, without changing the geo positions.
-    if(!reduceMotion()){
-      const path=distanceLine.getElement();
-      if(path){
-        const length=path.getTotalLength();
-        path.style.strokeDasharray=String(length);
-        path.style.strokeDashoffset=String(length);
-        path.getBoundingClientRect();
-        requestAnimationFrame(()=>{
-          if(id===distanceRenderId && path.isConnected){
-            path.style.transition="stroke-dashoffset .75s cubic-bezier(.22,1,.36,1)";
-            path.style.strokeDashoffset="0";
-          }
-        });
-      }
+    // Animate only opacity. A fixed pixel dash length becomes invalid when the
+    // map zooms and used to make the line appear broken or disappear.
+    const path=distanceLine.getElement();
+    if(path){
+      path.style.strokeDasharray="none";
+      path.style.strokeDashoffset="0";
+      if(reduceMotion())path.style.animation="none";
     }
     window.hosigiNaverMap?.setDistance?.(from,destination,distanceText(from,destination),fit);
     if(fit){
