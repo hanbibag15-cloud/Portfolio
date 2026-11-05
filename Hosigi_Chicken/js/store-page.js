@@ -411,10 +411,10 @@
         if(userAccuracyCircle)map.removeLayer(userAccuracyCircle);
         const icon=L.divIcon({className:"store-leaflet-marker",html:'<span class="store-current-location" aria-hidden="true"></span>',iconSize:[22,22],iconAnchor:[11,11]});
         userLocationMarker=L.marker(point,{icon,title:"내 현재 위치",zIndexOffset:1000}).addTo(map);
-        userLocationMarker.bindPopup("현재 위치").openPopup();
+        // Only the position marker and accuracy circle are displayed; no popup.
         userAccuracyCircle=L.circle(point,{
           radius:Math.min(Math.max(position.coords.accuracy,10),2000),
-          color:"#1674db",fillColor:"#1674db",fillOpacity:.07,weight:1
+          color:"#E60012",fillColor:"#E60012",fillOpacity:.09,weight:2
         }).addTo(map);
         map.flyTo(point,14,{animate:!reduceMotion(),duration:.75});
         showMessage("내 현재 위치를 표시했어요.");
