@@ -18,18 +18,54 @@
     {id:"busan-dadaepo",name:"다대포점",district:"사하구",address:"부산광역시 사하구 다대로 537",phone:"051-262-9986"},
     {id:"busan-beomcheon",name:"범천점",district:"부산진구",address:"부산광역시 부산진구 신암로 74",phone:"051-647-1238"},
     {id:"busan-myeongjang",name:"명장점",district:"동래구",address:"부산광역시 동래구 안락로51번길 9",phone:"051-524-8292"}
+  ,
+    // Additional locations provided in the 2026-11-05 checked-store spreadsheet.
+    {id:"import-20261105-01",name:"광안점",address:"부산광역시 수영구 광안4동",phone:"051-752-9282",addressNeedsReview:true},
+    {id:"import-20261105-02",name:"당감점",address:"부산광역시 부산진구 부암3동",phone:"051-894-0012",addressNeedsReview:true},
+    {id:"import-20261105-03",name:"수정점",address:"부산광역시 동구 수정동",phone:"051-462-2510",addressNeedsReview:true},
+    {id:"import-20261105-04",name:"사직점",address:"부산광역시 동래구 사직동",phone:"051-504-3999",addressNeedsReview:true},
+    {id:"import-20261105-05",name:"번동점",address:"서울 강북구 오현로 156",phone:"02-985-2334",addressNeedsReview:false},
+    {id:"import-20261105-06",name:"서초1호점",address:"서울 서초구 반포대로9길 75",phone:"02-522-9931",addressNeedsReview:false},
+    {id:"import-20261105-07",name:"노량진점",address:"서울 동작구 노량진로8길 70",phone:"02-821-9922",addressNeedsReview:false},
+    {id:"import-20261105-08",name:"청량리점",address:"서울 동대문구 왕산로 43",phone:"02-957-2614",addressNeedsReview:false},
+    {id:"import-20261105-09",name:"독산1호점",address:"서울 금천구 남부순환로128길 14",phone:"02-868-5592",addressNeedsReview:false},
+    {id:"import-20261105-10",name:"가산점",address:"서울 금천구 가산동 149-25",phone:"02-859-9969",addressNeedsReview:false},
+    {id:"import-20261105-11",name:"반송점",address:"부산광역시 해운대구 반송동",phone:"051-545-9933",addressNeedsReview:true},
+    {id:"import-20261105-12",name:"개금점",address:"부산광역시 부산진구 개금본동로22번길 29",phone:"051-893-8292",addressNeedsReview:false},
+    {id:"import-20261105-13",name:"가야점",address:"부산광역시 부산진구 가야공원로52번길 4",phone:"051-892-9292",addressNeedsReview:false},
+    {id:"import-20261105-14",name:"덕포점",address:"부산 사상구 백양대로768번길 8",phone:"051-305-9995",addressNeedsReview:false},
+    {id:"import-20261105-15",name:"구포점",address:"부산 북구 시랑로 47",phone:"051-333-1997",addressNeedsReview:false},
+    {id:"import-20261105-16",name:"금곡점",address:"부산 북구 효열로 69",phone:"051-361-9993",addressNeedsReview:false},
+    {id:"import-20261105-17",name:"호식이주례점",address:"부산 사상구 냉정로 132",phone:"051-315-8292",addressNeedsReview:false},
+    {id:"import-20261105-18",name:"덕천점",address:"부산 북구 만덕대로 102번길",phone:"051-341-9919",addressNeedsReview:true},
+    {id:"import-20261105-19",name:"만덕점",address:"부산 북구 만덕3로48번나길 18-1",phone:"051-335-6667",addressNeedsReview:false},
+    {id:"import-20261105-20",name:"엄궁점",address:"부산 사상구 엄궁로179번길 50",phone:"051-313-8293",addressNeedsReview:false},
+    {id:"import-20261105-21",name:"당리점",address:"부산 사하구 낙동대로356번길 56",phone:"051-293-9996",addressNeedsReview:false},
+    {id:"import-20261105-22",name:"정관점",address:"부산광역시 기장군 정관읍 방곡로 39",phone:"051-727-3198",addressNeedsReview:false},
+    {id:"import-20261105-23",name:"명지점",address:"부산광역시 강서구 명지오션시티8로12번길 9",phone:"051-291-9282",addressNeedsReview:false},
+    {id:"import-20261105-24",name:"대연점",address:"부산광역시 남구 대연동 대연동",phone:"051-626-5592",addressNeedsReview:true},
+    {id:"import-20261105-25",name:"장전점",address:"부산광역시 금정구 금정로119번길 13",phone:"051-518-9229",addressNeedsReview:false},
+    {id:"import-20261105-26",name:"영주점",address:"부산 중구 샘길 20",phone:"051-466-9911",addressNeedsReview:false},
+    {id:"import-20261105-27",name:"부산대신점",address:"부산 서구 보수대로 173(동대신동1가)",phone:"051-242-9958",addressNeedsReview:false},
+    {id:"import-20261105-28",name:"망미점",address:"부산 수영구 연수로296번길 9",phone:"051-755-8255",addressNeedsReview:false},
+    {id:"import-20261105-29",name:"신내점",address:"서울 중랑구 신내동 563-2",phone:"02-491-9979",addressNeedsReview:false},
+    {id:"import-20261105-30",name:"반여점",address:"부산 해운대구 반여로155번길 42",phone:"051-524-9909",addressNeedsReview:false},
+    {id:"import-20261105-31",name:"장산점",address:"부산 해운대구 양운로 182(좌동)",phone:"051-704-8892",addressNeedsReview:false}
   ];
 
   // Province/district classification from actual store addresses; no guessed locations.
-  const regionNames={"서울특별시":"서울","부산광역시":"부산","대구광역시":"대구","인천광역시":"인천","광주광역시":"광주","대전광역시":"대전","울산광역시":"울산","세종특별자치시":"세종","경기도":"경기","강원특별자치도":"강원","충청북도":"충북","충청남도":"충남","전북특별자치도":"전북","전라북도":"전북","전라남도":"전남","경상북도":"경북","경상남도":"경남","제주특별자치도":"제주"};
+  const regionNames={"서울":"서울","부산":"부산","서울특별시":"서울","부산광역시":"부산","대구광역시":"대구","인천광역시":"인천","광주광역시":"광주","대전광역시":"대전","울산광역시":"울산","세종특별자치시":"세종","경기도":"경기","강원특별자치도":"강원","충청북도":"충북","충청남도":"충남","전북특별자치도":"전북","전라북도":"전북","전라남도":"전남","경상북도":"경북","경상남도":"경남","제주특별자치도":"제주"};
   const seenBranches=new Set();
   for(const store of stores){
     const parts=store.address.trim().split(/\s+/);
     store.province=regionNames[parts[0]]||"";
     store.district=parts[1]||store.district;
     // Format check only; this does not certify that a branch is currently open.
-    store.addressValid=Boolean(store.province && /(?:구|군|시)$/.test(store.district) &&
-      parts.length>=4 && /(?:로|길)\S*\s+\d+(?:-\d+)?$/.test(store.address));
+    const hasStreetNumber=/(?:로|길)\S*\s+\d+(?:-\d+)?(?:\([^)]*\))?$/.test(store.address);
+    const hasLotNumber=/[가-힣]+(?:동|리)\s+\d+(?:-\d+)?$/.test(store.address);
+    store.addressValid=Boolean(!store.addressNeedsReview && store.province &&
+      /(?:구|군|시)$/.test(store.district) && parts.length>=4 &&
+      (hasStreetNumber||hasLotNumber));
     const key=store.name+"|"+store.address;
     if(seenBranches.has(key))console.warn("중복 매장:",store.name);
     seenBranches.add(key);
