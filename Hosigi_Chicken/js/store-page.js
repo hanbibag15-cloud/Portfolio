@@ -278,7 +278,7 @@
     const scrollTop=list.scrollTop;
     const focusedId=document.activeElement?.closest?.(".store-card")?.dataset.id;
     filtered=next;
-    if(selected&&!filtered.some(store=>store.id===selected))selected=null;
+    if(selected&&!filtered.some(store=>store.id===selected)){selected=null;clearDistance();}
     renderCards();
     list.scrollTop=scrollTop;
     if(focusedId){
@@ -305,6 +305,72 @@
   // GPS takes precedence over initial async geocoding and layout-driven auto-fit.
   let gpsNavigationActive=false;
   let userNavigationActive=false;
+  // Distance between GPS and selected store is a straight-line estimate.
+  let gpsPoint=null;
+  let distanceLine=null;
+  let distanceLabel=null;
+  let distancePath=null;
+  let distanceRenderId=0;
+  const kmBetween=(a,b)=>{
+    const rad=Math.PI/180;
+    const dLat=(b[0]-a[0])*rad,dLng=(b[1]-a[1])*rad;
+    const h=Math.sin(dLat/2)**2+Math.cos(a[0]*rad)*Math.cos(b[0]*rad)*Math.sin(dLng/2)**2;
+    return 6371*2*Math.atan2(Math.sqrt(h),Math.sqrt(1-h));
+  };
+  const distanceText=(a,b)=>{
+    const km=kmBetween(a,b);
+    return km<1 ? "직선거리 "+Math.round(km*1000)+"m" : "직선거리 "+km.toFixed(1)+"km";
+  };
+  function clearDistance(){
+    ++distanceRenderId;
+    if(distanceLine){map?.removeLayer(distanceLine);distanceLine=null;}
+    if(distanceLabel){map?.removeLayer(distanceLabel);distanceLabel=null;}
+    window.hosigiNaverMap?.clearDistance?.();
+  }
+  function drawDistance(fit=true){
+    clearDistance();
+    if(!map||!gpsVisible||!gpsPoint||!selected||!coords.has(selected))return false;
+    const destination=coords.get(selected);
+    const from=gpsPoint;
+    const id=distanceRenderId;
+    const middle=[(from[0]+destination[0])/2,(from[1]+destination[1])/2];
+    distanceLine=L.polyline([from,destination],{
+      color:"#E60012",weight:4,opacity:.95,interactive:false,
+      lineCap:"round",className:"store-distance-line"
+    }).addTo(map);
+    const label=L.divIcon({
+      className:"store-distance-label-wrapper",
+      html:'<span class="store-distance-label">'+distanceText(from,destination)+'</span>',
+      iconSize:[150,36],iconAnchor:[75,18]
+    });
+    distanceLabel=L.marker(middle,{icon:label,interactive:false,zIndexOffset:1100}).addTo(map);
+    // Animate SVG stroke itself, without changing the geo positions.
+    if(!reduceMotion()){
+      const path=distanceLine.getElement();
+      if(path){
+        const length=path.getTotalLength();
+        path.style.strokeDasharray=String(length);
+        path.style.strokeDashoffset=String(length);
+        path.getBoundingClientRect();
+        requestAnimationFrame(()=>{
+          if(id===distanceRenderId && path.isConnected){
+            path.style.transition="stroke-dashoffset .75s cubic-bezier(.22,1,.36,1)";
+            path.style.strokeDashoffset="0";
+          }
+        });
+      }
+    }
+    window.hosigiNaverMap?.setDistance?.(from,destination,distanceText(from,destination),fit);
+    if(fit){
+      // Show both points, preserving generous padding for pin and label.
+      map.stop();
+      map.flyToBounds(L.latLngBounds([from,destination]),{
+        padding:[80,80],maxZoom:16,
+        animate:!reduceMotion(),duration:.75
+      });
+    }
+    return true;
+  }
   // Async address lookups must not override a cluster/store chosen by the visitor.
   function fitPoints() {
     if(!map || gpsNavigationActive || userNavigationActive)return;
@@ -479,6 +545,7 @@
         card?.setAttribute("title","이 주소의 지도 좌표를 확인하지 못했습니다.");
         return;
       }
+      if(drawDistance(true))return;
       map.stop();
       map.flyTo(pt,15,{animate:!reduceMotion(),duration:.65});
       map.once("moveend",()=>{
@@ -557,6 +624,7 @@
     // A new search resets selection; '전체' also returns the camera to all branches.
     activeClusterKey=null;
     selected=null;
+    clearDistance();
     if(map){map.stop();map.closePopup();}
     window.hosigiNaverMap?.clearClusterSelection?.();
     filtered=mappedStores();
@@ -565,6 +633,8 @@
     if(userLocationMarker){map.removeLayer(userLocationMarker);userLocationMarker=null;}
     if(userAccuracyCircle){map.removeLayer(userAccuracyCircle);userAccuracyCircle=null;}
     gpsVisible=false;
+    gpsPoint=null;
+    clearDistance();
     gpsButton?.setAttribute("aria-pressed","false");
     window.hosigiNaverMap?.clearLocation?.();
     renderCards();
@@ -624,6 +694,8 @@
         if(userAccuracyCircle){map.removeLayer(userAccuracyCircle);userAccuracyCircle=null;}
         window.hosigiNaverMap?.clearLocation?.();
         gpsVisible=false;
+        gpsPoint=null;
+        clearDistance();
         gpsNavigationActive=false;
         gpsButton.setAttribute("aria-pressed","false");
         showMessage("");
@@ -646,6 +718,7 @@
         gpsButton.disabled=false;
         gpsButton.removeAttribute("aria-busy");
         const point=[position.coords.latitude,position.coords.longitude];
+        gpsPoint=point;
         gpsVisible=true;
         gpsButton.setAttribute("aria-pressed","true");
         window.hosigiNaverMap?.locate?.(point,position.coords.accuracy);
@@ -672,7 +745,8 @@
             showMessage("현재 위치는 표시했지만 GPS 오차가 커 정확도 범위는 생략했어요.");
           }
         };
-        // Stop any previous fitBounds/flyTo so only GPS controls the camera.
+        // If a store is already selected, show the pair instead of flying to GPS alone.
+        if(drawDistance(true))return;
         map.stop();
         if(!reduceMotion()){
           map.once("moveend",drawAccuracy);
@@ -684,6 +758,8 @@
       },error=>{
         gpsNavigationActive=false;
         gpsVisible=false;
+        gpsPoint=null;
+        clearDistance();
         gpsButton.setAttribute("aria-pressed","false");
         gpsButton.disabled=false;
         gpsButton.removeAttribute("aria-busy");
