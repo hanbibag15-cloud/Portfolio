@@ -92,7 +92,7 @@
 
   // Build region choices from source records, so new provinces appear automatically.
   const regions=[...new Set(stores.map(x=>x.province).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"ko"));
-  const regionOptions=[["all","등록된 매장 전체"]];
+  const regionOptions=[["all","전체"]];
   // Keep the dropdown compact: city-level choices only, not individual districts.
   for(const province of regions){
     regionOptions.push(["province:"+province,province]);
@@ -132,7 +132,7 @@
       trigger.setAttribute("aria-expanded","false");
     };
     const sync=()=>{
-      text.textContent=district.selectedOptions[0]?.textContent||"등록된 매장 전체";
+      text.textContent=district.selectedOptions[0]?.textContent||"전체";
       items.forEach(item=>{
         const chosen=item.dataset.value===district.value;
         item.classList.toggle("is-active",chosen);
