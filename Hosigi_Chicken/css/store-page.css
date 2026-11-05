@@ -636,3 +636,19 @@
 /* Reserve breathing room around the first/last store card while scrolling. */
 .store-list {scroll-padding-block:12px;}
 .store-card {scroll-margin-block:12px;}
+
+/* Card scroll safety: space above and below cards prevents selected borders
+   from being clipped at the visible list boundaries. */
+@media (min-width:768px) {
+  .store-list {
+    box-sizing:border-box;
+    padding-top:14px;
+    padding-bottom:14px;
+    scroll-padding-top:14px;
+    scroll-padding-bottom:14px;
+  }
+  .store-card {flex-shrink:0;}
+}
+.store-card-hit-area {appearance:none; -webkit-appearance:none; min-height:0;}
+.store-card.is-location-loading {cursor:progress;}
+.store-card.is-location-unavailable {border-style:dashed;}
