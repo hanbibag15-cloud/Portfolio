@@ -91,7 +91,8 @@
   if(!form || !keyword || !district || !list || !count || !mapElement) return;
 
   // Build region choices from source records, so new provinces appear automatically.
-  const regions=[...new Set(stores.map(x=>x.province).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"ko"));
+  const koreanOrder=new Intl.Collator("ko-KR",{usage:"sort",sensitivity:"base"});
+  const regions=[...new Set(stores.map(x=>x.province).filter(Boolean))].sort(koreanOrder.compare);
   const regionOptions=[["all","전체"]];
   // Keep the dropdown compact: city-level choices only, not individual districts.
   for(const province of regions){
