@@ -379,3 +379,6 @@
 @media(prefers-reduced-motion:reduce){
   .store-map .store-marker-pin,.store-map-panel .store-naver-pin{transition:none;}
 }
+
+/* Address validation status on a sample branch card. */
+.store-card-address-warning{margin:5px 0 0;color:var(--brand-red);font-size:12px;line-height:1.5;}
