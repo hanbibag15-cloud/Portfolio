@@ -423,8 +423,8 @@
   position:relative;
   display:block;
   box-sizing:border-box;
-  width:22px;
-  height:22px;
+  width:28px;
+  height:28px;
   border:0;
   border-radius:50%;
   background:rgba(230,0,18,.20);
@@ -436,7 +436,7 @@
 .store-map-panel .store-naver-current::before {
   content:"";
   position:absolute;
-  inset:3px;
+  inset:4px;
   box-sizing:border-box;
   border:2px solid #fff;
   border-radius:50%;
