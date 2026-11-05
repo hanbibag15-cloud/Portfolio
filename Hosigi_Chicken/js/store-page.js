@@ -278,7 +278,11 @@
     const scrollTop=list.scrollTop;
     const focusedId=document.activeElement?.closest?.(".store-card")?.dataset.id;
     filtered=next;
-    if(selected&&!filtered.some(store=>store.id===selected)){selected=null;clearDistance();}
+    if(selected&&!filtered.some(store=>store.id===selected)){
+      selected=null;
+      clearDistance();
+      closeSelectedPopup();
+    }
     renderCards();
     list.scrollTop=scrollTop;
     if(focusedId){
@@ -457,7 +461,7 @@
       const address=document.createElement("p");
       address.className="store-popup-address";address.textContent=store.address;
       popup.append(heading,address);
-      marker.bindPopup(popup);
+      // Popup state is controlled only by branch selection, not map background clicks.
       marker.on("click",()=>selectStore(store.id,false));
       marker.addTo(markerLayer);markers.set(store.id,marker);
     }
@@ -533,6 +537,35 @@
     void pumpGeoQueue();
     return promise;
   }
+  let selectedPopup=null;
+  function closeSelectedPopup(){
+    if(selectedPopup){
+      map?.closePopup(selectedPopup);
+      selectedPopup=null;
+    }
+  }
+  function showSelectedPopup(id){
+    if(!map || selected!==id || !coords.has(id))return;
+    const store=stores.find(item=>item.id===id);
+    if(!store)return;
+    closeSelectedPopup();
+    const content=document.createElement("div");
+    const title=document.createElement("strong");
+    title.className="store-popup-title";
+    title.textContent="호식이두마리치킨 "+store.name;
+    const address=document.createElement("p");
+    address.className="store-popup-address";
+    address.textContent=store.address;
+    content.append(title,address);
+    selectedPopup=L.popup({
+      closeButton:false,
+      closeOnClick:false,
+      autoClose:false,
+      autoPan:false,
+      offset:[0,-78],
+      className:"store-selected-popup"
+    }).setLatLng(coords.get(id)).setContent(content).openOn(map);
+  }
   function selectStore(id,scrollToCard=true) {
     gpsNavigationActive=false;
     userNavigationActive=true;
@@ -540,7 +573,7 @@
       // Clicking an already-selected pin/card toggles it back to black.
       selected=null;
       clearDistance();
-      map?.closePopup();
+      closeSelectedPopup();
       for(const card of list.querySelectorAll(".store-card")){
         card.classList.remove("is-selected");
         card.querySelector(".store-card-hit-area")?.setAttribute("aria-pressed","false");
@@ -549,6 +582,7 @@
       return;
     }
     selected=id;
+    closeSelectedPopup();
     for(const card of list.querySelectorAll(".store-card")){
       const active=card.dataset.id===id;
       card.classList.toggle("is-selected",active);
@@ -576,13 +610,14 @@
         card?.setAttribute("title","이 주소의 지도 좌표를 확인하지 못했습니다.");
         return;
       }
+      showSelectedPopup(id);
       if(drawDistance(true))return;
       map.stop();
       map.flyTo(pt,15,{animate:!reduceMotion(),duration:.65});
       map.once("moveend",()=>{
         if(selected!==id)return;
         refreshMarkers();
-        markers.get(id)?.openPopup();
+        showSelectedPopup(id);
       });
       window.hosigiNaverMap?.focus?.(id);
     };
@@ -656,6 +691,7 @@
     activeClusterKey=null;
     selected=null;
     clearDistance();
+    closeSelectedPopup();
     if(map){map.stop();map.closePopup();}
     window.hosigiNaverMap?.clearClusterSelection?.();
     filtered=mappedStores();
