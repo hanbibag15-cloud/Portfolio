@@ -506,28 +506,14 @@
   .store-map-panel .store-naver-pin.is-entering {animation:none;}
 }
 
-/* Minimal store-list scrollbar: slim, low-contrast and arrow-free. */
+/* Hide the inconsistent browser-native scrollbar (and its arrow buttons).
+   Wheel, touchpad, touch and keyboard scrolling remain available. */
 .store-list {
-  scrollbar-width:thin;
-  scrollbar-color:rgba(34,23,20,.24) transparent;
+  scrollbar-width:none; /* Firefox and modern Chromium */
+  -ms-overflow-style:none; /* legacy Edge */
 }
 .store-list::-webkit-scrollbar {
-  width:5px;
-  height:5px;
-}
-.store-list::-webkit-scrollbar-track {
-  background:transparent;
-}
-.store-list::-webkit-scrollbar-thumb {
-  background:rgba(34,23,20,.22);
-  border-radius:999px;
-}
-.store-list::-webkit-scrollbar-thumb:hover {
-  background:rgba(34,23,20,.38);
-}
-.store-list::-webkit-scrollbar-button,
-.store-list::-webkit-scrollbar-button:single-button {
-  display:none;
-  width:0;
-  height:0;
+  display:none !important;
+  width:0 !important;
+  height:0 !important;
 }
