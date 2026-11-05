@@ -506,14 +506,44 @@
   .store-map-panel .store-naver-pin.is-entering {animation:none;}
 }
 
-/* Hide the inconsistent browser-native scrollbar (and its arrow buttons).
-   Wheel, touchpad, touch and keyboard scrolling remain available. */
-.store-list {
-  scrollbar-width:none; /* Firefox and modern Chromium */
-  -ms-overflow-style:none; /* legacy Edge */
+/* Quiet, consistent scrollbars for store cards and region dropdown.
+   Keep both scrollers usable, with no intrusive top/bottom arrow buttons. */
+.store-list,
+.store-district-options {
+  scrollbar-width:thin;
+  scrollbar-color:#C7C7C7 transparent;
+  scrollbar-gutter:stable;
 }
-.store-list::-webkit-scrollbar {
-  display:none !important;
-  width:0 !important;
-  height:0 !important;
+/* On Chromium/WebKit, use a precisely sized track and hide arrow controls. */
+@supports selector(::-webkit-scrollbar) {
+  .store-list,
+  .store-district-options {
+    scrollbar-width:auto;
+    scrollbar-color:auto;
+  }
+  .store-list::-webkit-scrollbar,
+  .store-district-options::-webkit-scrollbar {
+    display:block;
+    width:6px;
+    height:6px;
+  }
+  .store-list::-webkit-scrollbar-track,
+  .store-district-options::-webkit-scrollbar-track {
+    background:transparent;
+  }
+  .store-list::-webkit-scrollbar-thumb,
+  .store-district-options::-webkit-scrollbar-thumb {
+    background:#C7C7C7;
+    border-radius:999px;
+  }
+  .store-list::-webkit-scrollbar-thumb:hover,
+  .store-district-options::-webkit-scrollbar-thumb:hover {
+    background:#999999;
+  }
+  .store-list::-webkit-scrollbar-button,
+  .store-district-options::-webkit-scrollbar-button {
+    display:none !important;
+    width:0 !important;
+    height:0 !important;
+  }
 }
