@@ -373,6 +373,9 @@
     userNavigationActive=false;
     const term=keyword.value.trim().toLocaleLowerCase("ko");
     const region=district.value;
+    // Starting a new search (including '전체') clears a previously selected cluster.
+    activeClusterKey=null;
+    window.hosigiNaverMap?.clearClusterSelection?.();
     filtered=stores.filter(store=>{
       const area=region==="all" ||
         (region.startsWith("province:")&&store.province===region.slice(9));
