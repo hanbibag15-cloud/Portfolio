@@ -652,3 +652,6 @@
 .store-card-hit-area {appearance:none; -webkit-appearance:none; min-height:0;}
 .store-card.is-location-loading {cursor:progress;}
 .store-card.is-location-unavailable {border-style:dashed;}
+
+/* A visible alternative when no precise coordinates are returned. */
+.store-address-map-link{position:relative;z-index:2;color:var(--brand-red);font-size:12px;text-decoration:underline;text-underline-offset:3px;}
