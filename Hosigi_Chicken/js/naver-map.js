@@ -135,6 +135,10 @@
     sync.lastKey=null; // Force fitBounds even when the same store IDs are selected.
     sync(latest,coords||new Map(),null);
   }
+  function setSelection(activeId){
+    selected=activeId;
+    if(map)renderMarkers();
+  }
   function clearClusterSelection(){
     activeClusterKey=null;
     if(map)renderMarkers();
@@ -194,7 +198,7 @@
     map.setZoom(14);
     map.panTo(ll(point));
   }
-  window.hosigiNaverMap={sync,focus,locate,clearLocation,clearClusterSelection,resetView,setDistance,clearDistance};
+  window.hosigiNaverMap={sync,focus,locate,clearLocation,clearClusterSelection,resetView,setDistance,clearDistance,setSelection};
   window.navermap_authFailure=()=>{overlay.style.display="none";host.style.visibility="visible";window.hosigiNaverMap=null;};
   const script=document.createElement("script");
   script.src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId="+encodeURIComponent(clientId);
