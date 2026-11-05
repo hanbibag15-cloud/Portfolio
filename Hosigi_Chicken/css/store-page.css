@@ -477,14 +477,13 @@
 .store-map-panel .store-cluster-count.is-entering,
 .store-map .store-marker-pin.is-entering,
 .store-map-panel .store-naver-pin.is-entering {
-  animation:hosigi-cluster-arrive .56s cubic-bezier(.22,1,.36,1) both;
-  animation-delay:var(--store-enter-delay,0ms);
+  animation:hosigi-cluster-arrive .34s cubic-bezier(.2,.8,.25,1) both;
   transform-origin:center center;
+  backface-visibility:hidden;
 }
 @keyframes hosigi-cluster-arrive {
-  0% {transform:scale(.55);}
-  55% {transform:scale(1.18);}
-  78% {transform:scale(.94);}
+  0% {transform:scale(.72);}
+  72% {transform:scale(1.07);}
   100% {transform:scale(1);}
 }
 .store-map-panel .store-cluster-count {
