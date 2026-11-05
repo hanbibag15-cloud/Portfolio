@@ -81,7 +81,7 @@
       map,position:ll(point),title:"내 현재 위치",
       icon:{content:'<div class="store-naver-current"></div>',size:new naver.maps.Size(26,26),anchor:new naver.maps.Point(13,13)}
     });
-    accuracyCircle=new naver.maps.Circle({map,center:ll(point),radius:Math.min(Math.max(accuracy,10),2000),strokeColor:"#1674db",strokeOpacity:.6,fillColor:"#1674db",fillOpacity:.08});
+    accuracyCircle=new naver.maps.Circle({map,center:ll(point),radius:Math.min(Math.max(accuracy,10),2000),strokeColor:"#E60012",strokeOpacity:.8,strokeWeight:2,fillColor:"#E60012",fillOpacity:.09});
     map.panTo(ll(point));map.setZoom(14);
   }
   window.hosigiNaverMap={sync,focus,locate};
