@@ -164,29 +164,54 @@ function renderMenu(category) {
         article.append(photo, body);
         return article;
     }));
-    // On first arrival from the home page, reveal the exact product card.
+    // Main-page deep link: wait until scrolling settles before highlighting.
+    // A fixed delay would end before distant products have reached the viewport.
     if (pendingProductFocus && requestedProduct) {
         const matched = [...grid.querySelectorAll(".all-menu-card")].find(card =>
             normalizeProductName(card.dataset.productName) === normalizeProductName(requestedProduct)
         );
         if (matched) {
             pendingProductFocus = false;
-            // Move naturally to the requested product without decorating its card.
             requestAnimationFrame(() => requestAnimationFrame(() => {
                 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-                matched.scrollIntoView({behavior:reduceMotion ? "auto" : "smooth",block:"center"});
-                // Brief, non-layout-shifting arrival cue. Remove it automatically.
-                const reveal=()=>{
-                    if(!matched.isConnected)return;
+                let started = false;
+                let fallbackTimer = null;
+                let settledTimer = null;
+                const visible = () => {
+                    const rect=matched.getBoundingClientRect();
+                    const height=window.innerHeight;
+                    return rect.top < height * .78 && rect.bottom > height * .22;
+                };
+                const reveal = () => {
+                    if(started || !matched.isConnected || !visible())return;
+                    started=true;
+                    window.removeEventListener("scroll",onScroll);
+                    window.removeEventListener("scrollend",onSettled);
+                    clearTimeout(settledTimer);
+                    clearTimeout(fallbackTimer);
+                    if(reduceMotion)return;
                     matched.classList.add("is-product-arrival-highlight");
                     matched.addEventListener("animationend",event=>{
-                        if(event.target===matched && event.animationName==="hosigi-product-arrival"){
+                        if(event.target===matched.querySelector(".all-menu-photo") &&
+                           event.animationName==="hosigi-product-arrival"){
                             matched.classList.remove("is-product-arrival-highlight");
                         }
                     },{once:true});
                 };
+                const onSettled=()=>{requestAnimationFrame(reveal);};
+                const onScroll=()=>{
+                    clearTimeout(settledTimer);
+                    settledTimer=setTimeout(reveal,130);
+                };
+                if(!reduceMotion){
+                    window.addEventListener("scroll",onScroll,{passive:true});
+                    window.addEventListener("scrollend",onSettled,{once:true});
+                    // Ensures first-viewport products and browsers without scrollend work.
+                    fallbackTimer=setTimeout(reveal,2600);
+                }
+                matched.scrollIntoView({behavior:reduceMotion?"auto":"smooth",block:"center"});
                 if(reduceMotion)reveal();
-                else window.setTimeout(reveal,550);
+                else settledTimer=setTimeout(reveal,250);
             }));
         }
     }
