@@ -143,16 +143,37 @@
   let markerLayer=null;
   const markers=new Map();
   const coords=new Map();
-  const cacheKey="hosigi-store-coordinates-v1";
+  const cacheKey="hosigi-store-geocodes-v2";
+  const cacheLifetime=30*24*60*60*1000;
   const reduceMotion=()=>window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  try {
-    const saved=JSON.parse(sessionStorage.getItem(cacheKey)||"{}");
-    for(const [id,pair] of Object.entries(saved)){
-      if(Array.isArray(pair) && pair.length===2 && pair.every(Number.isFinite))coords.set(id,pair);
+  const validGeo=(store,point)=>{
+    if(!store.addressValid||!Array.isArray(point)||point.length!==2||
+       !point.every(Number.isFinite))return false;
+    const [lat,lng]=point;
+    if(lat<33||lat>39||lng<124||lng>132)return false;
+    // Regional bounding boxes are a sanity check, not proof of a precise address match.
+    if(store.province==="서울")return lat>=37.40&&lat<=37.73&&lng>=126.75&&lng<=127.25;
+    if(store.province==="부산")return lat>=34.95&&lat<=35.43&&lng>=128.70&&lng<=129.40;
+    return true;
+  };
+  try{
+    const saved=JSON.parse(localStorage.getItem(cacheKey)||"{}");
+    for(const store of stores){
+      const cached=saved[store.id];
+      if(cached&&cached.address===store.address&&
+        Date.now()-cached.savedAt<cacheLifetime&&validGeo(store,cached.point)){
+        coords.set(store.id,cached.point);
+      }
     }
-  }catch(e){ /* Session storage might be blocked. */ }
+  }catch(e){/* Storage may be unavailable. */}
   const saveCoords=()=>{
-    try { sessionStorage.setItem(cacheKey,JSON.stringify(Object.fromEntries(coords))); }catch(e){}
+    try{
+      const data=Object.fromEntries([...coords].map(([id,point])=>{
+        const store=stores.find(x=>x.id===id);
+        return [id,{point,address:store.address,savedAt:Date.now()}];
+      }));
+      localStorage.setItem(cacheKey,JSON.stringify(data));
+    }catch(e){/* Cache is optional. */}
   };
   const showMessage=(message)=>{
     if(!mapMessage)return;
@@ -352,7 +373,7 @@
   // Public Nominatim requires at most one lookup per second.
   // Keep all results visible even if geocoding or map tiles are unavailable.
   async function geocodeStores(){
-    const pending=stores.filter(store=>!coords.has(store.id));
+    const pending=stores.filter(store=>store.addressValid&&!coords.has(store.id));
     if(!pending.length){showMessage("");refreshMarkers();fitPoints();return;}
     showMessage("매장 위치를 지도에 표시하는 중입니다.");
     let done=0;
@@ -364,7 +385,7 @@
         const items=await response.json();
         if(items.length){
           const lat=Number(items[0].lat),lng=Number(items[0].lon);
-          if(Number.isFinite(lat)&&Number.isFinite(lng)){
+          if(validGeo(store,[lat,lng])){
             coords.set(store.id,[lat,lng]);saveCoords();refreshMarkers();
           }
         }
