@@ -8,6 +8,11 @@
     {id:"coupang",type:"promo",category:"배달 프로모션",title:"쿠팡이츠 7천 원 할인",date:"2026.10.23 – 2026.10.25",state:"ended",description:"리뉴얼 프로젝트의 기존 메인페이지에 소개된 쿠팡이츠 할인 프로모션입니다. 기간이 종료되어 과거 이벤트 사례로 표시합니다.",source:"프로젝트 기존 brand.html 이벤트 콘텐츠"},
     {id:"detective",type:"sns",category:"SNS 이벤트",title:"치킨 범인 맞히기 이벤트",date:"2026.10.14 – 2026.10.16",state:"ended",description:"리뉴얼 프로젝트의 기존 메인페이지에 소개된 SNS 퀴즈형 이벤트입니다. 기간이 종료되어 참여할 수 없는 사례로 정리했습니다.",source:"프로젝트 기존 brand.html 이벤트 콘텐츠"}
   ];
+  // Existing main-page artwork; remaining events intentionally use placeholders.
+  const eventImages={
+    coupang:"img/Event_img01.png",
+    detective:"img/Event_img02.png"
+  };
   const grid=document.getElementById("event-card-grid");
   const count=document.getElementById("event-count");
   const filters=[...document.querySelectorAll(".event-filter")];
@@ -23,16 +28,35 @@
     button.setAttribute("aria-label",event.title+" 상세 보기");
     const art=document.createElement("div");
     art.className="event-list-art";
-    const label=document.createElement("span");label.className="event-placeholder-label";label.textContent="IMAGE PLACEHOLDER";
-    const mark=document.createElement("span");mark.className="event-placeholder-mark";mark.setAttribute("aria-hidden","true");mark.textContent="H";
-    const state=document.createElement("span");state.className="event-status"+(event.state==="ended"?" is-ended":"");state.textContent=status(event);
-    art.append(mark,label,state);
+    const addPlaceholder=()=>{
+      art.replaceChildren();
+      const label=document.createElement("span");
+      label.className="event-placeholder-label";
+      label.textContent="IMAGE PLACEHOLDER";
+      const mark=document.createElement("span");
+      mark.className="event-placeholder-mark";
+      mark.setAttribute("aria-hidden","true");
+      mark.textContent="H";
+      art.append(mark,label);
+    };
+    const imagePath=eventImages[event.id];
+    if(imagePath){
+      const image=document.createElement("img");
+      image.className="event-card-image";
+      image.src=imagePath;
+      image.alt=event.title+" 이벤트 이미지";
+      image.loading="lazy";
+      image.decoding="async";
+      image.addEventListener("error",addPlaceholder,{once:true});
+      art.append(image);
+    }else addPlaceholder();
     const info=document.createElement("div");info.className="event-list-info";
     const cat=document.createElement("span");cat.className="event-list-category";cat.textContent=event.category;
     const title=document.createElement("h4");title.textContent=event.title;
     const dates=document.createElement("p");dates.className="event-list-date";dates.textContent=event.date;
-    const action=document.createElement("span");action.className="event-list-action";action.textContent="자세히 보기 →";
-    info.append(cat,title,dates,action);button.append(art,info);article.append(button);
+    info.append(cat,title,dates);
+    button.append(art,info);
+    article.append(button);
     button.addEventListener("click",()=>openDetail(event));
     return article;
   }
@@ -65,6 +89,26 @@
     document.getElementById("event-detail-date").textContent=event.date;
     document.getElementById("event-detail-description").textContent=event.description;
     document.getElementById("event-detail-source").textContent="자료 기준: "+event.source;
+    const poster=backdrop.querySelector(".event-detail-poster");
+    poster.replaceChildren();
+    if(eventImages[event.id]){
+      const image=document.createElement("img");
+      image.src=eventImages[event.id];
+      image.alt=event.title+" 이벤트 이미지";
+      image.addEventListener("error",()=>{
+        poster.replaceChildren();
+        const label=document.createElement("span");
+        label.textContent="EVENT IMAGE";
+        poster.append(label);
+      },{once:true});
+      poster.append(image);
+    }else{
+      const label=document.createElement("span");
+      label.textContent="EVENT IMAGE";
+      const tip=document.createElement("small");
+      tip.textContent="이미지 교체 영역";
+      poster.append(label,tip);
+    }
     backdrop.hidden=false;
     document.body.classList.add("event-dialog-open");
     closeButton.focus();
