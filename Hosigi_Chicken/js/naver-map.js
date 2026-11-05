@@ -16,33 +16,51 @@
   let activeClusterKey=null;
   let locationGeneration=0;
   let clusterMorphing=false;
-  let distanceLine=null,distanceLabel=null;
+  let distanceLine=null;
+  let distanceGeneration=0;
   function clearDistance(){
+    ++distanceGeneration;
     distanceLine?.setMap(null);
-    distanceLabel?.setMap(null);
-    distanceLine=null;distanceLabel=null;
+    distanceLine=null;
   }
-  function setDistance(from,to,text,fit=true){
+  function setDistance(from,to,fit=true){
     if(!map)return;
     clearDistance();
-    const lineCoords=[ll(from),ll(to)];
+    const generation=distanceGeneration;
+    const startPoint=from.slice(),endPoint=to.slice();
     distanceLine=new naver.maps.Polyline({
-      map,path:lineCoords,strokeColor:"#E60012",strokeWeight:4,strokeOpacity:.95
+      map,path:[ll(startPoint),ll(startPoint)],
+      strokeColor:"#E60012",strokeWeight:4,strokeOpacity:.95
     });
-    const mid=[(from[0]+to[0])/2,(from[1]+to[1])/2];
-    distanceLabel=new naver.maps.Marker({
-      map,position:ll(mid),clickable:false,
-      icon:{
-        content:'<div class="store-distance-label">'+text+'</div>',
-        size:new naver.maps.Size(150,36),anchor:new naver.maps.Point(75,18)
-      },
-      zIndex:200
-    });
+    const animate=()=>{
+      if(generation!==distanceGeneration||!distanceLine)return;
+      if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+        distanceLine.setPath([ll(startPoint),ll(endPoint)]);
+        return;
+      }
+      const start=performance.now(),duration=680;
+      const frame=now=>{
+        if(generation!==distanceGeneration||!distanceLine)return;
+        const t=Math.min(1,(now-start)/duration);
+        const eased=1-Math.pow(1-t,3);
+        distanceLine.setPath([
+          ll(startPoint),
+          ll([
+            startPoint[0]+(endPoint[0]-startPoint[0])*eased,
+            startPoint[1]+(endPoint[1]-startPoint[1])*eased
+          ])
+        ]);
+        if(t<1)requestAnimationFrame(frame);
+        else distanceLine.setPath([ll(startPoint),ll(endPoint)]);
+      };
+      requestAnimationFrame(frame);
+    };
     if(fit){
-      const bounds=new naver.maps.LatLngBounds(ll(from),ll(from));
-      bounds.extend(ll(to));
+      const bounds=new naver.maps.LatLngBounds(ll(startPoint),ll(startPoint));
+      bounds.extend(ll(endPoint));
+      naver.maps.Event.addListenerOnce(map,"idle",animate);
       map.fitBounds(bounds,{top:80,right:80,bottom:80,left:80});
-    }
+    }else animate();
   }
   function ll(point){return new naver.maps.LatLng(point[0],point[1]);}
   function markerHTML(active) {
