@@ -148,6 +148,8 @@
       item.textContent=option.textContent;
       item.addEventListener("click",()=>{
         district.value=option.value;
+        // '전체' restores the complete list and resets the map, not just the city filter.
+        if(option.value==="all")keyword.value="";
         district.dispatchEvent(new Event("change",{bubbles:true}));
         close();
         trigger.focus();
@@ -352,7 +354,7 @@
     if(!map || !pt)return;
     map.flyTo(pt,14,{animate:!reduceMotion(),duration:.65});
     // Recalculate after flyTo so the selected store is available as an individual pin.
-    map.once("moveend",()=>{refreshMarkers();markers.get(id)?.openPopup();});
+    map.once("moveend",()=>{if(selected!==id)return;refreshMarkers();markers.get(id)?.openPopup();});
     markers.get(id)?.openPopup();
   }
   function renderCards(){
@@ -408,16 +410,30 @@
     userNavigationActive=false;
     const term=keyword.value.trim().toLocaleLowerCase("ko");
     const region=district.value;
-    // Starting a new search (including '전체') clears a previously selected cluster.
+    // A new search resets selection; '전체' also returns the camera to all branches.
     activeClusterKey=null;
+    selected=null;
+    if(map){map.stop();map.closePopup();}
     window.hosigiNaverMap?.clearClusterSelection?.();
     filtered=stores.filter(store=>{
       const area=region==="all" ||
         (region.startsWith("province:")&&store.province===region.slice(9));
       return area&&(!term||[store.name,store.address,store.district,store.province].some(v=>v.toLocaleLowerCase("ko").includes(term)));
     });
-    if(!filtered.some(store=>store.id===selected))selected=null;
-    renderCards();refreshMarkers();fitPoints();
+    // Invalidate stale GPS/moveend callbacks that could reopen an old popup.
+    ++gpsRequestNumber;
+    if(userLocationMarker){map.removeLayer(userLocationMarker);userLocationMarker=null;}
+    if(userAccuracyCircle){map.removeLayer(userAccuracyCircle);userAccuracyCircle=null;}
+    gpsVisible=false;
+    gpsButton?.setAttribute("aria-pressed","false");
+    window.hosigiNaverMap?.clearLocation?.();
+    renderCards();
+    refreshMarkers();
+    if(region==="all" && !term){
+      window.hosigiNaverMap?.resetView?.();
+      list.scrollTo({top:0,behavior:"auto"});
+    }
+    fitPoints();
   }
   form.addEventListener("submit",event=>{event.preventDefault();applySearch();});
   district.addEventListener("change",applySearch);
