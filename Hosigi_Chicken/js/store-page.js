@@ -4,6 +4,28 @@
 (() => {
   "use strict";
   const stores = [
+    {id:"verified-20261105-01",name:"동탄역점",address:"경기도 화성시 동탄대로21가길 4-3",phone:""}, // source: turn747474search9
+    {id:"verified-20261105-02",name:"상동1호점",address:"경기도 부천시 원미구 조마루로105번길 30",phone:""}, // source: turn747474search12
+    {id:"verified-20261105-03",name:"인천갈산점",address:"인천광역시 부평구 주부토로249번길 17",phone:"032-522-1771"}, // source: turn260282search7
+    {id:"verified-20261105-04",name:"화수점",address:"인천광역시 동구 운교로 12",phone:"032-221-7772"}, // source: turn260282search4
+    {id:"verified-20261105-05",name:"인천학익점",address:"인천광역시 미추홀구 매소홀로 482",phone:"0507-1381-3085"}, // source: turn260282search0
+    {id:"verified-20261105-06",name:"인천연희점",address:"인천광역시 서구 연희로14번길 9-3",phone:"032-566-6339"}, // source: turn747474search7
+    {id:"verified-20261105-07",name:"인천신흥점",address:"인천광역시 중구 서해대로449번길 6-7",phone:"032-766-3755"}, // source: turn747474search13
+    {id:"verified-20261105-08",name:"청천점",address:"인천광역시 부평구 산청로 102",phone:""}, // source: turn747474search11
+    {id:"verified-20261105-09",name:"검암점",address:"인천광역시 서구 승학로495번길 16",phone:"032-561-9985"}, // source: turn747474search8
+    {id:"verified-20261105-10",name:"신서점",address:"대구광역시 동구 동호로9길 57",phone:""}, // source: turn511293search12
+    {id:"verified-20261105-11",name:"노변점",address:"대구광역시 수성구 노변로 55",phone:"0507-1343-9282"}, // source: turn511293search14
+    {id:"verified-20261105-12",name:"시지1호점",address:"대구광역시 수성구 신매로16길 76",phone:"053-794-9995"}, // source: turn511293search7
+    {id:"verified-20261105-13",name:"신정5동점",address:"울산광역시 남구 월평로171번길 26",phone:"052-258-6636"}, // source: turn260282search1
+    {id:"verified-20261105-14",name:"강동점",address:"울산광역시 북구 산하중앙2로 275",phone:"052-296-9299"}, // source: turn260282search5
+    {id:"verified-20261105-15",name:"온양점",address:"울산광역시 울주군 온양읍 연안4길 5",phone:"052-239-9963"}, // source: turn260282search9
+    {id:"verified-20261105-16",name:"울산언양점",address:"울산광역시 울주군 언양읍 방천8길 5",phone:""}, // source: turn747474search3
+    {id:"verified-20261105-17",name:"울산삼산점",address:"울산광역시 남구 남중로105번길 2-1",phone:"052-227-9599"}, // source: turn260282search3
+    {id:"verified-20261105-18",name:"거제1호점",address:"경상남도 거제시 장평3로4길 45",phone:"055-637-9377"}, // source: turn511293search15
+    {id:"verified-20261105-19",name:"자산남성점",address:"경상남도 창원시 마산합포구 오동북11길 18",phone:"055-245-0922"}, // source: turn511293search10
+    {id:"verified-20261105-20",name:"도남점",address:"제주특별자치도 제주시 신성로 62",phone:""}, // source: turn688562search1
+    {id:"verified-20261105-21",name:"안덕점",address:"제주특별자치도 서귀포시 안덕면 일주서로 1449",phone:""}, // source: turn688562search2
+    {id:"verified-20261105-22",name:"연동신시가지점",address:"제주특별자치도 제주시 국기중길 5-6",phone:""}, // source: turn688562search3
     {id:"expand-20261105-1",name:"풍무점",address:"경기도 김포시 풍무2로 59",phone:""}, // turn865450search9
     {id:"expand-20261105-2",name:"청라1호점",address:"인천광역시 서구 청라에메랄드로 99",phone:"032-623-4343"}, // turn865450search1
     {id:"expand-20261105-3",name:"성서2호점",address:"대구광역시 달서구 성지로18길 10-4",phone:"053-586-9982"}, // turn202210search2
