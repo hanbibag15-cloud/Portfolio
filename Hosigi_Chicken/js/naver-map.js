@@ -24,8 +24,7 @@
     naverMarkers.forEach(marker=>marker.setMap(null));naverMarkers=[];
     const entries=latest.filter(store=>coords.has(store.id)).map(store=>({...store,point:coords.get(store.id)}));
     const groups=window.hosigiClusterStores?window.hosigiClusterStores(entries,map.getZoom()):entries.map(store=>({items:[store],point:store.point}));
-    for(const [index,group] of groups.entries()){
-      const enterDelay=Math.min(index*55,260);
+    for(const group of groups){
       const clustered=group.items.length>1;
       const count=group.items.length;
       const clusterKey=group.items.map(item=>item.id).sort().join("|");
@@ -34,10 +33,10 @@
         map,position:ll(group.point),
         title:clustered?count+"개 매장 확대해서 보기":"호식이두마리치킨 "+group.items[0].name,
         icon:clustered?{
-          content:'<div class="store-cluster-count'+(active?' is-selected':'')+(revealSplit?' is-entering':'')+'" style="--store-enter-delay:'+enterDelay+'ms" aria-label="'+count+'개 매장">'+count+'</div>',
+          content:'<div class="store-cluster-count'+(active?' is-selected':'')+(revealSplit?' is-entering':'')+'" aria-label="'+count+'개 매장">'+count+'</div>',
           size:new naver.maps.Size(46,46),anchor:new naver.maps.Point(23,23)
         }:{
-          content:revealSplit?markerHTML(group.items[0].id===selected).replace('class="store-naver-pin','style="--store-enter-delay:'+enterDelay+'ms" class="store-naver-pin is-entering'):markerHTML(group.items[0].id===selected),
+          content:revealSplit?markerHTML(group.items[0].id===selected).replace('class="store-naver-pin','class="store-naver-pin is-entering'):markerHTML(group.items[0].id===selected),
           size:new naver.maps.Size(40,52),anchor:new naver.maps.Point(20,51)
         }
       });
@@ -55,7 +54,7 @@
           group.items.slice(1).forEach(item=>bounds.extend(ll(item.point)));
           const next=Math.min(18,map.getZoom()+2);
           // morph changes center and zoom in one continuous transition.
-          map.morph(bounds.getCenter(),next,{duration:900,easing:"easeOutCubic"});
+          map.morph(bounds.getCenter(),next,{duration:650,easing:"easeOutCubic"});
         }else window.hosigiStoreMapState?.selectStore(group.items[0].id,false);
       });
       naverMarkers.push(marker);
