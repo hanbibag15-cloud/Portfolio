@@ -1651,3 +1651,8 @@ body {
 @media (max-width: 420px) {
     .footer-links > span + span::before { margin: 0 5px; }
 }
+
+/* Product photos link to their exact item on the all-menu subpage. */
+.menu-product-detail-link{display:block;width:100%;height:100%;cursor:pointer;}
+.menu-product-detail-link img{display:block;}
+.menu-product-detail-link:focus-visible{outline:3px solid var(--brand-red);outline-offset:4px;border-radius:16px;}
