@@ -17,22 +17,47 @@
   function markerHTML(active) {
     return '<div class="store-naver-pin'+(active?' is-active':'')+'"><svg class="store-location-icon" viewBox="0 0 40 52" width="40" height="52" aria-hidden="true"><path d="M20 1C9.5 1 1 9.5 1 20c0 14 19 31 19 31s19-17 19-31C39 9.5 30.5 1 20 1Z" fill="currentColor"/><circle cx="20" cy="20" r="7.5" fill="#fff"/></svg></div>';
   }
+  function renderMarkers(){
+    if(!map || !coords)return;
+    naverMarkers.forEach(marker=>marker.setMap(null));naverMarkers=[];
+    const entries=latest.filter(store=>coords.has(store.id)).map(store=>({...store,point:coords.get(store.id)}));
+    const groups=window.hosigiClusterStores?window.hosigiClusterStores(entries,map.getZoom()):entries.map(store=>({items:[store],point:store.point}));
+    for(const group of groups){
+      const clustered=group.items.length>1;
+      const count=group.items.length;
+      const marker=new naver.maps.Marker({
+        map,position:ll(group.point),
+        title:clustered?count+"개 매장 확대해서 보기":"호식이두마리치킨 "+group.items[0].name,
+        icon:clustered?{
+          content:'<div class="store-cluster-count" aria-label="'+count+'개 매장">'+count+'</div>',
+          size:new naver.maps.Size(46,46),anchor:new naver.maps.Point(23,23)
+        }:{
+          content:markerHTML(group.items[0].id===selected),
+          size:new naver.maps.Size(40,52),anchor:new naver.maps.Point(20,51)
+        }
+      });
+      naver.maps.Event.addListener(marker,"click",()=>{
+        if(clustered){
+          const bounds=new naver.maps.LatLngBounds(ll(group.items[0].point),ll(group.items[0].point));
+          group.items.slice(1).forEach(item=>bounds.extend(ll(item.point)));
+          map.fitBounds(bounds,{top:70,right:70,bottom:70,left:70});
+          const next=Math.min(18,map.getZoom()+2);
+          map.setZoom(next);
+        }else window.hosigiStoreMapState?.selectStore(group.items[0].id,false);
+      });
+      naverMarkers.push(marker);
+    }
+  }
   function sync(stores,positions,activeId) {
     latest=stores;coords=positions;selected=activeId;
     if(!map)return;
-    naverMarkers.forEach(m=>m.setMap(null));naverMarkers=[];
-    const points=[];
-    stores.forEach(store=>{
-      const pos=positions.get(store.id);
-      if(!pos)return;
-      points.push(pos);
-      const marker=new naver.maps.Marker({
-        map,position:ll(pos),title:"호식이두마리치킨 "+store.name,
-        icon:{content:markerHTML(store.id===activeId),size:new naver.maps.Size(40,52),anchor:new naver.maps.Point(20,51)}
-      });
-      naver.maps.Event.addListener(marker,"click",()=>window.hosigiStoreMapState?.selectStore(store.id,false));
-      naverMarkers.push(marker);
-    });
+    renderMarkers();
+    // Only reset map bounds when the searched set changes; do not reset on
+    // each zoom or marker refresh.
+    const key=stores.map(store=>store.id).join("|");
+    if(key===sync.lastKey)return;
+    sync.lastKey=key;
+    const points=stores.map(store=>positions.get(store.id)).filter(Boolean);
     if(!points.length){map.setCenter(ll([37.5665,126.978]));map.setZoom(11);return;}
     if(points.length===1){map.setCenter(ll(points[0]));map.setZoom(14);return;}
     const bounds=new naver.maps.LatLngBounds(ll(points[0]),ll(points[0]));
@@ -63,6 +88,7 @@
     if(!window.naver?.maps)return;
     try{
       map=new naver.maps.Map(overlay,{center:new naver.maps.LatLng(37.5665,126.978),zoom:11,zoomControl:false,scrollWheel:true});
+      naver.maps.Event.addListener(map,"zoom_changed",renderMarkers);
       overlay.style.display="block";
       host.style.visibility="hidden";
       sync(latest,coords||new Map(),selected);
