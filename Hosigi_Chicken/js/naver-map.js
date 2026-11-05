@@ -41,6 +41,7 @@
       });
       naver.maps.Event.addListener(marker,"click",()=>{
         if(clustered){
+          window.hosigiStoreMapState?.lockUserNavigation?.();
           activeClusterKey=clusterKey;
           renderMarkers(); // Immediately show selected red cluster.
           const bounds=new naver.maps.LatLngBounds(ll(group.items[0].point),ll(group.items[0].point));
@@ -58,7 +59,7 @@
     if(!map)return;
     renderMarkers();
     // An active GPS request must not be overridden by automatic store bounds.
-    if(window.hosigiStoreMapState?.isGpsNavigationActive?.())return;
+    if(window.hosigiStoreMapState?.isUserNavigationActive?.() || window.hosigiStoreMapState?.isGpsNavigationActive?.())return;
     // Only reset map bounds when the searched set changes; do not reset on
     // each zoom or marker refresh.
     const key=stores.map(store=>store.id).join("|");
