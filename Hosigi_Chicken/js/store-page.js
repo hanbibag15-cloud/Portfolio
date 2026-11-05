@@ -352,32 +352,76 @@
       marker.addTo(markerLayer);markers.set(store.id,marker);
     }
   }
-  const clickGeocodeRequests=new Map();
-  async function ensureStorePoint(store) {
-    if(coords.has(store.id))return coords.get(store.id);
-    if(!store.addressValid)return null;
-    if(clickGeocodeRequests.has(store.id))return clickGeocodeRequests.get(store.id);
-    const promise=(async()=>{
-      const candidates=[store.address,...(store.geocodeAlt?[store.geocodeAlt]:[])];
-      for(const address of candidates){
-        try {
-          const endpoint="https://nominatim.openstreetmap.org/search?format=jsonv2&limit=3&countrycodes=kr&q="+encodeURIComponent(address);
-          const response=await fetch(endpoint,{headers:{"Accept":"application/json"}});
-          if(!response.ok)continue;
-          const results=await response.json();
-          for(const match of results){
-            const point=[Number(match.lat),Number(match.lon)];
-            if(validGeo(store,point)){
-              coords.set(store.id,point);saveCoords();refreshMarkers();
-              return point;
-            }
+  // Single queue for background and clicked-store lookups. The clicked store
+  // moves to the front instead of racing the background requests and being 429ed.
+  const geoJobs=new Map();
+  const geoQueue=[];
+  let geoBusy=false;
+  const geoDelay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+  const getGeoCandidates=store=>{
+    const values=[store.address,store.geocodeAlt];
+    // Try a normalized, still house-number-specific variant. Never use a
+    // bare district or city center as though it were the store location.
+    const normalized=store.address.replace(/^(서울특별시|서울|부산광역시|부산|인천광역시|대구광역시|울산광역시|경기도|경상남도|제주특별자치도)\s+/,"");
+    values.push(normalized+", 대한민국");
+    return [...new Set(values.filter(Boolean))].slice(0,3);
+  };
+  async function pumpGeoQueue(){
+    if(geoBusy)return;
+    geoBusy=true;
+    try{
+      while(geoQueue.length){
+        const job=geoQueue.shift();
+        const {store,resolve}=job;
+        if(coords.has(store.id)){resolve(coords.get(store.id));continue;}
+        let resolved=null;
+        if(store.addressValid){
+          for(const address of getGeoCandidates(store)){
+            try{
+              const endpoint="https://nominatim.openstreetmap.org/search?format=jsonv2&limit=3&countrycodes=kr&q="+encodeURIComponent(address);
+              const response=await fetch(endpoint,{headers:{"Accept":"application/json"}});
+              if(response.ok){
+                const matches=await response.json();
+                for(const item of matches){
+                  const point=[Number(item.lat),Number(item.lon)];
+                  if(validGeo(store,point)){resolved=point;break;}
+                }
+              }
+            }catch(e){/* Keep the queue moving when geocoding is unavailable. */}
+            // Respect the public service's one-request-per-second guideline.
+            await geoDelay(1100);
+            if(resolved)break;
           }
-        }catch(e){ /* Try the next verified address or show a message. */ }
+        }
+        if(resolved){
+          coords.set(store.id,resolved);
+          saveCoords();
+          refreshMarkers();
+        }
+        geoJobs.delete(store.id);
+        resolve(resolved);
       }
-      return null;
-    })();
-    clickGeocodeRequests.set(store.id,promise);
-    try{return await promise;}finally{clickGeocodeRequests.delete(store.id);}
+    }finally{geoBusy=false;}
+  }
+  function ensureStorePoint(store,priority=true){
+    if(coords.has(store.id))return Promise.resolve(coords.get(store.id));
+    if(!store.addressValid)return Promise.resolve(null);
+    const queued=geoJobs.get(store.id);
+    if(queued){
+      if(priority){
+        const index=geoQueue.indexOf(queued);
+        if(index>0){geoQueue.splice(index,1);geoQueue.unshift(queued);}
+      }
+      return queued.promise;
+    }
+    let resolve;
+    const promise=new Promise(done=>{resolve=done;});
+    const job={store,promise,resolve};
+    geoJobs.set(store.id,job);
+    if(priority)geoQueue.unshift(job);
+    else geoQueue.push(job);
+    void pumpGeoQueue();
+    return promise;
   }
   function selectStore(id,scrollToCard=true) {
     gpsNavigationActive=false;
@@ -408,6 +452,15 @@
         const card=list.querySelector('.store-card[data-id="'+id+'"]');
         card?.classList.add("is-location-unavailable");
         card?.setAttribute("title","이 주소의 지도 좌표를 확인하지 못했습니다.");
+        if(card && !card.querySelector(".store-address-map-link")){
+          const external=document.createElement("a");
+          external.className="store-address-map-link";
+          external.href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(store.address);
+          external.target="_blank";
+          external.rel="noopener noreferrer";
+          external.textContent="외부 지도에서 주소 확인";
+          card.querySelector(".store-card-actions")?.append(external);
+        }
         return;
       }
       map.stop();
@@ -649,32 +702,11 @@
   // Keep all results visible even if geocoding or map tiles are unavailable.
   async function geocodeStores(){
     const pending=stores.filter(store=>store.addressValid&&!coords.has(store.id));
-    if(!pending.length){showMessage("");refreshMarkers();fitPoints();return;}
-    showMessage("매장 위치를 지도에 표시하는 중입니다.");
-    let done=0;
-    for(const store of pending){
-      try{
-        const url="https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=kr&q="+encodeURIComponent(store.address);
-        const response=await fetch(url,{headers:{"Accept":"application/json"}});
-        if(!response.ok)throw Error("Geocoding unavailable");
-        const items=await response.json();
-        if(items.length){
-          const lat=Number(items[0].lat),lng=Number(items[0].lon);
-          if(validGeo(store,[lat,lng])){
-            coords.set(store.id,[lat,lng]);saveCoords();refreshMarkers();
-          }
-        }
-      }catch(e){ /* Keep address list usable when the geocoding service fails. */ }
-      done++;
-      showMessage("매장 위치를 확인하는 중 · "+done+"/"+pending.length);
-      if(done<pending.length)await new Promise(resolve=>setTimeout(resolve,1200));
-    }
-    refreshMarkers();fitPoints();
-    if(coords.size===0){
-      showMessage("위치 조회가 제한되어 지도 핀이 표시되지 않습니다. 매장 주소를 확인해 주세요.");
-    }else if(coords.size<stores.length){
-      showMessage("일부 매장의 위치는 확인 중입니다. 목록의 주소를 참고해 주세요.");
-    }else showMessage("");
+    if(!pending.length){refreshMarkers();fitPoints();return;}
+    // Shared queue eliminates overlapping requests; selected branches jump ahead.
+    await Promise.all(pending.map(store=>ensureStorePoint(store,false)));
+    refreshMarkers();
+    fitPoints();
   }
   window.hosigiStoreMapState={sync:()=>window.hosigiNaverMap?.sync?.(filtered,coords,selected),selectStore,isGpsNavigationActive:()=>gpsNavigationActive,isUserNavigationActive:()=>userNavigationActive,lockUserNavigation:()=>{userNavigationActive=true;}};
   geocodeStores();
