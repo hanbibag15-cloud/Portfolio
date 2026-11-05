@@ -415,3 +415,8 @@
 /* Store search CTA: dark by default, brand red on hover/focus. */
 .store-search-button{background:var(--brand-brown);border-color:var(--brand-brown);}
 .store-search-button:hover,.store-search-button:focus-visible{background:var(--brand-red);border-color:var(--brand-red);}
+
+/* Number clusters: default near-black, red only after selecting a group. */
+.store-map-panel .store-cluster-count{background:var(--brand-brown);color:#fff;transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease;}
+.store-map-panel .store-cluster-count.is-selected{background:var(--brand-red);}
+@media(prefers-reduced-motion:reduce){.store-map-panel .store-cluster-count{transition:none;}}
