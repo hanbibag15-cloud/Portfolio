@@ -334,7 +334,7 @@
     for(const card of list.querySelectorAll(".store-card")){
       const active=card.dataset.id===id;
       card.classList.toggle("is-selected",active);
-      card.querySelector(".store-card-view")?.setAttribute("aria-pressed",String(active));
+      card.querySelector(".store-card-hit-area")?.setAttribute("aria-pressed",String(active));
       if(active && scrollToCard)card.scrollIntoView({block:"nearest",behavior:reduceMotion()?"auto":"smooth"});
     }
     refreshMarkers();
@@ -367,10 +367,14 @@
       const tag=document.createElement("span");tag.className="store-card-category";tag.textContent=store.province+" · "+store.district;
       const title=document.createElement("h4");title.textContent="호식이두마리치킨 "+store.name;
       const address=document.createElement("p");address.className="store-card-address";address.textContent=store.address;
+      // Full-card action matches the reference: keep the phone link independently clickable.
       const actions=document.createElement("div");actions.className="store-card-actions";
-      const btn=document.createElement("button");btn.type="button";btn.className="store-card-view";btn.textContent="지도에서 보기";btn.setAttribute("aria-pressed",String(store.id===selected));
-      btn.addEventListener("click",()=>selectStore(store.id));
-      actions.append(btn);
+      const cardAction=document.createElement("button");
+      cardAction.type="button";
+      cardAction.className="store-card-hit-area";
+      cardAction.setAttribute("aria-label","호식이두마리치킨 "+store.name+" 지도 위치 보기");
+      cardAction.setAttribute("aria-pressed",String(store.id===selected));
+      cardAction.addEventListener("click",()=>selectStore(store.id));
       if(store.phone){
         const number=document.createElement("a");number.className="store-card-phone-link";number.href="tel:"+store.phone.replace(/[^\d+]/g,"");number.textContent=store.phone;
         number.setAttribute("aria-label",store.name+" 전화 "+store.phone);
@@ -382,6 +386,8 @@
         warning.textContent="정확한 도로명주소 확인 필요 · 지도 핀 미표시";
         card.append(tag,title,address,warning,actions);
       }else card.append(tag,title,address,actions);
+      // Add the overlay last, while the phone link stays above it through CSS.
+      card.append(cardAction);
       fragment.append(card);
     }
     list.append(fragment);
