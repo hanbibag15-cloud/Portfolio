@@ -234,8 +234,10 @@
   let activeClusterKey=null;
   // GPS takes precedence over initial async geocoding and layout-driven auto-fit.
   let gpsNavigationActive=false;
+  let userNavigationActive=false;
+  // Async address lookups must not override a cluster/store chosen by the visitor.
   function fitPoints() {
-    if(!map || gpsNavigationActive)return;
+    if(!map || gpsNavigationActive || userNavigationActive)return;
     const pts=filtered.map(store=>coords.get(store.id)).filter(Boolean);
     if(pts.length===0) {
       map.setView([37.5665,126.9780],11);
@@ -263,6 +265,8 @@
         });
         const clustered=L.marker(group.point,{icon,title:count+"개 매장 확대해서 보기"});
         clustered.on("click",()=>{
+          userNavigationActive=true;
+          map.stop();
           activeClusterKey=clusterKey;
           clustered.getElement()?.querySelector(".store-cluster-count")?.classList.add("is-selected");
           const points=group.items.map(item=>item.point);
@@ -298,6 +302,7 @@
   }
   function selectStore(id,scrollToCard=true) {
     gpsNavigationActive=false;
+    userNavigationActive=true;
     selected=id;
     for(const card of list.querySelectorAll(".store-card")){
       const active=card.dataset.id===id;
@@ -355,8 +360,9 @@
     list.append(fragment);
   }
   function applySearch(){
-    // Explicit searches restore the normal fit-to-results behavior.
+    // Only a new search is allowed to restore automatic fitting of result bounds.
     gpsNavigationActive=false;
+    userNavigationActive=false;
     const term=keyword.value.trim().toLocaleLowerCase("ko");
     const region=district.value;
     filtered=stores.filter(store=>{
@@ -404,6 +410,7 @@
       // Lock the viewport before the asynchronous location permission request.
       // Font loading, initial geocoding and resize callbacks must not recenter it.
       gpsNavigationActive=true;
+      userNavigationActive=true;
       map.stop();
       if(!navigator.geolocation){
         gpsNavigationActive=false;
@@ -511,6 +518,6 @@
       showMessage("일부 매장의 위치는 확인 중입니다. 목록의 주소를 참고해 주세요.");
     }else showMessage("");
   }
-  window.hosigiStoreMapState={sync:()=>window.hosigiNaverMap?.sync?.(filtered,coords,selected),selectStore,isGpsNavigationActive:()=>gpsNavigationActive};
+  window.hosigiStoreMapState={sync:()=>window.hosigiNaverMap?.sync?.(filtered,coords,selected),selectStore,isGpsNavigationActive:()=>gpsNavigationActive,isUserNavigationActive:()=>userNavigationActive,lockUserNavigation:()=>{userNavigationActive=true;}};
   geocodeStores();
 })();
