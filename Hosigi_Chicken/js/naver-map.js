@@ -57,6 +57,8 @@
     latest=stores;coords=positions;selected=activeId;
     if(!map)return;
     renderMarkers();
+    // An active GPS request must not be overridden by automatic store bounds.
+    if(window.hosigiStoreMapState?.isGpsNavigationActive?.())return;
     // Only reset map bounds when the searched set changes; do not reset on
     // each zoom or marker refresh.
     const key=stores.map(store=>store.id).join("|");
