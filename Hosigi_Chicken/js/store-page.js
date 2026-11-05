@@ -420,7 +420,7 @@
         window.hosigiNaverMap?.locate?.(point,position.coords.accuracy);
         if(userLocationMarker)map.removeLayer(userLocationMarker);
         if(userAccuracyCircle)map.removeLayer(userAccuracyCircle);
-        const icon=L.divIcon({className:"store-leaflet-marker",html:'<span class="store-current-location" aria-hidden="true"></span>',iconSize:[22,22],iconAnchor:[11,11]});
+        const icon=L.divIcon({className:"store-leaflet-marker",html:'<span class="store-current-location" aria-hidden="true"></span>',iconSize:[28,28],iconAnchor:[14,14]});
         userLocationMarker=L.marker(point,{icon,title:"내 현재 위치",zIndexOffset:1000}).addTo(map);
         // Only the position marker and accuracy circle are displayed; no popup.
         const requestNumber=++gpsRequestNumber;
