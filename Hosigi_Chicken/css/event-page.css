@@ -213,3 +213,45 @@ body.event-dialog-open{overflow:hidden;}
   .event-list-card,.event-card-image {transition:none!important;}
   .event-list-card:hover,.event-list-card:focus-within {transform:none;}
 }
+
+/* Two-tier navigation: primary Event/Notice pills, secondary compact status pills. */
+.event-filters{margin-bottom:22px;}
+.event-filter{min-width:180px;}
+.event-status-filters{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:0 auto 54px;
+}
+.event-status-filter{
+  min-width:78px;
+  min-height:36px;
+  padding:7px 20px;
+  border:1px solid var(--border-default);
+  border-radius:999px;
+  background:var(--surface-default);
+  color:var(--text-primary);
+  cursor:pointer;
+  font:500 13px var(--font);
+  transition:background .2s,color .2s,border-color .2s;
+}
+.event-status-filter:hover,
+.event-status-filter:focus-visible{
+  border-color:var(--brand-red);
+  color:var(--brand-red);
+}
+.event-status-filter.is-active{
+  background:var(--brand-brown);
+  border-color:var(--brand-brown);
+  color:var(--neutral-white);
+}
+.event-status-filter:focus-visible{outline:2px solid var(--brand-red);outline-offset:3px;}
+@media(max-width:767px){
+  .event-filters{margin-bottom:17px;}
+  .event-status-filters{gap:8px;margin-bottom:38px;}
+  .event-status-filter{min-width:70px;padding:7px 14px;font-size:12px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .event-status-filter{transition:none;}
+}
