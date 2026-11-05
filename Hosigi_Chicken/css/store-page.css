@@ -588,3 +588,46 @@
 @media (prefers-reduced-motion:reduce) {
   .store-district-scroll-indicator {transition:none;}
 }
+
+/* Store cards act as their own map-selection controls. The overlay preserves
+   native button keyboard access; the telephone link remains independent. */
+.store-card {
+  cursor:pointer;
+  isolation:isolate;
+  transition:border-color .24s ease,background-color .24s ease,box-shadow .28s ease,transform .32s cubic-bezier(.22,1,.36,1);
+}
+.store-card:hover,
+.store-card:focus-within {
+  border-color:var(--brand-red);
+  box-shadow:0 8px 24px rgba(34,23,20,.10);
+  transform:translateY(-3px);
+}
+.store-card.is-selected {
+  border-color:var(--brand-red);
+}
+.store-card-hit-area {
+  position:absolute;
+  inset:0;
+  z-index:1;
+  display:block;
+  width:100%;
+  height:100%;
+  padding:0;
+  border:0;
+  border-radius:inherit;
+  background:transparent;
+  cursor:pointer;
+}
+.store-card-hit-area:focus-visible {
+  outline:2px solid var(--brand-red);
+  outline-offset:3px;
+}
+.store-card-phone-link {
+  position:relative;
+  z-index:2;
+}
+.store-card-actions:empty {display:none;}
+@media(prefers-reduced-motion:reduce) {
+  .store-card {transition:none;}
+  .store-card:hover,.store-card:focus-within {transform:none;}
+}
