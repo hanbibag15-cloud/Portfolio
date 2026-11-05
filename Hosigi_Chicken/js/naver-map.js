@@ -14,6 +14,7 @@
   panel.insertBefore(overlay,panel.firstChild);
   let map=null,naverMarkers=[],currentMarker=null,accuracyCircle=null,latest=[],coords=null,selected=null;
   let activeClusterKey=null;
+  let locationGeneration=0;
   let clusterMorphing=false;
   function ll(point){return new naver.maps.LatLng(point[0],point[1]);}
   function markerHTML(active) {
@@ -83,14 +84,23 @@
     map.panTo(ll(coords.get(id)));
     map.setZoom(14);
   }
+  function clearLocation(){
+    ++locationGeneration;
+    currentMarker?.setMap(null);
+    accuracyCircle?.setMap(null);
+    currentMarker=null;
+    accuracyCircle=null;
+  }
   function locate(point,accuracy){
     if(!map)return;
-    currentMarker?.setMap(null);accuracyCircle?.setMap(null);
+    clearLocation();
+    const generation=locationGeneration;
     currentMarker=new naver.maps.Marker({
       map,position:ll(point),title:"내 현재 위치",
       icon:{content:'<div class="store-naver-current"></div>',size:new naver.maps.Size(28,28),anchor:new naver.maps.Point(14,14)}
     });
     const displayAccuracy=()=>{
+      if(generation!==locationGeneration)return;
       accuracyCircle?.setMap(null);
       accuracyCircle=null;
       if(!Number.isFinite(accuracy)||accuracy<0||accuracy>500)return;
@@ -105,7 +115,7 @@
     map.setZoom(14);
     map.panTo(ll(point));
   }
-  window.hosigiNaverMap={sync,focus,locate};
+  window.hosigiNaverMap={sync,focus,locate,clearLocation};
   window.navermap_authFailure=()=>{overlay.style.display="none";host.style.visibility="visible";window.hosigiNaverMap=null;};
   const script=document.createElement("script");
   script.src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId="+encodeURIComponent(clientId);
