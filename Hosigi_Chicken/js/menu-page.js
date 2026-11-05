@@ -90,6 +90,11 @@ const grid = document.querySelector("#menu-products");
 const title = document.querySelector("#menu-category-title");
 const count = document.querySelector("#menu-count");
 let lastRenderedCategory = null;
+// Deep link from the home-page product carousel.
+const requestedProduct = new URLSearchParams(location.search).get("product");
+const normalizeProductName = name => (name || "").replace(/\\s+/g, "").trim();
+let pendingProductFocus = Boolean(requestedProduct);
+
 function renderMenu(category) {
     const current = Object.hasOwn(categoryNames, category) ? category : "all";
     const shouldAnimateContent = lastRenderedCategory !== null && lastRenderedCategory !== current;
@@ -108,6 +113,7 @@ function renderMenu(category) {
     grid.replaceChildren(...shown.map(([type,name,description]) => {
         const article = document.createElement("article");
         article.className = "all-menu-card";
+        article.dataset.productName = name;
         const photo = document.createElement("div");
         photo.className = "all-menu-photo";
         // Match by product name, not the position in a filtered tab.
@@ -158,6 +164,21 @@ function renderMenu(category) {
         article.append(photo, body);
         return article;
     }));
+    // On first arrival from the home page, reveal the exact product card.
+    if (pendingProductFocus && requestedProduct) {
+        const matched = [...grid.querySelectorAll(".all-menu-card")].find(card =>
+            normalizeProductName(card.dataset.productName) === normalizeProductName(requestedProduct)
+        );
+        if (matched) {
+            pendingProductFocus = false;
+            matched.classList.add("is-deep-linked");
+            matched.tabIndex = -1;
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                matched.scrollIntoView({behavior:"auto",block:"center"});
+                matched.focus({preventScroll:true});
+            }));
+        }
+    }
     // Animate each new card as a unit, including its photo, badge and text.
     const page = document.querySelector(".all-menu-page");
     if (shouldAnimateContent && page) {
