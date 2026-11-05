@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/default.css">
     <link rel="stylesheet" href="../npm/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
-    <link rel="stylesheet" href="css/main.css?v=49">
+    <link rel="stylesheet" href="css/main.css?v=50">
     <link rel="stylesheet" href="css/nav-state.css">
     <script src="../npm/swiper/swiper-bundle.min.js"></script>
 <script src="js/nav-state.js?v=2" defer></script>
@@ -465,6 +465,24 @@
         window.addEventListener('resize', updateEventReveal);
         requestAnimationFrame(() => requestAnimationFrame(updateEventReveal));
     }
+
+    // Open the matching menu card, not just the chicken/side category.
+    // Read product names from the image alt and preserve existing carousel dragging.
+    document.querySelectorAll('.menu-feature[data-menu-panel]').forEach(panel => {
+        const category = panel.dataset.menuPanel;
+        panel.querySelectorAll('.menu-product-image img').forEach(img => {
+            const name = img.alt?.trim();
+            if (!name) return;
+            const imageBox = img.closest('.menu-product-image');
+            if (!imageBox || imageBox.querySelector('a')) return;
+            const link = document.createElement('a');
+            link.className = 'menu-product-detail-link';
+            link.href = 'menu.html?product=' + encodeURIComponent(name) + '#' + category;
+            link.setAttribute('aria-label', name + ' 메뉴 자세히 보기');
+            img.replaceWith(link);
+            link.append(img);
+        });
+    });
 
     document.querySelectorAll('.menu-feature').forEach(panel => {
         const items = [...panel.querySelectorAll('.menu-feature-product')];
