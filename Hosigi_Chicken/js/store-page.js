@@ -223,7 +223,8 @@
     window.addEventListener("resize",updateThumb,{passive:true});
     sync();
   }
-  let filtered=stores.slice();
+  let filtered=[];
+  let geocodingComplete=false;
   let selected=null;
   let map=null;
   let markerLayer=null;
@@ -261,6 +262,30 @@
       localStorage.setItem(cacheKey,JSON.stringify(data));
     }catch(e){/* Cache is optional. */}
   };
+  // Only show branches that have a usable map coordinate. A card should
+  // never be offered as clickable when the map has nowhere to navigate.
+  const matchesCurrentFilter=store=>{
+    const region=district.value;
+    const term=keyword.value.trim().toLocaleLowerCase("ko");
+    return (region==="all"||(region.startsWith("province:")&&store.province===region.slice(9))) &&
+      (!term||[store.name,store.address,store.district,store.province].some(v=>v.toLocaleLowerCase("ko").includes(term)));
+  };
+  const mappedStores=()=>stores.filter(store=>coords.has(store.id)&&matchesCurrentFilter(store));
+  function refreshMappedList(){
+    const previous=filtered.map(store=>store.id).join("|");
+    const next=mappedStores();
+    if(previous===next.map(store=>store.id).join("|"))return;
+    const scrollTop=list.scrollTop;
+    const focusedId=document.activeElement?.closest?.(".store-card")?.dataset.id;
+    filtered=next;
+    if(selected&&!filtered.some(store=>store.id===selected))selected=null;
+    renderCards();
+    list.scrollTop=scrollTop;
+    if(focusedId){
+      list.querySelector('.store-card[data-id="'+focusedId+'"] .store-card-hit-area')?.focus({preventScroll:true});
+    }
+    refreshMarkers();
+  }
   const showMessage=(message)=>{
     if(!mapMessage)return;
     if(!message){mapMessage.hidden=true;mapMessage.textContent="";return;}
@@ -396,7 +421,7 @@
         if(resolved){
           coords.set(store.id,resolved);
           saveCoords();
-          refreshMarkers();
+          refreshMappedList();
         }
         geoJobs.delete(store.id);
         resolve(resolved);
@@ -481,9 +506,11 @@
       const empty=document.createElement("div");
       empty.className="store-empty";
       const strong=document.createElement("strong");
-      strong.textContent="검색 결과가 없습니다.";
+      strong.textContent=geocodingComplete?"표시할 매장이 없습니다.":"매장 위치 확인 중입니다.";
       const p=document.createElement("p");
-      p.textContent="다른 지역이나 매장명으로 다시 검색해 보세요.";
+      p.textContent=geocodingComplete
+        ?"지도 위치가 확인된 매장만 목록에 표시됩니다."
+        :"주소에서 지도 위치를 확인한 매장부터 목록에 추가됩니다.";
       const reset=document.createElement("button");
       reset.type="button";reset.className="store-reset-button";reset.textContent="전체 지점 보기";
       reset.addEventListener("click",()=>{district.value="all";keyword.value="";applySearch();});
@@ -532,11 +559,7 @@
     selected=null;
     if(map){map.stop();map.closePopup();}
     window.hosigiNaverMap?.clearClusterSelection?.();
-    filtered=stores.filter(store=>{
-      const area=region==="all" ||
-        (region.startsWith("province:")&&store.province===region.slice(9));
-      return area&&(!term||[store.name,store.address,store.district,store.province].some(v=>v.toLocaleLowerCase("ko").includes(term)));
-    });
+    filtered=mappedStores();
     // Invalidate stale GPS/moveend callbacks that could reopen an old popup.
     ++gpsRequestNumber;
     if(userLocationMarker){map.removeLayer(userLocationMarker);userLocationMarker=null;}
@@ -555,6 +578,7 @@
   form.addEventListener("submit",event=>{event.preventDefault();applySearch();});
   district.addEventListener("change",applySearch);
   keyword.addEventListener("input",()=>{if(!keyword.value.trim())applySearch();});
+  filtered=mappedStores();
   renderCards();
 
   if(!window.L){
@@ -693,9 +717,12 @@
   // Keep all results visible even if geocoding or map tiles are unavailable.
   async function geocodeStores(){
     const pending=stores.filter(store=>store.addressValid&&!coords.has(store.id));
-    if(!pending.length){refreshMarkers();fitPoints();return;}
+    if(!pending.length){geocodingComplete=true;refreshMappedList();refreshMarkers();fitPoints();return;}
     // Shared queue eliminates overlapping requests; selected branches jump ahead.
     await Promise.all(pending.map(store=>ensureStorePoint(store,false)));
+    geocodingComplete=true;
+    refreshMappedList();
+    renderCards();
     refreshMarkers();
     fitPoints();
   }
