@@ -308,12 +308,23 @@
   // Distance between GPS and selected store is a straight-line estimate.
   let gpsPoint=null;
   let distanceLine=null;
+  let distanceLabel=null;
   let distanceRenderId=0;
+  const distanceKm=(a,b)=>{
+    const rad=Math.PI/180;
+    const deltaLat=(b[0]-a[0])*rad;
+    const deltaLng=(b[1]-a[1])*rad;
+    const value=Math.sin(deltaLat/2)**2+
+      Math.cos(a[0]*rad)*Math.cos(b[0]*rad)*Math.sin(deltaLng/2)**2;
+    const km=6371*2*Math.atan2(Math.sqrt(value),Math.sqrt(Math.max(0,1-value)));
+    return km.toFixed(1)+"km";
+  };
   // Draw by moving the endpoint through geographic coordinates. Unlike a
   // pixel dash animation, the line stays intact after any map zoom or pan.
   function clearDistance(){
     ++distanceRenderId;
     if(distanceLine){map?.removeLayer(distanceLine);distanceLine=null;}
+    if(distanceLabel){map?.removeLayer(distanceLabel);distanceLabel=null;}
     window.hosigiNaverMap?.clearDistance?.();
   }
   function drawDistance(fit=true){
@@ -322,6 +333,16 @@
     const from=gpsPoint.slice();
     const destination=coords.get(selected).slice();
     const renderId=distanceRenderId;
+    const midpoint=[(from[0]+destination[0])/2,(from[1]+destination[1])/2];
+    const distanceValue=distanceKm(from,destination);
+    const textIcon=L.divIcon({
+      className:"store-distance-text-icon",
+      html:'<span class="store-distance-text">'+distanceValue+'</span>',
+      iconSize:[110,32],iconAnchor:[55,16]
+    });
+    distanceLabel=L.marker(midpoint,{
+      icon:textIcon,interactive:false,zIndexOffset:1100
+    }).addTo(map);
     distanceLine=L.polyline([from,from],{
       color:"#E60012",weight:4,opacity:.95,interactive:false,
       lineCap:"round",className:"store-distance-line"
@@ -348,8 +369,8 @@
       };
       requestAnimationFrame(frame);
     };
-    // Keep the two map implementations in sync without showing any text.
-    window.hosigiNaverMap?.setDistance?.(from,destination,fit);
+    // Keep both map providers consistent: horizontal km label at the midpoint.
+    window.hosigiNaverMap?.setDistance?.(from,destination,distanceValue,fit);
     if(fit){
       map.stop();
       map.once("moveend",drawLine);
