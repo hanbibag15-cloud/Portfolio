@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
 <link rel="stylesheet" href="css/main.css?v=50">
     <link rel="stylesheet" href="css/nav-state.css">
-<link rel="stylesheet" href="css/event-page.css?v=4">
-<script src="js/event-page.js?v=4" defer></script>
+<link rel="stylesheet" href="css/event-page.css?v=5">
+<script src="js/event-page.js?v=5" defer></script>
 <script src="js/nav-state.js" defer></script>
 
 
@@ -74,17 +74,22 @@
   </section>
   <section class="event-page-content" aria-label="이벤트 둘러보기">
     <div class="event-page-container">
-      <div class="event-filters" role="group" aria-label="이벤트 진행 상태">
-        <button type="button" class="event-filter" data-filter="active" aria-pressed="false">진행중인 이벤트</button>
-        <button type="button" class="event-filter is-active" data-filter="ended" aria-pressed="true">종료 이벤트</button>
+      <div class="event-filters" role="group" aria-label="콘텐츠 종류">
+        <button type="button" class="event-filter is-active" data-section="events" aria-pressed="true">이벤트</button>
+        <button type="button" class="event-filter" data-section="notices" aria-pressed="false">공지사항</button>
+      </div>
+      <div class="event-status-filters" role="group" aria-label="진행 상태">
+        <button type="button" class="event-status-filter is-active" data-status="all" aria-pressed="true">전체</button>
+        <button type="button" class="event-status-filter" data-status="active" aria-pressed="false">진행중</button>
+        <button type="button" class="event-status-filter" data-status="ended" aria-pressed="false">종료</button>
       </div>
       <section class="event-collection" id="event-list" aria-labelledby="event-list-title">
         <div class="event-list-top">
-          <h3 id="event-list-title">종료 이벤트</h3>
+          <h3 id="event-list-title">전체 이벤트</h3>
           <p id="event-count" class="event-count" aria-live="polite"></p>
         </div>
         <div class="event-card-grid" id="event-card-grid"></div>
-        <p class="event-data-note">※ 본 페이지는 웹디자인 학습용 리뉴얼 포트폴리오입니다. 현재 진행 중인 이벤트는 공식 확인된 경우에만 표시하며, 종료 이벤트는 공개 자료와 기존 프로젝트 콘텐츠를 바탕으로 소개합니다. 이미지 박스는 추후 교체할 수 있습니다.</p>
+        <p class="event-data-note">※ 본 페이지는 웹디자인 학습용 리뉴얼 포트폴리오입니다. 진행 중 여부가 확인되지 않은 이벤트는 '전체'에서만 확인할 수 있습니다. 실제 진행 중인 이벤트와 공지사항은 검증된 자료가 있을 때 등록하며, 종료된 이벤트는 공개 자료와 기존 프로젝트 콘텐츠를 바탕으로 소개합니다. 이미지 박스는 추후 교체할 수 있습니다.</p>
       </section>
     </div>
   </section>
