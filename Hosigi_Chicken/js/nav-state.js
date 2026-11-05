@@ -9,7 +9,8 @@
 
   function mark(index) {
     links.forEach((link, i) => {
-      const active = i === index;
+      // The main page MENU is a dropdown trigger, not an active navigation destination.
+      const active = i === index && !(page === 'brand.html' && i === 0);
       link.classList.toggle('is-current', active);
       if (active) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
