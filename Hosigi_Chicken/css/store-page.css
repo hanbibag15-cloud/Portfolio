@@ -660,6 +660,8 @@
   pointer-events:none;
   stroke-dasharray:none !important;
   stroke-dashoffset:0 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
 }
 
 /* A single horizontal km value centered on the GPS-to-store line. */
@@ -669,8 +671,10 @@
 .store-distance-text {
   display:flex;
   align-items:center;justify-content:center;
-  width:120px;height:36px;
-  border:0;border-radius:6px;
+  width:max-content;min-width:0;height:28px;
+  margin:4px auto;
+  padding:0 8px;
+  border:0;border-radius:5px;
   background:rgba(255,255,255,.84);
   color:#D90012;
   font:800 19px/1.1 var(--font);
@@ -688,3 +692,9 @@
 @media(prefers-reduced-motion:reduce){
   .store-distance-text {animation:none;}
 }
+
+/* Center the content-sized distance chip inside its map marker anchor. */
+.store-distance-text-icon{width:120px!important;height:36px!important;text-align:center;}
+
+.store-distance-text-anchor{display:flex;width:120px;height:36px;align-items:center;justify-content:center;pointer-events:none;}
+.store-distance-text-anchor .store-distance-text{margin:0;}
