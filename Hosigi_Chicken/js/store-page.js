@@ -232,8 +232,10 @@
     });
   }
   let activeClusterKey=null;
+  // GPS takes precedence over initial async geocoding and layout-driven auto-fit.
+  let gpsNavigationActive=false;
   function fitPoints() {
-    if(!map)return;
+    if(!map || gpsNavigationActive)return;
     const pts=filtered.map(store=>coords.get(store.id)).filter(Boolean);
     if(pts.length===0) {
       map.setView([37.5665,126.9780],11);
@@ -295,6 +297,7 @@
     }
   }
   function selectStore(id,scrollToCard=true) {
+    gpsNavigationActive=false;
     selected=id;
     for(const card of list.querySelectorAll(".store-card")){
       const active=card.dataset.id===id;
@@ -352,6 +355,8 @@
     list.append(fragment);
   }
   function applySearch(){
+    // Explicit searches restore the normal fit-to-results behavior.
+    gpsNavigationActive=false;
     const term=keyword.value.trim().toLocaleLowerCase("ko");
     const region=district.value;
     filtered=stores.filter(store=>{
@@ -396,7 +401,12 @@
   let gpsRequestNumber=0;
   if(gpsButton){
     gpsButton.addEventListener("click",()=>{
+      // Lock the viewport before the asynchronous location permission request.
+      // Font loading, initial geocoding and resize callbacks must not recenter it.
+      gpsNavigationActive=true;
+      map.stop();
       if(!navigator.geolocation){
+        gpsNavigationActive=false;
         showMessage("이 브라우저에서는 현재 위치 기능을 사용할 수 없습니다.");
         return;
       }
@@ -431,6 +441,8 @@
             showMessage("현재 위치는 표시했지만 GPS 오차가 커 정확도 범위는 생략했어요.");
           }
         };
+        // Stop any previous fitBounds/flyTo so only GPS controls the camera.
+        map.stop();
         if(!reduceMotion()){
           map.once("moveend",drawAccuracy);
           map.flyTo(point,14,{animate:true,duration:.75});
@@ -439,6 +451,7 @@
           drawAccuracy();
         }
       },error=>{
+        gpsNavigationActive=false;
         gpsButton.disabled=false;
         gpsButton.removeAttribute("aria-busy");
         const msg=error.code===1 ? "위치 권한이 허용되지 않았습니다. 브라우저 위치 설정을 확인해 주세요."
@@ -498,6 +511,6 @@
       showMessage("일부 매장의 위치는 확인 중입니다. 목록의 주소를 참고해 주세요.");
     }else showMessage("");
   }
-  window.hosigiStoreMapState={sync:()=>window.hosigiNaverMap?.sync?.(filtered,coords,selected),selectStore};
+  window.hosigiStoreMapState={sync:()=>window.hosigiNaverMap?.sync?.(filtered,coords,selected),selectStore,isGpsNavigationActive:()=>gpsNavigationActive};
   geocodeStores();
 })();
