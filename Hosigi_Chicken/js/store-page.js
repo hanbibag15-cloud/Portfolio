@@ -254,15 +254,14 @@
     window.hosigiNaverMap?.sync?.(filtered,coords,selected);
     const mapped=filtered.filter(store=>coords.has(store.id)).map(store=>({...store,point:coords.get(store.id)}));
     const groups=window.hosigiClusterStores?window.hosigiClusterStores(mapped,map.getZoom()):mapped.map(store=>({items:[store],point:store.point}));
-    for(const [index,group] of groups.entries()){
-      const enterDelay=Math.min(index*55,260);
+    for(const group of groups){
       if(group.items.length>1){
         const count=group.items.length;
         const clusterKey=group.items.map(item=>item.id).sort().join("|");
         const active=clusterKey===activeClusterKey;
         const icon=L.divIcon({
           className:"store-cluster-wrapper",
-          html:'<span class="store-cluster-count'+(active?' is-selected':'')+(revealSplit?' is-entering':'')+'" style="--store-enter-delay:'+enterDelay+'ms" aria-label="'+count+'개 매장">'+count+'</span>',
+          html:'<span class="store-cluster-count'+(active?' is-selected':'')+(revealSplit?' is-entering':'')+'" aria-label="'+count+'개 매장">'+count+'</span>',
           iconSize:[46,46],iconAnchor:[23,23]
         });
         const clustered=L.marker(group.point,{icon,title:count+"개 매장 확대해서 보기"});
@@ -278,11 +277,11 @@
           // A single animated flight avoids the jump caused by fitting bounds
           // and then immediately calling setZoom.
           if(bounds.getNorthEast().equals(bounds.getSouthWest())){
-            map.flyTo(bounds.getCenter(),nextZoom,{animate:!reduceMotion(),duration:0.9});
+            map.flyTo(bounds.getCenter(),nextZoom,{animate:!reduceMotion(),duration:0.65});
           }else{
             map.flyToBounds(bounds,{
               padding:[65,65],maxZoom:nextZoom,
-              animate:!reduceMotion(),duration:0.9
+              animate:!reduceMotion(),duration:0.65
             });
           }
         });
@@ -295,7 +294,7 @@
       if(revealSplit){
         marker.on("add",()=>{
           const pin=marker.getElement()?.querySelector(".store-marker-pin");
-          if(pin){pin.classList.add("is-entering");pin.style.setProperty("--store-enter-delay",enterDelay+"ms");}
+          if(pin)pin.classList.add("is-entering");
         });
       }
       const popup=document.createElement("div");
