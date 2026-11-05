@@ -294,7 +294,7 @@
   position:absolute;left:0;right:0;top:calc(100% + 6px);
   padding:9px 0;background:#fff;border:1px solid var(--border-default);
   border-radius:16px;box-shadow:0 12px 28px rgba(34,23,20,.13);
-  max-height:290px;overflow-y:auto;z-index:30;
+  max-height:240px;overflow-y:auto;z-index:30;
   opacity:0;visibility:hidden;pointer-events:none;
   transform:translateY(-10px) scale(.98);transform-origin:top center;
   transition:opacity .26s ease,transform .32s cubic-bezier(.22,1,.36,1),visibility .26s;
