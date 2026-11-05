@@ -37,9 +37,21 @@
     return article;
   }
   function render(filter){
-    const selected=events.filter(event=>filter==="all"||event.type===filter||(filter==="ended"&&event.state==="ended"));
+    const selected=events.filter(event=>event.state===filter);
     grid.replaceChildren(...selected.map(makeCard));
+    const heading=document.getElementById("event-list-title");
+    heading.textContent=filter==="active"?"진행중인 이벤트":"종료 이벤트";
     count.textContent=selected.length+"개의 이벤트";
+    if(!selected.length){
+      const empty=document.createElement("div");
+      empty.className="event-empty";
+      const title=document.createElement("strong");
+      title.textContent="현재 확인된 진행중 이벤트가 없습니다.";
+      const copy=document.createElement("p");
+      copy.textContent="공식적으로 진행 여부가 확인되는 이벤트가 등록되면 이곳에서 확인할 수 있어요.";
+      empty.append(title,copy);
+      grid.append(empty);
+    }
     filters.forEach(button=>{
       const active=button.dataset.filter===filter;
       button.classList.toggle("is-active",active);
@@ -92,5 +104,5 @@
       if(event.key==="Enter"||event.key===" "){event.preventDefault();control();}
     });
   });
-  render("all");
+  render("active");
 })();
