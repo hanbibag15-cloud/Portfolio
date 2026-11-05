@@ -246,16 +246,39 @@
     if(!map || !markerLayer)return;
     markerLayer.clearLayers();markers.clear();
     window.hosigiNaverMap?.sync?.(filtered,coords,selected);
-    for(const store of filtered){
-      const point=coords.get(store.id);
-      if(!point)continue;
+    const mapped=filtered.filter(store=>coords.has(store.id)).map(store=>({...store,point:coords.get(store.id)}));
+    const groups=window.hosigiClusterStores?window.hosigiClusterStores(mapped,map.getZoom()):mapped.map(store=>({items:[store],point:store.point}));
+    for(const group of groups){
+      if(group.items.length>1){
+        const count=group.items.length;
+        const icon=L.divIcon({
+          className:"store-cluster-wrapper",
+          html:'<span class="store-cluster-count" aria-label="'+count+'개 매장">'+count+'</span>',
+          iconSize:[46,46],iconAnchor:[23,23]
+        });
+        const clustered=L.marker(group.point,{icon,title:count+"개 매장 확대해서 보기"});
+        clustered.on("click",()=>{
+          const points=group.items.map(item=>item.point);
+          const bounds=L.latLngBounds(points);
+          if(bounds.getNorthEast().equals(bounds.getSouthWest())){
+            map.setView(group.point,Math.min(map.getZoom()+2,18),{animate:!reduceMotion()});
+          }else{
+            map.fitBounds(bounds,{padding:[70,70],maxZoom:Math.min(18,map.getZoom()+3),animate:!reduceMotion()});
+            if(map.getZoom()<=12)map.setZoom(Math.min(14,map.getZoom()+2));
+          }
+        });
+        clustered.addTo(markerLayer);
+        continue;
+      }
+      const store=group.items[0];
+      const point=store.point;
       const marker=L.marker(point,{icon:markerIcon(store.id===selected),title:"호식이두마리치킨 "+store.name});
       const popup=document.createElement("div");
-      const h=document.createElement("strong");
-      h.className="store-popup-title";h.textContent="호식이두마리치킨 "+store.name;
-      const p=document.createElement("p");
-      p.className="store-popup-address";p.textContent=store.address;
-      popup.append(h,p);
+      const heading=document.createElement("strong");
+      heading.className="store-popup-title";heading.textContent="호식이두마리치킨 "+store.name;
+      const address=document.createElement("p");
+      address.className="store-popup-address";address.textContent=store.address;
+      popup.append(heading,address);
       marker.bindPopup(popup);
       marker.on("click",()=>selectStore(store.id,false));
       marker.addTo(markerLayer);markers.set(store.id,marker);
@@ -273,6 +296,8 @@
     const pt=coords.get(id);
     if(!map || !pt)return;
     map.flyTo(pt,14,{animate:!reduceMotion(),duration:.65});
+    // Recalculate after flyTo so the selected store is available as an individual pin.
+    map.once("moveend",()=>{refreshMarkers();markers.get(id)?.openPopup();});
     markers.get(id)?.openPopup();
   }
   function renderCards(){
@@ -355,6 +380,7 @@
     if(!hasLoadedTiles)showMessage("지도 타일을 불러올 수 없습니다. 네트워크 연결을 확인하고 다시 새로고침해 주세요.");
   });
   markerLayer=L.layerGroup().addTo(map);
+  map.on("zoomend",refreshMarkers);
   let userLocationMarker=null;
   let userAccuracyCircle=null;
   if(gpsButton){
