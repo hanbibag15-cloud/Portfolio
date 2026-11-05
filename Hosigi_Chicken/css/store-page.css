@@ -547,3 +547,44 @@
     height:0 !important;
   }
 }
+
+/* Region picker only: a short fixed 30px thumb that tracks actual scroll.
+   The long native scrollbar remains available on the store-card list. */
+.store-district-options {
+  scrollbar-width:none !important;
+  scrollbar-color:auto;
+  scrollbar-gutter:auto;
+  padding-right:12px;
+}
+.store-district-options::-webkit-scrollbar {
+  display:none !important;
+  width:0 !important;
+  height:0 !important;
+}
+.store-district-scroll-indicator {
+  position:absolute;
+  top:calc(100% + 19px);
+  right:7px;
+  height:212px;
+  width:5px;
+  z-index:31;
+  pointer-events:none;
+  visibility:hidden;
+  opacity:0;
+  transition:opacity .22s ease,visibility .22s ease;
+}
+.store-district-dropdown.is-open .store-district-scroll-indicator.has-overflow {
+  visibility:visible;
+  opacity:1;
+}
+.store-district-scroll-thumb {
+  display:block;
+  width:5px;
+  height:30px;
+  border-radius:999px;
+  background:#BDBDBD;
+  will-change:transform;
+}
+@media (prefers-reduced-motion:reduce) {
+  .store-district-scroll-indicator {transition:none;}
+}
