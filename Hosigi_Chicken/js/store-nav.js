@@ -36,7 +36,15 @@
       trigger.setAttribute("aria-expanded",String(open));
     };
     trigger.addEventListener("click",event=>{
-      event.preventDefault();activate();
+      event.preventDefault();
+      if(!mobile()){
+        // The desktop dropdown is hover-driven. Clicking an <a> leaves it
+        // focused, which otherwise keeps CSS :focus-within open after mouseleave.
+        // Clear only pointer-click focus; keyboard focus behavior stays intact.
+        if(event.detail>0)trigger.blur();
+        return;
+      }
+      activate();
     });
     trigger.addEventListener("keydown",event=>{
       if(event.key==="Enter"||event.key===" "){event.preventDefault();activate();}
