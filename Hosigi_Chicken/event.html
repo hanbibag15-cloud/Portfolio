@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
 <link rel="stylesheet" href="css/main.css?v=50">
     <link rel="stylesheet" href="css/nav-state.css">
-<link rel="stylesheet" href="css/event-page.css?v=2">
-<script src="js/event-page.js?v=1" defer></script>
+<link rel="stylesheet" href="css/event-page.css?v=3">
+<script src="js/event-page.js?v=2" defer></script>
 <script src="js/nav-state.js" defer></script>
 
 
@@ -68,27 +68,23 @@
 <main class="hosigi-event-page">
   <section class="event-page-hero" aria-labelledby="event-page-title">
     <div class="event-page-container">
-      <p class="event-page-eyebrow">HOSIGI NEWS &amp; BENEFITS</p>
       <h2 id="event-page-title">EVENT</h2>
       <p class="event-page-subtitle">맛있는 소식, 즐거운 이벤트!</p>
-      <p class="event-page-intro">호식이두마리치킨의 다양한 프로모션과 이벤트 이야기를 확인해 보세요.</p>
     </div>
   </section>
   <section class="event-page-content" aria-label="이벤트 둘러보기">
     <div class="event-page-container">
+      <div class="event-filters" role="group" aria-label="이벤트 진행 상태">
+        <button type="button" class="event-filter is-active" data-filter="active" aria-pressed="true">진행중인 이벤트</button>
+        <button type="button" class="event-filter" data-filter="ended" aria-pressed="false">종료 이벤트</button>
+      </div>
       <section class="event-collection" id="event-list" aria-labelledby="event-list-title">
         <div class="event-list-top">
-          <div><p class="event-list-kicker">HOSIGI EVENT</p><h3 id="event-list-title">이벤트 목록</h3></div>
+          <h3 id="event-list-title">진행중인 이벤트</h3>
           <p id="event-count" class="event-count" aria-live="polite"></p>
         </div>
-        <div class="event-filters" role="group" aria-label="이벤트 유형">
-          <button type="button" class="event-filter is-active" data-filter="all" aria-pressed="true">전체</button>
-          <button type="button" class="event-filter" data-filter="promo" aria-pressed="false">할인·프로모션</button>
-          <button type="button" class="event-filter" data-filter="sns" aria-pressed="false">SNS 이벤트</button>
-          <button type="button" class="event-filter" data-filter="ended" aria-pressed="false">종료된 이벤트</button>
-        </div>
         <div class="event-card-grid" id="event-card-grid"></div>
-        <p class="event-data-note">※ 본 페이지는 웹디자인 학습용 리뉴얼 포트폴리오입니다. 게시된 이벤트는 공개 자료를 바탕으로 소개한 사례이며, 현재 진행 중인 혜택을 보장하지 않습니다. 이미지 박스는 추후 교체할 수 있습니다.</p>
+        <p class="event-data-note">※ 본 페이지는 웹디자인 학습용 리뉴얼 포트폴리오입니다. 현재 진행 중인 이벤트는 공식 확인된 경우에만 표시하며, 종료 이벤트는 공개 자료와 기존 프로젝트 콘텐츠를 바탕으로 소개합니다. 이미지 박스는 추후 교체할 수 있습니다.</p>
       </section>
     </div>
   </section>
