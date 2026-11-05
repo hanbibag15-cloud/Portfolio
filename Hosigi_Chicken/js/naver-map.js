@@ -15,7 +15,7 @@
   let map=null,naverMarkers=[],currentMarker=null,accuracyCircle=null,latest=[],coords=null,selected=null;
   function ll(point){return new naver.maps.LatLng(point[0],point[1]);}
   function markerHTML(active) {
-    return '<div class="store-naver-pin'+(active?' is-active':'')+'"><svg class="store-pin-symbol" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10V20H20V10"/><path d="M3 10L5.2 4H18.8L21 10"/><path d="M3 10C3 12 6 12 6 10C6 12 9 12 9 10C9 12 12 12 12 10C12 12 15 12 15 10C15 12 18 12 18 10C18 12 21 12 21 10"/><path d="M9 20V14H15V20"/></svg></div>';
+    return '<div class="store-naver-pin'+(active?' is-active':'')+'"><svg class="store-location-icon" viewBox="0 0 40 52" width="40" height="52" aria-hidden="true"><path d="M20 1C9.5 1 1 9.5 1 20c0 14 19 31 19 31s19-17 19-31C39 9.5 30.5 1 20 1Z" fill="currentColor"/><circle cx="20" cy="20" r="7.5" fill="#fff"/></svg></div>';
   }
   function sync(stores,positions,activeId) {
     latest=stores;coords=positions;selected=activeId;
@@ -28,7 +28,7 @@
       points.push(pos);
       const marker=new naver.maps.Marker({
         map,position:ll(pos),title:"호식이두마리치킨 "+store.name,
-        icon:{content:markerHTML(store.id===activeId),size:new naver.maps.Size(70,78),anchor:new naver.maps.Point(35,74)}
+        icon:{content:markerHTML(store.id===activeId),size:new naver.maps.Size(40,52),anchor:new naver.maps.Point(20,51)}
       });
       naver.maps.Event.addListener(marker,"click",()=>window.hosigiStoreMapState?.selectStore(store.id,false));
       naverMarkers.push(marker);
