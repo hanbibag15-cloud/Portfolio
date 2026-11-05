@@ -536,6 +536,18 @@
   function selectStore(id,scrollToCard=true) {
     gpsNavigationActive=false;
     userNavigationActive=true;
+    if(selected===id){
+      // Clicking an already-selected pin/card toggles it back to black.
+      selected=null;
+      clearDistance();
+      map?.closePopup();
+      for(const card of list.querySelectorAll(".store-card")){
+        card.classList.remove("is-selected");
+        card.querySelector(".store-card-hit-area")?.setAttribute("aria-pressed","false");
+      }
+      refreshMarkers();
+      return;
+    }
     selected=id;
     for(const card of list.querySelectorAll(".store-card")){
       const active=card.dataset.id===id;
