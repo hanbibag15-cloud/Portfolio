@@ -393,6 +393,7 @@
   map.on("zoomend",refreshMarkers);
   let userLocationMarker=null;
   let userAccuracyCircle=null;
+  let gpsRequestNumber=0;
   if(gpsButton){
     gpsButton.addEventListener("click",()=>{
       if(!navigator.geolocation){
@@ -412,12 +413,31 @@
         const icon=L.divIcon({className:"store-leaflet-marker",html:'<span class="store-current-location" aria-hidden="true"></span>',iconSize:[22,22],iconAnchor:[11,11]});
         userLocationMarker=L.marker(point,{icon,title:"내 현재 위치",zIndexOffset:1000}).addTo(map);
         // Only the position marker and accuracy circle are displayed; no popup.
-        userAccuracyCircle=L.circle(point,{
-          radius:Math.min(Math.max(position.coords.accuracy,10),2000),
-          color:"#E60012",fillColor:"#E60012",fillOpacity:.09,weight:2
-        }).addTo(map);
-        map.flyTo(point,14,{animate:!reduceMotion(),duration:.75});
-        showMessage("내 현재 위치를 표시했어요.");
+        const requestNumber=++gpsRequestNumber;
+        const accuracy=position.coords.accuracy;
+        // Wait for the camera animation to finish before adding a large SVG
+        // circle; otherwise the zoom transition can paint an oversized red blob.
+        const drawAccuracy=()=>{
+          if(requestNumber!==gpsRequestNumber)return;
+          if(userAccuracyCircle){map.removeLayer(userAccuracyCircle);userAccuracyCircle=null;}
+          if(Number.isFinite(accuracy)&&accuracy>=0&&accuracy<=500){
+            userAccuracyCircle=L.circle(point,{
+              radius:Math.max(accuracy,10),
+              color:"#E60012",fillColor:"#E60012",
+              opacity:.8,fillOpacity:.035,weight:2,interactive:false
+            }).addTo(map);
+            showMessage("내 현재 위치를 표시했어요.");
+          }else{
+            showMessage("현재 위치는 표시했지만 GPS 오차가 커 정확도 범위는 생략했어요.");
+          }
+        };
+        if(!reduceMotion()){
+          map.once("moveend",drawAccuracy);
+          map.flyTo(point,14,{animate:true,duration:.75});
+        }else{
+          map.setView(point,14,{animate:false});
+          drawAccuracy();
+        }
       },error=>{
         gpsButton.disabled=false;
         gpsButton.removeAttribute("aria-busy");
