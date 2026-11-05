@@ -175,6 +175,18 @@ function renderMenu(category) {
             requestAnimationFrame(() => requestAnimationFrame(() => {
                 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
                 matched.scrollIntoView({behavior:reduceMotion ? "auto" : "smooth",block:"center"});
+                // Brief, non-layout-shifting arrival cue. Remove it automatically.
+                const reveal=()=>{
+                    if(!matched.isConnected)return;
+                    matched.classList.add("is-product-arrival-highlight");
+                    matched.addEventListener("animationend",event=>{
+                        if(event.target===matched && event.animationName==="hosigi-product-arrival"){
+                            matched.classList.remove("is-product-arrival-highlight");
+                        }
+                    },{once:true});
+                };
+                if(reduceMotion)reveal();
+                else window.setTimeout(reveal,550);
             }));
         }
     }
