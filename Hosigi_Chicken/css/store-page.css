@@ -411,3 +411,7 @@
 @media(prefers-reduced-motion:reduce) {
   .store-cluster-count{transition:none;}
 }
+
+/* Store search CTA: dark by default, brand red on hover/focus. */
+.store-search-button{background:var(--brand-brown);border-color:var(--brand-brown);}
+.store-search-button:hover,.store-search-button:focus-visible{background:var(--brand-red);border-color:var(--brand-red);}
