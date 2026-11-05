@@ -335,14 +335,18 @@
     const renderId=distanceRenderId;
     const midpoint=[(from[0]+destination[0])/2,(from[1]+destination[1])/2];
     const distanceValue=distanceKm(from,destination);
-    const textIcon=L.divIcon({
-      className:"store-distance-text-icon",
-      html:'<span class="store-distance-text">'+distanceValue+'</span>',
-      iconSize:[110,32],iconAnchor:[55,16]
-    });
-    distanceLabel=L.marker(midpoint,{
-      icon:textIcon,interactive:false,zIndexOffset:1100
-    }).addTo(map);
+    // Prepare the label, but only add it after the connection is complete.
+    const revealDistance=()=>{
+      if(renderId!==distanceRenderId||distanceLabel)return;
+      const textIcon=L.divIcon({
+        className:"store-distance-text-icon",
+        html:'<span class="store-distance-text">'+distanceValue+'</span>',
+        iconSize:[120,36],iconAnchor:[60,18]
+      });
+      distanceLabel=L.marker(midpoint,{
+        icon:textIcon,interactive:false,zIndexOffset:1100
+      }).addTo(map);
+    };
     distanceLine=L.polyline([from,from],{
       color:"#E60012",weight:4,opacity:.95,interactive:false,
       lineCap:"round",className:"store-distance-line"
@@ -351,10 +355,11 @@
       if(renderId!==distanceRenderId||!distanceLine)return;
       if(reduceMotion()){
         distanceLine.setLatLngs([from,destination]);
+        revealDistance();
         return;
       }
       const start=performance.now();
-      const duration=680;
+      const duration=400;
       const frame=now=>{
         if(renderId!==distanceRenderId||!distanceLine)return;
         const t=Math.min(1,(now-start)/duration);
@@ -365,7 +370,10 @@
         ];
         distanceLine.setLatLngs([from,end]);
         if(t<1)requestAnimationFrame(frame);
-        else distanceLine.setLatLngs([from,destination]);
+        else {
+          distanceLine.setLatLngs([from,destination]);
+          revealDistance();
+        }
       };
       requestAnimationFrame(frame);
     };
@@ -376,9 +384,9 @@
       map.once("moveend",drawLine);
       map.flyToBounds(L.latLngBounds([from,destination]),{
         padding:[80,80],maxZoom:16,
-        animate:!reduceMotion(),duration:.65
+        animate:!reduceMotion(),duration:.55
       });
-      if(reduceMotion())drawLine();
+      // If reduced motion, flyToBounds itself is immediate and moveend handles reveal.
     }else drawLine();
     return true;
   }
