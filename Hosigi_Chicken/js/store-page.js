@@ -155,14 +155,32 @@
       items.push(item);
       options.append(item);
     }
-    dropdown.append(trigger,options);
+    // Fixed 30px visual thumb: native thumb lengths are controlled by the browser.
+    // Keep the actual options scrollable for wheel, touch and keyboard users.
+    const scrollIndicator=document.createElement("span");
+    scrollIndicator.className="store-district-scroll-indicator";
+    scrollIndicator.setAttribute("aria-hidden","true");
+    const scrollThumb=document.createElement("span");
+    scrollThumb.className="store-district-scroll-thumb";
+    scrollIndicator.append(scrollThumb);
+    dropdown.append(trigger,options,scrollIndicator);
+    const updateThumb=()=>{
+      const remaining=options.scrollHeight-options.clientHeight;
+      const travel=Math.max(0,scrollIndicator.clientHeight-scrollThumb.offsetHeight);
+      scrollIndicator.classList.toggle("has-overflow",remaining>1);
+      scrollThumb.style.transform="translateY("+(remaining>0?(options.scrollTop/remaining)*travel:0)+"px)";
+    };
+    options.addEventListener("scroll",updateThumb,{passive:true});
     district.insertAdjacentElement("afterend",dropdown);
     district.classList.add("store-district-native-hidden");
     trigger.addEventListener("click",()=>{
       const opening=!dropdown.classList.contains("is-open");
       dropdown.classList.toggle("is-open",opening);
       trigger.setAttribute("aria-expanded",String(opening));
-      if(opening)items.find(item=>item.dataset.value===district.value)?.focus();
+      if(opening){
+        requestAnimationFrame(updateThumb);
+        items.find(item=>item.dataset.value===district.value)?.focus();
+      }
     });
     dropdown.addEventListener("keydown",event=>{
       if(event.key==="Escape"){close();trigger.focus();}
@@ -177,6 +195,7 @@
       if(!dropdown.contains(event.target))close();
     });
     district.addEventListener("change",sync);
+    window.addEventListener("resize",updateThumb,{passive:true});
     sync();
   }
   let filtered=stores.slice();
