@@ -334,6 +334,7 @@
   function drawDistance(fit=true){
     clearDistance();
     if(!map||!gpsVisible||!gpsPoint||!selected||!coords.has(selected))return false;
+    closeSelectedPopup(true);
     const from=gpsPoint.slice();
     const destination=coords.get(selected).slice();
     const renderId=distanceRenderId;
@@ -463,6 +464,13 @@
       popup.append(heading,address);
       // Popup state is controlled only by branch selection, not map background clicks.
       marker.on("click",()=>selectStore(store.id,false));
+      // While GPS and a branch are connected, the popup is hover-only.
+      marker.on("mouseover",()=>{
+        if(isDistanceMode() && selected===store.id)showSelectedPopup(store.id,true);
+      });
+      marker.on("mouseout",()=>{
+        if(isDistanceMode() && selected===store.id)closeSelectedPopup(true);
+      });
       marker.addTo(markerLayer);markers.set(store.id,marker);
     }
   }
@@ -538,16 +546,36 @@
     return promise;
   }
   let selectedPopup=null;
-  function closeSelectedPopup(){
-    if(selectedPopup){
-      map?.closePopup(selectedPopup);
-      selectedPopup=null;
+  let popupCloseTimer=null;
+  const isDistanceMode=()=>Boolean(gpsVisible && gpsPoint && selected && coords.has(selected));
+  function closeSelectedPopup(animate=false){
+    if(popupCloseTimer!==null){clearTimeout(popupCloseTimer);popupCloseTimer=null;}
+    if(!selectedPopup)return;
+    const popup=selectedPopup;
+    if(!animate||reduceMotion()){
+      map?.closePopup(popup);
+      if(selectedPopup===popup)selectedPopup=null;
+      return;
     }
+    popup.getElement()?.classList.add("is-dismissing");
+    popupCloseTimer=setTimeout(()=>{
+      map?.closePopup(popup);
+      if(selectedPopup===popup)selectedPopup=null;
+      popupCloseTimer=null;
+    },180);
   }
-  function showSelectedPopup(id){
+  function showSelectedPopup(id,hoverOnly=false){
     if(!map || selected!==id || !coords.has(id))return;
+    if(isDistanceMode()&&!hoverOnly)return;
     const store=stores.find(item=>item.id===id);
     if(!store)return;
+    if(selectedPopup){
+      if(popupCloseTimer!==null){
+        clearTimeout(popupCloseTimer);popupCloseTimer=null;
+        selectedPopup.getElement()?.classList.remove("is-dismissing");
+      }
+      if(selectedPopup.options?.storeId===id)return;
+    }
     closeSelectedPopup();
     const content=document.createElement("div");
     const title=document.createElement("strong");
@@ -563,7 +591,8 @@
       autoClose:false,
       autoPan:false,
       offset:[0,-55],
-      className:"store-selected-popup"
+      className:"store-selected-popup"+(hoverOnly?" is-hover-popup":""),
+      storeId:id
     }).setLatLng(coords.get(id)).setContent(content).openOn(map);
   }
   function updatePinSelection(){
@@ -619,14 +648,17 @@
         card?.setAttribute("title","이 주소의 지도 좌표를 확인하지 못했습니다.");
         return;
       }
+      if(drawDistance(true)){
+        closeSelectedPopup(true);
+        return;
+      }
       showSelectedPopup(id);
-      if(drawDistance(true))return;
       map.stop();
       map.flyTo(pt,15,{animate:!reduceMotion(),duration:.65});
       map.once("moveend",()=>{
         if(selected!==id)return;
         refreshMarkers();
-        showSelectedPopup(id);
+        if(!isDistanceMode())showSelectedPopup(id);
       });
       window.hosigiNaverMap?.focus?.(id);
     };
@@ -774,6 +806,7 @@
         clearDistance();
         gpsNavigationActive=false;
         gpsButton.setAttribute("aria-pressed","false");
+        if(selected)showSelectedPopup(selected);
         showMessage("");
         return;
       }
@@ -837,6 +870,7 @@
         gpsPoint=null;
         clearDistance();
         gpsButton.setAttribute("aria-pressed","false");
+        if(selected)showSelectedPopup(selected);
         gpsButton.disabled=false;
         gpsButton.removeAttribute("aria-busy");
         const msg=error.code===1 ? "위치 권한이 허용되지 않았습니다. 브라우저 위치 설정을 확인해 주세요."
