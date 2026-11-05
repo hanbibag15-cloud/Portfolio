@@ -35,21 +35,25 @@
       strokeColor:"#E60012",strokeWeight:4,strokeOpacity:.95
     });
     const mid=[(startPoint[0]+endPoint[0])/2,(startPoint[1]+endPoint[1])/2];
-    distanceLabel=new naver.maps.Marker({
-      map,position:ll(mid),clickable:false,zIndex:200,
-      icon:{
-        content:'<span class="store-distance-text">'+distanceValue+'</span>',
-        size:new naver.maps.Size(110,32),
-        anchor:new naver.maps.Point(55,16)
-      }
-    });
+    const revealDistance=()=>{
+      if(generation!==distanceGeneration||distanceLabel)return;
+      distanceLabel=new naver.maps.Marker({
+        map,position:ll(mid),clickable:false,zIndex:200,
+        icon:{
+          content:'<span class="store-distance-text">'+distanceValue+'</span>',
+          size:new naver.maps.Size(120,36),
+          anchor:new naver.maps.Point(60,18)
+        }
+      });
+    };
     const animate=()=>{
       if(generation!==distanceGeneration||!distanceLine)return;
       if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
         distanceLine.setPath([ll(startPoint),ll(endPoint)]);
+        revealDistance();
         return;
       }
-      const start=performance.now(),duration=680;
+      const start=performance.now(),duration=400;
       const frame=now=>{
         if(generation!==distanceGeneration||!distanceLine)return;
         const t=Math.min(1,(now-start)/duration);
@@ -62,7 +66,10 @@
           ])
         ]);
         if(t<1)requestAnimationFrame(frame);
-        else distanceLine.setPath([ll(startPoint),ll(endPoint)]);
+        else {
+          distanceLine.setPath([ll(startPoint),ll(endPoint)]);
+          revealDistance();
+        }
       };
       requestAnimationFrame(frame);
     };
