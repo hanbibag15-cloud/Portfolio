@@ -10,7 +10,14 @@
     {id:"bangi",name:"방이점",district:"송파구",address:"서울특별시 송파구 가락로 240",phone:"02-417-9992"},
     {id:"seongsan",name:"성산1호점",district:"마포구",address:"서울특별시 마포구 월드컵북로30길 9",phone:"02-307-1237"},
     {id:"gongdeok",name:"공덕점",district:"마포구",address:"서울특별시 마포구 만리재로 74",phone:"02-704-8788"},
-    {id:"huam",name:"후암점",district:"용산구",address:"서울특별시 용산구 두텁바위로1길 71",phone:"02-3789-3393"}
+    {id:"huam",name:"후암점",district:"용산구",address:"서울특별시 용산구 두텁바위로1길 71",phone:"02-3789-3393"},
+    // Branches with complete addresses and phone numbers listed on the official store page.
+    {id:"busan-yeonji",name:"연지초읍점",district:"부산진구",address:"부산광역시 부산진구 동평로265번길 69",phone:"051-806-1010"},
+    {id:"busan-goejeong",name:"괴정점",district:"사하구",address:"부산광역시 사하구 회화나무길 67",phone:"051-207-9972"},
+    {id:"busan-sinpyeong",name:"신평점",district:"사하구",address:"부산광역시 사하구 장평로 311",phone:"051-208-9936"},
+    {id:"busan-dadaepo",name:"다대포점",district:"사하구",address:"부산광역시 사하구 다대로 537",phone:"051-262-9986"},
+    {id:"busan-beomcheon",name:"범천점",district:"부산진구",address:"부산광역시 부산진구 신암로 74",phone:"051-647-1238"},
+    {id:"busan-myeongjang",name:"명장점",district:"동래구",address:"부산광역시 동래구 안락로51번길 9",phone:"051-524-8292"}
   ];
   const form=document.querySelector("#store-search-form");
   const keyword=document.querySelector("#store-keyword");
@@ -51,7 +58,7 @@
       trigger.setAttribute("aria-expanded","false");
     };
     const sync=()=>{
-      text.textContent=district.selectedOptions[0]?.textContent||"서울 전체";
+      text.textContent=district.selectedOptions[0]?.textContent||"등록된 매장 전체";
       items.forEach(item=>{
         const chosen=item.dataset.value===district.value;
         item.classList.toggle("is-active",chosen);
@@ -192,7 +199,7 @@
     for(const store of filtered){
       const card=document.createElement("article");card.className="store-card";card.dataset.id=store.id;
       if(store.id===selected)card.classList.add("is-selected");
-      const tag=document.createElement("span");tag.className="store-card-category";tag.textContent="서울 · "+store.district;
+      const tag=document.createElement("span");tag.className="store-card-category";tag.textContent=(store.address.startsWith("부산") ? "부산" : "서울")+" · "+store.district;
       const title=document.createElement("h4");title.textContent="호식이두마리치킨 "+store.name;
       const address=document.createElement("p");address.className="store-card-address";address.textContent=store.address;
       const actions=document.createElement("div");actions.className="store-card-actions";
@@ -211,7 +218,7 @@
   function applySearch(){
     const term=keyword.value.trim().toLocaleLowerCase("ko");
     const region=district.value;
-    filtered=stores.filter(store=>(region==="all"||store.district===region)&&(!term||[store.name,store.address,store.district].some(v=>v.toLocaleLowerCase("ko").includes(term))));
+    filtered=stores.filter(store=>(region==="all"||store.district===region||store.address.startsWith(region))&&(!term||[store.name,store.address,store.district].some(v=>v.toLocaleLowerCase("ko").includes(term))));
     if(!filtered.some(store=>store.id===selected))selected=null;
     renderCards();refreshMarkers();fitPoints();
   }
