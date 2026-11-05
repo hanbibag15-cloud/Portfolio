@@ -420,3 +420,13 @@
 .store-map-panel .store-cluster-count{background:var(--brand-brown);color:#fff;transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease;}
 .store-map-panel .store-cluster-count.is-selected{background:var(--brand-red);}
 @media(prefers-reduced-motion:reduce){.store-map-panel .store-cluster-count{transition:none;}}
+
+/* GPS point: use the same brand-red color as the accuracy outline. */
+.store-map .store-current-location,
+.store-map-panel .store-naver-current{
+  background:#E60012;
+  box-shadow:0 0 0 2px #E60012,0 2px 8px rgba(230,0,18,.25);
+}
+.store-map .store-current-location::after{
+  border-color:rgba(230,0,18,.3);
+}
