@@ -79,6 +79,13 @@
   font:700 13px var(--font);cursor:pointer;transition:background .2s,color .2s;
 }
 .store-gps-button:hover,.store-gps-button:focus-visible{background:var(--brand-red);color:var(--neutral-white);border-color:var(--brand-red);}
+.store-gps-button[aria-pressed="true"],
+.store-gps-button[aria-pressed="true"]:hover,
+.store-gps-button[aria-pressed="true"]:focus-visible {
+  background:var(--brand-red);
+  color:var(--neutral-white);
+  border-color:var(--brand-red);
+}
 .store-gps-button:focus-visible{outline:2px solid var(--brand-brown);outline-offset:3px;}
 .store-gps-button svg{width:19px;height:19px;flex:0 0 19px;}
 .store-gps-button[disabled]{opacity:.6;cursor:wait;}
