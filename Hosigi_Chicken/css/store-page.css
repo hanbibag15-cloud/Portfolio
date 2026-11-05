@@ -698,3 +698,12 @@
 
 .store-distance-text-anchor{display:flex;width:120px;height:36px;align-items:center;justify-content:center;pointer-events:none;}
 .store-distance-text-anchor .store-distance-text{margin:0;}
+
+/* Selected branch tooltip: visibly separated above the pin, no close icon.
+   Map-background clicks do not dismiss it; the same pin toggles it off. */
+.store-map-panel .store-selected-popup .leaflet-popup-content-wrapper {
+  border-radius:14px;
+}
+.store-map-panel .store-selected-popup .leaflet-popup-close-button {
+  display:none !important;
+}
