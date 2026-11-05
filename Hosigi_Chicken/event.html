@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="css/main.css?v=50">
     <link rel="stylesheet" href="css/nav-state.css">
 <link rel="stylesheet" href="css/event-page.css?v=3">
-<script src="js/event-page.js?v=2" defer></script>
+<script src="js/event-page.js?v=3" defer></script>
 <script src="js/nav-state.js" defer></script>
 
 
@@ -75,12 +75,12 @@
   <section class="event-page-content" aria-label="이벤트 둘러보기">
     <div class="event-page-container">
       <div class="event-filters" role="group" aria-label="이벤트 진행 상태">
-        <button type="button" class="event-filter is-active" data-filter="active" aria-pressed="true">진행중인 이벤트</button>
-        <button type="button" class="event-filter" data-filter="ended" aria-pressed="false">종료 이벤트</button>
+        <button type="button" class="event-filter" data-filter="active" aria-pressed="false">진행중인 이벤트</button>
+        <button type="button" class="event-filter is-active" data-filter="ended" aria-pressed="true">종료 이벤트</button>
       </div>
       <section class="event-collection" id="event-list" aria-labelledby="event-list-title">
         <div class="event-list-top">
-          <h3 id="event-list-title">진행중인 이벤트</h3>
+          <h3 id="event-list-title">종료 이벤트</h3>
           <p id="event-count" class="event-count" aria-live="polite"></p>
         </div>
         <div class="event-card-grid" id="event-card-grid"></div>
