@@ -18,8 +18,8 @@
     });
   }
 
-  if (page === 'menu.html') {
-    mark(0); // On the menu subpage the current-page indicator stays visible.
+  if (page === 'menu.html' || page === 'event.html') {
+    mark(page === 'menu.html' ? 0 : 3);
     return;
   }
   if (page !== 'brand.html') {
