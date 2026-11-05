@@ -61,6 +61,10 @@
       naverMarkers.push(marker);
     }
   }
+  function clearClusterSelection(){
+    activeClusterKey=null;
+    if(map)renderMarkers();
+  }
   function sync(stores,positions,activeId) {
     latest=stores;coords=positions;selected=activeId;
     if(!map)return;
@@ -115,7 +119,7 @@
     map.setZoom(14);
     map.panTo(ll(point));
   }
-  window.hosigiNaverMap={sync,focus,locate,clearLocation};
+  window.hosigiNaverMap={sync,focus,locate,clearLocation,clearClusterSelection};
   window.navermap_authFailure=()=>{overlay.style.display="none";host.style.visibility="visible";window.hosigiNaverMap=null;};
   const script=document.createElement("script");
   script.src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId="+encodeURIComponent(clientId);
