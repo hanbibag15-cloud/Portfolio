@@ -119,3 +119,97 @@ body.event-dialog-open{overflow:hidden;}
   .event-empty strong{font-size:16px;}
   .event-empty p{font-size:13px;}
 }
+
+/* Unified EVENT card: same image-and-information hierarchy as the homepage
+   event preview. Artwork sits flush above a white card body. */
+.event-card-grid {align-items:stretch;}
+.event-list-card {
+  min-width:0;
+  overflow:hidden;
+  border-radius:20px;
+  background:var(--surface-default);
+  box-shadow:0 5px 22px rgba(34,23,20,.075);
+  transition:transform .32s cubic-bezier(.22,1,.36,1),box-shadow .32s ease;
+}
+.event-card-open {
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  text-align:left;
+  background:transparent;
+}
+.event-list-art {
+  width:100%;
+  aspect-ratio:600/309;
+  border-radius:20px 20px 0 0;
+  overflow:hidden;
+  box-shadow:none;
+  background:var(--background-subtle);
+}
+.event-list-art::before {display:none;}
+.event-card-image {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .45s cubic-bezier(.22,1,.36,1);
+}
+.event-list-info {
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  flex:1;
+  min-height:137px;
+  padding:23px 29px 26px;
+  background:var(--surface-default);
+}
+.event-list-category {
+  color:var(--brand-red);
+  font-size:14px;
+  font-weight:600;
+}
+.event-list-info h4 {
+  min-height:0;
+  margin-top:12px;
+  font-size:18px;
+  font-weight:600;
+  line-height:1.4;
+}
+.event-list-date {
+  margin-top:auto;
+  padding-top:14px;
+  color:#767676;
+  font-size:14px;
+}
+.event-status,.event-list-action {display:none;}
+.event-list-card:hover,
+.event-list-card:focus-within {
+  transform:translateY(-4px);
+  box-shadow:0 12px 32px rgba(34,23,20,.13);
+}
+.event-card-open:hover .event-card-image,
+.event-card-open:focus-visible .event-card-image {
+  transform:scale(1.045);
+}
+.event-card-open:hover .event-list-art,
+.event-card-open:focus-visible .event-list-art {
+  box-shadow:none;
+}
+.event-card-open:hover .event-list-art::before,
+.event-card-open:focus-visible .event-list-art::before {opacity:0;}
+.event-detail-poster {overflow:hidden;}
+.event-detail-poster img {display:block;width:100%;height:100%;object-fit:cover;}
+@media(max-width:767px){
+  .event-list-info {min-height:116px;padding:17px 18px 20px;}
+  .event-list-category {font-size:12px;}
+  .event-list-info h4 {font-size:15px;margin-top:9px;}
+  .event-list-date {font-size:12px;padding-top:11px;}
+}
+@media(max-width:420px){
+  .event-list-art {aspect-ratio:600/309;}
+  .event-list-info {min-height:122px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .event-list-card,.event-card-image {transition:none!important;}
+  .event-list-card:hover,.event-list-card:focus-within {transform:none;}
+}
