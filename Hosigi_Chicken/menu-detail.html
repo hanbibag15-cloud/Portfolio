@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>메뉴 상세 | 호식이두마리치킨 리뉴얼</title>
+<link rel="stylesheet" href="../css/default.css">
+<link rel="stylesheet" href="../Font/css/pretendardvariable.css">
+<link rel="stylesheet" href="css/main.css?v=50">
+    <link rel="stylesheet" href="css/nav-state.css?v=6">
+<link rel="stylesheet" href="css/menu-detail.css?v=1">
+<script src="js/menu-detail.js?v=1" defer></script>
+<script src="js/nav-state.js" defer></script>
+
+
+<link rel="stylesheet" href="css/quick-menu-motion.css?v=10">
+<script src="js/smooth-wheel.js?v=3" defer></script>
+<script src="js/nav-motion.js?v=6" defer></script>
+</head>
+<body>
+<div id="wrap">
+<header class="site-header">
+            <div class="header-inner">
+                <h1 class="header-logo">
+                    <a href="brand.html" aria-label="호식이두마리치킨 메인페이지">
+                        <img src="img/log.png" alt="호식이두마리치킨">
+                    </a>
+                </h1>
+
+                <nav class="header-nav" id="header-nav" aria-label="주요 메뉴">
+                    <ul>
+                        <li class="has-submenu">
+                            <a aria-expanded="false" aria-controls="mobile-submenu">메뉴</a>
+                            <ul class="header-submenu" id="mobile-submenu" aria-label="메뉴 상세">
+                                <li><a href="menu.html#all">전체 메뉴</a></li>
+                                <li><a href="menu.html#chicken">치킨 메뉴</a></li>
+                                <li><a href="menu.html#parts">부위별 메뉴</a></li>
+                                <li><a href="menu.html#side">사이드 메뉴</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a aria-expanded="false" aria-controls="brand-submenu">브랜드</a>
+                            <ul class="header-submenu" id="brand-submenu" aria-label="브랜드 상세">
+                                <li><a href="brand.html">호식이 이야기</a></li>
+                                <li><a href="brand.html">브랜드 철학</a></li>
+                                <li><a href="brand.html">사회공헌</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="store.html">매장찾기</a></li>
+                        <li><a href="event.html">이벤트</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-utils">
+                    <a href="franchise.html">
+                        <img src="img/store 2.svg" alt="">
+                        <span>창업안내</span>
+                    </a>
+                    <span class="header-utils-divider" aria-hidden="true"></span>
+                    <a href="index.html"><img src="img/ticket 2.svg" alt=""><span>상품권</span></a>
+                </div>
+
+                <button class="header-menu-toggle" type="button" aria-label="메뉴 열기" aria-controls="header-nav" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </header>
+<main class="menu-detail-page">
+  <div class="menu-detail-container">
+    <nav class="menu-detail-breadcrumb" aria-label="현재 위치">
+      <a href="menu.html">MENU</a><span aria-hidden="true">/</span><span>메뉴 상세</span>
+    </nav>
+    <a class="menu-detail-back" id="detail-back" href="menu.html#all" aria-label="메뉴 목록으로 돌아가기"><span aria-hidden="true">←</span> 메뉴 목록으로</a>
+    <section class="menu-detail-hero" aria-labelledby="detail-product-name">
+      <div class="menu-detail-visual" id="detail-product-art"></div>
+      <div class="menu-detail-overview">
+        <p class="menu-detail-eyebrow">HOSIGI MENU DETAIL</p>
+        <p class="menu-detail-category" id="detail-category"></p>
+        <h2 id="detail-product-name"></h2>
+        <p class="menu-detail-summary" id="detail-product-summary"></p>
+        <div class="menu-detail-rule"></div>
+        <p class="menu-detail-info-hint">메뉴의 영양성분과 알레르기 정보를 아래에서 확인해 보세요.</p>
+        <a href="#detail-facts" class="menu-detail-scroll-link">제품 정보 보기 <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+    <section class="menu-detail-facts" id="detail-facts" aria-labelledby="detail-facts-title">
+      <div class="menu-detail-section-heading">
+        <p>PRODUCT INFORMATION</p><h3 id="detail-facts-title">메뉴 상세정보</h3>
+      </div>
+      <div class="menu-detail-info-grid">
+        <section class="menu-detail-info-panel" aria-labelledby="allergy-title">
+          <h4 id="allergy-title">알레르기 유발성분</h4>
+          <p class="menu-detail-allergens" id="detail-allergens"></p>
+          <p class="menu-detail-footnote">제조·조리 환경에서 다른 알레르기 유발성분과 교차 접촉할 수 있습니다. 알레르기가 있는 경우 주문 전 매장에 확인해 주세요.</p>
+        </section>
+        <section class="menu-detail-info-panel" aria-labelledby="nutrition-title">
+          <h4 id="nutrition-title">영양성분표 <span class="menu-detail-unit">100g 기준 · 확인된 메뉴에 한함</span></h4>
+          <table class="menu-detail-nutrition"><tbody id="detail-nutrition-body"></tbody></table>
+          <p class="menu-detail-footnote" id="detail-nutrition-note"></p>
+        </section>
+      </div>
+      <p class="menu-detail-source" id="detail-info-source"></p>
+    </section>
+    <div class="menu-detail-bottom"><a href="menu.html#chicken" class="menu-detail-more">다른 메뉴 보기 <span aria-hidden="true">→</span></a></div>
+  </div>
+</main>
+<footer class="site-footer">
+            <div class="footer-inner">
+                <a class="footer-logo" href="brand.html" aria-label="호식이두마리치킨 메인페이지">
+                    <img src="img/h_log.png" alt="호식이두마리치킨" loading="lazy" onerror="this.onerror=null;this.src='img/log.png';">
+                </a>
+                <div class="footer-details">
+                    <nav class="footer-links" aria-label="푸터 안내">
+                        <span>이용약관</span>
+                        <span>개인정보처리방침</span>
+                        <span>공지사항</span>
+                        <span>고객센터</span>
+                    </nav>
+                    <div class="footer-info">
+                        <p><span>(주)호식이두마리치킨</span><span>대표이사 최호식</span><span>사업자등록번호 504-07-99251</span></p>
+                        <p><span>주소 서울특별시 학동로 337 H타워</span><span>대표번호 1688-9922</span></p>
+                        <small class="footer-copyright">Copyright © 호식이두마리치킨. All rights reserved.</small>
+                    </div>
+                </div>
+            </div>
+        </footer>
+<aside class="quick-menu" aria-label="퀵 메뉴">
+            <div class="quick-menu-social">
+            <div class="quick-menu-social-links" role="group" aria-label="SNS 아이콘">
+                <button class="quick-menu-social-link quick-menu-youtube" type="button" aria-label="호식이두마리치킨 유튜브" title="YouTube">
+                    <img src="img/youtube%201.svg" width="28" height="28" alt="" aria-hidden="true">
+                </button>
+                <button class="quick-menu-social-link quick-menu-facebook" type="button" aria-label="호식이두마리치킨 페이스북" title="Facebook">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M14.2 21V12.8H17l.4-3.2h-3.2V7.5c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.3 0-1.3-.1-2.5-.1-2.6 0-4.4 1.6-4.4 4.5v2.1H8v3.2h2.6V21h3.6Z"/></svg>
+                </button>
+                <button class="quick-menu-social-link quick-menu-blog" type="button" aria-label="호식이두마리치킨 네이버 블로그" title="Naver Blog">
+                    <span aria-hidden="true">N</span>
+                </button>
+            </div>
+            <button class="quick-menu-sns" type="button" aria-label="호식이두마리치킨 인스타그램">
+                <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="6"></rect>
+                    <circle cx="12" cy="12" r="4.5"></circle>
+                    <circle cx="18" cy="6" r="1" fill="currentColor" stroke="none"></circle>
+                </svg>
+                <span>SNS</span>
+            </button>
+        </div>
+            <button class="quick-menu-top" type="button" aria-label="페이지 맨 위로 이동">
+                <span aria-hidden="true">↑</span>
+                <span class="quick-menu-direction">TOP</span>
+            </button>
+        </aside>
+</div><script src="js/quick-menu.js" defer></script>
+</body></html>
