@@ -292,8 +292,38 @@ const allergens={
 "허니갈릭치즈볼":"밀, 대두, 우유",
 "치킨무":"페닐알라닌 함유"
 };
-// Nutrients: kcal, protein g, carbohydrate g, saturated fat g, sugars g, sodium mg, per 100g.
+// Side-menu values from named official product detail pages.
+// Each array: kcal, protein(g), carbohydrates(g), saturated fat(g), sugar(g), sodium(mg).
+// Most values are per 100g. Chicken radish is per 200g pack.
+const sideNutrients={
+  "쉬림프 미니튀김(칠리)":[253.86,7.99,36.98,0.66,6.98,478.94],
+  // Official page /198 states both 326.51 and 326.61 kcal: do not select one.
+  "쉬림프 미니튀김(레몬크림)":[null,8.41,25.90,2.94,5.63,472.15],
+  "체다마요 감자튀김":[360.04,9.33,36.99,2.59,2.70,610.03],
+  "치폴레 감자튀김":[333.70,3.05,43.34,2.33,5.12,467.40],
+  "크리스피 치킨넥":[408.86,20.15,24.15,3.89,2.63,788.36],
+  "감자볼튀김":[227.83,2.25,32.59,0.98,null,435.63],
+  "트리플치즈볼":[259.18,9.69,33.28,2.60,3.40,282.23],
+  "마늘떡볶이":[146.9,3.7,31.3,0.1,5.6,518.7],
+  "로제비앤나떡볶이":[174.6,4.6,31.4,1.8,1.90,534],
+  "감자튀김":[150.00,2.50,24.00,2.00,0.80,980.00],
+  "치킨무":[23,1,4,0,3,91]
+};
+const nutritionBasis={"치킨무":"200g(1팩)"};
+const nutritionCautions={
+  "쉬림프 미니튀김(레몬크림)":"공식 상세페이지에 열량이 326.51kcal와 326.61kcal로 다르게 표시되어 열량을 미확정으로 두었습니다."
+};
+// Allergens on the user-supplied image apply to the individual sauce,
+// not necessarily the complete side dish. Keep them separately identified.
+const optionalSauceAllergens={
+  "통살가득 텐더킹":[
+    "허니머스타드(팩소스): 대두, 난류, 쇠고기",
+    "호식이양념소스(팩소스): 밀, 대두, 땅콩, 토마토, 난류, 우유, 닭고기, 쇠고기"
+  ]
+};
+// Nutrients: kcal, protein g, carbohydrate g, saturated fat g, sugars g, sodium mg.
 const nutrients={
+  ...sideNutrients,
 // Part-menu nutrition verified against official product detail pages (per 100g).
 "다리":[238.57,24.23,8.03,2.23,2.4,324.79],
 "윙+다리":[282.38,23.59,9.88,3.01,2.37,357.43],
@@ -395,24 +425,39 @@ function renderMenuModalTab(index){
     nutritionFields.forEach(([label,unit],i)=>{
       const th=document.createElement("th");th.scope="col";th.textContent=label+"("+unit+")";
       const td=document.createElement("td");
-      td.textContent=values[i]===null?"미표기":String(values[i]);
+      td.textContent=values[i]===null?(nutritionCautions[modalProduct[1]]&&i===0?"미확정":"미표기"):String(values[i]);
       labels.append(th);numbers.append(td);
     });
     head.append(labels);const body=document.createElement("tbody");body.append(numbers);table.append(head,body);
     menuModalInfo.append(table);
     const note=document.createElement("p");
     note.className="menu-modal-message";
-    note.textContent="100g 기준 영양성분 (한 마리 전체 열량 아님).";
+    const basis=nutritionBasis[modalProduct[1]]||"100g";
+    note.textContent=basis+" 기준 영양성분 (제품 전체와 혼동하지 마세요).";
     menuModalInfo.append(note);
+    if(nutritionCautions[modalProduct[1]]){
+      const caution=document.createElement("p");
+      caution.className="menu-modal-message";
+      caution.textContent=nutritionCautions[modalProduct[1]];
+      menuModalInfo.append(caution);
+    }
   }else{
     const p=document.createElement("p");p.className="menu-modal-message";
     if(key==="allergens"){
-      p.textContent=allergens[modalProduct[1]]||(modalProduct[0]==="parts"?"이 부위별 메뉴는 제공된 공식 알레르기 표에 별도 항목이 없습니다. 선택 소스에 따라 알레르기 유발성분이 달라질 수 있으므로 주문 전 확인해 주세요.":"이 메뉴의 알레르기 유발성분을 공식 자료에서 확인하지 못했습니다.");
+      const sauceInfo=optionalSauceAllergens[modalProduct[1]];
+      const base=allergens[modalProduct[1]];
+      p.textContent=base||(sauceInfo
+        ? "선택 소스별 알레르기 성분 안내 (제품 본체의 전체 성분표는 별도 확인 필요)"
+        : "이 메뉴의 알레르기 유발성분을 공식 자료에서 확인하지 못했습니다.");
+      if(sauceInfo){
+        p.textContent+="\n"+sauceInfo.join("\n");
+        p.style.whiteSpace="pre-line";
+      }
     }else{
       const name=modalProduct[1];
       const category=modalProduct[0];
       const weight=getMenuWeight(name,category);
-      p.textContent=weight?"조리 전 중량 안내: "+weight:"이 메뉴의 중량 정보는 확인되지 않았습니다.";
+      p.textContent=name==="치킨무"?"제품 표기 용량: 200g":weight?"조리 전 중량 안내: "+weight:"이 메뉴의 중량 정보는 확인되지 않았습니다.";
       p.style.whiteSpace="pre-line";
     }
     menuModalInfo.append(p);
@@ -438,14 +483,27 @@ function openMenuModal(name){
   // Keep verified data and the weight tab, and restore tabs for other categories.
   const isParts=item[0]==="parts";
   const hasWeight=Boolean(getMenuWeight(name,item[0]));
-  const available=[!isParts||Array.isArray(nutrients[name]),
-                   !isParts||Boolean(allergens[name]),hasWeight];
+  const isSide=item[0]==="side";
+  const available=[
+    (!isParts&&!isSide)||Array.isArray(nutrients[name]),
+    (!isParts&&!isSide)||Boolean(allergens[name])||Boolean(optionalSauceAllergens[name]),
+    hasWeight||name==="치킨무"
+  ];
   menuModalTabs.forEach((tab,index)=>{tab.hidden=!available[index];});
   const tabBar=menuModalTabs[0].parentElement;
   tabBar.style.setProperty("--visible-menu-tabs",String(available.filter(Boolean).length));
   menuModal.hidden=false;
   document.body.classList.add("menu-modal-open");
-  renderMenuModalTab(available.findIndex(Boolean));
+  const initialTab=available.findIndex(Boolean);
+  if(initialTab>=0){
+    renderMenuModalTab(initialTab);
+    tabBar.hidden=false;
+    menuModalInfo.hidden=false;
+  }else{
+    menuModalTabs.forEach(tab=>{tab.setAttribute("aria-selected","false");tab.tabIndex=-1;});
+    tabBar.hidden=true;
+    menuModalInfo.hidden=true;
+  }
   menuModalClose.focus();
 }
 function closeMenuModal(){
