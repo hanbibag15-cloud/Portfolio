@@ -340,7 +340,6 @@ const portionWeights={
   "다리":menuWeightGuide.legs,
   "윙+다리":menuWeightGuide.wingsLegs
 };
-const bonelessMenuNames=new Set(["크리스피골드","레몬크림탕슈"]);
 const menuModal=document.getElementById("menu-detail-modal");
 const menuModalCard=menuModal.querySelector(".menu-modal-card");
 const menuModalClose=menuModal.querySelector(".menu-modal-close");
@@ -401,7 +400,7 @@ function renderMenuModalTab(index){
       const category=modalProduct[0];
       const weight=portionWeights[name] ||
         (category==="chicken"
-          ? (bonelessMenuNames.has(name)?menuWeightGuide.boneless:menuWeightGuide.chicken)
+          ? menuWeightGuide.chicken+"\n순살 선택 시: "+menuWeightGuide.boneless
           : "");
       const origin=data?"닭고기 원산지: "+data.origin:"원산지: 메뉴별 확인 자료 없음";
       p.textContent=origin+(weight?"\n조리 전 중량 안내: "+weight:"\n중량: 메뉴별 확인 자료 없음");
