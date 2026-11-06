@@ -133,7 +133,6 @@ const nutrients={
 (() => {
 const name=new URLSearchParams(location.search).get("product");
 const found=menuItems.find(item=>item[1]===name);
-const back=document.getElementById("detail-back");
 const heading=document.getElementById("detail-product-name");
 const cat=document.getElementById("detail-category");
 const description=document.getElementById("detail-product-summary");
@@ -171,7 +170,6 @@ document.title=name+" | 호식이두마리치킨";
 description.textContent=text||"호식이두마리치킨의 다양한 메뉴를 만나보세요.";
 productType.textContent=categories[type]||"메뉴";
 detailDescription.textContent=text||"제품별 안내 사항은 주문 매장에서 확인해 주세요.";
-back.href="menu.html#"+type;
 more.href="menu.html#"+type;
 const photo=menuPhotos[name];
 if(photo){
