@@ -34,17 +34,11 @@
   const statusFilters=[...document.querySelectorAll(".event-status-filter")];
   // Curated records from the official site's announcement and news boards.
   // Dates are the dates shown on those boards, not newly invented publication dates.
+  // Only announcements with an independently verified official posting date.
   const notices=[
-    {id:"notice-awards-final",category:"수상 발표",title:"2025 호식이두마리치킨 대학생 마케팅 아이디어 공모전 최종 수상작 발표",date:"2025.02.17",startDate:"2025-02-17",description:"대학생 마케팅 아이디어 공모전 최종 수상작 발표 게시물입니다. 공식 게시판에서 최종 PT 심사에 참여한 분들께 감사 인사를 전하고 수상자 명단을 발표했습니다.",source:"공식 공모전 수상자 발표 게시판 · 2025.02.17",sourceUrl:"https://www.9922.co.kr/onair"},
-    {id:"notice-awards-initial",category:"수상 발표",title:"2025 호식이두마리치킨 대학생 마케팅 아이디어 공모전 수상작 발표",date:"2025.02.07",startDate:"2025-02-07",description:"대학생 마케팅 아이디어 공모전 수상작 발표 게시물입니다. 수상자에게 개별 연락을 안내한 공식 게시판 기록입니다.",source:"공식 공모전 수상자 발표 게시판 · 2025.02.07",sourceUrl:"https://www.9922.co.kr/onair"},
-    {id:"notice-management-award",category:"브랜드 소식",title:"호식이두마리치킨, 대한민국 최고경영대상 고객감동·사회공헌 부문 수상",date:"2024.02.27",startDate:"2024-02-27",description:"대한민국 최고경영대상 고객감동 부문 대상과 사회공헌 부문 보건복지부 장관상 수상 소식입니다. 공식 사이트의 주요소식 게시판에 수록된 내용입니다.",source:"공식 주요소식 게시판 · 2024.02.27",sourceUrl:"https://www.9922.co.kr/issue"},
-    {id:"notice-share-chicken",category:"사회공헌",title:"호식이두마리치킨, 설 명절 앞두고 치킨 200인분 나눔",date:"2024.02.27",startDate:"2024-02-27",description:"설 명절을 앞두고 치킨 200인분을 나눈 사회공헌 소식으로, 공식 주요소식 게시판에 등록된 기록입니다.",source:"공식 주요소식 게시판 · 2024.02.27",sourceUrl:"https://www.9922.co.kr/issue"},
-    {id:"notice-sura-launch",category:"신메뉴 소식",title:"수라깐풍치킨 출시 소식",date:"2024.02.27",startDate:"2024-02-27",description:"호식이두마리치킨 공식 주요소식에 게재된 수라깐풍치킨 출시 관련 게시물입니다.",source:"공식 주요소식 게시판 · 2024.02.27",sourceUrl:"https://www.9922.co.kr/issue"},
-    {id:"notice-yogurt-launch",category:"신메뉴 소식",title:"요거치즈닝치킨 출시 소식",date:"2024.02.27",startDate:"2024-02-27",description:"치즈 시즈닝과 딜요거트를 활용한 요거치즈닝치킨 출시 관련 공식 주요소식입니다.",source:"공식 주요소식 게시판 · 2024.02.27",sourceUrl:"https://www.9922.co.kr/issue"},
-    {id:"notice-taco-launch",category:"신메뉴 소식",title:"호식이두마리치킨, 타코마요치킨 선봬",date:"2022.11.22",startDate:"2022-11-22",description:"다양한 토핑을 활용한 멕시코풍 타코마요치킨을 소개한 공식 주요소식 게시물입니다.",source:"공식 주요소식 게시판 · 2022.11.22",sourceUrl:"https://www.9922.co.kr/issue"},
-    {id:"notice-startup-support",category:"상생 소식",title:"호식이두마리치킨, 자영업자 창업지원 정책 강화",date:"2022.06.27",startDate:"2022-06-27",description:"자영업자 창업지원 정책을 강화한다는 내용으로 공식 주요소식 게시판에 게시된 소식입니다.",source:"공식 주요소식 게시판 · 2022.06.27",sourceUrl:"https://www.9922.co.kr/issue"}
-  ];
-  let currentSection="events";
+    {id:"notice-awards-final",category:"수상 발표",title:"2025 호식이두마리치킨 대학생 마케팅 아이디어 공모전 최종 수상작 발표",date:"2025.02.17",startDate:"2025-02-17",description:"호식이두마리치킨 대학생 마케팅 아이디어 공모전의 최종 수상작을 발표했습니다. 최종 PT 심사에 참여한 분들께 감사의 뜻을 전하고 최종 선정 결과를 안내한 공식 게시물입니다.",source:"호식이두마리치킨 공모전 공식 게시판 · 2025.02.17",sourceUrl:"https://www.9922.co.kr/onair"},
+    {id:"notice-awards-initial",category:"수상 발표",title:"2025 호식이두마리치킨 대학생 마케팅 아이디어 공모전 수상작 발표",date:"2025.02.07",startDate:"2025-02-07",description:"호식이두마리치킨 대학생 마케팅 아이디어 공모전 수상작 발표 안내입니다. 수상자에게 개별 연락 예정임을 공지한 공식 게시물입니다.",source:"호식이두마리치킨 공모전 공식 게시판 · 2025.02.07",sourceUrl:"https://www.9922.co.kr/onair"}
+  ];  let currentSection="events";
   let currentStatus="all";
   const pageSize=9;
   let currentPage=1;
