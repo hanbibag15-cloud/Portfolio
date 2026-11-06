@@ -4,7 +4,7 @@
 (() => {
   const nav=document.querySelector(".header-nav");
   if(!nav)return;
-  const rootLinks=[...nav.querySelectorAll(":scope > ul > li > a")];
+  const rootLinks=[...nav.querySelectorAll(":scope > ul > li")].map(item=>item.querySelector(":scope > a"));
   if(rootLinks.length<4)return;
   const reduced=window.matchMedia("(prefers-reduced-motion: reduce)");
   const key="hosigi-nav-click-target";
