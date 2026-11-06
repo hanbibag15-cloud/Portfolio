@@ -38,6 +38,8 @@
   const pageSize=9;
   let currentPage=1;
   let visibleEventList=[];
+  let listingHeight=0;
+  let listingWidth=0;
   const pagination=document.getElementById("event-pagination");
   const backdrop=document.getElementById("event-detail-backdrop");
   const closeButton=backdrop.querySelector(".event-detail-close");
@@ -142,7 +144,21 @@
     const firstIndex=(currentPage-1)*pageSize;
     const visible=selected.slice(firstIndex,firstIndex+pageSize);
     visibleEventList=selected;
+    // Keep the listing as tall as its full first page. A short last page
+    // must not shrink the document and force the browser to scroll upward.
+    const width=grid.getBoundingClientRect().width;
+    if(Math.abs(width-listingWidth)>1){
+      listingWidth=width;
+      listingHeight=0;
+      grid.style.minHeight="";
+    }
     grid.replaceChildren(...visible.map(makeCard));
+    if(currentPage===1&&totalPages>1){
+      grid.style.minHeight="";
+      listingHeight=Math.max(listingHeight,grid.getBoundingClientRect().height);
+    }
+    if(totalPages>1&&listingHeight>0)grid.style.minHeight=listingHeight+"px";
+    else if(totalPages<=1)grid.style.minHeight="";
     pagination.replaceChildren();
     pagination.hidden=totalPages<=1;
     if(totalPages>1){
@@ -161,6 +177,13 @@
           if(page===currentPage)return;
           currentPage=page;
           render();
+          // Recreated pagination controls should retain focus without
+          // triggering the browser's automatic focus scrolling.
+          const nextButton=[...pagination.querySelectorAll("button")].find(
+            item=>item.classList.contains("event-page-"+kind) &&
+              (kind==="number"?item.textContent===String(page):item.textContent===label)
+          );
+          nextButton?.focus({preventScroll:true});
         });
         pagination.append(button);
       };
