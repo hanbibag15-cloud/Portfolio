@@ -252,5 +252,3 @@ body.menu-modal-open{overflow:hidden}
 .menu-modal-source-link{display:inline-block;margin-top:12px;color:var(--brand-red);font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:3px;}
 .menu-modal-source-link:hover,.menu-modal-source-link:focus-visible{color:var(--brand-brown);}
 
-/* Display both cautions in the original small-print area. */
-.menu-modal-footnote-line{display:block;}
