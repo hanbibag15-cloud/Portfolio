@@ -577,7 +577,12 @@
       if(selectedPopup.options?.storeId===id)return;
     }
     closeSelectedPopup();
-    const content=document.createElement("div");
+    // The whole information bubble acts as a button that focuses its pin.
+    // Do not call selectStore(id): it toggles an already-selected pin OFF.
+    const content=document.createElement("button");
+    content.type="button";
+    content.className="store-popup-focus";
+    content.setAttribute("aria-label","호식이두마리치킨 "+store.name+" 지도 위치로 이동");
     const title=document.createElement("strong");
     title.className="store-popup-title";
     title.textContent="호식이두마리치킨 "+store.name;
@@ -585,6 +590,19 @@
     address.className="store-popup-address";
     address.textContent=store.address;
     content.append(title,address);
+    L.DomEvent.disableClickPropagation(content);
+    content.addEventListener("click",event=>{
+      event.preventDefault();
+      if(selected!==id || !coords.has(id))return;
+      userNavigationActive=true;
+      gpsNavigationActive=false;
+      const point=coords.get(id);
+      const targetZoom=Math.max(15,map.getZoom());
+      map.stop();
+      if(reduceMotion())map.setView(point,targetZoom,{animate:false});
+      else map.flyTo(point,targetZoom,{animate:true,duration:.6});
+      window.hosigiNaverMap?.focus?.(id);
+    });
     selectedPopup=L.popup({
       closeButton:false,
       closeOnClick:false,
