@@ -122,7 +122,12 @@ body.event-dialog-open{overflow:hidden;}
 
 /* Unified EVENT card: same image-and-information hierarchy as the homepage
    event preview. Artwork sits flush above a white card body. */
-.event-card-grid {align-items:stretch;}
+/* Reserve list height for stable pagination without stretching the last page cards. */
+.event-card-grid {
+  align-items:stretch;
+  align-content:start;
+  grid-auto-rows:max-content;
+}
 .event-list-card {
   min-width:0;
   overflow:hidden;
