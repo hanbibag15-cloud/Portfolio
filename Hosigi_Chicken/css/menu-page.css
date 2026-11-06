@@ -223,7 +223,10 @@
 .menu-modal-backdrop{position:fixed;inset:0;z-index:150;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(34,23,20,.55);overflow-y:auto}
 body.menu-modal-open{overflow:hidden}
 .menu-modal-card{position:relative;box-sizing:border-box;width:min(950px,100%);height:520px;max-height:none;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center;background:var(--surface-default);border-radius:32px;padding:52px 42px 42px;box-shadow:0 22px 55px rgba(0,0,0,.18);animation:menu-dialog-in .35s cubic-bezier(.22,1,.36,1) both}
-.menu-modal-close{position:absolute;right:20px;top:18px;width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:50%;background:var(--background-subtle);color:var(--brand-brown);font:300 31px var(--font);cursor:pointer;z-index:3;transition:background .2s}
+.menu-modal-close{position:absolute;right:20px;top:18px;width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:50%;background:var(--background-subtle);color:var(--brand-brown);cursor:pointer;z-index:3;transition:background .2s}
+.menu-modal-close::before,.menu-modal-close::after{content:"";grid-area:1/1;width:18px;height:2px;border-radius:1px;background:currentColor}
+.menu-modal-close::before{transform:rotate(45deg)}
+.menu-modal-close::after{transform:rotate(-45deg)}
 .menu-modal-close:hover{background:var(--surface-brand-soft)}
 .menu-modal-close:focus-visible,.menu-modal-tabs button:focus-visible{outline:2px solid var(--brand-red);outline-offset:3px}
 .menu-modal-image{display:grid;place-items:center;min-width:0;aspect-ratio:1.05}
