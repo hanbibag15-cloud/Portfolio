@@ -36,6 +36,9 @@
       trigger.setAttribute("aria-expanded",String(open));
     };
     trigger.addEventListener("click",event=>{
+      // EVENT is a real page link, even though it also has a hover submenu.
+      // Do not cancel navigation to event.html.
+      if(item.classList.contains("event-nav-item"))return;
       event.preventDefault();
       if(!mobile()){
         // The desktop dropdown is hover-driven. Clicking an <a> leaves it
@@ -47,6 +50,7 @@
       activate();
     });
     trigger.addEventListener("keydown",event=>{
+      if(item.classList.contains("event-nav-item"))return;
       if(event.key==="Enter"||event.key===" "){event.preventDefault();activate();}
     });
     item.addEventListener("mouseleave",()=>{
