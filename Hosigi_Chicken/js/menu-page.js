@@ -294,6 +294,7 @@ const allergens={
 };
 // Nutrients: kcal, protein g, carbohydrate g, saturated fat g, sugars g, sodium mg, per 100g.
 const nutrients={
+"타코마요 치킨":[290.2,20.08,11.08,3.35,4.18,370.1],
 "맵시크 치킨":[254.38,21.66,13.81,2.18,7.77,482.55],
 "크리스피골드":[276.70,21.36,19.24,1.17,.79,633.99],
 "수라깐풍 치킨":[228.65,18.17,13.86,1.65,6.86,432.31],
@@ -307,6 +308,23 @@ const nutrients={
 "청양고추마요 치킨":[314.4,16.7,16,3.4,2.5,449.1]
 };
 
+// Official brand product pages checked 2026-11-06. Each value is per 100g;
+// these are NOT a claim about a whole chicken or its serving weight.
+// Newer products without published figures are intentionally left blank.
+const verifiedChickenInfo={
+  "맵시크 치킨":{source:"https://www.9922.co.kr/193",origin:"국내산"},
+  "크리스피골드":{source:"https://www.9922.co.kr/180",origin:"국내산"},
+  "수라깐풍 치킨":{source:"https://www.9922.co.kr/156",origin:"국내산"},
+  "요거치즈닝치킨":{source:"https://www.9922.co.kr/152",origin:"국내산"},
+  "타코마요 치킨":{source:"https://www.9922.co.kr/149",origin:"국내산"},
+  "레몬크림탕슈":{source:"https://www.9922.co.kr/141",origin:"국내산"},
+  "간장 치킨":{source:"https://www.9922.co.kr/27",origin:"국내산"},
+  "매운 간장 치킨":{source:"https://www.9922.co.kr/29",origin:"국내산"},
+  "후라이드 치킨":{source:"https://www.9922.co.kr/fried",origin:"국내산"},
+  "양념 치킨":{source:"https://www.9922.co.kr/26",origin:"국내산"},
+  "매운 양념 치킨":{source:"https://www.9922.co.kr/28",origin:"국내산"},
+  "청양고추마요 치킨":{source:"https://www.9922.co.kr/gochumayo",origin:"국내산"}
+};
 const menuModal=document.getElementById("menu-detail-modal");
 const menuModalCard=menuModal.querySelector(".menu-modal-card");
 const menuModalClose=menuModal.querySelector(".menu-modal-close");
@@ -353,14 +371,45 @@ function renderMenuModalTab(index){
     });
     head.append(labels);const body=document.createElement("tbody");body.append(numbers);table.append(head,body);
     menuModalInfo.append(table);
+    const note=document.createElement("p");
+    note.className="menu-modal-message";
+    note.textContent="공식 홈페이지 표기 · 치킨 100g 기준 (한 마리 전체 열량 아님).";
+    menuModalInfo.append(note);
+    const source=verifiedChickenInfo[modalProduct[1]]?.source;
+    if(source){
+      const link=document.createElement("a");
+      link.href=source;link.target="_blank";link.rel="noopener noreferrer";
+      link.className="menu-modal-source-link";
+      link.textContent="영양정보 공식 출처 확인 ↗";
+      menuModalInfo.append(link);
+    }
   }else{
     const p=document.createElement("p");p.className="menu-modal-message";
     if(key==="allergens"){
       p.textContent=allergens[modalProduct[1]]||"이 메뉴의 알레르기 유발성분을 공식 자료에서 확인하지 못했습니다.";
     }else{
-      p.textContent="현재 해당 메뉴의 원산지 및 중량에 관한 검증된 정보가 없습니다. 주문 전 매장에서 확인해 주세요.";
+      const data=verifiedChickenInfo[modalProduct[1]];
+      if(data){
+        p.textContent="닭고기 원산지: "+data.origin+" (공식 제품 페이지 표기). 완제품 한 마리 중량: 공식 확인 자료 없음. 부위·순살 선택 및 매장에 따라 달라질 수 있으므로 주문 전 확인해 주세요.";
+      }else{
+        p.textContent="이 메뉴의 원산지 및 완제품 중량은 공식 자료에서 확인하지 못했습니다. 주문 전 매장에 확인해 주세요.";
+      }
     }
     menuModalInfo.append(p);
+    if(key==="origin"&&verifiedChickenInfo[modalProduct[1]]?.source){
+      const link=document.createElement("a");
+      link.href=verifiedChickenInfo[modalProduct[1]].source;
+      link.target="_blank";link.rel="noopener noreferrer";
+      link.className="menu-modal-source-link";
+      link.textContent="원산지 공식 출처 확인 ↗";
+      menuModalInfo.append(link);
+    }
+    if(key==="allergens"){
+      const note=document.createElement("p");
+      note.className="menu-modal-message";
+      note.textContent="기존 프로젝트의 알레르기 목록이며 최신 공식 표기와 대조되지 않았습니다. 알레르기가 있다면 주문 전 반드시 매장에 확인하세요.";
+      menuModalInfo.append(note);
+    }
   }
 }
 function openMenuModal(name){
