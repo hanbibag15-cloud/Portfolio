@@ -80,7 +80,7 @@
       // Save only real navigation to another page.
       const href=link.getAttribute("href");
       if(href && !href.startsWith("#") && !href.startsWith("javascript:")){
-        savePrevious(index);
+        savePrevious(currentIndex()>=0?currentIndex():index);
       }
     });
   });
@@ -89,7 +89,7 @@
     link.addEventListener("click",()=>{
       const parent=link.closest(".has-submenu");
       const idx=links.findIndex(top=>top.parentElement===parent);
-      if(idx>=0)savePrevious(idx);
+      if(idx>=0)savePrevious(currentIndex()>=0?currentIndex():idx);
     });
   });
   nav.addEventListener("mouseleave",()=>{hovering=-1;place(active);});
