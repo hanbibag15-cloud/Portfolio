@@ -147,6 +147,7 @@
     link.className="event-source-link";link.textContent="공식 게시판 확인 ↗";
     source.append(link);
     backdrop.querySelector(".event-detail-poster").hidden=true;
+    backdrop.querySelector(".event-detail-disclaimer").hidden=true;
     backdrop.hidden=false;
     document.body.classList.add("event-dialog-open");
     closeButton.focus();
@@ -273,6 +274,7 @@
     }
     const poster=backdrop.querySelector(".event-detail-poster");
     poster.hidden=false;
+    backdrop.querySelector(".event-detail-disclaimer").hidden=false;
     poster.replaceChildren();
     if(eventImages[event.id]){
       const image=document.createElement("img");
