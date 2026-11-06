@@ -430,18 +430,18 @@
           animateClusterSplit=true;
           activeClusterKey=clusterKey;
           clustered.getElement()?.querySelector(".store-cluster-count")?.classList.add("is-selected");
-          const points=group.items.map(item=>item.point);
-          const bounds=L.latLngBounds(points);
-          const nextZoom=Math.min(18,map.getZoom()+2);
-          // A single animated flight avoids the jump caused by fitting bounds
-          // and then immediately calling setZoom.
-          if(bounds.getNorthEast().equals(bounds.getSouthWest())){
-            map.flyTo(bounds.getCenter(),nextZoom,{animate:!reduceMotion(),duration:0.65});
+          // Distance-connected clusters may cover a very large region.
+          // fitBounds could return the CURRENT zoom (or zoom out), making a
+          // cluster appear unresponsive. Always zoom in around its icon.
+          const currentZoom=map.getZoom();
+          const nextZoom=Math.min(map.getMaxZoom(),currentZoom+2);
+          const center=L.latLng(group.point);
+          if(nextZoom>currentZoom){
+            if(reduceMotion())map.setView(center,nextZoom,{animate:false});
+            else map.flyTo(center,nextZoom,{animate:true,duration:.6,easeLinearity:.25});
           }else{
-            map.flyToBounds(bounds,{
-              padding:[65,65],maxZoom:nextZoom,
-              animate:!reduceMotion(),duration:0.65
-            });
+            // At max zoom, markers must still separate on the next refresh.
+            refreshMarkers(true);
           }
         });
         clustered.addTo(markerLayer);
