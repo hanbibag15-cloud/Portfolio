@@ -15,7 +15,14 @@
     link.classList.remove(cls);
     void link.offsetWidth; // Restart when clicked repeatedly.
     link.classList.add(cls);
-    link.addEventListener("animationend",()=>link.classList.remove(cls),{once:true});
+    // Remove the animation class without restarting the base CSS transition.
+    // A cancelled animation must not remove a newer click's active class.
+    const finish=event=>{
+      if(event.animationName!=="hosigi-nav-underline-in"||event.target!==link)return;
+      link.removeEventListener("animationend",finish);
+      requestAnimationFrame(()=>link.classList.remove(cls));
+    };
+    link.addEventListener("animationend",finish);
   };
   // Do not create any underline on brand or top-level MENU click.
   [2,3].forEach(index=>{
