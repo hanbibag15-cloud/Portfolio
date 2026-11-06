@@ -161,7 +161,12 @@ function renderMenu(category) {
             desc.textContent = description;
             body.append(desc);
         }
-        article.append(photo, body);
+        const link=document.createElement("a");
+        link.className="all-menu-card-link";
+        link.href="menu-detail.html?product="+encodeURIComponent(name);
+        link.setAttribute("aria-label",name+" 메뉴 상세 보기");
+        link.append(photo,body);
+        article.append(link);
         return article;
     }));
     // Highlight only after the linked menu has reached the viewport.
