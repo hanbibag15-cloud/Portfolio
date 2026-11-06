@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
 <link rel="stylesheet" href="css/main.css?v=50">
     <link rel="stylesheet" href="css/nav-state.css?v=6">
-<link rel="stylesheet" href="css/menu-page.css?v=23">
-<script src="js/menu-page.js?v=24" defer></script>
+<link rel="stylesheet" href="css/menu-page.css?v=24">
+<script src="js/menu-page.js?v=25" defer></script>
 <script src="js/nav-state.js?v=2" defer></script>
 
 
@@ -84,6 +84,25 @@
 <div class="all-menu-grid" id="menu-products" role="tabpanel" aria-labelledby="tab-all"></div>
 
 </div></section></main>
+<div class="menu-modal-backdrop" id="menu-detail-modal" hidden>
+  <section class="menu-modal-card" role="dialog" aria-modal="true" aria-labelledby="menu-modal-title" aria-describedby="menu-modal-summary" tabindex="-1">
+    <button type="button" class="menu-modal-close" aria-label="메뉴 상세 닫기">×</button>
+    <div class="menu-modal-image" id="menu-modal-image"></div>
+    <div class="menu-modal-details">
+      <p class="menu-modal-category" id="menu-modal-category"></p>
+      <h2 id="menu-modal-title"></h2>
+      <p class="menu-modal-summary" id="menu-modal-summary"></p>
+      <div class="menu-modal-divider"></div>
+      <div class="menu-modal-tabs" role="tablist" aria-label="메뉴 상세정보">
+        <button type="button" role="tab" id="menu-modal-nutrition-tab" aria-selected="true" aria-controls="menu-modal-info">영양정보</button>
+        <button type="button" role="tab" id="menu-modal-allergen-tab" aria-selected="false" aria-controls="menu-modal-info">알레르기정보</button>
+        <button type="button" role="tab" id="menu-modal-origin-tab" aria-selected="false" aria-controls="menu-modal-info">원산지 / 중량</button>
+      </div>
+      <div class="menu-modal-info" id="menu-modal-info" role="tabpanel" aria-labelledby="menu-modal-nutrition-tab" tabindex="0"></div>
+      <p class="menu-modal-footnote">표시된 영양성분은 확인된 제품에 한해 100g 기준입니다. 알레르기와 원재료 정보는 주문 전 매장에 확인해 주세요.</p>
+    </div>
+  </section>
+</div>
 <footer class="site-footer">
             <div class="footer-inner">
                 <a class="footer-logo" href="brand.html" aria-label="호식이두마리치킨 메인페이지">
