@@ -347,6 +347,13 @@ const portionWeights={
   "다리":menuWeightGuide.legs,
   "윙+다리":menuWeightGuide.wingsLegs
 };
+// Only show the weight tab where an applicable weight standard exists.
+function getMenuWeight(name,category){
+  return portionWeights[name] ||
+    (category==="chicken"
+      ? menuWeightGuide.chicken+"\n순살 선택 시: "+menuWeightGuide.boneless
+      : "");
+}
 const menuModal=document.getElementById("menu-detail-modal");
 const menuModalCard=menuModal.querySelector(".menu-modal-card");
 const menuModalClose=menuModal.querySelector(".menu-modal-close");
@@ -404,10 +411,7 @@ function renderMenuModalTab(index){
     }else{
       const name=modalProduct[1];
       const category=modalProduct[0];
-      const weight=portionWeights[name] ||
-        (category==="chicken"
-          ? menuWeightGuide.chicken+"\n순살 선택 시: "+menuWeightGuide.boneless
-          : "");
+      const weight=getMenuWeight(name,category);
       p.textContent=weight?"조리 전 중량 안내: "+weight:"이 메뉴의 중량 정보는 확인되지 않았습니다.";
       p.style.whiteSpace="pre-line";
     }
@@ -433,8 +437,9 @@ function openMenuModal(name){
   // Only hide *unverified* nutrition/allergen tabs for the parts category.
   // Keep verified data and the weight tab, and restore tabs for other categories.
   const isParts=item[0]==="parts";
+  const hasWeight=Boolean(getMenuWeight(name,item[0]));
   const available=[!isParts||Array.isArray(nutrients[name]),
-                   !isParts||Boolean(allergens[name]),true];
+                   !isParts||Boolean(allergens[name]),hasWeight];
   menuModalTabs.forEach((tab,index)=>{tab.hidden=!available[index];});
   const tabBar=menuModalTabs[0].parentElement;
   tabBar.style.setProperty("--visible-menu-tabs",String(available.filter(Boolean).length));
