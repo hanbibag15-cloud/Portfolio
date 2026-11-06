@@ -370,8 +370,8 @@ function modalPlaceholder(){
 function renderMenuModalTab(index){
   const key=["nutrition","allergens","weight"][index];
   menuModalTabs.forEach((button,i)=>{
-    button.setAttribute("aria-selected",String(i===index));
-    button.tabIndex=i===index?0:-1;
+    button.setAttribute("aria-selected",String(!button.hidden&&i===index));
+    button.tabIndex=!button.hidden&&i===index?0:-1;
   });
   menuModalInfo.setAttribute("aria-labelledby",menuModalTabs[index].id);
   menuModalInfo.replaceChildren();
@@ -430,9 +430,17 @@ function openMenuModal(name){
     image.alt=name+" 제품 이미지";image.addEventListener("error",modalPlaceholder,{once:true});
     menuModalImage.append(image);
   }else modalPlaceholder();
+  // Only hide *unverified* nutrition/allergen tabs for the parts category.
+  // Keep verified data and the weight tab, and restore tabs for other categories.
+  const isParts=item[0]==="parts";
+  const available=[!isParts||Array.isArray(nutrients[name]),
+                   !isParts||Boolean(allergens[name]),true];
+  menuModalTabs.forEach((tab,index)=>{tab.hidden=!available[index];});
+  const tabBar=menuModalTabs[0].parentElement;
+  tabBar.style.setProperty("--visible-menu-tabs",String(available.filter(Boolean).length));
   menuModal.hidden=false;
   document.body.classList.add("menu-modal-open");
-  renderMenuModalTab(0);
+  renderMenuModalTab(available.findIndex(Boolean));
   menuModalClose.focus();
 }
 function closeMenuModal(){
@@ -448,9 +456,13 @@ menuModalTabs.forEach((tab,index)=>{
   tab.addEventListener("keydown",event=>{
     if(!["ArrowLeft","ArrowRight","Home","End"].includes(event.key))return;
     event.preventDefault();
-    const selected=event.key==="Home"?0:event.key==="End"?menuModalTabs.length-1:
-      (index+(event.key==="ArrowRight"?1:-1)+menuModalTabs.length)%menuModalTabs.length;
-    renderMenuModalTab(selected);menuModalTabs[selected].focus();
+    const visibleTabs=menuModalTabs.filter(tab=>!tab.hidden);
+    const currentPosition=visibleTabs.indexOf(tab);
+    const nextPosition=event.key==="Home"?0:event.key==="End"?visibleTabs.length-1:
+      (currentPosition+(event.key==="ArrowRight"?1:-1)+visibleTabs.length)%visibleTabs.length;
+    const nextTab=visibleTabs[nextPosition];
+    const selected=menuModalTabs.indexOf(nextTab);
+    renderMenuModalTab(selected);nextTab.focus();
   });
 });
 document.addEventListener("keydown",event=>{
