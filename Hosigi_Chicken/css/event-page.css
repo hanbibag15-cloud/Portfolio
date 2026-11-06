@@ -292,3 +292,42 @@ body.event-dialog-open{overflow:hidden;}
     pointer-events:none;
   }
 }
+
+/* Event card pagination: nine cards (three desktop rows) per page. */
+.event-pagination{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:24px;
+  margin:56px auto 0;
+}
+.event-pagination[hidden]{display:none;}
+.event-page-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:36px;
+  height:44px;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:#795a48;
+  font:700 20px var(--font);
+  cursor:pointer;
+}
+.event-page-button.is-active{color:var(--brand-red);}
+.event-page-button.event-page-arrow{
+  width:48px;
+  height:48px;
+  border:2px solid #553b29;
+  border-radius:50%;
+  color:#553b29;
+  font-size:19px;
+}
+.event-page-button:disabled{opacity:.35;cursor:default;}
+.event-page-button:focus-visible{outline:2px solid var(--brand-red);outline-offset:4px;border-radius:6px;}
+@media(max-width:767px){
+  .event-pagination{gap:12px;margin-top:38px;}
+  .event-page-button{width:30px;font-size:17px;}
+  .event-page-button.event-page-arrow{width:42px;height:42px;}
+}
