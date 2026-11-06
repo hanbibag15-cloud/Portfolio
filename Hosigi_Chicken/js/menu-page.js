@@ -294,6 +294,7 @@ const allergens={
 };
 // Nutrients: kcal, protein g, carbohydrate g, saturated fat g, sugars g, sodium mg, per 100g.
 const nutrients={
+"딥블랙갈릭 치킨":[232.78,20.60,17.12,1.57,7.13,478.79],
 "타코마요 치킨":[290.2,20.08,11.08,3.35,4.18,370.1],
 "맵시크 치킨":[254.38,21.66,13.81,2.18,7.77,482.55],
 "크리스피골드":[276.70,21.36,19.24,1.17,.79,633.99],
@@ -308,22 +309,22 @@ const nutrients={
 "청양고추마요 치킨":[314.4,16.7,16,3.4,2.5,449.1]
 };
 
-// Official brand product pages checked 2026-11-06. Each value is per 100g;
-// these are NOT a claim about a whole chicken or its serving weight.
-// Newer products without published figures are intentionally left blank.
+// Origin labels verified against product information; no external homepage links.
+// Image supplied by the project author confirms the new deep-black garlic item.
 const verifiedChickenInfo={
-  "맵시크 치킨":{source:"https://www.9922.co.kr/193",origin:"국내산"},
-  "크리스피골드":{source:"https://www.9922.co.kr/180",origin:"국내산"},
-  "수라깐풍 치킨":{source:"https://www.9922.co.kr/156",origin:"국내산"},
-  "요거치즈닝치킨":{source:"https://www.9922.co.kr/152",origin:"국내산"},
-  "타코마요 치킨":{source:"https://www.9922.co.kr/149",origin:"국내산"},
-  "레몬크림탕슈":{source:"https://www.9922.co.kr/141",origin:"국내산"},
-  "간장 치킨":{source:"https://www.9922.co.kr/27",origin:"국내산"},
-  "매운 간장 치킨":{source:"https://www.9922.co.kr/29",origin:"국내산"},
-  "후라이드 치킨":{source:"https://www.9922.co.kr/fried",origin:"국내산"},
-  "양념 치킨":{source:"https://www.9922.co.kr/26",origin:"국내산"},
-  "매운 양념 치킨":{source:"https://www.9922.co.kr/28",origin:"국내산"},
-  "청양고추마요 치킨":{source:"https://www.9922.co.kr/gochumayo",origin:"국내산"}
+  "딥블랙갈릭 치킨":{origin:"국내산"},
+  "맵시크 치킨":{origin:"국내산"},
+  "크리스피골드":{origin:"국내산"},
+  "수라깐풍 치킨":{origin:"국내산"},
+  "요거치즈닝치킨":{origin:"국내산"},
+  "타코마요 치킨":{origin:"국내산"},
+  "레몬크림탕슈":{origin:"국내산"},
+  "간장 치킨":{origin:"국내산"},
+  "매운 간장 치킨":{origin:"국내산"},
+  "후라이드 치킨":{origin:"국내산"},
+  "양념 치킨":{origin:"국내산"},
+  "매운 양념 치킨":{origin:"국내산"},
+  "청양고추마요 치킨":{origin:"국내산"}
 };
 const menuModal=document.getElementById("menu-detail-modal");
 const menuModalCard=menuModal.querySelector(".menu-modal-card");
@@ -373,16 +374,8 @@ function renderMenuModalTab(index){
     menuModalInfo.append(table);
     const note=document.createElement("p");
     note.className="menu-modal-message";
-    note.textContent="공식 홈페이지 표기 · 치킨 100g 기준 (한 마리 전체 열량 아님).";
+    note.textContent="100g 기준 영양성분 (한 마리 전체 열량 아님).";
     menuModalInfo.append(note);
-    const source=verifiedChickenInfo[modalProduct[1]]?.source;
-    if(source){
-      const link=document.createElement("a");
-      link.href=source;link.target="_blank";link.rel="noopener noreferrer";
-      link.className="menu-modal-source-link";
-      link.textContent="영양정보 공식 출처 확인 ↗";
-      menuModalInfo.append(link);
-    }
   }else{
     const p=document.createElement("p");p.className="menu-modal-message";
     if(key==="allergens"){
@@ -396,25 +389,11 @@ function renderMenuModalTab(index){
       }
     }
     menuModalInfo.append(p);
-    if(key==="origin"&&verifiedChickenInfo[modalProduct[1]]?.source){
-      const link=document.createElement("a");
-      link.href=verifiedChickenInfo[modalProduct[1]].source;
-      link.target="_blank";link.rel="noopener noreferrer";
-      link.className="menu-modal-source-link";
-      link.textContent="원산지 공식 출처 확인 ↗";
-      menuModalInfo.append(link);
-    }
     if(key==="allergens"){
       const note=document.createElement("p");
       note.className="menu-modal-message";
-      note.textContent="공식 알레르기 성분정보 페이지 기준. 제조 및 조리 환경에서 교차 접촉할 수 있으니 주문 전 다시 확인하세요.";
+      note.textContent="알레르기 유발성분은 조리 환경에 따라 교차 접촉할 수 있으니 주문 전 다시 확인하세요.";
       menuModalInfo.append(note);
-      const link=document.createElement("a");
-      link.href="https://www.9922.co.kr/allergenic-component";
-      link.target="_blank";link.rel="noopener noreferrer";
-      link.className="menu-modal-source-link";
-      link.textContent="공식 알레르기 성분정보 확인 ↗";
-      menuModalInfo.append(link);
     }
   }
 }
