@@ -357,7 +357,7 @@ function renderMenuModalTab(index){
     const values=nutrients[modalProduct[1]];
     if(!values){
       const text=document.createElement("p");text.className="menu-modal-message";
-      text.textContent="이 메뉴의 공식 영양성분 수치를 확인하지 못했습니다.";
+      text.textContent="이 메뉴의 공식 영양성분 수치(100g 기준)는 확인되지 않았습니다. 확인되지 않은 수치는 임의로 표시하지 않습니다.";
       menuModalInfo.append(text);return;
     }
     const table=document.createElement("table");table.className="menu-modal-nutrition-table";
@@ -407,8 +407,14 @@ function renderMenuModalTab(index){
     if(key==="allergens"){
       const note=document.createElement("p");
       note.className="menu-modal-message";
-      note.textContent="기존 프로젝트의 알레르기 목록이며 최신 공식 표기와 대조되지 않았습니다. 알레르기가 있다면 주문 전 반드시 매장에 확인하세요.";
+      note.textContent="공식 알레르기 성분정보 페이지 기준. 제조 및 조리 환경에서 교차 접촉할 수 있으니 주문 전 다시 확인하세요.";
       menuModalInfo.append(note);
+      const link=document.createElement("a");
+      link.href="https://www.9922.co.kr/allergenic-component";
+      link.target="_blank";link.rel="noopener noreferrer";
+      link.className="menu-modal-source-link";
+      link.textContent="공식 알레르기 성분정보 확인 ↗";
+      menuModalInfo.append(link);
     }
   }
 }
