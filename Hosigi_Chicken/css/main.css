@@ -1682,9 +1682,19 @@ body {
     font-size:16px;
     line-height:1;
     transform:translateY(-50%);
-    transition:none;
+    transition:transform 300ms cubic-bezier(.22,1,.36,1);
 }
-/* CTA arrows remain fixed on hover and keyboard focus. */
+/* Animate only the arrow, while keeping CTA labels centered. */
+@media(hover:hover){
+    .store-promo-link:hover > .promo-cta-arrow[aria-hidden="true"],
+    .event-more:hover > .promo-cta-arrow[aria-hidden="true"]{
+        transform:translate(4px,-50%);
+    }
+}
+.store-promo-link:focus-visible > .promo-cta-arrow[aria-hidden="true"],
+.event-more:focus-visible > .promo-cta-arrow[aria-hidden="true"]{
+    transform:translate(4px,-50%);
+}
 @media(max-width:767px){
     .store-promo-link,.event-more{
         width:132px;
