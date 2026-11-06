@@ -38,8 +38,6 @@
   const pageSize=9;
   let currentPage=1;
   let visibleEventList=[];
-  let listingHeight=0;
-  let listingWidth=0;
   const pagination=document.getElementById("event-pagination");
   const backdrop=document.getElementById("event-detail-backdrop");
   const closeButton=backdrop.querySelector(".event-detail-close");
@@ -144,23 +142,10 @@
     const firstIndex=(currentPage-1)*pageSize;
     const visible=selected.slice(firstIndex,firstIndex+pageSize);
     visibleEventList=selected;
-    // Let event cards keep their natural height on short pages.
-    // Reserve the missing height below pagination to avoid browser scroll jumps.
-    const width=grid.getBoundingClientRect().width;
-    if(Math.abs(width-listingWidth)>1){
-      listingWidth=width;
-      listingHeight=0;
-    }
+    // Use only the visible cards' natural height on every page.
+    // No artificial minimum height or spacer between pagination and footer.
     grid.style.minHeight="";
     grid.replaceChildren(...visible.map(makeCard));
-    const actualHeight=grid.getBoundingClientRect().height;
-    if(currentPage===1&&totalPages>1){
-      listingHeight=actualHeight;
-    }
-    const spacer=document.getElementById("event-list-spacer");
-    if(spacer)spacer.style.height=totalPages>1
-      ? Math.max(0,listingHeight-actualHeight)+"px"
-      : "0px";
     pagination.hidden=totalPages<=1;
     // Preserve the same pagination button elements while switching pages.
     // Removing the focused button makes browsers auto-scroll to a new anchor.
@@ -291,18 +276,8 @@
     if(!button||button.disabled)return;
     const page=Number(button.dataset.page);
     if(page===currentPage)return;
-    const scrollPosition=window.scrollY;
     currentPage=page;
     render();
-    // Do not let native scroll anchoring change the viewing position.
-    if(window.scrollY!==scrollPosition){
-      window.scrollTo({top:scrollPosition,behavior:"instant"});
-    }
-    requestAnimationFrame(()=>{
-      if(window.scrollY!==scrollPosition){
-        window.scrollTo({top:scrollPosition,behavior:"instant"});
-      }
-    });
   });
   closeButton.addEventListener("click",closeDetail);
   backdrop.addEventListener("click",event=>{if(event.target===backdrop)closeDetail();});
