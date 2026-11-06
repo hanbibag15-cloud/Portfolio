@@ -310,9 +310,6 @@ const sideNutrients={
   "치킨무":[23,1,4,0,3,91]
 };
 const nutritionBasis={"치킨무":"200g(1팩)"};
-const nutritionCautions={
-  "쉬림프 미니튀김(레몬크림)":"공식 상세페이지에 열량이 326.51kcal와 326.61kcal로 다르게 표시되어 열량을 미확정으로 두었습니다."
-};
 // Allergens on the user-supplied image apply to the individual sauce,
 // not necessarily the complete side dish. Keep them separately identified.
 const optionalSauceAllergens={
@@ -416,16 +413,17 @@ function renderMenuModalTab(index){
     const values=nutrients[modalProduct[1]];
     if(!values){
       const text=document.createElement("p");text.className="menu-modal-message";
-      text.textContent=modalProduct[1]==="플라윙 세트"?"플라윙 세트의 영양성분은 공식 제품표에 수치가 미표기(-)되어 있습니다.":"이 메뉴의 공식 영양성분 수치(100g 기준)는 확인되지 않았습니다. 확인되지 않은 수치는 임의로 표시하지 않습니다.";
+      text.textContent="등록된 영양성분 정보가 없습니다.";
       menuModalInfo.append(text);return;
     }
     const table=document.createElement("table");table.className="menu-modal-nutrition-table";
     const head=document.createElement("thead");
     const labels=document.createElement("tr"),numbers=document.createElement("tr");
     nutritionFields.forEach(([label,unit],i)=>{
+      // Omit fields whose values are unavailable rather than displaying placeholders.
+      if(values[i]===null || values[i]===undefined)return;
       const th=document.createElement("th");th.scope="col";th.textContent=label+"("+unit+")";
-      const td=document.createElement("td");
-      td.textContent=values[i]===null?(nutritionCautions[modalProduct[1]]&&i===0?"미확정":"미표기"):String(values[i]);
+      const td=document.createElement("td");td.textContent=String(values[i]);
       labels.append(th);numbers.append(td);
     });
     head.append(labels);const body=document.createElement("tbody");body.append(numbers);table.append(head,body);
@@ -435,12 +433,6 @@ function renderMenuModalTab(index){
     const basis=nutritionBasis[modalProduct[1]]||"100g";
     note.textContent=basis+" 기준 영양성분 (제품 전체와 혼동하지 마세요).";
     menuModalInfo.append(note);
-    if(nutritionCautions[modalProduct[1]]){
-      const caution=document.createElement("p");
-      caution.className="menu-modal-message";
-      caution.textContent=nutritionCautions[modalProduct[1]];
-      menuModalInfo.append(caution);
-    }
   }else{
     const p=document.createElement("p");p.className="menu-modal-message";
     if(key==="allergens"){
@@ -485,7 +477,7 @@ function openMenuModal(name){
   const hasWeight=Boolean(getMenuWeight(name,item[0]));
   const isSide=item[0]==="side";
   const available=[
-    (!isParts&&!isSide)||Array.isArray(nutrients[name]),
+    (!isParts&&!isSide)||(Array.isArray(nutrients[name])&&nutrients[name].some(value=>value!==null&&value!==undefined)),
     (!isParts&&!isSide)||Boolean(allergens[name])||Boolean(optionalSauceAllergens[name]),
     hasWeight||name==="치킨무"
   ];
