@@ -255,3 +255,29 @@ body.event-dialog-open{overflow:hidden;}
 @media(prefers-reduced-motion:reduce){
   .event-status-filter{transition:none;}
 }
+
+/* Finished events retain the original image-first card, but the artwork
+   is darkened with a centered message. Information below stays readable. */
+.event-list-art .event-ended-overlay{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  background:rgba(25,12,12,.73);
+  color:#fff;
+  text-align:center;
+  pointer-events:none;
+}
+.event-ended-overlay span{
+  font-size:clamp(14px,1.35vw,17px);
+  font-weight:750;
+  line-height:1.5;
+  word-break:keep-all;
+}
+.event-list-card:hover .event-ended-overlay,
+.event-list-card:focus-within .event-ended-overlay{
+  background:rgba(25,12,12,.73);
+}
