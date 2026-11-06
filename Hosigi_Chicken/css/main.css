@@ -1667,13 +1667,14 @@ body {
 .store-promo-link .promo-cta-label,
 .event-more .promo-cta-label{
     display:block;
+    box-sizing:border-box;
     width:100%;
-    padding:0 25px 0 12px;
+    padding:0;
     text-align:center;
     white-space:nowrap;
 }
-.store-promo-link .promo-cta-arrow,
-.event-more .promo-cta-arrow{
+.store-promo-link > .promo-cta-arrow[aria-hidden="true"],
+.event-more > .promo-cta-arrow[aria-hidden="true"]{
     position:absolute;
     left:auto;
     right:15px;
@@ -1693,9 +1694,9 @@ body {
         font-size:12px;
     }
     .store-promo-link .promo-cta-label,
-    .event-more .promo-cta-label{padding:0 20px 0 8px;}
-    .store-promo-link .promo-cta-arrow,
-    .event-more .promo-cta-arrow{right:9px;font-size:12px;left:auto;}
+    .event-more .promo-cta-label{padding:0;}
+    .store-promo-link > .promo-cta-arrow[aria-hidden="true"],
+    .event-more > .promo-cta-arrow[aria-hidden="true"]{right:9px;font-size:12px;left:auto;}
 }
 @media(prefers-reduced-motion:reduce){
     .store-promo-link .promo-cta-arrow,
