@@ -361,7 +361,7 @@ function modalPlaceholder(){
   menuModalImage.append(label);
 }
 function renderMenuModalTab(index){
-  const key=["nutrition","allergens","origin"][index];
+  const key=["nutrition","allergens","weight"][index];
   menuModalTabs.forEach((button,i)=>{
     button.setAttribute("aria-selected",String(i===index));
     button.tabIndex=i===index?0:-1;
@@ -395,15 +395,13 @@ function renderMenuModalTab(index){
     if(key==="allergens"){
       p.textContent=allergens[modalProduct[1]]||"이 메뉴의 알레르기 유발성분을 공식 자료에서 확인하지 못했습니다.";
     }else{
-      const data=verifiedChickenInfo[modalProduct[1]];
       const name=modalProduct[1];
       const category=modalProduct[0];
       const weight=portionWeights[name] ||
         (category==="chicken"
           ? menuWeightGuide.chicken+"\n순살 선택 시: "+menuWeightGuide.boneless
           : "");
-      const origin=data?"닭고기 원산지: "+data.origin:"원산지: 메뉴별 확인 자료 없음";
-      p.textContent=origin+(weight?"\n조리 전 중량 안내: "+weight:"\n중량: 메뉴별 확인 자료 없음");
+      p.textContent=weight?"조리 전 중량 안내: "+weight:"이 메뉴의 중량 정보는 확인되지 않았습니다.";
       p.style.whiteSpace="pre-line";
     }
     menuModalInfo.append(p);
