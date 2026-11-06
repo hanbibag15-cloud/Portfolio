@@ -329,7 +329,7 @@ const verifiedChickenInfo={
 // Weight guide transcribed from the reference image provided by the user.
 // Raw-meat weights are not the cooked weight of the finished menu.
 const menuWeightGuide={
-  chicken:"한 마리: 원료육 851~950g(9호) × 1 / 두 마리: 원료육 851~950g(9호) × 2",
+  chicken:"한 마리: 원료육 851~950g(9호) × 1\n두 마리: 원료육 851~950g(9호) × 2",
   boneless:"순살 1개: 500g / 순살 2개: 1,000g",
   flying:"플라윙(윙+봉): 1,000g (윙 500g + 봉 500g)",
   wingsLegs:"날개와 다리: 1,000g (윙 500g + 북채 500g)",
