@@ -35,6 +35,10 @@
   const notices=[]; // 공식 게시물을 검증한 뒤 등록 (가짜 공지 생성 방지)
   let currentSection="events";
   let currentStatus="all";
+  const pageSize=9;
+  let currentPage=1;
+  const pagination=document.getElementById("event-pagination");
+  const listSection=document.getElementById("event-list");
   const backdrop=document.getElementById("event-detail-backdrop");
   const closeButton=backdrop.querySelector(".event-detail-close");
   let previousFocus=null;
@@ -133,7 +137,39 @@
       (currentStatus==="active"&&eventState(entry)==="active") ||
       (currentStatus==="ended"&&eventState(entry)==="ended")
     );
-    grid.replaceChildren(...selected.map(makeCard));
+    const totalPages=Math.ceil(selected.length/pageSize);
+    currentPage=Math.min(Math.max(currentPage,1),Math.max(totalPages,1));
+    const firstIndex=(currentPage-1)*pageSize;
+    const visible=selected.slice(firstIndex,firstIndex+pageSize);
+    grid.replaceChildren(...visible.map(makeCard));
+    pagination.replaceChildren();
+    pagination.hidden=totalPages<=1;
+    if(totalPages>1){
+      const addButton=(label,page,kind,disabled=false)=>{
+        const button=document.createElement("button");
+        button.type="button";
+        button.className="event-page-button event-page-"+kind;
+        button.textContent=label;
+        button.setAttribute("aria-label",kind==="number"?page+"페이지":label==="◀"?"이전 페이지":"다음 페이지");
+        if(kind==="number"&&page===currentPage){
+          button.classList.add("is-active");
+          button.setAttribute("aria-current","page");
+        }
+        button.disabled=disabled;
+        button.addEventListener("click",()=>{
+          if(page===currentPage)return;
+          currentPage=page;
+          render();
+          const headerHeight=document.querySelector(".site-header")?.getBoundingClientRect().height||0;
+          const top=window.scrollY+listSection.getBoundingClientRect().top-headerHeight-20;
+          window.scrollTo({top:Math.max(0,top),behavior:"smooth"});
+        });
+        pagination.append(button);
+      };
+      addButton("◀",currentPage-1,"arrow",currentPage===1);
+      for(let page=1;page<=totalPages;page++)addButton(String(page),page,"number");
+      addButton("▶",currentPage+1,"arrow",currentPage===totalPages);
+    }
     const heading=document.getElementById("event-list-title");
     const sectionLabel=currentSection==="events"?"이벤트":"공지사항";
     heading.textContent=(currentStatus==="all"?"전체 ":currentStatus==="active"?"진행중 ":"종료 ")+sectionLabel;
@@ -217,10 +253,12 @@
   filters.forEach(button=>button.addEventListener("click",()=>{
     currentSection=button.dataset.section;
     currentStatus="all";
+    currentPage=1;
     render();
   }));
   statusFilters.forEach(button=>button.addEventListener("click",()=>{
     currentStatus=button.dataset.status;
+    currentPage=1;
     render();
   }));
   closeButton.addEventListener("click",closeDetail);
