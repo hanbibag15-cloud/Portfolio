@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
 <link rel="stylesheet" href="css/main.css?v=50">
     <link rel="stylesheet" href="css/nav-state.css?v=6">
-<link rel="stylesheet" href="css/menu-detail.css?v=2">
-<script src="js/menu-detail.js?v=2" defer></script>
+<link rel="stylesheet" href="css/menu-detail.css?v=3">
+<script src="js/menu-detail.js?v=3" defer></script>
 <script src="js/nav-state.js?v=2" defer></script>
 <script src="js/store-nav.js?v=2" defer></script>
 
@@ -68,10 +68,9 @@
         </header>
 <main class="menu-detail-page">
   <div class="menu-detail-container">
-    <nav class="menu-detail-breadcrumb" aria-label="현재 위치">
-      <a href="menu.html">MENU</a><span aria-hidden="true">/</span><span>메뉴 상세</span>
-    </nav>
-    <a class="menu-detail-back" id="detail-back" href="menu.html#all"><span aria-hidden="true">←</span> 메뉴 목록으로</a>
+    <div class="menu-detail-top">
+      <a href="menu.html#all" class="menu-detail-more">다른 메뉴 보기 <span aria-hidden="true">→</span></a>
+    </div>
     <section class="menu-detail-hero" aria-labelledby="detail-product-name">
       <div class="menu-detail-visual" id="detail-product-art"></div>
       <div class="menu-detail-overview">
@@ -120,7 +119,6 @@
       </section>
       <p class="menu-detail-source" id="detail-info-source"></p>
     </section>
-    <div class="menu-detail-bottom"><a href="menu.html#chicken" class="menu-detail-more">다른 메뉴 보기 <span aria-hidden="true">→</span></a></div>
   </div>
 </main>
 <footer class="site-footer">
