@@ -271,13 +271,37 @@
     currentPage=1;
     render();
   }));
+  // Keep mouse clicks from focusing a control which moves vertically
+  // when a short last page is replaced with a full page.
+  pagination.addEventListener("pointerdown",event=>{
+    if(event.pointerType==="mouse" && event.target.closest("button[data-page]")){
+      event.preventDefault();
+    }
+  });
   pagination.addEventListener("click",event=>{
     const button=event.target.closest("button[data-page]");
     if(!button||button.disabled)return;
     const page=Number(button.dataset.page);
-    if(page===currentPage)return;
+    if(!Number.isInteger(page)||page<1||page===currentPage)return;
+
+    // Capture document position before replacing cards. Scroll anchoring can
+    // otherwise follow the pagination/footer when page 3 grows to page 2.
+    const scrollTop=window.scrollY;
+    const root=document.documentElement;
+    const previousBehavior=root.style.scrollBehavior;
+    root.style.scrollBehavior="auto";
     currentPage=page;
     render();
+    const restore=()=>{
+      if(Math.abs(window.scrollY-scrollTop)>0.5){
+        window.scrollTo({top:scrollTop,behavior:"instant"});
+      }
+    };
+    restore();
+    requestAnimationFrame(()=>{
+      restore();
+      root.style.scrollBehavior=previousBehavior;
+    });
   });
   closeButton.addEventListener("click",closeDetail);
   backdrop.addEventListener("click",event=>{if(event.target===backdrop)closeDetail();});
