@@ -159,37 +159,39 @@
     }
     if(totalPages>1&&listingHeight>0)grid.style.minHeight=listingHeight+"px";
     else if(totalPages<=1)grid.style.minHeight="";
-    pagination.replaceChildren();
     pagination.hidden=totalPages<=1;
+    // Preserve the same pagination button elements while switching pages.
+    // Removing the focused button makes browsers auto-scroll to a new anchor.
     if(totalPages>1){
-      const addButton=(label,page,kind,disabled=false)=>{
-        const button=document.createElement("button");
-        button.type="button";
-        button.className="event-page-button event-page-"+kind;
-        button.textContent=label;
-        button.setAttribute("aria-label",kind==="number"?page+"페이지":label==="◀"?"이전 페이지":"다음 페이지");
-        if(kind==="number"&&page===currentPage){
-          button.classList.add("is-active");
-          button.setAttribute("aria-current","page");
-        }
-        button.disabled=disabled;
-        button.addEventListener("click",()=>{
-          if(page===currentPage)return;
-          currentPage=page;
-          render();
-          // Recreated pagination controls should retain focus without
-          // triggering the browser's automatic focus scrolling.
-          const nextButton=[...pagination.querySelectorAll("button")].find(
-            item=>item.classList.contains("event-page-"+kind) &&
-              (kind==="number"?item.textContent===String(page):item.textContent===label)
-          );
-          nextButton?.focus({preventScroll:true});
-        });
-        pagination.append(button);
-      };
-      addButton("◀",currentPage-1,"arrow",currentPage===1);
-      for(let page=1;page<=totalPages;page++)addButton(String(page),page,"number");
-      addButton("▶",currentPage+1,"arrow",currentPage===totalPages);
+      if(pagination.dataset.pageCount!==String(totalPages)){
+        pagination.replaceChildren();
+        const addButton=(label,kind)=>{
+          const button=document.createElement("button");
+          button.type="button";
+          button.className="event-page-button event-page-"+kind;
+          button.textContent=label;
+          pagination.append(button);
+        };
+        addButton("◀","arrow");
+        for(let page=1;page<=totalPages;page++)addButton(String(page),"number");
+        addButton("▶","arrow");
+        pagination.dataset.pageCount=String(totalPages);
+      }
+      const buttons=[...pagination.querySelectorAll("button")];
+      buttons.forEach((button,index)=>{
+        const isArrow=index===0||index===buttons.length-1;
+        const page=index===0?currentPage-1:
+          index===buttons.length-1?currentPage+1:index;
+        const active=!isArrow&&page===currentPage;
+        button.dataset.page=String(page);
+        button.disabled=isArrow&&(page<1||page>totalPages);
+        button.classList.toggle("is-active",active);
+        if(active)button.setAttribute("aria-current","page");
+        else button.removeAttribute("aria-current");
+        button.setAttribute("aria-label",
+          index===0?"이전 페이지":
+          index===buttons.length-1?"다음 페이지":page+"페이지");
+      });
     }
     const heading=document.getElementById("event-list-title");
     const sectionLabel=currentSection==="events"?"이벤트":"공지사항";
@@ -282,6 +284,24 @@
     currentPage=1;
     render();
   }));
+  pagination.addEventListener("click",event=>{
+    const button=event.target.closest("button[data-page]");
+    if(!button||button.disabled)return;
+    const page=Number(button.dataset.page);
+    if(page===currentPage)return;
+    const scrollPosition=window.scrollY;
+    currentPage=page;
+    render();
+    // Do not let native scroll anchoring change the viewing position.
+    if(window.scrollY!==scrollPosition){
+      window.scrollTo({top:scrollPosition,behavior:"instant"});
+    }
+    requestAnimationFrame(()=>{
+      if(window.scrollY!==scrollPosition){
+        window.scrollTo({top:scrollPosition,behavior:"instant"});
+      }
+    });
+  });
   closeButton.addEventListener("click",closeDetail);
   backdrop.addEventListener("click",event=>{if(event.target===backdrop)closeDetail();});
   document.addEventListener("keydown",event=>{
