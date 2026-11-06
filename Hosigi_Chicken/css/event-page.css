@@ -363,3 +363,6 @@ body.event-dialog-open{overflow:hidden;}
   .event-page-button{transition:none;}
   .event-page-button.event-page-arrow:hover{transform:none;}
 }
+
+/* Prevent browser scroll anchoring from jumping when cards change. */
+.event-collection,.event-card-grid,.event-pagination{overflow-anchor:none;}
