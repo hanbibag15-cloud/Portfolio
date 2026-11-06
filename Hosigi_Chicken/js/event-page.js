@@ -37,6 +37,7 @@
   let currentStatus="all";
   const pageSize=9;
   let currentPage=1;
+  let visibleEventList=[];
   const pagination=document.getElementById("event-pagination");
   const listSection=document.getElementById("event-list");
   const backdrop=document.getElementById("event-detail-backdrop");
@@ -141,6 +142,7 @@
     currentPage=Math.min(Math.max(currentPage,1),Math.max(totalPages,1));
     const firstIndex=(currentPage-1)*pageSize;
     const visible=selected.slice(firstIndex,firstIndex+pageSize);
+    visibleEventList=selected;
     grid.replaceChildren(...visible.map(makeCard));
     pagination.replaceChildren();
     pagination.hidden=totalPages<=1;
@@ -333,4 +335,17 @@
     submenuParents.forEach(item=>item.classList.remove("submenu-dismissed"));
   });
   render();
+  // Main-page event image deep links show the correct listing page and detail.
+  const linkedId=location.hash.startsWith("#event-")
+    ? decodeURIComponent(location.hash.slice("#event-".length))
+    : null;
+  const linkedEvent=events.find(event=>event.id===linkedId);
+  if(linkedEvent){
+    const index=visibleEventList.findIndex(event=>event.id===linkedId);
+    if(index>=0){
+      currentPage=Math.floor(index/pageSize)+1;
+      render();
+    }
+    openDetail(linkedEvent);
+  }
 })();
