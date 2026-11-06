@@ -281,3 +281,14 @@ body.event-dialog-open{overflow:hidden;}
 .event-list-card:focus-within .event-ended-overlay{
   background:rgba(25,12,12,.73);
 }
+
+/* Event GNB: a clicked desktop submenu must not remain open due to :focus-within. */
+@media(min-width:1025px){
+  .header-nav .has-submenu.submenu-dismissed > .header-submenu,
+  .header-nav .has-submenu.submenu-dismissed:hover > .header-submenu,
+  .header-nav .has-submenu.submenu-dismissed:focus-within > .header-submenu {
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+  }
+}
