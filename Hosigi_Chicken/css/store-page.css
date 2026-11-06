@@ -769,3 +769,13 @@
   from {opacity:1;}
   to {opacity:0;}
 }
+
+/* Entire selected-store info bubble is a keyboard-accessible focus action. */
+.store-map-panel .store-popup-focus{
+  display:block;width:100%;border:0;padding:0;margin:0;
+  background:transparent;color:inherit;text-align:left;
+  font:inherit;cursor:pointer;
+}
+.store-map-panel .store-popup-focus:hover .store-popup-title,
+.store-map-panel .store-popup-focus:focus-visible .store-popup-title{color:var(--brand-red)}
+.store-map-panel .store-popup-focus:focus-visible{outline:2px solid var(--brand-red);outline-offset:4px;border-radius:5px}
