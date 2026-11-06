@@ -18,8 +18,8 @@
     });
   }
 
-  if (page === 'menu.html' || page === 'event.html') {
-    mark(page === 'menu.html' ? 0 : 3);
+  if (page === 'menu.html' || page === 'menu-detail.html' || page === 'event.html') {
+    mark(page === 'event.html' ? 3 : 0);
     return;
   }
   if (page !== 'brand.html') {
