@@ -1716,3 +1716,7 @@ body {
     .store-promo-link .promo-cta-arrow,
     .event-more .promo-cta-arrow{transition:none;}
 }
+
+/* Non-interactive BRAND label; same type scale as sibling navigation links. */
+.header-nav .header-nav-static-label{display:block;white-space:nowrap;font-size:20px;font-weight:500;line-height:1;letter-spacing:-.023em;color:var(--text-primary);cursor:default;}
+@media(max-width:1024px){.header-nav .header-nav-static-label{padding:12px 2px;font-size:16px;text-align:center;}}
