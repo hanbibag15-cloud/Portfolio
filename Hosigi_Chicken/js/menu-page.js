@@ -294,6 +294,12 @@ const allergens={
 };
 // Nutrients: kcal, protein g, carbohydrate g, saturated fat g, sugars g, sodium mg, per 100g.
 const nutrients={
+// Part-menu nutrition verified against official product detail pages (per 100g).
+"다리":[238.57,24.23,8.03,2.23,2.4,324.79],
+"윙+다리":[282.38,23.59,9.88,3.01,2.37,357.43],
+"호식이 안심텐더":[244.04,17.03,18.33,1.32,2.24,456.73],
+"닭발 튀김":[220.00,11.75,18.05,0.25,null,696.95],
+"똥집 튀김":[184.94,11.22,21.20,0.16,null,351.58],
 "깐쇼킹 치킨":[231.80,17.48,17.34,1.50,6.36,342.01],
 "딥블랙갈릭 치킨":[232.78,20.60,17.12,1.57,7.13,478.79],
 "타코마요 치킨":[290.2,20.08,11.08,3.35,4.18,370.1],
@@ -373,7 +379,7 @@ function renderMenuModalTab(index){
     const values=nutrients[modalProduct[1]];
     if(!values){
       const text=document.createElement("p");text.className="menu-modal-message";
-      text.textContent="이 메뉴의 공식 영양성분 수치(100g 기준)는 확인되지 않았습니다. 확인되지 않은 수치는 임의로 표시하지 않습니다.";
+      text.textContent=modalProduct[1]==="플라윙 세트"?"플라윙 세트의 영양성분은 공식 제품표에 수치가 미표기(-)되어 있습니다.":"이 메뉴의 공식 영양성분 수치(100g 기준)는 확인되지 않았습니다. 확인되지 않은 수치는 임의로 표시하지 않습니다.";
       menuModalInfo.append(text);return;
     }
     const table=document.createElement("table");table.className="menu-modal-nutrition-table";
@@ -394,7 +400,7 @@ function renderMenuModalTab(index){
   }else{
     const p=document.createElement("p");p.className="menu-modal-message";
     if(key==="allergens"){
-      p.textContent=allergens[modalProduct[1]]||"이 메뉴의 알레르기 유발성분을 공식 자료에서 확인하지 못했습니다.";
+      p.textContent=allergens[modalProduct[1]]||(modalProduct[0]==="parts"?"이 부위별 메뉴는 제공된 공식 알레르기 표에 별도 항목이 없습니다. 선택 소스에 따라 알레르기 유발성분이 달라질 수 있으므로 주문 전 확인해 주세요.":"이 메뉴의 알레르기 유발성분을 공식 자료에서 확인하지 못했습니다.");
     }else{
       const name=modalProduct[1];
       const category=modalProduct[0];
