@@ -116,11 +116,16 @@
             clusterMorphing=false;
             renderMarkers(true);
           });
-          const bounds=new naver.maps.LatLngBounds(ll(group.items[0].point),ll(group.items[0].point));
-          group.items.slice(1).forEach(item=>bounds.extend(ll(item.point)));
+          // Guarantee a zoom change even for geographically broad clusters.
+          // Their bounding box can be wider than the visible map.
           const next=Math.min(18,map.getZoom()+2);
-          // morph changes center and zoom in one continuous transition.
-          map.morph(bounds.getCenter(),next,{duration:650,easing:"easeOutCubic"});
+          const center=ll(group.point);
+          if(next>map.getZoom()){
+            map.morph(center,next,{duration:600,easing:"easeOutCubic"});
+          }else{
+            clusterMorphing=false;
+            renderMarkers(true);
+          }
         }else window.hosigiStoreMapState?.selectStore(group.items[0].id,false);
       });
       naverMarkers.push(marker);
