@@ -247,3 +247,7 @@ body.menu-modal-open{overflow:hidden}
 @keyframes menu-dialog-in{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(max-width:767px){.menu-modal-backdrop{padding:12px}.menu-modal-card{grid-template-columns:1fr;gap:4px;padding:48px 22px 26px;border-radius:22px;max-height:92dvh}.menu-modal-image{aspect-ratio:1.6;max-height:230px}.menu-modal-close{right:13px;top:11px;width:38px;height:38px}.menu-modal-details{padding:6px 0}.menu-modal-details h2{font-size:25px}.menu-modal-summary{font-size:14px;margin-top:12px}.menu-modal-divider{margin:18px 0 10px}.menu-modal-tabs button{font-size:11px;min-height:41px}.menu-modal-nutrition-table{font-size:10px}.menu-modal-nutrition-table th,.menu-modal-nutrition-table td{padding:8px 2px}.menu-modal-info{min-height:90px}}
 @media(prefers-reduced-motion:reduce){.menu-modal-card{animation:none}.menu-modal-close{transition:none}}
+
+/* Verified product information sources in the menu detail modal. */
+.menu-modal-source-link{display:inline-block;margin-top:12px;color:var(--brand-red);font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:3px;}
+.menu-modal-source-link:hover,.menu-modal-source-link:focus-visible{color:var(--brand-brown);}
