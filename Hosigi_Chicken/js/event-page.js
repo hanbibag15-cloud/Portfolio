@@ -39,7 +39,6 @@
   let currentPage=1;
   let visibleEventList=[];
   const pagination=document.getElementById("event-pagination");
-  const listSection=document.getElementById("event-list");
   const backdrop=document.getElementById("event-detail-backdrop");
   const closeButton=backdrop.querySelector(".event-detail-close");
   let previousFocus=null;
@@ -162,9 +161,6 @@
           if(page===currentPage)return;
           currentPage=page;
           render();
-          const headerHeight=document.querySelector(".site-header")?.getBoundingClientRect().height||0;
-          const top=window.scrollY+listSection.getBoundingClientRect().top-headerHeight-20;
-          window.scrollTo({top:Math.max(0,top),behavior:"smooth"});
         });
         pagination.append(button);
       };
