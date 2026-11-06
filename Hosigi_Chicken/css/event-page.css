@@ -371,3 +371,7 @@ body.event-dialog-open{overflow:hidden;}
 
 /* Prevent browser scroll anchoring from jumping when cards change. */
 .event-collection,.event-card-grid,.event-pagination{overflow-anchor:none;}
+
+/* Pagination replaces content above the viewport: do not anchor the page
+   to the old buttons or footer while card rows change. */
+html:has(.event-pagination),body:has(.event-pagination){overflow-anchor:none;}
