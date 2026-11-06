@@ -143,7 +143,6 @@ const note=document.getElementById("detail-nutrition-note");
 const source=document.getElementById("detail-info-source");
 const more=document.querySelector(".menu-detail-more");
 const productType=document.getElementById("detail-product-type");
-const detailDescription=document.getElementById("detail-description");
 const panel=document.getElementById("detail-info-panel");
 const panelButtons=[...document.querySelectorAll(".menu-detail-buttons button")];
 const closePanel=document.querySelector(".menu-detail-panel-close");
@@ -169,7 +168,6 @@ heading.textContent=name;
 document.title=name+" | 호식이두마리치킨";
 description.textContent=text||"호식이두마리치킨의 다양한 메뉴를 만나보세요.";
 productType.textContent=categories[type]||"메뉴";
-detailDescription.textContent=text||"제품별 안내 사항은 주문 매장에서 확인해 주세요.";
 more.href="menu.html#"+type;
 const photo=menuPhotos[name];
 if(photo){
