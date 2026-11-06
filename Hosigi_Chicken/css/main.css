@@ -1260,14 +1260,7 @@ body {
     display: inline-block;
     transition: transform 300ms cubic-bezier(.22, 1, .36, 1);
 }
-@media (hover: hover) {
-    .store-promo-link:hover > span[aria-hidden="true"] {
-        transform: translateX(6px);
-    }
-}
-.store-promo-link:focus-visible > span[aria-hidden="true"] {
-    transform: translateX(6px);
-}
+
 @media (prefers-reduced-motion: reduce) {
     .store-promo-link > span[aria-hidden="true"] {
         transition: none;
@@ -1421,10 +1414,7 @@ body {
     display: inline-block;
     transition: transform 300ms cubic-bezier(.22, 1, .36, 1);
 }
-@media (hover: hover) {
-    .event-more:hover > span[aria-hidden="true"] { transform: translateX(6px); }
-}
-.event-more:focus-visible > span[aria-hidden="true"] { transform: translateX(6px); }
+
 @media (prefers-reduced-motion: reduce) {
     .event-more > span[aria-hidden="true"] { transition: none; }
 }
@@ -1691,14 +1681,9 @@ body {
     font-size:16px;
     line-height:1;
     transform:translateY(-50%);
-    transition:transform 300ms cubic-bezier(.22,1,.36,1);
+    transition:none;
 }
-@media(hover:hover){
-    .store-promo-link:hover .promo-cta-arrow,
-    .event-more:hover .promo-cta-arrow{transform:translate(4px,-50%);}
-}
-.store-promo-link:focus-visible .promo-cta-arrow,
-.event-more:focus-visible .promo-cta-arrow{transform:translate(4px,-50%);}
+/* CTA arrows remain fixed on hover and keyboard focus. */
 @media(max-width:767px){
     .store-promo-link,.event-more{
         width:132px;
