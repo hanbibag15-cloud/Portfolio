@@ -293,41 +293,73 @@ body.event-dialog-open{overflow:hidden;}
   }
 }
 
-/* Event card pagination: nine cards (three desktop rows) per page. */
+/* Hosigi brand pagination: keep the reference's circular arrows and numbered layout. */
 .event-pagination{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:24px;
-  margin:56px auto 0;
+  gap:20px;
+  margin:64px auto 0;
 }
 .event-pagination[hidden]{display:none;}
 .event-page-button{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  width:36px;
-  height:44px;
+  flex:0 0 auto;
+  box-sizing:border-box;
+  width:40px;
+  height:48px;
   padding:0;
   border:0;
+  border-radius:999px;
   background:transparent;
-  color:#795a48;
-  font:700 20px var(--font);
+  color:var(--brand-brown);
+  font:600 19px var(--font);
+  line-height:1;
   cursor:pointer;
+  transition:color .2s ease,background-color .2s ease,border-color .2s ease,transform .25s cubic-bezier(.22,1,.36,1);
 }
-.event-page-button.is-active{color:var(--brand-red);}
+.event-page-button.event-page-number:hover{
+  color:var(--brand-red);
+  background:var(--surface-brand-soft);
+}
+.event-page-button.event-page-number.is-active{
+  color:var(--brand-red);
+  font-weight:750;
+}
 .event-page-button.event-page-arrow{
   width:48px;
   height:48px;
-  border:2px solid #553b29;
-  border-radius:50%;
-  color:#553b29;
-  font-size:19px;
+  border:1.5px solid var(--brand-brown);
+  background:var(--surface-default);
+  color:var(--brand-brown);
+  font-size:20px;
 }
-.event-page-button:disabled{opacity:.35;cursor:default;}
-.event-page-button:focus-visible{outline:2px solid var(--brand-red);outline-offset:4px;border-radius:6px;}
+@media(hover:hover){
+  .event-page-button.event-page-arrow:not(:disabled):hover{
+    border-color:var(--brand-red);
+    background:var(--brand-red);
+    color:var(--neutral-white);
+    transform:translateY(-2px);
+  }
+}
+.event-page-button.event-page-arrow:disabled{
+  border-color:var(--border-default);
+  color:#bcb5b2;
+  background:var(--surface-default);
+  cursor:default;
+}
+.event-page-button:focus-visible{
+  outline:2px solid var(--brand-red);
+  outline-offset:4px;
+}
 @media(max-width:767px){
-  .event-pagination{gap:12px;margin-top:38px;}
-  .event-page-button{width:30px;font-size:17px;}
-  .event-page-button.event-page-arrow{width:42px;height:42px;}
+  .event-pagination{gap:9px;margin-top:42px;}
+  .event-page-button{width:35px;height:44px;font-size:16px;}
+  .event-page-button.event-page-arrow{width:44px;height:44px;font-size:17px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .event-page-button{transition:none;}
+  .event-page-button.event-page-arrow:hover{transform:none;}
 }
