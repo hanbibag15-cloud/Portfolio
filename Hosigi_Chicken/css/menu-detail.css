@@ -10,9 +10,7 @@
 .menu-detail-category{font-size:13px;color:var(--brand-red);font-weight:700}
 .menu-detail-overview h2{font-size:clamp(31px,3vw,43px);font-weight:750;line-height:1.24;letter-spacing:-.035em;word-break:keep-all;margin:8px 0 0}
 .menu-detail-summary{font-size:16px;color:#666;margin-top:14px;line-height:1.7;word-break:keep-all}
-.menu-detail-price-note{font-size:14px;font-weight:650;margin-top:16px;color:var(--text-primary)}
 .menu-detail-section-row{border-top:1px solid var(--border-default);padding:24px 0 27px;margin-top:26px}
-.menu-detail-section-row+.menu-detail-section-row{margin-top:0}
 .menu-detail-section-row h3,.menu-detail-product-info h3{font-size:21px;font-weight:750;letter-spacing:-.025em}
 .menu-detail-section-row p{font-size:15px;line-height:1.7;color:#606060;margin-top:13px;word-break:keep-all}
 .menu-detail-product-info{border-top:1px solid var(--border-default);padding-top:24px}
