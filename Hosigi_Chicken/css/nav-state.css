@@ -30,15 +30,20 @@
     .header-nav > ul > li > a::after{transition:none}
 }
 
-/* Click-only local activation: no underline traveling between menu items. */
+/* One local reveal, with no competing transition while the keyframes run.
+   Applied to the top-level MENU (after a submenu click), STORE and EVENT. */
 .header-nav > ul > li > a.nav-click-reveal::after {
-    animation: hosigi-nav-underline-in .48s cubic-bezier(.22,1,.36,1) both;
+    transition:none !important;
+    animation:hosigi-nav-underline-in .42s cubic-bezier(.22,1,.36,1) both;
+    transform-origin:center center;
 }
 @keyframes hosigi-nav-underline-in {
-    from {transform:scaleX(0);opacity:0;}
-    to {transform:scaleX(1);opacity:1;}
+    0% {transform:scaleX(0);opacity:0;}
+    100% {transform:scaleX(1);opacity:1;}
 }
 @media(prefers-reduced-motion:reduce){
-    .header-nav > ul > li > a.nav-click-reveal::after,
-
+    .header-nav > ul > li > a.nav-click-reveal::after{
+        transition:none !important;
+        animation:none !important;
+    }
 }
