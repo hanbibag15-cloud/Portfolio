@@ -26,20 +26,23 @@
       try{sessionStorage.setItem(key,targetPage[index]);}catch{}
     });
   });
-  // Menu submenu clicks highlight the selected submenu text only.
+  // Capture submenu navigation BEFORE page-specific handlers close the dropdown.
+  // Leave the selected text visible long enough to finish the click animation.
   const menuSubmenu=nav.querySelector("#mobile-submenu");
-  menuSubmenu?.querySelectorAll("a[href]").forEach(link=>{
-    link.addEventListener("click",event=>{
-      if(event.defaultPrevented||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
-      trigger(link,"nav-submenu-click");
-      if(reduced.matches)return;
-      // Let the click response play before navigating away.
-      const destination=link.href;
-      if(!destination)return;
-      event.preventDefault();
-      window.setTimeout(()=>{window.location.href=destination;},260);
-    });
-  });
+  let menuNavigating=false;
+  menuSubmenu?.addEventListener("click",event=>{
+    const link=event.target.closest("a[href]");
+    if(!link||!menuSubmenu.contains(link)||menuNavigating)return;
+    if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
+    const destination=link.href;
+    if(!destination)return;
+    if(reduced.matches)return; // Respect native navigation for reduced motion.
+    event.preventDefault();
+    event.stopImmediatePropagation(); // Avoid closing the dropdown before animation.
+    menuNavigating=true;
+    trigger(link,"nav-submenu-click");
+    window.setTimeout(()=>window.location.assign(destination),360);
+  },true);
   let incoming=null;
   try{
     incoming=sessionStorage.getItem(key);
