@@ -13,7 +13,6 @@
   line.className="nav-motion-line";
   line.setAttribute("aria-hidden","true");
   nav.append(line);
-  let hovering=-1;
   let active=-1;
   let initialized=false;
   const currentIndex=()=>links.findIndex(link=>link.classList.contains("is-current"));
@@ -48,7 +47,7 @@
   };
   const refresh=()=>{
     active=currentIndex();
-    if(hovering<0)place(active);
+    place(active,false);
   };
   const setUp=()=>{
     if(!desktop.matches){nav.classList.remove("has-motion");line.style.opacity="0";return;}
@@ -68,31 +67,37 @@
           requestAnimationFrame(()=>requestAnimationFrame(()=>{line.style.transitionDuration="";line.style.opacity="1";}));
         }
       }
-    }else place(hovering>=0?hovering:active,false);
+    }else place(active,false);
   };
+  // Only an actual navigation click moves the underline. Pointer hover and
+  // keyboard focus keep the underline at the current page/section.
   links.forEach((link,index)=>{
-    link.addEventListener("mouseenter",()=>{hovering=index;place(index);});
-    link.addEventListener("mouseleave",()=>{hovering=-1;place(active);});
-    link.addEventListener("focus",()=>{hovering=index;place(index);});
-    link.addEventListener("blur",()=>{hovering=-1;place(active);});
     link.addEventListener("click",()=>{
-      // Main-page MENU trigger intentionally has no active underline on click.
-      // Save only real navigation to another page.
       const href=link.getAttribute("href");
-      if(href && !href.startsWith("#") && !href.startsWith("javascript:")){
-        savePrevious(currentIndex()>=0?currentIndex():index);
+      if(!href || href==="#" || href.startsWith("javascript:"))return;
+      // Restore the previous menu position after loading the destination page.
+      if(!href.startsWith("#")){
+        const origin=currentIndex();
+        savePrevious(origin>=0?origin:index);
       }
+      // On the current page, animate immediately on click; after navigation,
+      // the destination page animates from the saved previous position.
+      place(index,true);
     });
   });
-  // For submenu links, store the parent top-level menu's origin.
   nav.querySelectorAll(".header-submenu a[href]").forEach(link=>{
     link.addEventListener("click",()=>{
       const parent=link.closest(".has-submenu");
-      const idx=links.findIndex(top=>top.parentElement===parent);
-      if(idx>=0)savePrevious(currentIndex()>=0?currentIndex():idx);
+      const index=links.findIndex(top=>top.parentElement===parent);
+      if(index<0)return;
+      const href=link.getAttribute("href");
+      if(href && !href.startsWith("#")){
+        const origin=currentIndex();
+        savePrevious(origin>=0?origin:index);
+      }
+      place(index,true);
     });
   });
-  nav.addEventListener("mouseleave",()=>{hovering=-1;place(active);});
   const observer=new MutationObserver(records=>{
     if(records.some(record=>record.attributeName==="class" && links.includes(record.target))){
       refresh();
@@ -100,7 +105,7 @@
   });
   links.forEach(link=>observer.observe(link,{attributes:true,attributeFilter:["class"]}));
   desktop.addEventListener("change",setUp);
-  window.addEventListener("resize",()=>{if(desktop.matches)place(hovering>=0?hovering:currentIndex(),false);},{passive:true});
+  window.addEventListener("resize",()=>{if(desktop.matches)place(currentIndex(),false);},{passive:true});
   window.addEventListener("pageshow",()=>{if(desktop.matches)refresh();});
   setUp();
 })();
