@@ -161,10 +161,11 @@ function renderMenu(category) {
             desc.textContent = description;
             body.append(desc);
         }
-        const link=document.createElement("a");
+        const link=document.createElement("button");
+        link.type="button";
         link.className="all-menu-card-link";
-        link.href="menu-detail.html?product="+encodeURIComponent(name);
         link.setAttribute("aria-label",name+" 메뉴 상세 보기");
+        link.addEventListener("click",()=>openMenuModal(name));
         link.append(photo,body);
         article.append(link);
         return article;
@@ -259,3 +260,155 @@ document.querySelectorAll(".header-nav .has-submenu > a").forEach(a=>a.addEventL
     a.parentElement.classList.add("submenu-open");
 }));
 
+
+const allergens={
+"딥블랙갈릭 치킨":"밀, 대두, 닭고기",
+"깐쇼킹 치킨":"밀, 대두, 토마토, 닭고기, 쇠고기, 새우",
+"맵시크 치킨":"밀, 대두, 토마토, 난류, 우유, 닭고기, 쇠고기, 조개류",
+"크리스피골드":"밀, 대두, 우유, 닭고기, 쇠고기",
+"수라깐풍 치킨":"밀, 대두, 닭고기, 쇠고기",
+"요거치즈닝치킨":"밀, 대두, 토마토, 난류, 우유, 닭고기, 쇠고기",
+"타코마요 치킨":"밀, 대두, 토마토, 난류, 우유, 닭고기, 쇠고기",
+"레몬크림탕슈":"밀, 대두, 토마토, 난류, 우유, 닭고기, 쇠고기",
+"후라이드 치킨":"밀, 닭고기",
+"간장 치킨":"밀, 대두, 닭고기",
+"매운 간장 치킨":"밀, 대두, 닭고기",
+"양념 치킨":"계란, 우유, 밀, 땅콩, 대두, 닭고기, 쇠고기, 토마토",
+"매운 양념 치킨":"계란, 우유, 밀, 땅콩, 대두, 닭고기, 쇠고기, 토마토",
+"청양고추마요 치킨":"밀, 대두, 난류, 닭고기, 쇠고기",
+"호식이 안심텐더":"계란, 우유, 밀, 대두, 닭고기, 쇠고기",
+"닭발 튀김":"밀, 대두, 토마토, 우유, 닭고기, 쇠고기",
+"똥집 튀김":"밀, 대두, 토마토, 우유, 닭고기, 쇠고기",
+"체다마요 감자튀김":"밀, 대두, 난류, 우유, 쇠고기",
+"치폴레 감자튀김":"밀, 대두, 토마토, 난류, 우유, 쇠고기",
+"크리스피 치킨넥":"밀, 대두, 우유, 닭고기, 쇠고기",
+"쉬림프 미니튀김(칠리)":"밀, 대두, 토마토, 쇠고기, 새우",
+"쉬림프 미니튀김(레몬크림)":"밀, 대두, 토마토, 난류, 우유, 쇠고기, 새우",
+"감자볼튀김":"밀, 난류, 우유",
+"감자튀김":"밀",
+"마늘떡볶이":"우유, 밀, 대두, 토마토, 닭고기, 쇠고기",
+"로제비앤나떡볶이":"밀, 대두, 돼지고기, 우유, 닭고기, 쇠고기, 굴, 조개류",
+"트리플치즈볼":"대두, 우유, 쇠고기",
+"허니갈릭치즈볼":"밀, 대두, 우유",
+"치킨무":"페닐알라닌 함유"
+};
+// Nutrients: kcal, protein g, carbohydrate g, saturated fat g, sugars g, sodium mg, per 100g.
+const nutrients={
+"맵시크 치킨":[254.38,21.66,13.81,2.18,7.77,482.55],
+"크리스피골드":[276.70,21.36,19.24,1.17,.79,633.99],
+"수라깐풍 치킨":[228.65,18.17,13.86,1.65,6.86,432.31],
+"요거치즈닝치킨":[206.43,16.76,18.76,1.01,1.35,649.92],
+"레몬크림탕슈":[633,13.3,58.1,6.8,21,1003.4],
+"간장 치킨":[277.16,24.47,13.23,2.28,.59,403.99],
+"매운 간장 치킨":[265.13,23.45,11.22,2.57,.49,412.71],
+"매운 양념 치킨":[259.88,21.18,18.84,1.84,7.59,340.57],
+"후라이드 치킨":[245.61,24.77,9.88,2.17,null,228.42],
+"양념 치킨":[286.61,17.64,26.45,2.03,3.85,450.59],
+"청양고추마요 치킨":[314.4,16.7,16,3.4,2.5,449.1]
+};
+
+const menuModal=document.getElementById("menu-detail-modal");
+const menuModalCard=menuModal.querySelector(".menu-modal-card");
+const menuModalClose=menuModal.querySelector(".menu-modal-close");
+const menuModalImage=document.getElementById("menu-modal-image");
+const menuModalTitle=document.getElementById("menu-modal-title");
+const menuModalCategory=document.getElementById("menu-modal-category");
+const menuModalSummary=document.getElementById("menu-modal-summary");
+const menuModalInfo=document.getElementById("menu-modal-info");
+const menuModalTabs=[...menuModal.querySelectorAll('[role="tab"]')];
+let modalProduct=null;
+let modalTrigger=null;
+let previouslyFocused=null;
+const nutritionFields=[["열량","kcal"],["단백질","g"],["탄수화물","g"],["포화지방","g"],["당류","g"],["나트륨","mg"]];
+function modalPlaceholder(){
+  menuModalImage.replaceChildren();
+  const label=document.createElement("span");
+  label.className="menu-modal-placeholder";
+  label.textContent="IMAGE";
+  menuModalImage.append(label);
+}
+function renderMenuModalTab(index){
+  const key=["nutrition","allergens","origin"][index];
+  menuModalTabs.forEach((button,i)=>{
+    button.setAttribute("aria-selected",String(i===index));
+    button.tabIndex=i===index?0:-1;
+  });
+  menuModalInfo.setAttribute("aria-labelledby",menuModalTabs[index].id);
+  menuModalInfo.replaceChildren();
+  if(key==="nutrition"){
+    const values=nutrients[modalProduct[1]];
+    if(!values){
+      const text=document.createElement("p");text.className="menu-modal-message";
+      text.textContent="이 메뉴의 공식 영양성분 수치를 확인하지 못했습니다.";
+      menuModalInfo.append(text);return;
+    }
+    const table=document.createElement("table");table.className="menu-modal-nutrition-table";
+    const head=document.createElement("thead");
+    const labels=document.createElement("tr"),numbers=document.createElement("tr");
+    nutritionFields.forEach(([label,unit],i)=>{
+      const th=document.createElement("th");th.scope="col";th.textContent=label+"("+unit+")";
+      const td=document.createElement("td");
+      td.textContent=values[i]===null?"미표기":String(values[i]);
+      labels.append(th);numbers.append(td);
+    });
+    head.append(labels);const body=document.createElement("tbody");body.append(numbers);table.append(head,body);
+    menuModalInfo.append(table);
+  }else{
+    const p=document.createElement("p");p.className="menu-modal-message";
+    if(key==="allergens"){
+      p.textContent=allergens[modalProduct[1]]||"이 메뉴의 알레르기 유발성분을 공식 자료에서 확인하지 못했습니다.";
+    }else{
+      p.textContent="현재 해당 메뉴의 원산지 및 중량에 관한 검증된 정보가 없습니다. 주문 전 매장에서 확인해 주세요.";
+    }
+    menuModalInfo.append(p);
+  }
+}
+function openMenuModal(name){
+  const item=menuItems.find(entry=>entry[1]===name);
+  if(!item)return;
+  modalProduct=item;
+  modalTrigger=document.activeElement;
+  previouslyFocused=modalTrigger;
+  menuModalTitle.textContent=name;
+  menuModalCategory.textContent=categoryNames[item[0]]||"메뉴";
+  menuModalSummary.textContent=item[2]||"호식이두마리치킨의 다양한 메뉴를 만나보세요.";
+  const file=menuPhotos[name];
+  if(file){
+    menuModalImage.replaceChildren();
+    const image=document.createElement("img");image.src="img/"+file;
+    image.alt=name+" 제품 이미지";image.addEventListener("error",modalPlaceholder,{once:true});
+    menuModalImage.append(image);
+  }else modalPlaceholder();
+  menuModal.hidden=false;
+  document.body.classList.add("menu-modal-open");
+  renderMenuModalTab(0);
+  menuModalClose.focus();
+}
+function closeMenuModal(){
+  if(menuModal.hidden)return;
+  menuModal.hidden=true;
+  document.body.classList.remove("menu-modal-open");
+  previouslyFocused?.focus();
+}
+menuModalClose.addEventListener("click",closeMenuModal);
+menuModal.addEventListener("click",event=>{if(event.target===menuModal)closeMenuModal();});
+menuModalTabs.forEach((tab,index)=>{
+  tab.addEventListener("click",()=>renderMenuModalTab(index));
+  tab.addEventListener("keydown",event=>{
+    if(!["ArrowLeft","ArrowRight","Home","End"].includes(event.key))return;
+    event.preventDefault();
+    const selected=event.key==="Home"?0:event.key==="End"?menuModalTabs.length-1:
+      (index+(event.key==="ArrowRight"?1:-1)+menuModalTabs.length)%menuModalTabs.length;
+    renderMenuModalTab(selected);menuModalTabs[selected].focus();
+  });
+});
+document.addEventListener("keydown",event=>{
+  if(menuModal.hidden)return;
+  if(event.key==="Escape"){event.preventDefault();closeMenuModal();return;}
+  if(event.key!=="Tab")return;
+  const focusable=[...menuModal.querySelectorAll('button:not([disabled]),[tabindex="0"]')].filter(el=>el.offsetParent!==null);
+  if(!focusable.length){event.preventDefault();menuModalCard.focus();return;}
+  const first=focusable[0],last=focusable[focusable.length-1];
+  if(event.shiftKey && document.activeElement===first){event.preventDefault();last.focus();}
+  else if(!event.shiftKey && document.activeElement===last){event.preventDefault();first.focus();}
+});
