@@ -118,7 +118,7 @@
           "description": "자영업자를 위한 창업지원 정책 강화에 관한 호식이두마리치킨의 주요소식입니다.",
           "source": "공식 주요소식 게시판"
       }
-  ]; let currentSection="events";
+  ]; let currentSection=new URLSearchParams(window.location.search).get("section")==="notices"?"notices":"events";
   let currentStatus="all";
   const pageSize=9;
   let currentPage=1;
