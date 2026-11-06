@@ -209,8 +209,7 @@
     const tag=document.createElement("span");tag.className="event-notice-category";tag.textContent=notice.category;
     const title=document.createElement("strong");title.className="event-notice-title";title.textContent=notice.title;
     const date=document.createElement("time");date.className="event-notice-date";date.dateTime=notice.startDate;date.textContent=notice.date;
-    const arrow=document.createElement("span");arrow.className="event-notice-arrow";arrow.setAttribute("aria-hidden","true");arrow.textContent="↗";
-    button.append(tag,title,date,arrow);
+    button.append(tag,title,date);
     button.addEventListener("click",()=>openNoticeDetail(notice));
     article.append(button);return article;
   }
