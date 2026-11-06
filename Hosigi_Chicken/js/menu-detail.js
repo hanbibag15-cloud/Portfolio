@@ -196,10 +196,7 @@ if(values){
  note.textContent="상세한 영양성분은 공식 사이트 또는 매장에 확인해 주세요.";
 }
 source.textContent="출처: 호식이 공식 알레르기 유발성분표(2026.03) 및 공식 제품 상세 정보. ";
-const url=document.createElement("a");
-url.href="https://www.9922.co.kr/allergenic-component";url.target="_blank";url.rel="noopener noreferrer";
-url.textContent="알레르기 정보 원문 확인";
-source.append(url);
+
 const openPanel=type=>{
   const selected=panelButtons.find(button=>button.dataset.info===type);
   if(!selected)return;
