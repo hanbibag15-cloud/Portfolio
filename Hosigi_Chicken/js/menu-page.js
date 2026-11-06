@@ -326,6 +326,21 @@ const verifiedChickenInfo={
   "매운 양념 치킨":{origin:"국내산"},
   "청양고추마요 치킨":{origin:"국내산"}
 };
+// Weight guide transcribed from the reference image provided by the user.
+// Raw-meat weights are not the cooked weight of the finished menu.
+const menuWeightGuide={
+  chicken:"한 마리: 원료육 851~950g(9호) × 1 / 두 마리: 원료육 851~950g(9호) × 2",
+  boneless:"순살 1개: 500g / 순살 2개: 1,000g",
+  flying:"플라윙(윙+봉): 1,000g (윙 500g + 봉 500g)",
+  wingsLegs:"날개와 다리: 1,000g (윙 500g + 북채 500g)",
+  legs:"다리만: 북채 1,000g"
+};
+const portionWeights={
+  "플라윙 세트":menuWeightGuide.flying,
+  "다리":menuWeightGuide.legs,
+  "윙+다리":menuWeightGuide.wingsLegs
+};
+const bonelessMenuNames=new Set(["크리스피골드","레몬크림탕슈"]);
 const menuModal=document.getElementById("menu-detail-modal");
 const menuModalCard=menuModal.querySelector(".menu-modal-card");
 const menuModalClose=menuModal.querySelector(".menu-modal-close");
@@ -382,19 +397,17 @@ function renderMenuModalTab(index){
       p.textContent=allergens[modalProduct[1]]||"이 메뉴의 알레르기 유발성분을 공식 자료에서 확인하지 못했습니다.";
     }else{
       const data=verifiedChickenInfo[modalProduct[1]];
-      if(data){
-        p.textContent="닭고기 원산지: "+data.origin+" (공식 제품 페이지 표기). 완제품 한 마리 중량: 공식 확인 자료 없음. 부위·순살 선택 및 매장에 따라 달라질 수 있으므로 주문 전 확인해 주세요.";
-      }else{
-        p.textContent="이 메뉴의 원산지 및 완제품 중량은 공식 자료에서 확인하지 못했습니다. 주문 전 매장에 확인해 주세요.";
-      }
+      const name=modalProduct[1];
+      const category=modalProduct[0];
+      const weight=portionWeights[name] ||
+        (category==="chicken"
+          ? (bonelessMenuNames.has(name)?menuWeightGuide.boneless:menuWeightGuide.chicken)
+          : "");
+      const origin=data?"닭고기 원산지: "+data.origin:"원산지: 메뉴별 확인 자료 없음";
+      p.textContent=origin+(weight?"\n조리 전 중량 안내: "+weight:"\n중량: 메뉴별 확인 자료 없음");
+      p.style.whiteSpace="pre-line";
     }
     menuModalInfo.append(p);
-    if(key==="allergens"){
-      const note=document.createElement("p");
-      note.className="menu-modal-message";
-      note.textContent="알레르기 유발성분은 조리 환경에 따라 교차 접촉할 수 있으니 주문 전 다시 확인하세요.";
-      menuModalInfo.append(note);
-    }
   }
 }
 function openMenuModal(name){
