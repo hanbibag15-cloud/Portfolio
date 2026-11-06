@@ -375,3 +375,86 @@ body.event-dialog-open{overflow:hidden;}
 /* Pagination replaces content above the viewport: do not anchor the page
    to the old buttons or footer while card rows change. */
 html:has(.event-pagination),body:has(.event-pagination){overflow-anchor:none;}
+
+/* NOTICE LIST — reference-inspired editorial rows, aligned with Hosigi tokens. */
+.event-status-filters[hidden],
+.event-detail-poster[hidden]{display:none;}
+.event-card-grid.is-notice-list{
+  display:block;
+  border-top:1px solid var(--border-default);
+  gap:0;
+}
+.event-notice-row{
+  border-bottom:1px solid var(--border-default);
+}
+.event-notice-open{
+  width:100%;
+  display:grid;
+  grid-template-columns:115px minmax(0,1fr) 125px 26px;
+  align-items:center;
+  gap:22px;
+  min-height:94px;
+  padding:20px 12px;
+  border:0;
+  background:transparent;
+  font:inherit;
+  text-align:left;
+  color:var(--text-primary);
+  cursor:pointer;
+  transition:background .2s ease;
+}
+.event-notice-open:hover,
+.event-notice-open:focus-visible{
+  background:var(--background-subtle);
+}
+.event-notice-open:focus-visible{
+  outline:2px solid var(--brand-red);
+  outline-offset:-2px;
+}
+.event-notice-category{
+  color:var(--brand-red);
+  font-size:13px;
+  font-weight:700;
+  white-space:nowrap;
+}
+.event-notice-title{
+  font-size:17px;
+  font-weight:650;
+  line-height:1.5;
+  word-break:keep-all;
+}
+.event-notice-date{
+  text-align:right;
+  white-space:nowrap;
+  color:#777;
+  font-size:14px;
+}
+.event-notice-arrow{
+  justify-self:end;
+  color:var(--brand-brown);
+  font-size:21px;
+  transition:transform .25s ease,color .2s ease;
+}
+@media(hover:hover){
+  .event-notice-open:hover .event-notice-arrow{
+    color:var(--brand-red);
+    transform:translate(3px,-3px);
+  }
+}
+@media(max-width:767px){
+  .event-notice-open{
+    grid-template-columns:minmax(0,1fr) 24px;
+    grid-template-areas:"category arrow" "title arrow" "date arrow";
+    gap:7px 12px;
+    min-height:106px;
+    padding:17px 6px;
+  }
+  .event-notice-category{grid-area:category;font-size:12px;}
+  .event-notice-title{grid-area:title;font-size:15px;}
+  .event-notice-date{grid-area:date;text-align:left;font-size:12px;}
+  .event-notice-arrow{grid-area:arrow;}
+}
+@media(prefers-reduced-motion:reduce){
+  .event-notice-open,.event-notice-arrow{transition:none;}
+  .event-notice-open:hover .event-notice-arrow{transform:none;}
+}
