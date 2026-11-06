@@ -30,27 +30,25 @@
     .header-nav > ul > li > a::after{transition:none}
 }
 
-/* Shared animated GNB underline: follows hover/focus and page navigation.
-   Mobile keeps the original per-link underline so collapsed menus stay usable. */
-@media (min-width:1025px){
-  .header-nav.has-motion > ul > li > a::after{opacity:0!important;transform:scaleX(0)!important;}
-  .header-nav .nav-motion-line{
-    position:absolute;
-    left:0;
-    top:0;
-    width:0;
-    height:3px;
-    z-index:2;
-    border-radius:999px;
-    background:var(--action-primary);
-    pointer-events:none;
-    opacity:0;
-    transform:translateX(0);
-    transition:transform .48s cubic-bezier(.22,1,.36,1),
-               width .48s cubic-bezier(.22,1,.36,1),
-               opacity .22s ease;
-  }
+/* Click-only local activation: no underline traveling between menu items. */
+.header-nav > ul > li > a.nav-click-reveal::after {
+    animation: hosigi-nav-underline-in .48s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes hosigi-nav-underline-in {
+    from {transform:scaleX(0);opacity:0;}
+    to {transform:scaleX(1);opacity:1;}
+}
+/* Only MENU's submenu text receives a click response, not its parent label. */
+.header-nav .header-submenu a.nav-submenu-click {
+    color:var(--action-primary);
+    animation:hosigi-submenu-click-in .3s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes hosigi-submenu-click-in {
+    0% {color:var(--text-primary);background:transparent;}
+    45% {color:var(--action-primary);background:var(--surface-brand-soft);}
+    100% {color:var(--action-primary);background:transparent;}
 }
 @media(prefers-reduced-motion:reduce){
-  .header-nav .nav-motion-line{transition:none!important;}
+    .header-nav > ul > li > a.nav-click-reveal::after,
+    .header-nav .header-submenu a.nav-submenu-click {animation:none!important;}
 }
