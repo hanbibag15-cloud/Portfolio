@@ -38,33 +38,7 @@
     from {transform:scaleX(0);opacity:0;}
     to {transform:scaleX(1);opacity:1;}
 }
-/* MENU submenu: visible click response confined to the selected text. */
-.header-nav #mobile-submenu a {position:relative;}
-.header-nav #mobile-submenu a.nav-submenu-click {
-    color:var(--action-primary) !important;
-    animation:hosigi-submenu-click-in .34s cubic-bezier(.22,1,.36,1) both;
-}
-.header-nav #mobile-submenu a.nav-submenu-click::after {
-    content:"";
-    position:absolute;
-    bottom:3px;
-    left:22%;
-    width:56%;
-    height:2px;
-    border-radius:2px;
-    background:var(--action-primary);
-    animation:hosigi-submenu-line-in .34s cubic-bezier(.22,1,.36,1) both;
-}
-@keyframes hosigi-submenu-click-in {
-    0% {color:var(--text-primary);background:transparent;}
-    55% {color:var(--action-primary);background:var(--surface-brand-soft);}
-    100% {color:var(--action-primary);background:transparent;}
-}
-@keyframes hosigi-submenu-line-in {
-    from {transform:scaleX(0);opacity:0;}
-    to {transform:scaleX(1);opacity:1;}
-}
 @media(prefers-reduced-motion:reduce){
     .header-nav > ul > li > a.nav-click-reveal::after,
-    .header-nav .header-submenu a.nav-submenu-click {animation:none!important;}
+
 }
