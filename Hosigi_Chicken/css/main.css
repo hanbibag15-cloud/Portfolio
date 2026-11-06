@@ -984,7 +984,7 @@ body {
 .app-store-link:last-child img {width:47px;height:47px;flex-basis:47px;}
 .app-store-link span {display:flex;flex-direction:column;line-height:1.18;white-space:nowrap;}
 .app-store-link small {font-size:17px;font-weight:400;letter-spacing:-.023em;}
-.app-store-link strong {font-size:clamp(20px,1.67vw,32px);font-weight:500;letter-spacing:-.023em;}
+.app-store-link strong {font-size:clamp(20px,1.67vw,23px);font-weight:500;letter-spacing:-.023em;}
 .app-store-link:hover,.app-store-link:focus-visible {background:var(--brand-red);}
 .app-promo-art {flex:0 1 580px;min-width:0;}
 .app-promo-art img {width:100%;height:auto;object-fit:contain;}
@@ -1656,3 +1656,63 @@ body {
 .menu-product-detail-link{display:block;width:100%;height:100%;cursor:pointer;}
 .menu-product-detail-link img{display:block;}
 .menu-product-detail-link:focus-visible{outline:3px solid var(--brand-red);outline-offset:4px;border-radius:16px;}
+
+/* Matching STORE and EVENT CTAs: equal dimensions, centered label, arrow on right. */
+.store-promo-link,
+.event-more{
+    box-sizing:border-box;
+    width:176px;
+    height:50px;
+    min-height:50px;
+    border:1px solid var(--brand-red);
+    border-radius:25px;
+    font-size:16px;
+    font-weight:500;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:0;
+    position:relative;
+}
+.store-promo-link .promo-cta-label,
+.event-more .promo-cta-label{
+    display:block;
+    width:100%;
+    padding:0 25px 0 12px;
+    text-align:center;
+    white-space:nowrap;
+}
+.store-promo-link .promo-cta-arrow,
+.event-more .promo-cta-arrow{
+    position:absolute;
+    left:auto;
+    right:15px;
+    top:50%;
+    font-size:16px;
+    line-height:1;
+    transform:translateY(-50%);
+    transition:transform 300ms cubic-bezier(.22,1,.36,1);
+}
+@media(hover:hover){
+    .store-promo-link:hover .promo-cta-arrow,
+    .event-more:hover .promo-cta-arrow{transform:translate(4px,-50%);}
+}
+.store-promo-link:focus-visible .promo-cta-arrow,
+.event-more:focus-visible .promo-cta-arrow{transform:translate(4px,-50%);}
+@media(max-width:767px){
+    .store-promo-link,.event-more{
+        width:132px;
+        height:34px;
+        min-height:34px;
+        border-radius:17px;
+        font-size:12px;
+    }
+    .store-promo-link .promo-cta-label,
+    .event-more .promo-cta-label{padding:0 20px 0 8px;}
+    .store-promo-link .promo-cta-arrow,
+    .event-more .promo-cta-arrow{right:9px;font-size:12px;left:auto;}
+}
+@media(prefers-reduced-motion:reduce){
+    .store-promo-link .promo-cta-arrow,
+    .event-more .promo-cta-arrow{transition:none;}
+}
