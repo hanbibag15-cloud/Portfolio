@@ -239,18 +239,60 @@
     toggle.setAttribute("aria-expanded",String(opened));
     toggle.setAttribute("aria-label",opened?"메뉴 닫기":"메뉴 열기");
   });
-  document.querySelectorAll(".header-nav .has-submenu > a").forEach(link=>{
+  const nav=document.querySelector(".header-nav");
+  const submenuParents=[...nav.querySelectorAll(".has-submenu")];
+  const desktopNav=window.matchMedia("(min-width:1025px)");
+  const closeSubmenus=()=>{
+    submenuParents.forEach(item=>{
+      item.classList.remove("submenu-open");
+      item.querySelector(":scope > a")?.setAttribute("aria-expanded","false");
+    });
+  };
+  submenuParents.forEach(item=>{
+    const link=item.querySelector(":scope > a");
     link.setAttribute("tabindex","0");
     link.setAttribute("role","button");
-    const item=link.closest(".has-submenu");
-    const control=()=>{
-      const expanded=item.classList.toggle("submenu-open");
-      link.setAttribute("aria-expanded",String(expanded));
-    };
-    link.addEventListener("click",event=>{event.preventDefault();control();});
-    link.addEventListener("keydown",event=>{
-      if(event.key==="Enter"||event.key===" "){event.preventDefault();control();}
+    link.addEventListener("click",event=>{
+      event.preventDefault();
+      if(desktopNav.matches){
+        // Desktop dropdowns are hover-driven; a click must not pin them open.
+        closeSubmenus();
+        item.classList.add("submenu-dismissed");
+        link.blur();
+      }else{
+        const shouldOpen=!item.classList.contains("submenu-open");
+        closeSubmenus();
+        item.classList.toggle("submenu-open",shouldOpen);
+        link.setAttribute("aria-expanded",String(shouldOpen));
+      }
     });
+    item.addEventListener("mouseleave",()=>{
+      item.classList.remove("submenu-dismissed");
+      if(desktopNav.matches)closeSubmenus();
+    });
+    item.addEventListener("focusout",event=>{
+      if(item.contains(event.relatedTarget))return;
+      if(desktopNav.matches)closeSubmenus();
+    });
+  });
+  nav.querySelectorAll(":scope > ul > li:not(.has-submenu) > a").forEach(link=>{
+    link.addEventListener("click",closeSubmenus);
+    link.addEventListener("mouseenter",()=>{
+      if(desktopNav.matches)closeSubmenus();
+    });
+  });
+  document.addEventListener("pointerdown",event=>{
+    if(!nav.contains(event.target))closeSubmenus();
+  });
+  document.addEventListener("keydown",event=>{
+    if(event.key==="Escape"){
+      closeSubmenus();
+      if(nav.contains(document.activeElement))document.activeElement.blur();
+    }
+  });
+  desktopNav.addEventListener("change",()=>{
+    closeSubmenus();
+    submenuParents.forEach(item=>item.classList.remove("submenu-dismissed"));
   });
   render();
 })();
