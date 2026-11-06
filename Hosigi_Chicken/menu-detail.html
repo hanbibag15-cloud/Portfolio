@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
 <link rel="stylesheet" href="css/main.css?v=50">
     <link rel="stylesheet" href="css/nav-state.css?v=6">
-<link rel="stylesheet" href="css/menu-detail.css?v=1">
-<script src="js/menu-detail.js?v=1" defer></script>
+<link rel="stylesheet" href="css/menu-detail.css?v=2">
+<script src="js/menu-detail.js?v=2" defer></script>
 <script src="js/nav-state.js?v=2" defer></script>
 <script src="js/store-nav.js?v=2" defer></script>
 
@@ -71,35 +71,53 @@
     <nav class="menu-detail-breadcrumb" aria-label="현재 위치">
       <a href="menu.html">MENU</a><span aria-hidden="true">/</span><span>메뉴 상세</span>
     </nav>
-    <a class="menu-detail-back" id="detail-back" href="menu.html#all" aria-label="메뉴 목록으로 돌아가기"><span aria-hidden="true">←</span> 메뉴 목록으로</a>
+    <a class="menu-detail-back" id="detail-back" href="menu.html#all"><span aria-hidden="true">←</span> 메뉴 목록으로</a>
     <section class="menu-detail-hero" aria-labelledby="detail-product-name">
       <div class="menu-detail-visual" id="detail-product-art"></div>
       <div class="menu-detail-overview">
-        <p class="menu-detail-eyebrow">HOSIGI MENU DETAIL</p>
         <p class="menu-detail-category" id="detail-category"></p>
         <h2 id="detail-product-name"></h2>
         <p class="menu-detail-summary" id="detail-product-summary"></p>
-        <div class="menu-detail-rule"></div>
-        <p class="menu-detail-info-hint">메뉴의 영양성분과 알레르기 정보를 아래에서 확인해 보세요.</p>
-        <a href="#detail-facts" class="menu-detail-scroll-link">제품 정보 보기 <span aria-hidden="true">↓</span></a>
+        <p class="menu-detail-price-note">가격은 주문 매장 및 옵션에서 확인해 주세요.</p>
+        <div class="menu-detail-section-row">
+          <h3>메뉴설명</h3>
+          <p id="detail-description">메뉴의 특징을 확인해 보세요.</p>
+        </div>
+        <div class="menu-detail-section-row">
+          <h3>구성</h3>
+          <p id="detail-composition">메뉴 구성과 옵션은 매장 및 주문 방식에 따라 다를 수 있습니다.</p>
+        </div>
+        <div class="menu-detail-product-info">
+          <h3>제품 정보</h3>
+          <div class="menu-detail-product-strip"><span>메뉴 종류</span><strong id="detail-product-type"></strong></div>
+          <div class="menu-detail-buttons" role="group" aria-label="제품 상세 정보 선택">
+            <button type="button" data-info="origin" aria-controls="detail-info-panel" aria-pressed="false">원산지</button>
+            <button type="button" data-info="nutrition" aria-controls="detail-info-panel" aria-pressed="false">영양성분</button>
+            <button type="button" data-info="allergens" aria-controls="detail-info-panel" aria-pressed="false">알레르기 유발성분</button>
+          </div>
+          <p class="menu-detail-disclaimer">일부 메뉴에는 알레르기 유발 가능 성분이 포함될 수 있으며 동일한 조리 환경에서 교차 접촉이 발생할 수 있습니다. 알레르기나 식이 제한이 있는 고객은 주문 전 매장에 상세 정보를 확인해 주세요.</p>
+        </div>
       </div>
     </section>
-    <section class="menu-detail-facts" id="detail-facts" aria-labelledby="detail-facts-title">
-      <div class="menu-detail-section-heading">
-        <p>PRODUCT INFORMATION</p><h3 id="detail-facts-title">메뉴 상세정보</h3>
+    <section class="menu-detail-facts" id="detail-info-panel" aria-labelledby="detail-facts-title" hidden tabindex="-1">
+      <div class="menu-detail-facts-heading">
+        <p>PRODUCT INFORMATION</p><h3 id="detail-facts-title">제품 정보</h3>
+        <button type="button" class="menu-detail-panel-close" aria-label="제품 정보 닫기">×</button>
       </div>
-      <div class="menu-detail-info-grid">
-        <section class="menu-detail-info-panel" aria-labelledby="allergy-title">
-          <h4 id="allergy-title">알레르기 유발성분</h4>
-          <p class="menu-detail-allergens" id="detail-allergens"></p>
-          <p class="menu-detail-footnote">제조·조리 환경에서 다른 알레르기 유발성분과 교차 접촉할 수 있습니다. 알레르기가 있는 경우 주문 전 매장에 확인해 주세요.</p>
-        </section>
-        <section class="menu-detail-info-panel" aria-labelledby="nutrition-title">
-          <h4 id="nutrition-title">영양성분표 <span class="menu-detail-unit">100g 기준 · 확인된 메뉴에 한함</span></h4>
-          <table class="menu-detail-nutrition"><tbody id="detail-nutrition-body"></tbody></table>
-          <p class="menu-detail-footnote" id="detail-nutrition-note"></p>
-        </section>
-      </div>
+      <section class="menu-detail-fact-content" data-panel="origin" hidden>
+        <h4>원산지</h4>
+        <p>현재 해당 메뉴의 원산지를 공식 자료에서 확인하지 못했습니다. 원재료별 원산지는 제품 및 매장에 따라 다를 수 있으므로 주문 전 매장에 확인해 주세요.</p>
+      </section>
+      <section class="menu-detail-fact-content" data-panel="nutrition" hidden>
+        <h4>영양성분 <small>공식 수치 확인 메뉴 · 100g 기준</small></h4>
+        <table class="menu-detail-nutrition"><tbody id="detail-nutrition-body"></tbody></table>
+        <p class="menu-detail-footnote" id="detail-nutrition-note"></p>
+      </section>
+      <section class="menu-detail-fact-content" data-panel="allergens" hidden>
+        <h4>알레르기 유발성분</h4>
+        <p class="menu-detail-allergens" id="detail-allergens"></p>
+        <p class="menu-detail-footnote">조리 환경에서 다른 알레르기 유발성분과 교차 접촉할 수 있으므로, 알레르기가 있는 경우 주문 전 매장에 확인해 주세요.</p>
+      </section>
       <p class="menu-detail-source" id="detail-info-source"></p>
     </section>
     <div class="menu-detail-bottom"><a href="menu.html#chicken" class="menu-detail-more">다른 메뉴 보기 <span aria-hidden="true">→</span></a></div>
