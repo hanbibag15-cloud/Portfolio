@@ -119,7 +119,7 @@
     // so they sort correctly alongside entries with startDate.
     const toISO=event=>{
       if(event.startDate)return event.startDate;
-      const match=(event.date||"").match(/(20\\d{2})[.-](\\d{1,2})[.-](\\d{1,2})/);
+      const match=(event.date||"").match(/(20\d{2})[.-](\d{1,2})[.-](\d{1,2})/);
       return match
         ? match[1]+"-"+match[2].padStart(2,"0")+"-"+match[3].padStart(2,"0")
         : "0000-00-00";
