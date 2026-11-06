@@ -114,10 +114,22 @@
   }
   function render(){
     const dataset=currentSection==="events"?events:notices;
-    // Recently published events first, without changing card design.
-    const ordered=[...dataset].sort((a,b)=>
-      (b.startDate||b.date||"").localeCompare(a.startDate||a.date||"")
-    );
+    // Newest event start date first in every category.
+    // Legacy entries use YYYY.MM.DD text; normalize it to YYYY-MM-DD
+    // so they sort correctly alongside entries with startDate.
+    const toISO=event=>{
+      if(event.startDate)return event.startDate;
+      const match=(event.date||"").match(/(20\\d{2})[.-](\\d{1,2})[.-](\\d{1,2})/);
+      return match
+        ? match[1]+"-"+match[2].padStart(2,"0")+"-"+match[3].padStart(2,"0")
+        : "0000-00-00";
+    };
+    const ordered=[...dataset].sort((a,b)=>{
+      const byStart=toISO(b).localeCompare(toISO(a));
+      if(byStart)return byStart;
+      const byEnd=(b.endDate||"").localeCompare(a.endDate||"");
+      return byEnd || a.title.localeCompare(b.title,"ko");
+    });
     const selected=ordered.filter(entry=>
       currentStatus==="all" ||
       (currentStatus==="active"&&eventState(entry)==="active") ||
