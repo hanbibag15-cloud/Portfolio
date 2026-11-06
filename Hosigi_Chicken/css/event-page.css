@@ -371,6 +371,3 @@ body.event-dialog-open{overflow:hidden;}
 
 /* Prevent browser scroll anchoring from jumping when cards change. */
 .event-collection,.event-card-grid,.event-pagination{overflow-anchor:none;}
-
-/* Keep pagination next to the last row; reserve scroll space underneath. */
-.event-list-spacer{height:0;pointer-events:none;}
