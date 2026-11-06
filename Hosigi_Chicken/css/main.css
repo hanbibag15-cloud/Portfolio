@@ -1720,3 +1720,29 @@ body {
 /* Non-interactive BRAND label; same type scale as sibling navigation links. */
 .header-nav .header-nav-static-label{display:block;white-space:nowrap;font-size:20px;font-weight:500;line-height:1;letter-spacing:-.023em;color:var(--text-primary);cursor:default;}
 @media(max-width:1024px){.header-nav .header-nav-static-label{padding:12px 2px;font-size:16px;text-align:center;}}
+
+/* Restore the original centered BRAND dropdown layout after replacing links with text. */
+.header-nav #brand-submenu > li {width:100%;}
+.header-nav #brand-submenu .brand-submenu-label {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-sizing:border-box;
+    width:100%;
+    min-height:47px;
+    padding:0;
+    color:var(--text-primary);
+    font-size:16px;
+    font-weight:400;
+    line-height:1.2;
+    text-align:center;
+    white-space:nowrap;
+    cursor:default;
+}
+@media(max-width:1024px) {
+    .header-nav #brand-submenu .brand-submenu-label {
+        min-height:0;
+        padding:10px 0;
+        font-size:15px;
+    }
+}
