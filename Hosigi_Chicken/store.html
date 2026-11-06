@@ -7,7 +7,7 @@
 <title>매장찾기 | 호식이두마리치킨 리뉴얼</title>
 <link rel="stylesheet" href="../css/default.css">
 <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
-<link rel="stylesheet" href="css/main.css?v=55">
+<link rel="stylesheet" href="css/main.css?v=56">
 <link rel="stylesheet" href="css/nav-state.css?v=6">
 <link rel="stylesheet" href="css/leaflet-local.css?v=1">
 <link rel="stylesheet" href="css/store-page.css?v=61">
@@ -53,7 +53,13 @@
                             </ul>
                         </li>
                         <li><a href="store.html" class="is-current" aria-current="page">매장찾기</a></li>
-                        <li><a href="event.html">이벤트</a></li>
+                        <li class="has-submenu event-nav-item">
+                            <a href="event.html" aria-expanded="false" aria-controls="event-submenu">이벤트</a>
+                            <ul class="header-submenu" id="event-submenu" aria-label="이벤트 상세">
+                                <li><a href="event.html?section=events">이벤트</a></li>
+                                <li><a href="event.html?section=notices">공지사항</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
 
