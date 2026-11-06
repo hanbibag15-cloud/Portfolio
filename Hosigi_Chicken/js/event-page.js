@@ -144,21 +144,23 @@
     const firstIndex=(currentPage-1)*pageSize;
     const visible=selected.slice(firstIndex,firstIndex+pageSize);
     visibleEventList=selected;
-    // Keep the listing as tall as its full first page. A short last page
-    // must not shrink the document and force the browser to scroll upward.
+    // Let event cards keep their natural height on short pages.
+    // Reserve the missing height below pagination to avoid browser scroll jumps.
     const width=grid.getBoundingClientRect().width;
     if(Math.abs(width-listingWidth)>1){
       listingWidth=width;
       listingHeight=0;
-      grid.style.minHeight="";
     }
+    grid.style.minHeight="";
     grid.replaceChildren(...visible.map(makeCard));
+    const actualHeight=grid.getBoundingClientRect().height;
     if(currentPage===1&&totalPages>1){
-      grid.style.minHeight="";
-      listingHeight=Math.max(listingHeight,grid.getBoundingClientRect().height);
+      listingHeight=actualHeight;
     }
-    if(totalPages>1&&listingHeight>0)grid.style.minHeight=listingHeight+"px";
-    else if(totalPages<=1)grid.style.minHeight="";
+    const spacer=document.getElementById("event-list-spacer");
+    if(spacer)spacer.style.height=totalPages>1
+      ? Math.max(0,listingHeight-actualHeight)+"px"
+      : "0px";
     pagination.hidden=totalPages<=1;
     // Preserve the same pagination button elements while switching pages.
     // Removing the focused button makes browsers auto-scroll to a new anchor.
