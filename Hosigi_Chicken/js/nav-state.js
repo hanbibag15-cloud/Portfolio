@@ -2,7 +2,7 @@
 (() => {
   const nav = document.querySelector('.header-nav');
   if (!nav) return;
-  const links = [...nav.querySelectorAll(':scope > ul > li > a')];
+  const links = [...nav.querySelectorAll(':scope > ul > li')].map(item => item.querySelector(':scope > a'));
   const page = location.pathname.split('/').pop();
   let selected = -1;
   let hasEnteredSelectedSection = false;
@@ -12,6 +12,7 @@
       // MENU becomes active on the homepage only when its section is in view.
       // Clicking the header MENU trigger alone does not activate the underline.
       const active = i === index && !(page === 'brand.html' && i === 0 && !fromScroll);
+      if (!link) return; // BRAND is a non-interactive label.
       link.classList.toggle('is-current', active);
       if (active) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
@@ -67,6 +68,7 @@
   }
 
   links.forEach((link, index) => {
+    if (!link) return;
     link.addEventListener('click', () => {
       selected = targets[index] ? index : -1;
       hasEnteredSelectedSection = false;
