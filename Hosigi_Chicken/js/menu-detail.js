@@ -143,6 +143,11 @@ const body=document.getElementById("detail-nutrition-body");
 const note=document.getElementById("detail-nutrition-note");
 const source=document.getElementById("detail-info-source");
 const more=document.querySelector(".menu-detail-more");
+const productType=document.getElementById("detail-product-type");
+const detailDescription=document.getElementById("detail-description");
+const panel=document.getElementById("detail-info-panel");
+const panelButtons=[...document.querySelectorAll(".menu-detail-buttons button")];
+const closePanel=document.querySelector(".menu-detail-panel-close");
 const imageFallback=()=>{
  imageArea.replaceChildren();
  const label=document.createElement("span");
@@ -155,7 +160,7 @@ if(!found){
  cat.textContent="MENU";
  description.textContent="메뉴 목록에서 다시 선택해 주세요.";
  imageFallback();
- document.querySelector(".menu-detail-facts").hidden=true;
+ panel.hidden=true;
  return;
 }
 const [type,,text]=found;
@@ -164,6 +169,8 @@ cat.textContent=categories[type]||"메뉴";
 heading.textContent=name;
 document.title=name+" | 호식이두마리치킨";
 description.textContent=text||"호식이두마리치킨의 다양한 메뉴를 만나보세요.";
+productType.textContent=categories[type]||"메뉴";
+detailDescription.textContent=text||"제품별 안내 사항은 주문 매장에서 확인해 주세요.";
 back.href="menu.html#"+type;
 more.href="menu.html#"+type;
 const photo=menuPhotos[name];
@@ -197,4 +204,23 @@ const url=document.createElement("a");
 url.href="https://www.9922.co.kr/allergenic-component";url.target="_blank";url.rel="noopener noreferrer";
 url.textContent="알레르기 정보 원문 확인";
 source.append(url);
+const openPanel=type=>{
+  const selected=panelButtons.find(button=>button.dataset.info===type);
+  if(!selected)return;
+  const wasOpen=!panel.hidden&&selected.getAttribute("aria-pressed")==="true";
+  panelButtons.forEach(button=>button.setAttribute("aria-pressed","false"));
+  if(wasOpen){panel.hidden=true;return;}
+  panel.hidden=false;
+  selected.setAttribute("aria-pressed","true");
+  panel.querySelectorAll(".menu-detail-fact-content").forEach(section=>{
+    section.hidden=section.dataset.panel!==type;
+  });
+  document.getElementById("detail-facts-title").textContent=selected.textContent;
+  panel.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
+};
+panelButtons.forEach(button=>button.addEventListener("click",()=>openPanel(button.dataset.info)));
+closePanel.addEventListener("click",()=>{
+  panel.hidden=true;
+  panelButtons.forEach(button=>button.setAttribute("aria-pressed","false"));
+});
 })();
