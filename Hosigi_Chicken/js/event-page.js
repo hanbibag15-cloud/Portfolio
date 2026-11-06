@@ -32,6 +32,15 @@
     button.setAttribute("aria-label",event.title+" 상세 보기");
     const art=document.createElement("div");
     art.className="event-list-art";
+    const addEndOverlay=()=>{
+      if(event.state!=="ended")return;
+      const overlay=document.createElement("div");
+      overlay.className="event-ended-overlay";
+      const message=document.createElement("span");
+      message.textContent="종료된 이벤트입니다.";
+      overlay.append(message);
+      art.append(overlay);
+    };
     const addPlaceholder=()=>{
       art.replaceChildren();
       const label=document.createElement("span");
@@ -42,6 +51,7 @@
       mark.setAttribute("aria-hidden","true");
       mark.textContent="H";
       art.append(mark,label);
+      addEndOverlay();
     };
     const imagePath=eventImages[event.id];
     if(imagePath){
@@ -54,6 +64,7 @@
       image.addEventListener("error",addPlaceholder,{once:true});
       art.append(image);
     }else addPlaceholder();
+    if(imagePath)addEndOverlay();
     const info=document.createElement("div");info.className="event-list-info";
     const cat=document.createElement("span");cat.className="event-list-category";cat.textContent=event.category;
     const title=document.createElement("h4");title.textContent=event.title;
