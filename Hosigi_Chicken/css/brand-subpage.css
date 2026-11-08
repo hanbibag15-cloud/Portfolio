@@ -1,0 +1,19 @@
+/* Temporary BRAND subpages — typography and tokens follow Hosigi Design.md. */
+.brand-subpage{min-height:65vh;background:var(--surface-default);color:var(--text-primary);}
+.brand-subpage-container{width:min(1240px,calc(100% - 40px));margin-inline:auto;}
+.brand-subpage-hero{padding:100px 0 86px;text-align:center;background:var(--background-subtle);}
+.brand-subpage-eyebrow{color:var(--brand-red);font-weight:700;font-size:13px;letter-spacing:.15em;}
+.brand-subpage-hero h2{margin:14px 0 0;color:var(--text-brand);font-size:clamp(40px,5vw,64px);line-height:1.15;letter-spacing:-.035em;}
+.brand-subpage-lead{margin-top:17px;color:var(--text-primary);font-size:18px;line-height:1.65;word-break:keep-all;}
+.brand-subpage-content{padding:58px 0 115px;}
+.brand-subpage-tabs{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:54px;}
+.brand-subpage-tabs a{display:inline-flex;align-items:center;justify-content:center;min-height:46px;min-width:155px;padding:10px 22px;border:1px solid var(--border-default);border-radius:99px;background:var(--surface-default);color:var(--text-primary);font-size:15px;font-weight:600;text-decoration:none;}
+.brand-subpage-tabs a.is-active,.brand-subpage-tabs a:hover{color:#fff;background:var(--brand-red);border-color:var(--brand-red);}
+.brand-subpage-placeholder{min-height:290px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:46px 22px;border-radius:24px;background:var(--background-subtle);text-align:center;}
+.brand-subpage-status{font-size:13px;font-weight:700;color:var(--brand-red);}
+.brand-subpage-placeholder h3{margin-top:14px;font-size:clamp(25px,3vw,34px);font-weight:750;}
+.brand-subpage-placeholder p{margin-top:12px;font-size:15px;color:#777;line-height:1.7;word-break:keep-all;}
+.brand-subpage-home{display:inline-flex;gap:12px;align-items:center;justify-content:center;margin-top:28px;padding:12px 22px;border-radius:99px;background:var(--brand-brown);color:#fff;font-weight:650;font-size:14px;text-decoration:none;}
+.brand-subpage-home:hover{background:var(--brand-red);}
+.brand-subpage-tabs a:focus-visible,.brand-subpage-home:focus-visible{outline:3px solid var(--brand-red);outline-offset:3px;}
+@media(max-width:767px){.brand-subpage-container{width:calc(100% - 32px)}.brand-subpage-hero{padding:70px 0 62px}.brand-subpage-lead{font-size:15px}.brand-subpage-content{padding:36px 0 80px}.brand-subpage-tabs{gap:7px;margin-bottom:32px}.brand-subpage-tabs a{min-width:0;flex:1 1 30%;padding:10px 8px;font-size:12px}.brand-subpage-placeholder{min-height:250px}}
