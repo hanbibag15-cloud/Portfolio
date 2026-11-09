@@ -214,43 +214,27 @@
   .story-begin-heading h2{font-size:clamp(30px,8.4vw,38px)}
 }
 
-/* Bold circular photo poster — only the first BRAND STORY visual. */
+/* First story image: centered circular photo without decorative backdrop or caption. */
 .story-begin-centered .story-begin-figure{
-  width:min(100%,980px);
+  width:min(100%,790px);
   margin:0 auto;
 }
 .story-begin-poster{
-  position:relative;
-  display:grid;
-  place-items:center;
-  isolation:isolate;
-  min-height:clamp(370px,56vw,760px);
-  overflow:hidden;
-  background:var(--brand-red);
-  border-radius:3px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:transparent;
 }
-.story-begin-poster::before,
-.story-begin-poster::after{
-  content:"";
-  position:absolute;
-  z-index:-1;
-  width:30%;
-  aspect-ratio:1;
-  border:2px solid rgba(255,255,255,.15);
-  border-radius:50%;
-}
-.story-begin-poster::before{left:-12%;top:9%}
-.story-begin-poster::after{right:-13%;bottom:4%}
 .story-begin-centered .story-begin-poster .story-begin-image{
   position:relative;
-  z-index:1;
-  width:min(80%,690px);
+  display:block;
+  width:min(100%,690px);
   aspect-ratio:1;
-  margin:-38px auto 0;
-  border:3px solid var(--neutral-white);
+  margin:0;
+  border:2px solid var(--border-default);
   border-radius:50%;
   overflow:hidden;
-  background:var(--brand-brown);
+  background:transparent;
 }
 .story-begin-centered .story-begin-poster .story-begin-image::before{content:none;display:none}
 .story-begin-centered .story-begin-poster .story-begin-image img{
@@ -263,29 +247,8 @@
   object-position:center;
   filter:none;
 }
-.story-begin-poster-title{
-  position:absolute;
-  z-index:2;
-  left:0;
-  right:0;
-  bottom:-.055em;
-  display:block;
-  width:100%;
-  color:var(--neutral-white);
-  text-align:center;
-  font-size:clamp(52px,9vw,132px);
-  font-weight:850;
-  letter-spacing:-.075em;
-  line-height:1;
-  white-space:nowrap;
-  pointer-events:none;
-}
 @media(max-width:767px){
-  .story-begin-poster{min-height:clamp(330px,85vw,590px)}
   .story-begin-centered .story-begin-poster .story-begin-image{
-    width:90%;
-    margin:-22px auto 0;
-    border-width:2px;
+    width:100%;
   }
-  .story-begin-poster-title{font-size:clamp(36px,10.3vw,77px)}
 }
