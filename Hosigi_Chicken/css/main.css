@@ -1754,3 +1754,19 @@ body {
 @media(max-width:1024px){
   .header-nav #event-submenu{height:auto;min-height:0;}
 }
+
+/* BRAND parent is a non-navigational dropdown trigger, never an active GNB link. */
+.header-nav > ul > li > a[aria-controls="brand-submenu"],
+.header-nav > ul > li:hover > a[aria-controls="brand-submenu"],
+.header-nav > ul > li:focus-within > a[aria-controls="brand-submenu"]{
+  color:var(--text-primary);
+  font-weight:500;
+  cursor:default;
+}
+.header-nav > ul > li > a[aria-controls="brand-submenu"]::after{
+  display:none !important;
+  content:none !important;
+}
+@media(min-width:1025px){
+  .header-nav > ul > li > a[aria-controls="brand-submenu"]{pointer-events:none;}
+}
