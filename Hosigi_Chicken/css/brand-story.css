@@ -42,10 +42,9 @@
 .story-flavor-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 .story-flavor-card{min-height:325px;display:flex;flex-direction:column;padding:32px 30px;border:1px solid var(--border-default);border-radius:24px;background:var(--surface-default);transition:transform .25s,box-shadow .25s}
 .story-flavor-card:hover{transform:translateY(-5px);box-shadow:0 16px 34px rgba(34,23,20,.07)}
-.story-flavor-top{display:flex;align-items:center;justify-content:space-between;gap:14px}
-.story-flavor-top span{color:var(--brand-red);font-size:11px;font-weight:800;letter-spacing:.08em}
-.story-flavor-top strong{font-size:47px;font-weight:800;letter-spacing:-.06em;color:var(--brand-red)}
-.story-flavor-card h3{margin-top:42px;font-size:clamp(22px,2.3vw,29px);font-weight:800;letter-spacing:-.04em}
+.story-flavor-card h3{margin-top:35px;font-size:clamp(22px,2.3vw,29px);font-weight:800;letter-spacing:-.04em}
+.story-flavor-title{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.story-flavor-index{color:var(--brand-red);font-size:18px;font-weight:800;letter-spacing:-.03em}
 .story-flavor-card>p{margin-top:13px;color:#6d6561;font-size:15px;line-height:1.75;word-break:keep-all}
 .story-flavor-bottom{display:block;margin-top:auto;padding-top:25px;color:var(--brand-red);font-size:13px;font-weight:700}
 .story-today{background:var(--brand-brown);color:var(--neutral-white)}
@@ -89,7 +88,6 @@
 .story-timeline-content p{font-size:13px}
 .story-flavor-grid{grid-template-columns:1fr;gap:14px}
 .story-flavor-card{min-height:245px;padding:26px}
-.story-flavor-top strong{font-size:40px}
 .story-flavor-card h3{margin-top:24px}
 .story-today-inner{gap:30px}
 }
