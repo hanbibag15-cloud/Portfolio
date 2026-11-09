@@ -1791,3 +1791,14 @@ body {
 @media(min-width:1025px){
   .header-nav > ul > li > a[aria-controls="mobile-submenu"]{pointer-events:none;}
 }
+
+/* Active state for the current BRAND dropdown destination only.
+   Parent BRAND label remains neutral and non-navigational. */
+.header-nav #brand-submenu li > a.is-current,
+.header-nav #brand-submenu li > a.is-current:hover,
+.header-nav #brand-submenu li > a.is-current:focus-visible {
+  color:var(--brand-red);
+  font-weight:700;
+  background:var(--surface-brand-soft);
+  border-radius:12px;
+}
