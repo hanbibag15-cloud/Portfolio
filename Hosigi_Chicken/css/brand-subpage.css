@@ -17,3 +17,24 @@
 .brand-subpage-home:hover{background:var(--brand-red);}
 .brand-subpage-tabs a:focus-visible,.brand-subpage-home:focus-visible{outline:3px solid var(--brand-red);outline-offset:3px;}
 @media(max-width:767px){.brand-subpage-container{width:calc(100% - 32px)}.brand-subpage-hero{padding:70px 0 62px}.brand-subpage-lead{font-size:15px}.brand-subpage-content{padding:36px 0 80px}.brand-subpage-tabs{gap:7px;margin-bottom:32px}.brand-subpage-tabs a{min-width:0;flex:1 1 30%;padding:10px 8px;font-size:12px}.brand-subpage-placeholder{min-height:250px}}
+
+/* Shared BRAND subpage scroll entrance: same 750ms / 36px behavior as the main site. */
+.brand-subpage-reveal {
+  transition: opacity .75s cubic-bezier(.22,1,.36,1),
+              transform .75s cubic-bezier(.22,1,.36,1);
+}
+.story-motion-ready .brand-subpage-reveal:not(.is-visible) {
+  opacity:0;
+  transform:translateY(36px);
+}
+.story-motion-ready .brand-subpage-reveal.is-visible {
+  opacity:1;
+  transform:none;
+}
+@media(prefers-reduced-motion:reduce) {
+  .brand-subpage-reveal{transition:none!important;}
+  .story-motion-ready .brand-subpage-reveal:not(.is-visible){
+    opacity:1;
+    transform:none;
+  }
+}
