@@ -104,3 +104,112 @@
 .story-motion-ready .story-reveal:not(.is-visible){opacity:1;transform:none}
 .story-flavor-card:hover{transform:none}
 }
+
+/* 01 / THE BEGINNING — editorial, center-focused composition.
+   Reference-inspired typography + circular image, using Hosigi tokens. */
+.story-begin{
+  background:var(--surface-default);
+}
+.story-begin-centered{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+.story-begin-heading{
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:1150px;
+}
+.story-begin-heading .story-overline{
+  margin-top:17px;
+}
+.story-begin-heading h2{
+  margin:24px 0 42px;
+  font-size:clamp(48px,6.2vw,96px);
+  font-weight:850;
+  line-height:1.18;
+  letter-spacing:-.055em;
+  word-break:keep-all;
+}
+.story-begin-heading h2 strong{color:var(--brand-red)}
+.story-begin-centered .story-begin-figure{
+  width:min(100%,790px);
+  margin:0 auto;
+}
+.story-begin-centered .story-begin-image{
+  width:100%;
+  aspect-ratio:1;
+  margin:auto;
+  border-radius:50%;
+  background:var(--background-subtle);
+}
+.story-begin-centered .story-begin-image::before{
+  width:83%;
+  background:var(--surface-brand-soft);
+}
+.story-begin-centered .story-begin-image img{
+  width:100%;
+  height:100%;
+  max-height:none;
+  object-fit:contain;
+  padding:5%;
+  box-sizing:border-box;
+}
+.story-begin-centered .story-begin-figure figcaption{
+  margin-top:17px;
+  text-align:center;
+}
+.story-begin-description{
+  width:100%;
+  max-width:900px;
+  margin:49px auto 0;
+  text-align:center;
+}
+.story-begin-description .story-lead{
+  margin-bottom:23px;
+  color:var(--brand-brown);
+  font-size:clamp(21px,2vw,27px);
+  font-weight:750;
+  line-height:1.55;
+}
+.story-begin-description>p:not(.story-lead){
+  color:#625955;
+  font-size:clamp(16px,1.4vw,19px);
+  line-height:1.85;
+  word-break:keep-all;
+}
+.story-begin-description>p+p{
+  margin-top:16px;
+}
+.story-begin-centered .story-begin-mark{
+  justify-content:center;
+  margin-top:43px;
+  gap:25px;
+  text-align:left;
+}
+@media(max-width:767px){
+  .story-begin-heading h2{
+    margin:23px 0 32px;
+    font-size:clamp(34px,8vw,54px);
+    line-height:1.24;
+  }
+  .story-begin-centered .story-begin-figure{
+    width:min(100%,520px);
+  }
+  .story-begin-description{margin-top:35px}
+  .story-begin-description .story-lead{font-size:18px}
+  .story-begin-description>p:not(.story-lead){font-size:15px}
+  .story-desktop-break{display:none}
+  .story-begin-centered .story-begin-mark{
+    flex-wrap:wrap;
+    gap:16px;
+    margin-top:34px;
+    justify-content:center;
+    text-align:center;
+  }
+}
+@media(max-width:420px){
+  .story-begin-heading h2{font-size:clamp(30px,8.4vw,38px)}
+}
