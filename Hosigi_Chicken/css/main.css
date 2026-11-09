@@ -1770,3 +1770,8 @@ body {
 @media(min-width:1025px){
   .header-nav > ul > li > a[aria-controls="brand-submenu"]{pointer-events:none;}
 }
+
+/* Noncommercial portfolio notice: visible across desktop and mobile footers. */
+.footer-info .footer-portfolio-note{display:block;color:var(--neutral-white);font-size:13px;line-height:1.55;opacity:.78;word-break:keep-all;}
+@media(max-width:767px){.footer-info .footer-portfolio-note{font-size:11px;line-height:1.55;}}
+@media(max-width:420px){.footer-info .footer-portfolio-note{font-size:10px;}}
