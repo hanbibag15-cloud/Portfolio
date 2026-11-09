@@ -10,10 +10,8 @@
 .story-subnav a:is(:hover,:focus-visible),.story-subnav a.is-active{background:var(--brand-red);border-color:var(--brand-red);color:var(--neutral-white)}
 .story-subnav a:focus-visible,.story-next-link:focus-visible{outline:2px solid var(--brand-brown);outline-offset:4px}
 .story-section{padding-block:clamp(95px,9vw,146px)}
-.story-section-number{display:block;color:var(--brand-red);font-size:13px;font-weight:800;letter-spacing:.16em}
-.story-overline{margin-top:26px;color:var(--brand-red);font-size:14px;font-weight:750;letter-spacing:.11em}
 .story-begin-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(40px,6vw,100px)}
-.story-begin-content h2,.story-section-heading h2,.story-today h2{margin:20px 0 26px;font-size:clamp(38px,4vw,58px);font-weight:800;line-height:1.25;letter-spacing:-.045em;word-break:keep-all}
+.story-begin-content h2,.story-section-heading h2,.story-today h2{margin:0 0 26px;font-size:clamp(38px,4vw,58px);font-weight:800;line-height:1.25;letter-spacing:-.045em;word-break:keep-all}
 .story-begin-content h2 strong,.story-section-heading h2 strong,.story-today h2 strong{color:var(--brand-red)}
 .story-begin-content>p:not(.story-overline),.story-section-heading>p:last-child,.story-today-side p{color:#625955;font-size:17px;line-height:1.85;word-break:keep-all}
 .story-begin-content>p+p:not(.story-overline){margin-top:14px}
@@ -49,7 +47,6 @@
 .story-flavor-bottom{display:block;margin-top:auto;padding-top:25px;color:var(--brand-red);font-size:13px;font-weight:700}
 .story-today{background:var(--brand-brown);color:var(--neutral-white)}
 .story-today-inner{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.72fr);gap:80px;align-items:end}
-.story-today .story-section-number,.story-today .story-overline{color:#ff9aa2}
 .story-today h2{margin-bottom:0}
 .story-today h2 strong{color:#ff6570}
 .story-today-side p{color:#e6dbd7}
