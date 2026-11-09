@@ -105,67 +105,74 @@
 .story-flavor-card:hover{transform:none}
 }
 
-/* 01 / THE BEGINNING — editorial, center-focused composition.
-   Reference-inspired typography + circular image, using Hosigi tokens. */
-.story-begin{
+/* First story sequence: title section, followed by clean circular photo and left-aligned copy. */
+.story-begin-title-section{
+  display:flex;
+  align-items:center;
+  min-height:clamp(380px,54vw,640px);
+  padding:90px 0;
+  text-align:center;
   background:var(--surface-default);
 }
-.story-begin-centered{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-}
-.story-begin-heading{
-  position:relative;
-  z-index:2;
-  width:100%;
-  max-width:1150px;
-}
-.story-begin-heading .story-overline{
-  margin-top:17px;
-}
-.story-begin-heading h2{
-  margin:24px 0 42px;
+.story-begin-heading{width:100%;margin-inline:auto}
+.story-begin-title-section .story-begin-heading h2{
+  margin:0;
   font-size:clamp(48px,6.2vw,96px);
   font-weight:850;
-  line-height:1.18;
+  line-height:1.2;
   letter-spacing:-.055em;
   word-break:keep-all;
 }
-.story-begin-heading h2 strong{color:var(--brand-red)}
-.story-begin-centered .story-begin-figure{
+.story-begin-title-section .story-begin-heading strong{color:var(--brand-red)}
+.story-begin-visual-section{padding-top:50px;background:var(--surface-default)}
+.story-begin-visual-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.story-begin-visual-section .story-begin-figure{
   width:min(100%,790px);
-  margin:0 auto;
+  margin:0;
 }
-.story-begin-centered .story-begin-image{
-  width:100%;
+.story-begin-visual-section .story-begin-poster{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:transparent;
+}
+.story-begin-visual-section .story-begin-image{
+  position:relative;
+  display:block;
+  width:min(100%,690px);
   aspect-ratio:1;
-  margin:auto;
+  margin:0;
+  overflow:hidden;
+  border:0;
   border-radius:50%;
-  background:var(--background-subtle);
+  background:transparent;
 }
-.story-begin-centered .story-begin-image::before{
-  width:83%;
-  background:var(--surface-brand-soft);
+.story-begin-visual-section .story-begin-image::before{
+  display:none;
+  content:none;
 }
-.story-begin-centered .story-begin-image img{
+.story-begin-visual-section .story-begin-image img{
+  position:static;
+  display:block;
   width:100%;
   height:100%;
   max-height:none;
-  object-fit:contain;
-  padding:5%;
-  box-sizing:border-box;
+  padding:0;
+  object-fit:cover;
+  object-position:center;
+  filter:none;
 }
-.story-begin-centered .story-begin-figure figcaption{
-  margin-top:17px;
-  text-align:center;
+.story-begin-visual-section .story-begin-description{
+  width:min(100%,790px);
+  margin:50px 0 0;
+  text-align:left;
 }
-.story-begin-description{
-  width:100%;
-  max-width:900px;
-  margin:49px auto 0;
-  text-align:center;
+.story-begin-visual-section .story-begin-description p{
+  text-align:left;
 }
 .story-begin-description .story-lead{
   margin-bottom:23px;
@@ -180,133 +187,16 @@
   line-height:1.85;
   word-break:keep-all;
 }
-.story-begin-description>p+p{
-  margin-top:16px;
-}
-.story-begin-centered .story-begin-mark{
-  justify-content:center;
-  margin-top:43px;
-  gap:25px;
-  text-align:left;
-}
+.story-begin-description>p+p{margin-top:16px}
 @media(max-width:767px){
-  .story-begin-heading h2{
-    margin:23px 0 32px;
-    font-size:clamp(34px,8vw,54px);
-    line-height:1.24;
-  }
-  .story-begin-centered .story-begin-figure{
-    width:min(100%,520px);
-  }
-  .story-begin-description{margin-top:35px}
+  .story-begin-title-section{min-height:360px;padding:75px 0}
+  .story-begin-title-section .story-begin-heading h2{font-size:clamp(34px,8vw,54px)}
+  .story-begin-visual-section{padding-top:35px}
+  .story-begin-visual-section .story-begin-description{margin-top:34px}
   .story-begin-description .story-lead{font-size:18px}
   .story-begin-description>p:not(.story-lead){font-size:15px}
   .story-desktop-break{display:none}
-  .story-begin-centered .story-begin-mark{
-    flex-wrap:wrap;
-    gap:16px;
-    margin-top:34px;
-    justify-content:center;
-    text-align:center;
-  }
 }
 @media(max-width:420px){
-  .story-begin-heading h2{font-size:clamp(30px,8.4vw,38px)}
-}
-
-/* First story image: centered circular photo without decorative backdrop or caption. */
-.story-begin-centered .story-begin-figure{
-  width:min(100%,790px);
-  margin:0 auto;
-}
-.story-begin-poster{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:transparent;
-}
-.story-begin-centered .story-begin-poster .story-begin-image{
-  position:relative;
-  display:block;
-  width:min(100%,690px);
-  aspect-ratio:1;
-  margin:0;
-  border:2px solid var(--border-default);
-  border-radius:50%;
-  overflow:hidden;
-  background:transparent;
-}
-.story-begin-centered .story-begin-poster .story-begin-image::before{content:none;display:none}
-.story-begin-centered .story-begin-poster .story-begin-image img{
-  display:block;
-  width:100%;
-  height:100%;
-  max-height:none;
-  padding:0;
-  object-fit:cover;
-  object-position:center;
-  filter:none;
-}
-@media(max-width:767px){
-  .story-begin-centered .story-begin-poster .story-begin-image{
-    width:100%;
-  }
-}
-
-/* Separate editorial headline and photo/story into two scroll sections. */
-.story-begin-title-section{
-  display:flex;
-  align-items:center;
-  min-height:clamp(380px,54vw,640px);
-  padding:90px 0;
-  text-align:center;
-  background:var(--surface-default);
-}
-.story-begin-title-section .story-begin-heading{
-  max-width:none;
-  margin-inline:auto;
-}
-.story-begin-title-section .story-begin-heading h2{
-  margin:0;
-  font-size:clamp(48px,6.2vw,96px);
-  line-height:1.2;
-}
-.story-begin-visual-section{
-  background:var(--surface-default);
-  padding-top:50px;
-}
-.story-begin-visual-inner{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-.story-begin-visual-section .story-begin-figure{
-  width:min(100%,790px);
-  margin-inline:auto;
-}
-.story-begin-visual-section .story-begin-description{
-  width:min(100%,790px);
-  margin:44px auto 0;
-  text-align:right;
-}
-.story-begin-visual-section .story-begin-description p{
-  text-align:right;
-}
-@media(max-width:767px){
-  .story-begin-title-section{
-    min-height:360px;
-    padding:75px 0;
-  }
-  .story-begin-title-section .story-begin-heading h2{
-    font-size:clamp(34px,8vw,54px);
-  }
-  .story-begin-visual-section{padding-top:35px}
-  .story-begin-visual-section .story-begin-description{
-    margin-top:34px;
-  }
-}
-@media(max-width:420px){
-  .story-begin-title-section .story-begin-heading h2{
-    font-size:clamp(30px,8.4vw,38px);
-  }
+  .story-begin-title-section .story-begin-heading h2{font-size:clamp(30px,8.4vw,38px)}
 }
