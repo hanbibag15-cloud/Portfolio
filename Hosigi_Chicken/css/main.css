@@ -1775,3 +1775,19 @@ body {
 .footer-info .footer-portfolio-note{display:block;color:var(--neutral-white);font-size:13px;line-height:1.55;opacity:.78;word-break:keep-all;}
 @media(max-width:767px){.footer-info .footer-portfolio-note{font-size:11px;line-height:1.55;}}
 @media(max-width:420px){.footer-info .footer-portfolio-note{font-size:10px;}}
+
+/* MENU parent: neutral like BRAND, while submenu links keep their hover styles. */
+.header-nav > ul > li > a[aria-controls="mobile-submenu"],
+.header-nav > ul > li:hover > a[aria-controls="mobile-submenu"],
+.header-nav > ul > li:focus-within > a[aria-controls="mobile-submenu"]{
+  color:var(--text-primary);
+  font-weight:500;
+  cursor:default;
+}
+.header-nav > ul > li > a[aria-controls="mobile-submenu"]::after{
+  display:none !important;
+  content:none !important;
+}
+@media(min-width:1025px){
+  .header-nav > ul > li > a[aria-controls="mobile-submenu"]{pointer-events:none;}
+}
