@@ -1792,13 +1792,27 @@ body {
   .header-nav > ul > li > a[aria-controls="mobile-submenu"]{pointer-events:none;}
 }
 
-/* Active state for the current BRAND dropdown destination only.
-   Parent BRAND label remains neutral and non-navigational. */
+/* BRAND submenu active state: underline is sized to the label, not the full link. */
 .header-nav #brand-submenu li > a.is-current,
 .header-nav #brand-submenu li > a.is-current:hover,
 .header-nav #brand-submenu li > a.is-current:focus-visible {
   color:var(--brand-red);
   font-weight:700;
-  background:var(--surface-brand-soft);
-  border-radius:12px;
+  background:transparent;
+  border-radius:0;
+}
+.header-nav #brand-submenu li > a .brand-submenu-text{
+  position:relative;
+  display:inline-block;
+}
+.header-nav #brand-submenu li > a.is-current .brand-submenu-text::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-8px;
+  height:3px;
+  border-radius:2px;
+  background:var(--brand-red);
+  pointer-events:none;
 }
