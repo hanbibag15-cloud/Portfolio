@@ -4,8 +4,32 @@
   const section = document.querySelector("#story-history");
   if (!section) return;
 
-  const links = [...section.querySelectorAll(".history-year-link")];
-  const panels = [...section.querySelectorAll(".history-year-panel")];
+  const yearList = section.querySelector(".history-year-list");
+  const content = section.querySelector(".history-content");
+  if (!yearList || !content) return;
+
+  // Keep the navigation and panels in matching chronological Grid rows,
+  // even if an older version of the HTML is loaded.
+  const years = [...content.querySelectorAll(".history-year-panel")]
+    .sort((a, b) => Number(a.dataset.historyYear) - Number(b.dataset.historyYear));
+  const navItems = new Map(
+    [...yearList.querySelectorAll("li")].map(li => [
+      li.querySelector(".history-year-link")?.getAttribute("href")?.replace("#history-", ""),
+      li
+    ])
+  );
+  years.forEach((panel, index) => {
+    const row = String(index + 1);
+    const li = navItems.get(panel.dataset.historyYear);
+    if (!li) return;
+    panel.style.setProperty("--history-row", row);
+    li.style.setProperty("--history-row", row);
+    yearList.appendChild(li);
+    content.appendChild(panel);
+  });
+
+  const links = [...yearList.querySelectorAll(".history-year-link")];
+  const panels = [...content.querySelectorAll(".history-year-panel")];
   const mobile = window.matchMedia("(max-width: 767px)");
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   if (!links.length || links.length !== panels.length) return;
