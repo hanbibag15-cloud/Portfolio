@@ -9,11 +9,12 @@
 <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
 <link rel="stylesheet" href="css/main.css?v=68">
 <link rel="stylesheet" href="css/nav-state.css?v=8">
-<link rel="stylesheet" href="css/brand-story.css?v=12">
+<link rel="stylesheet" href="css/brand-story.css?v=13">
 <link rel="stylesheet" href="css/quick-menu-motion.css?v=10">
 <script src="js/store-nav.js?v=3" defer></script>
 <script src="js/gnb-motion.js?v=2" defer></script>
 <script src="js/brand-story.js?v=2" defer></script>
+<script src="js/brand-history.js?v=1" defer></script>
 <script src="js/smooth-wheel.js?v=4" defer></script>
 </head>
 <body>
@@ -118,16 +119,77 @@
         <h2 id="story-history-title"><strong>1999 — TODAY</strong><br>호식이가 걸어온 길</h2>
         <p>두 마리 치킨의 시작부터 품질 인증, 해외 진출, 국내 매장 확대까지 브랜드의 중요한 순간들을 모았습니다.</p>
       </div>
-      <ol class="story-timeline" aria-label="호식이두마리치킨 주요 연혁">
-        <li class="story-timeline-item story-reveal"><span class="story-year">1999</span><div class="story-timeline-content"><span class="story-timeline-tag">START</span><h3>두 마리 치킨 브랜드 탄생</h3><p>호식이두마리치킨 브랜드 론칭 및 두 마리 치킨 체인사업본부 설립</p></div></li>
-        <li class="story-timeline-item story-reveal"><span class="story-year">2001</span><div class="story-timeline-content"><h3>매운양념치킨 출시</h3><p>맛의 선택지를 넓히며 대표 메뉴의 역사를 시작했습니다.</p></div></li>
-        <li class="story-timeline-item story-reveal"><span class="story-year">2002</span><div class="story-timeline-content"><h3>ISO 9001 품질경영 인증</h3><p>품질경영 시스템 관련 인증을 획득했습니다.</p></div></li>
-        <li class="story-timeline-item story-reveal"><span class="story-year">2003</span><div class="story-timeline-content"><h3>매운간장치킨 출시</h3><p>새로운 맛을 더하며 치킨 메뉴를 확장했습니다.</p></div></li>
-        <li class="story-timeline-item story-reveal"><span class="story-year">2010</span><div class="story-timeline-content"><h3>하림과 공동 마케팅 협약</h3><p>㈜하림과 공동 마케팅 협약을 체결했습니다.</p></div></li>
-        <li class="story-timeline-item story-reveal"><span class="story-year">2015</span><div class="story-timeline-content"><span class="story-timeline-tag">GLOBAL</span><h3>해외 1호점 오픈</h3><p>일본 도쿄 신오쿠보점에서 해외 첫 매장을 열었습니다.</p></div></li>
-        <li class="story-timeline-item story-reveal"><span class="story-year">2016</span><div class="story-timeline-content"><span class="story-timeline-tag">1,000th STORE</span><h3>국내 1,000호점 오픈</h3><p>남산서울타워점을 통해 국내 1,000호점 기록을 세웠습니다.</p></div></li>
-      </ol>
-      <p class="story-source-note">기업 공식 연혁에 기록된 당시의 성과입니다. 현재 매장 수 또는 인증 현황을 의미하지 않습니다.</p>
+      <div class="history-layout">
+        <nav class="history-year-nav" aria-label="연혁 연도 선택">
+          <ol class="history-year-list">
+            <li><a class="history-year-link is-active" href="#history-2016" aria-current="location">2016</a></li>
+            <li><a class="history-year-link" href="#history-2015">2015</a></li>
+            <li><a class="history-year-link" href="#history-2010">2010</a></li>
+            <li><a class="history-year-link" href="#history-2003">2003</a></li>
+            <li><a class="history-year-link" href="#history-2002">2002</a></li>
+            <li><a class="history-year-link" href="#history-2001">2001</a></li>
+            <li><a class="history-year-link" href="#history-1999">1999</a></li>
+          </ol>
+        </nav>
+        <div class="history-content" aria-label="연도별 연혁">
+          <section class="history-year-panel" id="history-2016" data-history-year="2016" aria-labelledby="history-title-2016">
+            <h3 class="history-year-banner" id="history-title-2016">2016</h3>
+            <div class="history-event-list">
+              <article class="history-event-card history-reveal">
+                <span class="story-timeline-tag">1,000th STORE</span><h3>국내 1,000호점 오픈</h3><p>남산서울타워점을 통해 국내 1,000호점 기록을 세웠습니다.</p>
+              </article>
+            </div>
+          </section>
+          <section class="history-year-panel" id="history-2015" data-history-year="2015" aria-labelledby="history-title-2015">
+            <h3 class="history-year-banner" id="history-title-2015">2015</h3>
+            <div class="history-event-list">
+              <article class="history-event-card history-reveal">
+                <span class="story-timeline-tag">GLOBAL</span><h3>해외 1호점 오픈</h3><p>일본 도쿄 신오쿠보점에서 해외 첫 매장을 열었습니다.</p>
+              </article>
+            </div>
+          </section>
+          <section class="history-year-panel" id="history-2010" data-history-year="2010" aria-labelledby="history-title-2010">
+            <h3 class="history-year-banner" id="history-title-2010">2010</h3>
+            <div class="history-event-list">
+              <article class="history-event-card history-reveal">
+                <h3>하림과 공동 마케팅 협약</h3><p>㈜하림과 공동 마케팅 협약을 체결했습니다.</p>
+              </article>
+            </div>
+          </section>
+          <section class="history-year-panel" id="history-2003" data-history-year="2003" aria-labelledby="history-title-2003">
+            <h3 class="history-year-banner" id="history-title-2003">2003</h3>
+            <div class="history-event-list">
+              <article class="history-event-card history-reveal">
+                <h3>매운간장치킨 출시</h3><p>새로운 맛을 더하며 치킨 메뉴를 확장했습니다.</p>
+              </article>
+            </div>
+          </section>
+          <section class="history-year-panel" id="history-2002" data-history-year="2002" aria-labelledby="history-title-2002">
+            <h3 class="history-year-banner" id="history-title-2002">2002</h3>
+            <div class="history-event-list">
+              <article class="history-event-card history-reveal">
+                <h3>ISO 9001 품질경영 인증</h3><p>품질경영 시스템 관련 인증을 획득했습니다.</p>
+              </article>
+            </div>
+          </section>
+          <section class="history-year-panel" id="history-2001" data-history-year="2001" aria-labelledby="history-title-2001">
+            <h3 class="history-year-banner" id="history-title-2001">2001</h3>
+            <div class="history-event-list">
+              <article class="history-event-card history-reveal">
+                <h3>매운양념치킨 출시</h3><p>맛의 선택지를 넓히며 대표 메뉴의 역사를 시작했습니다.</p>
+              </article>
+            </div>
+          </section>
+          <section class="history-year-panel" id="history-1999" data-history-year="1999" aria-labelledby="history-title-1999">
+            <h3 class="history-year-banner" id="history-title-1999">1999</h3>
+            <div class="history-event-list">
+              <article class="history-event-card history-reveal">
+                <span class="story-timeline-tag">START</span><h3>두 마리 치킨 브랜드 탄생</h3><p>호식이두마리치킨 브랜드 론칭 및 두 마리 치킨 체인사업본부 설립</p>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>     <p class="story-source-note">기업 공식 연혁에 기록된 당시의 성과입니다. 현재 매장 수 또는 인증 현황을 의미하지 않습니다.</p>
     </div>
   </section>
 
