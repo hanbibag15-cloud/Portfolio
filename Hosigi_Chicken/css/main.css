@@ -1792,26 +1792,4 @@ body {
   .header-nav > ul > li > a[aria-controls="mobile-submenu"]{pointer-events:none;}
 }
 
-/* Only the GNB BRAND label is active on the three brand subpages.
-   The dropdown keeps its original link and hover styling. */
-.header-nav > ul > li > a[aria-controls="brand-submenu"].is-current,
-.header-nav > ul > li:hover > a[aria-controls="brand-submenu"].is-current,
-.header-nav > ul > li:focus-within > a[aria-controls="brand-submenu"].is-current{
-  color:#E60012;
-  font-weight:700;
-}
-.header-nav > ul > li > a[aria-controls="brand-submenu"].is-current .brand-gnb-text{
-  display:inline-block;
-  position:relative;
-}
-.header-nav > ul > li > a[aria-controls="brand-submenu"].is-current .brand-gnb-text::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:-8px;
-  height:3px;
-  border-radius:2px;
-  background:#E60012;
-  pointer-events:none;
-}
+/* GNB active styles are centralized in nav-state.css (no duplicate BRAND underline). */
