@@ -48,8 +48,8 @@
 .history-event-card h3{font-size:clamp(19px,2.1vw,25px);font-weight:750;line-height:1.4;letter-spacing:-.025em}
 .history-event-card p{margin-top:10px;font-size:16px;line-height:1.7;color:#6d6561;word-break:keep-all}
 .history-event-card.history-reveal{transition:opacity .7s ease-out,transform .7s ease-out}
-.history-event-card.history-reveal:not(.is-visible){opacity:0;transform:translateY(24px)}
-.history-event-card.history-reveal.is-visible{opacity:1;transform:translateY(0)}
+.history-motion-ready .history-event-card.history-reveal:not(.is-visible){opacity:0;transform:translateY(24px)}
+.history-motion-ready .history-event-card.history-reveal.is-visible{opacity:1;transform:translateY(0)}
 @media(max-width:1024px) and (min-width:768px){
   .history-layout{grid-template-columns:145px minmax(0,1fr);column-gap:36px}
   .history-year-nav{top:96px}
@@ -72,7 +72,7 @@
 }
 @media(prefers-reduced-motion:reduce){
   .history-year-link,.history-year-link::before,.history-event-card.history-reveal{transition:none!important}
-  .history-event-card.history-reveal:not(.is-visible){opacity:1;transform:none}
+  .history-motion-ready .history-event-card.history-reveal:not(.is-visible){opacity:1;transform:none}
 }
 .story-source-note{margin-top:26px;color:#78706c;font-size:12px;line-height:1.7;word-break:keep-all}
 .story-flavor-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
