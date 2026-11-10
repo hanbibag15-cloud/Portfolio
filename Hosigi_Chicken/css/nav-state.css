@@ -34,9 +34,8 @@
 .header-nav > ul > li:focus-within > a.gnb-motion-link{
   color:#E60012;
 }
-.header-nav > ul > li > a.gnb-motion-link:is(:hover,:focus-visible,.gnb-active) > .gnb-label::after,
-.header-nav > ul > li:hover > a.gnb-motion-link > .gnb-label::after,
-.header-nav > ul > li:focus-within > a.gnb-motion-link > .gnb-label::after{
+/* Hover/focus only changes label color. The underline belongs to the active page. */
+.header-nav > ul > li > a.gnb-motion-link:is(.gnb-active,.is-current) > .gnb-label::after{
   transform:scaleX(1);
 }
 .header-nav > ul > li > a.gnb-motion-link.gnb-enter{
