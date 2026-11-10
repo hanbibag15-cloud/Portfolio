@@ -1,4 +1,4 @@
-/* Brand Story HISTORY: sticky year rail and continuous scroll-synced milestones. */
+/* HISTORY-only navigation; preserves other page scroll and GNB behavior. */
 (() => {
   "use strict";
   const section = document.querySelector("#story-history");
@@ -6,23 +6,58 @@
 
   const links = [...section.querySelectorAll(".history-year-link")];
   const panels = [...section.querySelectorAll(".history-year-panel")];
-  if (!links.length || links.length !== panels.length) return;
+  const nav = section.querySelector(".history-year-nav");
+  const yearList = section.querySelector(".history-year-list");
+  if (!nav || !yearList || !links.length || links.length !== panels.length) return;
 
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   const mobile = window.matchMedia("(max-width: 767px)");
-  const nav = section.querySelector(".history-year-nav");
   let selected = -1;
   let frame = 0;
-  let clickTarget = null;
+  let clickTarget = -1;
+  let unlockTimer = 0;
 
-  function offset() {
-    const header = document.querySelector(".site-header");
-    const height = header ? header.getBoundingClientRect().height : (mobile.matches ? 70 : 90);
-    return height + (mobile.matches ? (nav?.getBoundingClientRect().height || 56) + 16 : 34);
+  function headerHeight() {
+    return document.querySelector(".site-header")?.getBoundingClientRect().height || 0;
+  }
+
+  function navTop() {
+    return Math.round(headerHeight() + 16);
+  }
+
+  function syncNavTop() {
+    section.style.setProperty("--history-nav-top", navTop() + "px");
+  }
+
+  function readingOffset() {
+    return navTop() + (mobile.matches ? nav.getBoundingClientRect().height + 16 : 24);
+  }
+
+  function keepVisible(index) {
+    const link = links[index];
+    if (!link) return;
+    const container = mobile.matches ? yearList : nav;
+    const bounds = container.getBoundingClientRect();
+    const item = link.getBoundingClientRect();
+    if (mobile.matches) {
+      const left = container.scrollLeft + item.left - bounds.left -
+        (container.clientWidth - item.width) / 2;
+      container.scrollTo({
+        left: Math.max(0, left),
+        behavior: reduced.matches ? "auto" : "smooth"
+      });
+    } else {
+      const top = container.scrollTop + item.top - bounds.top -
+        (container.clientHeight - item.height) / 2;
+      container.scrollTo({
+        top: Math.max(0, top),
+        behavior: reduced.matches ? "auto" : "smooth"
+      });
+    }
   }
 
   function activate(index) {
-    if (index === selected || index < 0) return;
+    if (index < 0 || index === selected) return;
     selected = index;
     links.forEach((link, i) => {
       const active = i === index;
@@ -30,26 +65,22 @@
       if (active) link.setAttribute("aria-current", "location");
       else link.removeAttribute("aria-current");
     });
-    // Keep the selected tab visible inside the horizontal mobile rail.
-    if (mobile.matches) {
-      const row = nav?.querySelector(".history-year-list");
-      const link = links[index];
-      if (row && link) {
-        const left = link.offsetLeft - row.offsetLeft - (row.clientWidth - link.offsetWidth) / 2;
-        row.scrollTo({ left, behavior: reduced.matches ? "auto" : "smooth" });
-      }
-    }
+    keepVisible(index);
+  }
+
+  function releaseSelection() {
+    clickTarget = -1;
+    clearTimeout(unlockTimer);
   }
 
   function updateOnScroll() {
     frame = 0;
-    const threshold = offset() + 25;
-    if (clickTarget !== null) {
-      const target = panels[clickTarget];
-      if (Math.abs(target.getBoundingClientRect().top - offset()) < 6) clickTarget = null;
-      else return; // Don't flicker through intermediate years during programmatic scroll.
+    if (clickTarget >= 0) {
+      const gap = Math.abs(panels[clickTarget].getBoundingClientRect().top - readingOffset());
+      if (gap > 8) return; // Keep clicked year highlighted while smooth-scrolling.
+      releaseSelection();
     }
-    // The last year whose heading is above the reading line is active.
+    const threshold = readingOffset() + 20;
     let index = 0;
     panels.forEach((panel, i) => {
       if (panel.getBoundingClientRect().top <= threshold) index = i;
@@ -57,30 +88,45 @@
     activate(index);
   }
 
-  function onScroll() {
+  function scheduleUpdate() {
     if (!frame) frame = requestAnimationFrame(updateOnScroll);
   }
 
-  links.forEach((link, i) => {
-    link.addEventListener("click", event => {
-      event.preventDefault();
-      clickTarget = i;
-      activate(i);
-      const targetY = Math.max(0, window.scrollY + panels[i].getBoundingClientRect().top - offset());
-      window.scrollTo({ top: targetY, behavior: reduced.matches ? "auto" : "smooth" });
-      // Don't change the URL hash: it can trigger a second, uncorrected jump.
-      // A user scroll or wheel action can take over immediately.
-    });
+  links.forEach((link, i) => link.addEventListener("click", event => {
+    event.preventDefault();
+    clearTimeout(unlockTimer);
+    clickTarget = i;
+    activate(i);
+
+    const top = Math.max(0,
+      window.scrollY + panels[i].getBoundingClientRect().top - readingOffset());
+    window.scrollTo({top, behavior: reduced.matches ? "auto" : "smooth"});
+
+    // Fallback for browsers without scrollend; user gestures release it sooner.
+    unlockTimer = window.setTimeout(() => {
+      releaseSelection();
+      scheduleUpdate();
+    }, reduced.matches ? 50 : 1700);
+  }));
+
+  ["wheel", "touchstart", "pointerdown", "keydown"].forEach(type => {
+    window.addEventListener(type, event => {
+      if (type === "pointerdown" && event.target.closest?.(".history-year-link")) return;
+      if (type === "wheel" && event.target.closest?.(".history-year-nav") &&
+          !mobile.matches) return; // Scrolling the year list itself must not change the selection.
+      releaseSelection();
+    }, {passive:true});
   });
+  window.addEventListener("scroll", scheduleUpdate, {passive:true});
+  window.addEventListener("scrollend", () => {
+    releaseSelection();
+    scheduleUpdate();
+  }, {passive:true});
+  window.addEventListener("resize", () => {
+    syncNavTop();
+    scheduleUpdate();
+  }, {passive:true});
 
-  window.addEventListener("wheel", () => { clickTarget = null; }, { passive: true });
-  window.addEventListener("touchstart", () => { clickTarget = null; }, { passive: true });
-  window.addEventListener("keydown", () => { clickTarget = null; });
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("scrollend", () => { clickTarget = null; updateOnScroll(); });
-  window.addEventListener("resize", onScroll, { passive: true });
-
-  // Reveal cards once without modifying their layout or document height.
   const cards = [...section.querySelectorAll(".history-reveal")];
   if (!reduced.matches && "IntersectionObserver" in window) {
     const observer = new IntersectionObserver(entries => {
@@ -89,9 +135,10 @@
         entry.target.classList.add("is-visible");
         observer.unobserve(entry.target);
       });
-    }, { threshold: 0.08, rootMargin: "0px 0px -15px 0px" });
+    }, {threshold:0.08,rootMargin:"0px 0px -15px 0px"});
     cards.forEach(card => {
-      if (card.getBoundingClientRect().top < window.innerHeight) card.classList.add("is-visible");
+      if (card.getBoundingClientRect().top < window.innerHeight)
+        card.classList.add("is-visible");
       else observer.observe(card);
     });
     section.classList.add("history-motion-ready");
@@ -99,5 +146,6 @@
     cards.forEach(card => card.classList.add("is-visible"));
   }
 
+  syncNavTop();
   updateOnScroll();
 })();
