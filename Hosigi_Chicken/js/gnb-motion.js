@@ -59,11 +59,15 @@
     // Reflow guarantees animation runs when opened directly or reloaded.
     void link.offsetWidth;
     link.classList.add("gnb-enter");
-    link.addEventListener("animationend",event=>{
-      if(event.target===link && event.animationName==="hosigi-gnb-underline-in"){
-        link.classList.remove("gnb-enter");
-      }
-    },{once:true});
+    // The underline is on .gnb-label::after, so animationend targets the
+    // inner span (not the outer <a>). Remove gnb-enter when it finishes.
+    const label=link.querySelector(":scope > .gnb-label");
+    const onEnd=event=>{
+      if(event.animationName!=="hosigi-gnb-underline-in" || event.target!==label)return;
+      label.removeEventListener("animationend",onEnd);
+      link.classList.remove("gnb-enter");
+    };
+    label?.addEventListener("animationend",onEnd);
   };
 
   if(permanent>=0){
