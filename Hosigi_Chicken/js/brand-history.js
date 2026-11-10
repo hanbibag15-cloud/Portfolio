@@ -75,10 +75,13 @@
   function update() {
     frame = 0;
     if (lockedIndex >= 0) return;
-    const line = readingOffset() + 28;
+    // Switch when the next red year header crosses 75% of viewport height
+    // (25% up from the bottom), in either scroll direction.
+    const line = Math.max(readingOffset(), window.innerHeight * 0.75);
     let index = 0;
     panels.forEach((panel, i) => {
-      if (panel.getBoundingClientRect().top <= line) index = i;
+      const banner = panel.querySelector(".history-year-banner");
+      if (banner && banner.getBoundingClientRect().top <= line) index = i;
     });
     activate(index);
   }
