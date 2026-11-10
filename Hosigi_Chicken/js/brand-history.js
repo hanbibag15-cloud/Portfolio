@@ -30,6 +30,7 @@
 
   const links = [...yearList.querySelectorAll(".history-year-link")];
   const panels = [...content.querySelectorAll(".history-year-panel")];
+  const banners = panels.map(panel => panel.querySelector(".history-year-banner"));
   const mobile = window.matchMedia("(max-width: 767px)");
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   if (!links.length || links.length !== panels.length) return;
@@ -75,12 +76,11 @@
   function update() {
     frame = 0;
     if (lockedIndex >= 0) return;
-    // Switch when the next red year header crosses 75% of viewport height
-    // (25% up from the bottom), in either scroll direction.
-    const line = Math.max(readingOffset(), window.innerHeight * 0.75);
+    // Activate when a RED YEAR HEADER crosses the line 25% up from the
+    // viewport bottom, in either direction (not when its card reaches the top).
+    const line = window.innerHeight * 0.75;
     let index = 0;
-    panels.forEach((panel, i) => {
-      const banner = panel.querySelector(".history-year-banner");
+    banners.forEach((banner, i) => {
       if (banner && banner.getBoundingClientRect().top <= line) index = i;
     });
     activate(index);
@@ -88,6 +88,20 @@
 
   function schedule() {
     if (!frame) frame = requestAnimationFrame(update);
+  }
+
+  // Crossings of the 75% line trigger a recheck even if scroll events are
+  // throttled. The pixel rootMargin is recalculated on viewport resize.
+  let yearObserver = null;
+  function observeYearHeaders() {
+    if (!("IntersectionObserver" in window)) return;
+    if (yearObserver) yearObserver.disconnect();
+    yearObserver = new IntersectionObserver(schedule, {
+      root: null,
+      rootMargin: `0px 0px -${Math.round(window.innerHeight * 0.25)}px 0px`,
+      threshold: 0
+    });
+    banners.forEach(banner => { if (banner) yearObserver.observe(banner); });
   }
 
   links.forEach((link, index) => {
@@ -104,7 +118,10 @@
 
   window.addEventListener("scroll", schedule, { passive: true });
   window.addEventListener("scrollend", () => { release(); schedule(); });
-  window.addEventListener("resize", schedule, { passive: true });
+  window.addEventListener("resize", () => {
+    observeYearHeaders();
+    schedule();
+  }, { passive: true });
   ["wheel", "touchstart", "keydown"].forEach(type => {
     window.addEventListener(type, () => { release(); schedule(); }, { passive: true });
   });
@@ -129,5 +146,6 @@
     cards.forEach(card => card.classList.add("is-visible"));
   }
 
+  observeYearHeaders();
   update();
 })();
