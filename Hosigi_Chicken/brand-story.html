@@ -9,12 +9,12 @@
 <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
 <link rel="stylesheet" href="css/main.css?v=68">
 <link rel="stylesheet" href="css/nav-state.css?v=9">
-<link rel="stylesheet" href="css/brand-story.css?v=14">
+<link rel="stylesheet" href="css/brand-story.css?v=15">
 <link rel="stylesheet" href="css/quick-menu-motion.css?v=10">
 <script src="js/store-nav.js?v=3" defer></script>
 <script src="js/gnb-motion.js?v=2" defer></script>
 <script src="js/brand-story.js?v=2" defer></script>
-<script src="js/brand-history.js?v=2" defer></script>
+<script src="js/brand-history.js?v=3" defer></script>
 <script src="js/smooth-wheel.js?v=4" defer></script>
 </head>
 <body>
@@ -122,23 +122,23 @@
       <div class="history-layout">
         <nav class="history-year-nav" aria-label="연혁 연도 선택">
           <ol class="history-year-list">
-            <li><a class="history-year-link is-active" href="#history-2024" aria-current="location">2024</a></li>
-            <li><a class="history-year-link" href="#history-2023">2023</a></li>
-            <li><a class="history-year-link" href="#history-2022">2022</a></li>
-            <li><a class="history-year-link" href="#history-2021">2021</a></li>
-            <li><a class="history-year-link" href="#history-2020">2020</a></li>
-            <li><a class="history-year-link" href="#history-2019">2019</a></li>
-            <li><a class="history-year-link" href="#history-2016">2016</a></li>
-            <li><a class="history-year-link" href="#history-2015">2015</a></li>
-            <li><a class="history-year-link" href="#history-2010">2010</a></li>
-            <li><a class="history-year-link" href="#history-2003">2003</a></li>
-            <li><a class="history-year-link" href="#history-2002">2002</a></li>
-            <li><a class="history-year-link" href="#history-2001">2001</a></li>
-            <li><a class="history-year-link" href="#history-1999">1999</a></li>
+            <li><a class="history-year-link is-active" href="#history-2024" style="--history-row:1" aria-current="location">2024</a></li>
+            <li><a class="history-year-link" href="#history-2023" style="--history-row:2">2023</a></li>
+            <li><a class="history-year-link" href="#history-2022" style="--history-row:3">2022</a></li>
+            <li><a class="history-year-link" href="#history-2021" style="--history-row:4">2021</a></li>
+            <li><a class="history-year-link" href="#history-2020" style="--history-row:5">2020</a></li>
+            <li><a class="history-year-link" href="#history-2019" style="--history-row:6">2019</a></li>
+            <li><a class="history-year-link" href="#history-2016" style="--history-row:7">2016</a></li>
+            <li><a class="history-year-link" href="#history-2015" style="--history-row:8">2015</a></li>
+            <li><a class="history-year-link" href="#history-2010" style="--history-row:9">2010</a></li>
+            <li><a class="history-year-link" href="#history-2003" style="--history-row:10">2003</a></li>
+            <li><a class="history-year-link" href="#history-2002" style="--history-row:11">2002</a></li>
+            <li><a class="history-year-link" href="#history-2001" style="--history-row:12">2001</a></li>
+            <li><a class="history-year-link" href="#history-1999" style="--history-row:13">1999</a></li>
           </ol>
         </nav>
         <div class="history-content" aria-label="연도별 연혁">
-          <section class="history-year-panel" id="history-2024" data-history-year="2024" aria-labelledby="history-title-2024">
+          <section class="history-year-panel" style="--history-row:1" id="history-2024" data-history-year="2024" aria-labelledby="history-title-2024">
             <h3 class="history-year-banner" id="history-title-2024">2024</h3>
             <div class="history-event-list">
               <article class="history-event-card history-reveal">
@@ -147,7 +147,7 @@
               </article>
             </div>
           </section>
-          <section class="history-year-panel" id="history-2023" data-history-year="2023" aria-labelledby="history-title-2023">
+          <section class="history-year-panel" style="--history-row:2" id="history-2023" data-history-year="2023" aria-labelledby="history-title-2023">
             <h3 class="history-year-banner" id="history-title-2023">2023</h3>
             <div class="history-event-list">
               <article class="history-event-card history-reveal">
@@ -160,7 +160,7 @@
               </article>
             </div>
           </section>
-          <section class="history-year-panel" id="history-2022" data-history-year="2022" aria-labelledby="history-title-2022">
+          <section class="history-year-panel" style="--history-row:3" id="history-2022" data-history-year="2022" aria-labelledby="history-title-2022">
             <h3 class="history-year-banner" id="history-title-2022">2022</h3>
             <div class="history-event-list">
               <article class="history-event-card history-reveal">
@@ -169,7 +169,7 @@
               </article>
             </div>
           </section>
-          <section class="history-year-panel" id="history-2021" data-history-year="2021" aria-labelledby="history-title-2021">
+          <section class="history-year-panel" style="--history-row:4" id="history-2021" data-history-year="2021" aria-labelledby="history-title-2021">
             <h3 class="history-year-banner" id="history-title-2021">2021</h3>
             <div class="history-event-list">
               <article class="history-event-card history-reveal">
@@ -178,7 +178,7 @@
               </article>
             </div>
           </section>
-          <section class="history-year-panel" id="history-2020" data-history-year="2020" aria-labelledby="history-title-2020">
+          <section class="history-year-panel" style="--history-row:5" id="history-2020" data-history-year="2020" aria-labelledby="history-title-2020">
             <h3 class="history-year-banner" id="history-title-2020">2020</h3>
             <div class="history-event-list">
               <article class="history-event-card history-reveal">
@@ -187,7 +187,7 @@
               </article>
             </div>
           </section>
-          <section class="history-year-panel" id="history-2019" data-history-year="2019" aria-labelledby="history-title-2019">
+          <section class="history-year-panel" style="--history-row:6" id="history-2019" data-history-year="2019" aria-labelledby="history-title-2019">
             <h3 class="history-year-banner" id="history-title-2019">2019</h3>
             <div class="history-event-list">
               <article class="history-event-card history-reveal">
@@ -196,7 +196,7 @@
               </article>
             </div>
           </section>
-<section class="history-year-panel" id="history-2016" data-history-year="2016" aria-labelledby="history-title-2016">
+<section class="history-year-panel" style="--history-row:7" id="history-2016" data-history-year="2016" aria-labelledby="history-title-2016">
             <h3 class="history-year-banner" id="history-title-2016">2016</h3>
             <div class="history-event-list">
               <article class="history-event-card history-reveal">
@@ -204,7 +204,7 @@
               </article>
             </div>
           </section>
-<section class="history-year-panel" id="history-2015" data-history-year="2015" aria-labelledby="history-title-2015">
+<section class="history-year-panel" style="--history-row:8" id="history-2015" data-history-year="2015" aria-labelledby="history-title-2015">
             <h3 class="history-year-banner" id="history-title-2015">2015</h3>
             <div class="history-event-list">
               <article class="history-event-card history-reveal">
@@ -213,7 +213,7 @@
               </div></article>
             </div>
           </section>
-<section class="history-year-panel" id="history-2010" data-history-year="2010" aria-labelledby="history-title-2010">
+<section class="history-year-panel" style="--history-row:9" id="history-2010" data-history-year="2010" aria-labelledby="history-title-2010">
             <h3 class="history-year-banner" id="history-title-2010">2010</h3>
             <div class="history-event-list">
               <article class="history-event-card history-reveal">
@@ -222,7 +222,7 @@
               </div></article>
             </div>
           </section>
-<section class="history-year-panel" id="history-2003" data-history-year="2003" aria-labelledby="history-title-2003">
+<section class="history-year-panel" style="--history-row:10" id="history-2003" data-history-year="2003" aria-labelledby="history-title-2003">
             <h3 class="history-year-banner" id="history-title-2003">2003</h3>
             <div class="history-event-list">
               <article class="history-event-card history-reveal">
@@ -230,7 +230,7 @@
               </article>
             </div>
           </section>
-<section class="history-year-panel" id="history-2002" data-history-year="2002" aria-labelledby="history-title-2002">
+<section class="history-year-panel" style="--history-row:11" id="history-2002" data-history-year="2002" aria-labelledby="history-title-2002">
             <h3 class="history-year-banner" id="history-title-2002">2002</h3>
             <div class="history-event-list">
               <article class="history-event-card history-reveal">
@@ -239,7 +239,7 @@
               </div></article>
             </div>
           </section>
-<section class="history-year-panel" id="history-2001" data-history-year="2001" aria-labelledby="history-title-2001">
+<section class="history-year-panel" style="--history-row:12" id="history-2001" data-history-year="2001" aria-labelledby="history-title-2001">
             <h3 class="history-year-banner" id="history-title-2001">2001</h3>
             <div class="history-event-list">
               <article class="history-event-card history-reveal">
@@ -247,7 +247,7 @@
               </article>
             </div>
           </section>
-<section class="history-year-panel" id="history-1999" data-history-year="1999" aria-labelledby="history-title-1999">
+<section class="history-year-panel" style="--history-row:13" id="history-1999" data-history-year="1999" aria-labelledby="history-title-1999">
             <h3 class="history-year-banner" id="history-title-1999">1999</h3>
             <div class="history-event-list">
               <article class="history-event-card history-reveal">
