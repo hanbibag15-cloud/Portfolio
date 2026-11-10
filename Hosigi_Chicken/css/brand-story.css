@@ -28,21 +28,29 @@
 .story-section-heading{max-width:880px;margin-bottom:60px}
 .story-section-heading>p:last-child{max-width:730px}
 /* HISTORY: section-scoped sticky years + continuous year cards */
-.history-layout{display:grid;grid-template-columns:minmax(160px,220px) minmax(0,1fr);align-items:start;column-gap:clamp(48px,7vw,118px)}
-.history-year-nav{
-  position:sticky;
-  top:var(--history-nav-top,115px);
+/* Shared rows: the event panel controls each row's natural height. */
+.history-layout{
+  display:grid;
+  grid-template-columns:minmax(160px,220px) minmax(0,1fr);
+  column-gap:clamp(48px,7vw,118px);
+  align-items:start;
+}
+.history-year-nav,
+.history-year-list,
+.history-content{display:contents}
+.history-year-list li{
+  grid-column:1;
+  grid-row:var(--history-row);
   align-self:start;
   min-width:0;
-  max-height:calc(100vh - var(--history-nav-top,115px) - 24px);
-  overflow-y:auto;
-  overflow-x:hidden;
-  overscroll-behavior:contain;
-  scrollbar-width:thin;
-  scrollbar-color:var(--border-default) transparent;
+  margin:0;
+  padding:15px 0 0 20px;
+  border-left:1px solid var(--border-default);
 }
-.history-year-list{display:flex;flex-direction:column;gap:0;list-style:none;margin:0;padding:8px 0 8px 20px;border-left:1px solid var(--border-default)}
-.history-year-list li{margin:0}
+.history-year-panel{
+  grid-column:2;
+  grid-row:var(--history-row);
+}
 .history-year-link{position:relative;display:inline-block;padding:12px 8px;color:var(--brand-brown);font-size:clamp(21px,2.2vw,29px);font-weight:500;letter-spacing:-.035em;line-height:1.3;text-decoration:none;transition:color .3s ease-out,font-weight .3s ease-out}
 .history-year-link::before{content:"";position:absolute;left:-21px;top:14px;bottom:14px;width:3px;background:var(--brand-red);transform:scaleY(0);transform-origin:center;transition:transform .3s ease-out}
 .history-year-link:is(:hover,:focus-visible,.is-active){color:var(--brand-red)}
@@ -61,25 +69,23 @@
 .history-event-card .story-timeline-tag{display:inline-block;margin-bottom:12px;color:var(--brand-red);font-size:11px;font-weight:800;letter-spacing:.12em}
 .history-event-card h3{font-size:clamp(19px,2.1vw,25px);font-weight:750;line-height:1.4;letter-spacing:-.025em}
 .history-event-card p{margin-top:10px;font-size:16px;line-height:1.7;color:#6d6561;word-break:keep-all}
-.history-year-nav::-webkit-scrollbar{width:5px}
-.history-year-nav::-webkit-scrollbar-thumb{background:var(--border-default);border-radius:10px}
 .history-event-card.history-reveal{transition:opacity .7s ease-out,transform .7s ease-out}
 .history-motion-ready .history-event-card.history-reveal:not(.is-visible){opacity:0;transform:translateY(24px)}
 .history-motion-ready .history-event-card.history-reveal.is-visible{opacity:1;transform:translateY(0)}
 @media(max-width:1024px) and (min-width:768px){
   .history-layout{grid-template-columns:145px minmax(0,1fr);column-gap:36px}
-  .history-year-nav{top:var(--history-nav-top,96px)}
   .history-year-banner{min-height:120px}
 }
 @media(max-width:767px){
   .history-layout{display:block}
-  .history-year-nav{position:sticky;top:var(--history-nav-top,70px);z-index:5;max-height:none;overflow:visible;margin:0 -16px 26px;padding:12px 16px;background:var(--background-subtle);border-bottom:1px solid var(--border-default)}
+  .history-year-nav{display:block;position:static;margin:0 -16px 26px;padding:12px 16px;background:var(--background-subtle);border-bottom:1px solid var(--border-default)}
   .history-year-list{display:flex;flex-direction:row;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;list-style:none;margin:0;padding:0 0 5px;border:0}
-  .history-year-list li{flex:0 0 auto}
+  .history-year-list li{display:block;flex:0 0 auto;margin:0;padding:0;border:0}
   .history-year-link{padding:9px 12px;font-size:18px;white-space:nowrap}
   .history-year-link::before{left:12px;right:12px;top:auto;bottom:1px;width:auto;height:3px;transform:scaleX(0);transform-origin:left}
   .history-year-link.is-active::before{transform:scaleX(1)}
-  .history-year-panel{scroll-margin-top:145px;padding-bottom:42px}
+  .history-content{display:block}
+  .history-year-panel{display:block;scroll-margin-top:100px;padding-bottom:42px}
   .history-year-banner{min-height:104px;border-radius:16px 16px 0 0;font-size:clamp(44px,10vw,62px);padding:18px 24px}
   .history-event-list{padding-top:14px}
   .history-event-card{padding:23px 21px}
