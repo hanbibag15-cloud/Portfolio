@@ -36,7 +36,7 @@
       const link = links[index];
       if (row && link) {
         const left = link.offsetLeft - row.offsetLeft - (row.clientWidth - link.offsetWidth) / 2;
-        row.scrollTo({ left, behavior: reduced.matches ? "instant" : "smooth" });
+        row.scrollTo({ left, behavior: reduced.matches ? "auto" : "smooth" });
       }
     }
   }
@@ -67,7 +67,7 @@
       clickTarget = i;
       activate(i);
       const targetY = Math.max(0, window.scrollY + panels[i].getBoundingClientRect().top - offset());
-      window.scrollTo({ top: targetY, behavior: reduced.matches ? "instant" : "smooth" });
+      window.scrollTo({ top: targetY, behavior: reduced.matches ? "auto" : "smooth" });
       // Don't change the URL hash: it can trigger a second, uncorrected jump.
       // A user scroll or wheel action can take over immediately.
     });
@@ -77,6 +77,7 @@
   window.addEventListener("touchstart", () => { clickTarget = null; }, { passive: true });
   window.addEventListener("keydown", () => { clickTarget = null; });
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("scrollend", () => { clickTarget = null; updateOnScroll(); });
   window.addEventListener("resize", onScroll, { passive: true });
 
   // Reveal cards once without modifying their layout or document height.
