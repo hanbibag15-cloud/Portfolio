@@ -75,13 +75,24 @@
 
   function update() {
     frame = 0;
-    if (lockedIndex >= 0) return;
-    // Activate when a RED YEAR HEADER crosses the line 25% up from the
-    // viewport bottom, in either direction (not when its card reaches the top).
-    const line = window.innerHeight * 0.75;
+    // The selection lock is only for a programmatic year-link jump.
+    // Release it on arrival; manual wheel/touch/keyboard also releases it.
+    if (lockedIndex >= 0) {
+      const destination = panels[lockedIndex];
+      if (destination &&
+          Math.abs(destination.getBoundingClientRect().top - readingOffset()) < 12) {
+        release();
+      } else {
+        return;
+      }
+    }
+
+    // Use the red YEAR HEADER, not the card or the top of the viewport.
+    // At 75% viewport height, the next year is already active.
+    const activationLine = window.innerHeight * 0.75;
     let index = 0;
     banners.forEach((banner, i) => {
-      if (banner && banner.getBoundingClientRect().top <= line) index = i;
+      if (banner && banner.getBoundingClientRect().top <= activationLine) index = i;
     });
     activate(index);
   }
@@ -148,4 +159,17 @@
 
   observeYearHeaders();
   update();
+
+  // The desktop page also uses eased wheel scrolling. Recheck the actual
+  // element positions while HISTORY is visible, even if scroll events or
+  // IntersectionObserver callbacks are delayed by other scroll handlers.
+  // No page content or layout is altered by this monitor.
+  function monitorActiveYear() {
+    if (!document.hidden) {
+      const rect = section.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < window.innerHeight) update();
+    }
+    requestAnimationFrame(monitorActiveYear);
+  }
+  requestAnimationFrame(monitorActiveYear);
 })();
