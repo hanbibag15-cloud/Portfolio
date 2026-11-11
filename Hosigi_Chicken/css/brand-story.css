@@ -41,12 +41,14 @@
 .history-year-list li{
   grid-column:1;
   grid-row:var(--history-row);
-  align-self:start;
+  align-self:center;
   min-width:0;
-  margin:0;
-  padding:15px 0 0 20px;
+  /* Match the panel's bottom spacing so the year centers on visible content. */
+  margin:0 0 clamp(44px,6vw,80px);
+  padding:0 0 0 20px;
   border-left:1px solid var(--border-default);
 }
+.history-year-list li:last-child{margin-bottom:0}
 .history-year-panel{
   grid-column:2;
   grid-row:var(--history-row);
