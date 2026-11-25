@@ -286,3 +286,26 @@
   .story-history .history-event-list{padding-top:24px;gap:10px}
   .story-history .history-event-card{min-height:100px;padding:20px 16px;border-radius:15px}
 }
+
+/* HISTORY — section-bounded sticky year index, with centered timeline cards. */
+.story-history .history-layout{display:grid;grid-template-columns:120px minmax(0,1fr) 120px;gap:24px;align-items:start;width:100%;max-width:1240px;margin-inline:auto}
+.story-history .history-year-nav{display:block;grid-column:1;grid-row:1;position:sticky;top:112px;align-self:start;max-height:calc(100vh - 136px);overflow-y:auto;overscroll-behavior-y:contain;scrollbar-width:thin;margin:0;padding:0;background:transparent;border:0}
+.story-history .history-year-list{display:flex;flex-direction:column;flex-wrap:nowrap;align-items:flex-start;justify-content:flex-start;gap:0;overflow:visible;margin:0 0 0 4px;padding:0 0 0 13px;border-left:3px solid var(--border-default)}
+.story-history .history-year-list li{margin:0;padding:0;border:0}
+.story-history .history-year-link{display:block;position:relative;padding:8px 0 8px 13px;color:var(--brand-brown);font-size:21px;font-weight:750;line-height:1.25;white-space:nowrap}
+.story-history .history-year-link::before{left:0;right:auto;top:50%;bottom:auto;width:0;height:0;background:transparent;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:7px solid var(--brand-red);transform:translateY(-50%) scale(.75);opacity:0;transition:opacity .2s,transform .2s}
+.story-history .history-year-link.is-active{color:var(--brand-red);font-weight:850}
+.story-history .history-year-link.is-active::before{transform:translateY(-50%) scale(1);opacity:1}
+.story-history .history-content{display:block;grid-column:2;grid-row:1;min-width:0}
+@media(max-width:1024px){
+  .story-history .history-layout{grid-template-columns:100px minmax(0,1fr) 100px;gap:14px}
+  .story-history .history-year-link{font-size:18px}
+}
+@media(max-width:767px){
+  .story-history .history-layout{grid-template-columns:66px minmax(0,1fr);gap:12px}
+  .story-history .history-year-nav{top:90px;max-height:calc(100vh - 110px)}
+  .story-history .history-year-list{margin-left:0;padding-left:5px;border-left-width:2px}
+  .story-history .history-year-link{font-size:14px;padding:8px 0 8px 10px}
+  .story-history .history-year-link::before{border-left-width:5px;border-top-width:4px;border-bottom-width:4px}
+}
+@media(prefers-reduced-motion:reduce){.story-history .history-year-link::before{transition:none}}
