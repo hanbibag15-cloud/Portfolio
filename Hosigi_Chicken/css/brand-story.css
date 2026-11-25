@@ -330,13 +330,13 @@
 .story-flavors .story-flavor-description-inner{min-height:0;overflow:hidden}
 @media(hover:hover) and (pointer:fine) and (min-width:768px){
  .story-flavors .story-flavor-card::after{opacity:0}
- .story-flavors .story-flavor-card:is(:hover,:focus-visible,:focus-within)::after{opacity:1}
- .story-flavors .story-flavor-card:is(:hover,:focus-visible,:focus-within) .story-flavor-index{background-color:var(--brand-red)}
+ .story-flavors .story-flavor-card:is(:hover,:focus-visible)::after{opacity:1}
+ .story-flavors .story-flavor-card:is(:hover,:focus-visible) .story-flavor-index{background-color:var(--brand-red)}
  .story-flavors .story-flavor-description{grid-template-rows:0fr}
  .story-flavors .story-flavor-copy p{opacity:0;transform:translateY(12px)}
- .story-flavors .story-flavor-card:is(:hover,:focus-within) .story-flavor-description{grid-template-rows:1fr}
- .story-flavors .story-flavor-card:is(:hover,:focus-within) .story-flavor-copy p{opacity:1;transform:none}
- .story-flavors .story-flavor-card:is(:hover,:focus-within) .story-value-photo{transform:scale(1.05)}
+ .story-flavors .story-flavor-card:is(:hover,:focus-visible) .story-flavor-description{grid-template-rows:1fr}
+ .story-flavors .story-flavor-card:is(:hover,:focus-visible) .story-flavor-copy p{opacity:1;transform:none}
+ .story-flavors .story-flavor-card:is(:hover,:focus-visible) .story-value-photo{transform:scale(1.05)}
 }
 .story-flavors .story-flavor-card:focus-visible{outline:3px solid var(--brand-red);outline-offset:4px}
 @media(max-width:767px){
@@ -347,7 +347,7 @@
 }
 @media(prefers-reduced-motion:reduce){
  .story-flavors .story-flavor-card.story-reveal,.story-flavors .story-value-photo,.story-flavors .story-flavor-description,.story-flavors .story-flavor-copy p,.story-flavors .story-flavor-index,.story-flavors .story-flavor-card::after{transition:none!important}
- .story-flavors .story-flavor-card:is(:hover,:focus-within) .story-value-photo{transform:none}
+ .story-flavors .story-flavor-card:is(:hover,:focus-visible) .story-value-photo{transform:none}
 }
 
 /* HISTORY: viewport-fitted rail, bounded by the timeline rather than root overflow. */
