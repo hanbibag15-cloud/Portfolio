@@ -14,6 +14,59 @@
 <script src="js/gnb-motion.js?v=2" defer></script>
 <script src="js/brand-story.js?v=2" defer></script>
 <script src="js/smooth-wheel.js?v=4" defer></script>
+<style>
+/* Philosophy page only — other BRAND pages retain their existing styles. */
+.philosophy-page{--philosophy-width:1480px;background:#fff;color:var(--brand-brown,#241713)}
+.philosophy-page .philosophy-wrap{width:min(var(--philosophy-width),calc(100% - 80px));margin-inline:auto}
+.philosophy-page .brand-subpage-hero{background:#fff;padding:100px 0 70px}
+.philosophy-page .brand-subpage-hero h2{color:var(--brand-brown,#241713);font-weight:850}
+.philosophy-page .philosophy-nav{background:#f8f5f2;border-block:1px solid var(--border-default,#e7e1dd)}
+.philosophy-page .brand-subpage-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:0}
+.philosophy-page .brand-subpage-tabs a{min-width:0;border:0;border-bottom:3px solid transparent;border-radius:0;background:transparent;color:var(--brand-brown,#241713);min-height:68px;font-size:17px}
+.philosophy-page .brand-subpage-tabs a:is(.is-active,:hover){border-bottom-color:var(--brand-red);color:var(--brand-red);background:transparent}
+.philosophy-page .philosophy-section{padding-block:clamp(80px,9vw,146px)}
+.philosophy-page .philosophy-heading{text-align:center;margin:0 auto clamp(36px,5vw,72px);max-width:1050px}
+.philosophy-page h2,.philosophy-page h3{word-break:keep-all;letter-spacing:-.045em}
+.philosophy-page .philosophy-heading h2,.philosophy-page .philosophy-feature-copy h2{font-size:clamp(36px,4.1vw,58px);font-weight:800;line-height:1.24;margin:0}
+.philosophy-page strong{color:var(--brand-red)}
+.philosophy-page .philosophy-mission .philosophy-heading h2{font-size:clamp(48px,6.3vw,96px);line-height:1.18}
+.philosophy-page .philosophy-heading p,.philosophy-page .philosophy-feature-copy p{font-size:clamp(16px,1.3vw,19px);line-height:1.8;margin:24px 0 0;color:var(--text-primary,#554b46);word-break:keep-all}
+.philosophy-page .philosophy-heading .philosophy-mission-note{max-width:720px;margin:12px auto 0;font-size:16px}
+.philosophy-page figure{margin:0;overflow:hidden;border-radius:10px;background:#f8f5f2}
+.philosophy-page figure img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.philosophy-page .philosophy-banner{aspect-ratio:16/7}
+.philosophy-page .philosophy-values{padding-top:clamp(30px,4vw,64px)}
+.philosophy-page .philosophy-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.philosophy-page .philosophy-card{min-width:0}
+.philosophy-page .philosophy-card figure{aspect-ratio:3/4}
+.philosophy-page .philosophy-number{display:block;color:var(--brand-red);font-weight:800;font-size:18px;margin-top:24px}
+.philosophy-page .philosophy-card h3{margin:8px 0 0;font-size:clamp(26px,2.5vw,36px);font-weight:800}
+.philosophy-page .philosophy-card p{margin:10px 0 0;font-size:16px;line-height:1.7;word-break:keep-all;color:var(--text-primary,#554b46)}
+.philosophy-page .philosophy-card .philosophy-card-lead{font-weight:700;font-size:19px}
+.philosophy-page .philosophy-quality{background:#f8f5f2}
+.philosophy-page .philosophy-split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(32px,6vw,96px);align-items:center}
+.philosophy-page .philosophy-feature-photo{aspect-ratio:4/5}
+.philosophy-page .philosophy-feature-copy{min-width:0}
+.philosophy-page .philosophy-promises{margin:32px 0 0;padding:0;list-style:none;border-top:1px solid #d9d0ca}
+.philosophy-page .philosophy-promises li{display:flex;align-items:center;gap:16px;padding:22px 0;border-bottom:1px solid #d9d0ca;font-size:clamp(18px,1.6vw,23px);font-weight:700}
+.philosophy-page .philosophy-promises svg{width:32px;height:32px;flex:none;color:var(--brand-red)}
+.philosophy-page .philosophy-vision{background:var(--brand-red,#e60012);color:white;text-align:center;padding:clamp(100px,12vw,190px) 0}
+.philosophy-page .philosophy-vision h2{font-size:clamp(42px,6vw,88px);font-weight:850;line-height:1.2;margin:0;color:white}
+.philosophy-page .philosophy-vision p{font-size:clamp(16px,1.5vw,21px);margin:28px 0 0;color:white}
+@media(max-width:767px){
+ .philosophy-page .philosophy-wrap{width:calc(100% - 32px)}
+ .philosophy-page .brand-subpage-hero{padding:70px 0 50px}
+ .philosophy-page .brand-subpage-tabs a{min-height:54px;font-size:14px}
+ .philosophy-page .philosophy-section{padding-block:72px}
+ .philosophy-page .philosophy-mission .philosophy-heading h2{font-size:clamp(34px,8vw,48px)}
+ .philosophy-page .philosophy-heading h2,.philosophy-page .philosophy-feature-copy h2{font-size:clamp(30px,7vw,42px)}
+ .philosophy-page .philosophy-banner{aspect-ratio:4/3}
+ .philosophy-page .philosophy-grid,.philosophy-page .philosophy-split{grid-template-columns:1fr;gap:36px}
+ .philosophy-page .philosophy-card figure,.philosophy-page .philosophy-feature-photo{aspect-ratio:4/3}
+ .philosophy-page .philosophy-partnership .philosophy-feature-photo{grid-row:1}
+ .philosophy-page .philosophy-vision h2{font-size:clamp(34px,8vw,48px)}
+}
+</style>
 </head>
 <body>
 <div id="wrap">
@@ -69,27 +122,57 @@
                 </button>
             </div>
         </header>
-<main class="brand-subpage" id="main-content">
+<main class="brand-subpage philosophy-page" id="main-content">
   <section class="brand-subpage-hero brand-subpage-reveal" aria-labelledby="brand-page-title">
     <div class="brand-subpage-container">
-      <h2 id="brand-page-title">브랜드 철학</h2>
-      <p class="brand-subpage-lead">호식이두마리치킨이 전하고자 하는 가치를 소개하는 공간입니다.</p>
+      <h2 id="brand-page-title">BRAND PHILOSOPHY</h2>
+      <p class="brand-subpage-lead">두 마리의 즐거움을 넘어 모두의 행복을 생각합니다.</p>
     </div>
   </section>
-  <section class="brand-subpage-content" aria-label="브랜드 철학 소개">
-    <div class="brand-subpage-container">
-      <nav class="brand-subpage-tabs brand-subpage-reveal" aria-label="브랜드 페이지">
+  <div class="philosophy-nav"><div class="philosophy-wrap"><nav class="brand-subpage-tabs brand-subpage-reveal" aria-label="브랜드 페이지">
         <a href="brand-story.html"><span class="brand-submenu-text">호식이 이야기</span></a>
         <a href="brand-philosophy.html" class="is-active" aria-current="page">브랜드 철학</a>
         <a href="brand-social.html"><span class="brand-submenu-text">사회공헌</span></a>
-      </nav>
-      <div class="brand-subpage-placeholder brand-subpage-reveal">
-        <span class="brand-subpage-status">콘텐츠 준비 중</span>
-        <h3>브랜드 철학</h3>
-        <p>브랜드가 중요하게 생각하는 가치와 약속을 정리할 예정입니다.</p>
-        <a class="brand-subpage-home" href="brand.html">메인페이지로 돌아가기 <span aria-hidden="true">→</span></a>
+      </nav></div></div>
+  <section class="philosophy-section philosophy-mission" aria-labelledby="philosophy-mission-title">
+    <div class="philosophy-wrap">
+      <div class="philosophy-heading brand-subpage-reveal">
+        <h2 id="philosophy-mission-title">세상을 두 배로<br><strong>행복하게 만드는 기업</strong></h2>
+        <p>고객과 가맹점, 그리고 이웃 모두의 행복을 생각합니다.</p>
+        <p class="philosophy-mission-note">한 마리의 가격으로 두 마리의 즐거움을 전하는 마음에서 시작해, 더 많은 사람과 행복을 나누고자 합니다.</p>
+      </div>
+      <figure class="philosophy-banner brand-subpage-reveal"><img src="img/chicken_img21.png" alt="함께 나누는 치킨" loading="lazy"></figure>
+    </div>
+  </section>
+  <section class="philosophy-section philosophy-values" aria-labelledby="philosophy-values-title">
+    <div class="philosophy-wrap">
+      <div class="philosophy-heading brand-subpage-reveal"><h2 id="philosophy-values-title">호식이가 지켜가는 <strong>세 가지 가치</strong></h2><p>더 큰 행복을 만들기 위한 호식이의 경영이념입니다.</p></div>
+      <div class="philosophy-grid">
+        <article class="philosophy-card brand-subpage-reveal"><figure><img src="img/hot_chicken_img.png" alt="치킨 조리 이미지" loading="lazy"></figure><span class="philosophy-number" aria-hidden="true">01</span><h3>품질경영</h3><p class="philosophy-card-lead">맛과 품질에 대한 진심</p><p>철저한 품질과 위생 관리를 통해 고객 만족을 추구합니다.</p></article>
+        <article class="philosophy-card brand-subpage-reveal"><figure><img src="img/h_store.png" alt="호식이두마리치킨 매장 이미지" loading="lazy"></figure><span class="philosophy-number" aria-hidden="true">02</span><h3>상생경영</h3><p class="philosophy-card-lead">함께 성장하는 가치</p><p>가맹점과의 동반성장과 사회적 책임을 중요하게 생각합니다.</p></article>
+        <article class="philosophy-card brand-subpage-reveal"><figure><img src="img/Startups_img.png" alt="호식이두마리치킨 창업 안내 이미지" loading="lazy"></figure><span class="philosophy-number" aria-hidden="true">03</span><h3>인재경영</h3><p class="philosophy-card-lead">사람을 향한 믿음</p><p>책임과 자율이 조화를 이루는 기업문화를 지향합니다.</p></article>
       </div>
     </div>
+  </section>
+  <section class="philosophy-section philosophy-quality" aria-labelledby="philosophy-quality-title">
+    <div class="philosophy-wrap philosophy-split">
+      <figure class="philosophy-feature-photo brand-subpage-reveal"><img src="img/chicken_img19.png" alt="풍성한 치킨 메뉴" loading="lazy"></figure>
+      <div class="philosophy-feature-copy brand-subpage-reveal"><h2 id="philosophy-quality-title">변하지 않는 맛,<br><strong>타협하지 않는 품질.</strong></h2><p>고객이 믿고 즐길 수 있는 한 끼를 위해 맛과 품질을 중요하게 생각합니다.</p>
+      <ul class="philosophy-promises">
+        <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 25C3 12 12 5 27 5c0 15-8 24-21 20ZM6 25 20 12"/></svg>신선한 식재료</li>
+        <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m16 3 11 5v8c0 6-5 10-11 13C10 26 5 22 5 16V8l11-5Z"/><path d="m11 16 4 4 7-8"/></svg>철저한 위생 관리</li>
+        <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="16" cy="16" r="12"/><path d="m10 16 4 4 8-9"/></svg>일관된 맛과 품질</li>
+      </ul></div>
+    </div>
+  </section>
+  <section class="philosophy-section philosophy-partnership" aria-labelledby="philosophy-partnership-title">
+    <div class="philosophy-wrap philosophy-split">
+      <div class="philosophy-feature-copy brand-subpage-reveal"><h2 id="philosophy-partnership-title">함께 걷는 길,<br><strong>함께 만드는 내일.</strong></h2><p>가맹점과 본사가 함께 성장하는 상생의 가치를 실천합니다.</p><p>서로를 존중하고 신뢰하며, 고객과 가맹점주 모두의 행복을 향해 나아갑니다.</p></div>
+      <figure class="philosophy-feature-photo brand-subpage-reveal"><img src="img/Startups_img.png" alt="호식이두마리치킨 창업 안내 이미지" loading="lazy"></figure>
+    </div>
+  </section>
+  <section class="philosophy-vision" aria-labelledby="philosophy-vision-title">
+    <div class="philosophy-wrap brand-subpage-reveal"><h2 id="philosophy-vision-title">더 나은 오늘,<br>두 배로 행복한 내일.</h2><p>함께 성장하는 호식이두마리치킨</p></div>
   </section>
 </main>
 <footer class="site-footer">
