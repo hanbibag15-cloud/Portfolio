@@ -72,6 +72,20 @@
         else if (selected<0) activate(0);
       }
     }
+    // Drive only the decorative background from actual scroll position.
+    // Keep the banner box stable for Scroll Spy, anchor offsets and pointer alignment.
+    const usable = Math.max(1, innerHeight - offset);
+    const finish = offset + usable * .40;
+    const start = innerHeight;
+    bounds.forEach(({banner}) => {
+      if (!banner) return;
+      const top = banner.getBoundingClientRect().top;
+      const progress = reduced.matches ? 1 : Math.max(0,Math.min(1,(start-top)/Math.max(1,start-finish)));
+      const eased = progress*progress*(3-2*progress);
+      const width = (25 + 75*eased).toFixed(3)+"%";
+      if (banner.style.getPropertyValue("--history-banner-width") !== width)
+        banner.style.setProperty("--history-banner-width",width);
+    });
     if (wide.matches && !reduced.matches) {
       const rect = section.getBoundingClientRect();
       if (rect.bottom > 0 && rect.top < innerHeight) {
@@ -111,5 +125,6 @@
     observer.observe(content);
   }
   document.fonts?.ready.then(()=>{measure();schedule()});
+  if (reduced.addEventListener) reduced.addEventListener("change",schedule);
   measure();update();
 })();
