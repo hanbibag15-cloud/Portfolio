@@ -18,12 +18,16 @@
 /* Philosophy page only — other BRAND pages retain their existing styles. */
 .philosophy-page{--philosophy-width:1480px;background:#fff;color:var(--brand-brown,#241713)}
 .philosophy-page .philosophy-wrap{width:min(var(--philosophy-width),calc(100% - 80px));margin-inline:auto}
-.philosophy-page .brand-subpage-hero{background:#fff;padding:100px 0 70px}
-.philosophy-page .brand-subpage-hero h2{color:var(--brand-brown,#241713);font-weight:850}
-.philosophy-page .philosophy-nav{background:#f8f5f2;border-block:1px solid var(--border-default,#e7e1dd)}
-.philosophy-page .brand-subpage-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:0}
-.philosophy-page .brand-subpage-tabs a{min-width:0;border:0;border-bottom:3px solid transparent;border-radius:0;background:transparent;color:var(--brand-brown,#241713);min-height:68px;font-size:17px}
-.philosophy-page .brand-subpage-tabs a:is(.is-active,:hover){border-bottom-color:var(--brand-red);color:var(--brand-red);background:transparent}
+.philosophy-page .brand-subpage-hero{padding:100px 20px 82px;text-align:center;background:var(--background-subtle)}
+.philosophy-page .brand-subpage-hero .brand-subpage-container,.philosophy-page .philosophy-nav .philosophy-wrap{width:min(1240px,calc(100% - 48px));margin-inline:auto}
+.philosophy-page .brand-subpage-hero h2{margin:0;color:var(--brand-red);font-size:clamp(36px,5vw,68px);font-weight:700;line-height:1.05;letter-spacing:-.023em}
+.philosophy-page .brand-subpage-lead{margin-top:12px;font-size:20px;font-weight:600;line-height:1.5;color:var(--text-primary);word-break:keep-all}
+.philosophy-page .philosophy-nav{padding:60px 20px 0;background:var(--surface-default)}
+.philosophy-page .brand-subpage-tabs{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin:0}
+.philosophy-page .brand-subpage-tabs a{display:inline-flex;align-items:center;justify-content:center;min-height:46px;min-width:148px;padding:12px 24px;background:var(--background-subtle);border:1px solid var(--border-default);border-radius:999px;color:var(--text-primary);font:500 16px var(--font);text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.philosophy-page .brand-subpage-tabs a:is(.is-active,:hover,:focus-visible){background:var(--brand-red);border-color:var(--brand-red);color:var(--neutral-white)}
+.philosophy-page .brand-subpage-tabs a:focus-visible{outline:2px solid var(--brand-brown);outline-offset:4px}
+@media(max-width:1024px){.philosophy-page .brand-subpage-hero{padding:76px 20px 65px}}
 .philosophy-page .philosophy-section{padding-block:clamp(80px,9vw,146px)}
 .philosophy-page .philosophy-heading{text-align:center;margin:0 auto clamp(36px,5vw,72px);max-width:1050px}
 .philosophy-page h2,.philosophy-page h3{word-break:keep-all;letter-spacing:-.045em}
@@ -55,8 +59,13 @@
 .philosophy-page .philosophy-vision p{font-size:clamp(16px,1.5vw,21px);margin:28px 0 0;color:white}
 @media(max-width:767px){
  .philosophy-page .philosophy-wrap{width:calc(100% - 32px)}
- .philosophy-page .brand-subpage-hero{padding:70px 0 50px}
- .philosophy-page .brand-subpage-tabs a{min-height:54px;font-size:14px}
+ .philosophy-page .brand-subpage-hero{padding:60px 16px 48px}
+ .philosophy-page .brand-subpage-hero .brand-subpage-container,.philosophy-page .philosophy-nav .philosophy-wrap{width:calc(100% - 32px)}
+ .philosophy-page .brand-subpage-hero h2{font-size:clamp(30px,7vw,44px)}
+ .philosophy-page .brand-subpage-lead{margin-top:16px;font-size:15px}
+ .philosophy-page .philosophy-nav{padding:35px 16px 0}
+ .philosophy-page .brand-subpage-tabs{gap:8px}
+ .philosophy-page .brand-subpage-tabs a{min-width:0;flex:1 1 calc(50% - 8px);padding:10px 8px;font-size:13px}
  .philosophy-page .philosophy-section{padding-block:72px}
  .philosophy-page .philosophy-mission .philosophy-heading h2{font-size:clamp(34px,8vw,48px)}
  .philosophy-page .philosophy-heading h2,.philosophy-page .philosophy-feature-copy h2{font-size:clamp(30px,7vw,42px)}
@@ -66,6 +75,8 @@
  .philosophy-page .philosophy-partnership .philosophy-feature-photo{grid-row:1}
  .philosophy-page .philosophy-vision h2{font-size:clamp(34px,8vw,48px)}
 }
+@media(max-width:420px){.philosophy-page .brand-subpage-tabs a{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.philosophy-page .brand-subpage-tabs a{transition:none!important}}
 </style>
 </head>
 <body>
