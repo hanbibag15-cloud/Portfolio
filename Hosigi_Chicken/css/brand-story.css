@@ -330,3 +330,9 @@
 .story-history .history-year-link:not(.is-active)::before{opacity:0;transform:translate(-4px,-50%)}
 .story-history .history-year-link:not(.is-active):hover{color:var(--brand-red)}
 @media(max-width:767px){.story-history .history-year-link{font-size:var(--history-link-size,14px)}}
+
+/* HISTORY: scroll-driven, center-out background only; layout and typography stay fixed. */
+.story-history .history-year-banner{isolation:isolate;background:transparent}
+.story-history .history-year-banner::before{content:"";position:absolute;z-index:-1;inset-block:0;left:50%;transform:translateX(-50%);width:min(100%,max(var(--history-banner-width,100%),calc(4ch + 16px)));border-radius:inherit;background:var(--brand-red);pointer-events:none}
+.story-history .history-year-banner::after{pointer-events:none}
+@media(prefers-reduced-motion:reduce){.story-history .history-year-banner::before{width:100%}}
