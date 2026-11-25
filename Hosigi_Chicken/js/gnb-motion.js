@@ -55,6 +55,8 @@
       link.classList.remove("gnb-enter");
     });
     if(index<0||reduced.matches)return;
+    // A same-category document navigation already has its active marker before paint.
+    if(index===1 && permanent===1 && document.documentElement.classList.contains("brand-gnb-continuation"))return;
     const link=links[index];
     // Reflow guarantees animation runs when opened directly or reloaded.
     void link.offsetWidth;
