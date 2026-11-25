@@ -54,18 +54,7 @@
       else link.removeAttribute("aria-current");
     });
 
-    // Keep the active year in view inside the vertical sticky index.
-    const nav = section.querySelector(".history-year-nav");
-    const link = links[index];
-    if (nav && link) {
-      const navRect = nav.getBoundingClientRect();
-      const linkRect = link.getBoundingClientRect();
-      if (linkRect.top < navRect.top || linkRect.bottom > navRect.bottom) {
-        const top = nav.scrollTop + linkRect.top - navRect.top -
-          (nav.clientHeight - linkRect.height) / 2;
-        nav.scrollTo({ top: Math.max(0, top), behavior: reduced.matches ? "auto" : "smooth" });
-      }
-    }
+    // Year links now share the same grid rows as their corresponding panels.
   }
 
   function release() {
