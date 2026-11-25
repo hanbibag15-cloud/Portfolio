@@ -59,6 +59,7 @@
 
   // A click on an anchor, keyboard scrolling, or viewport change should not
   // compete with a previous wheel animation.
+  window.addEventListener('hosigi:birth-layout-rebase', stop);
   window.addEventListener('keydown', stop);
   window.addEventListener('resize', stop);
   window.addEventListener('pagehide', stop);
