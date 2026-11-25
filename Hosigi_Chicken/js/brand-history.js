@@ -10,11 +10,22 @@
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   const wide = window.matchMedia("(min-width: 1550px)");
   const decorations = [...section.querySelectorAll(".history-decoration")];
+  const layout = section.querySelector(".history-layout");
+  const content = section.querySelector(".history-content");
+  if (!layout || !content) return;
   let selected = -1, frame = 0, lock = -1, timer = 0, offset = 112;
+  let previousY = window.scrollY, direction = 1;
+  const bounds = panels.map(panel => ({banner:panel.querySelector(".history-year-banner"),list:panel.querySelector(".history-event-list")}));
   function measure() {
     const header = document.querySelector(".site-header");
     offset = Math.ceil(header ? header.getBoundingClientRect().height : 0) + 24;
     section.style.setProperty("--history-sticky-top", offset + "px");
+    const available = Math.max(1, innerHeight - offset - 16);
+    const nominal = innerWidth <= 767 ? 14 : Math.max(17, Math.min(22, innerWidth * .015));
+    const size = Math.min(nominal, available / links.length / 1.2);
+    const pad = Math.max(0, Math.min(8, (available / links.length - size * 1.2) / 2));
+    section.style.setProperty("--history-link-size", size + "px");
+    section.style.setProperty("--history-link-pad", pad + "px");
   }
   function activate(index) {
     if (selected === index) return;
@@ -24,21 +35,42 @@
       if (i === index) link.setAttribute("aria-current", "location");
       else link.removeAttribute("aria-current");
     });
-    const link = links[index];
-    if (!link || nav.scrollHeight <= nav.clientHeight) return;
-    const a = link.getBoundingClientRect(), b = nav.getBoundingClientRect();
-    if (a.top < b.top || a.bottom > b.bottom) {
-      nav.scrollTo({top:Math.max(0,nav.scrollTop+a.top-b.top-(nav.clientHeight-a.height)/2),behavior:reduced.matches?"auto":"smooth"});
-    }
   }
   function release() { lock = -1; clearTimeout(timer); }
   function update() {
     frame = 0;
+    const y = window.scrollY;
+    if (Math.abs(y-previousY) > .5) direction = y > previousY ? 1 : -1;
+    previousY = y;
+    const rail = layout.getBoundingClientRect();
+    const end = content.getBoundingClientRect().bottom;
+    const travel = Math.max(0, end - rail.top - nav.offsetHeight);
+    const shift = Math.max(0, Math.min(travel, offset - rail.top));
+    nav.style.setProperty("--history-nav-y", shift.toFixed(2)+"px");
     if (lock >= 0 && Math.abs(panels[lock].getBoundingClientRect().top-offset) <= 8) release();
     if (lock < 0) {
-      let index = 0;
-      panels.forEach((panel,i) => { if (panel.getBoundingClientRect().top <= offset+12) index=i; });
-      activate(index);
+      const top = offset, bottom = innerHeight - 12, viewport = Math.max(1,bottom-top);
+      const metrics = bounds.map((item,i) => {
+        const a = (item.banner || panels[i]).getBoundingClientRect();
+        const b = (item.list || panels[i]).getBoundingClientRect();
+        const height = Math.max(1,b.bottom-a.top);
+        const visible = Math.max(0,Math.min(bottom,b.bottom)-Math.max(top,a.top));
+        const ratio = visible / Math.min(height,viewport);
+        const center = Math.abs((Math.max(top,a.top)+Math.min(bottom,b.bottom))/2-(top+bottom)/2);
+        return {i,ratio,visible,center,eligible:ratio >= .85};
+      });
+      const candidates = metrics.filter(m=>m.eligible && m.visible>0);
+      candidates.sort((a,b)=>b.visible-a.visible || a.center-b.center || direction*(b.i-a.i));
+      const current=metrics[selected];
+      if (candidates.length) {
+        const best=candidates[0];
+        if (!current || !current.eligible || best.i===selected || best.visible>current.visible+Math.max(20,viewport*.07)) activate(best.i);
+      } else if (!current || current.visible===0) {
+        // During large jumps or initial deep links choose the dominant visible group.
+        const best=metrics.filter(m=>m.visible>0).sort((a,b)=>b.visible-a.visible)[0];
+        if (best && best.ratio>=.5) activate(best.i);
+        else if (selected<0) activate(0);
+      }
     }
     if (wide.matches && !reduced.matches) {
       const rect = section.getBoundingClientRect();
@@ -73,5 +105,11 @@
     cards.forEach(card=>{if(card.getBoundingClientRect().top<innerHeight)card.classList.add("is-visible");else observer.observe(card)});
     section.classList.add("history-motion-ready");
   } else cards.forEach(card=>card.classList.add("is-visible"));
+  if ("ResizeObserver" in window) {
+    const observer=new ResizeObserver(()=>{measure();schedule()});
+    observer.observe(document.querySelector(".site-header") || section);
+    observer.observe(content);
+  }
+  document.fonts?.ready.then(()=>{measure();schedule()});
   measure();update();
 })();
