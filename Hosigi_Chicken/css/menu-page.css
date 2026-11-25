@@ -258,17 +258,18 @@ body.menu-modal-open{overflow:hidden}
 .menu-modal-source-link:hover,.menu-modal-source-link:focus-visible{color:var(--brand-brown);}
 
 
-/* ALL MENU banner: Figma 30:136. Uploaded cutouts include rotation and transparent padding. */
+/* ALL MENU banner: updated Figma 30:136. Cutouts already contain rotation and transparent padding. */
 .all-menu-intro{position:relative;overflow:hidden;isolation:isolate}
 .all-menu-intro > .all-menu-container{position:relative;z-index:1}
-.all-menu-intro-chicken{position:absolute;z-index:0;top:0;right:-49.291px;width:505.291px;height:auto;max-width:none;pointer-events:none}
-.all-menu-intro-fried{position:absolute;z-index:0;top:-48px;left:-22px;width:592.848px;height:auto;max-width:none;pointer-events:none}
+.all-menu-intro-chicken,.all-menu-intro-fried{position:absolute;z-index:0;height:auto;max-width:none;pointer-events:none}
+.all-menu-intro-chicken{top:0;right:-49.291px;width:505.291px}
+.all-menu-intro-fried{top:-45px;left:-25px;width:610px;transform:rotate(-5.24deg)}
 @media(max-width:1400px){
   .all-menu-intro-chicken{width:min(39.48vw,505.291px);right:-3.85vw}
-  .all-menu-intro-fried{width:min(46.32vw,592.848px);left:-1.72vw;top:clamp(-48px,-3.75vw,-28px)}
+  .all-menu-intro-fried{width:min(47.66vw,610px);left:-1.95vw;top:-3.52vw}
 }
 @media(max-width:1100px){
   .all-menu-intro-chicken{width:34vw;right:-5vw}
-  .all-menu-intro-fried{width:39vw;left:-3vw}
+  .all-menu-intro-fried{width:41vw;left:-3vw;top:-3.5vw}
 }
 @media(max-width:767px){.all-menu-intro-chicken,.all-menu-intro-fried{display:none}}
