@@ -44,6 +44,7 @@
   const mix=(a,b,p)=>a+(b-a)*p;
   const ease=p=>p*p*(3-2*p);
   let frame=0,geometry=null;
+  let isAnimationCompleted=false;
   const put=(name,value)=>section.style.setProperty("--birth-"+name,value);
   function measure(){
     if(reduced.matches){section.classList.remove("is-mask-ready");geometry=null;return}
@@ -68,18 +69,38 @@
     const copyY=mobile?imageY+imageW+34:(stageH-copyH)/2;
     geometry={w,vh,top,stageH,distance,imageW,imageX,imageY,copyY,left};
     put("stage-height",stageH+"px");
-    put("track-height",(stageH+distance)+"px");
+    // Both visual transitions end at 90%; release the pin at that exact point.
+    put("track-height",(stageH+distance*.9)+"px");
     put("copy-x",left+"px");
     put("copy-y",copyY+"px");
+    if(isAnimationCompleted){renderFinal();return}
     update();
+  }
+  function renderFinal(){
+    const g=geometry;
+    if(!g)return;
+    put("pin",g.distance*.9+"px");
+    put("x",g.imageX+"px");
+    put("y",g.imageY+"px");
+    put("w",g.imageW+"px");
+    put("h",g.imageW+"px");
+    put("radius","50%");
+    put("copy-opacity","1");
+    put("copy-shift","0px");
   }
   function update(){
     frame=0;
-    if(!geometry)return;
+    if(!geometry||isAnimationCompleted)return;
     const g=geometry;
     const rect=section.getBoundingClientRect();
-    const travel=clamp(g.top-rect.top,0,g.distance);
+    const travel=clamp(g.top-rect.top,0,g.distance*.9);
     const p=travel/g.distance;
+    if(travel>=g.distance*.9){
+      isAnimationCompleted=true;
+      renderFinal();
+      window.removeEventListener("scroll",schedule);
+      return;
+    }
     const motion=ease(clamp(p/.9,0,1));
     const reveal=ease(clamp((p-.48)/.42,0,1));
     put("pin",travel+"px");
@@ -91,7 +112,7 @@
     put("copy-opacity",String(reveal));
     put("copy-shift",((1-reveal)*24)+"px");
   }
-  function schedule(){if(!frame)frame=requestAnimationFrame(update)}
+  function schedule(){if(!isAnimationCompleted&&!frame)frame=requestAnimationFrame(update)}
   window.addEventListener("scroll",schedule,{passive:true});
   window.addEventListener("resize",measure,{passive:true});
   window.addEventListener("pageshow",measure);
