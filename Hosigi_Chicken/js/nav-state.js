@@ -39,8 +39,8 @@
   function updateOnScroll() {
     const headerBottom = header?.getBoundingClientRect().bottom || 0;
     const viewportThreshold = Math.min(window.innerHeight * 0.35, 220);
-    // Detect MENU and STORE on manual scroll, in either direction.
-    for (const index of [0, 2]) {
+    // Detect MENU, STORE and EVENT on manual scroll, in either direction.
+    for (const index of [0, 2, 3]) {
       const rect = targets[index]?.getBoundingClientRect();
       const visible = rect &&
         rect.bottom > headerBottom + 8 &&
