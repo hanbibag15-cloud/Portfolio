@@ -59,3 +59,15 @@
     animation:none !important;
   }
 }
+
+/* Keep BRAND active before deferred scripts run on internal brand navigation. */
+.brand-gnb-continuation .header-nav > ul > li > a.gnb-motion-link[aria-controls="brand-submenu"]{
+  color:#E60012;
+  transition:none;
+  animation:none;
+}
+.brand-gnb-continuation .header-nav > ul > li > a.gnb-motion-link[aria-controls="brand-submenu"] > .gnb-label::after{
+  transform:scaleX(1);
+  transition:none;
+  animation:none;
+}
