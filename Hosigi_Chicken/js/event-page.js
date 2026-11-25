@@ -23,10 +23,29 @@
     {id:"coupang",type:"promo",category:"배달앱 할인",title:"쿠팡이츠 7천 원 할인",date:"2026.10.23 – 2026.10.25",state:"ended",description:"리뉴얼 프로젝트의 기존 메인페이지에 소개된 쿠팡이츠 할인 프로모션입니다. 기간이 종료되어 과거 이벤트 사례로 표시합니다.",source:"프로젝트 기존 brand.html 이벤트 콘텐츠"},
     {id:"detective",type:"sns",category:"SNS 이벤트",title:"치킨 범인 맞히기 이벤트",date:"2026.10.14 – 2026.10.16",state:"ended",description:"리뉴얼 프로젝트의 기존 메인페이지에 소개된 SNS 퀴즈형 이벤트입니다. 기간이 종료되어 참여할 수 없는 사례로 정리했습니다.",source:"프로젝트 기존 brand.html 이벤트 콘텐츠"}
   ];
-  // Existing main-page artwork; remaining events intentionally use placeholders.
+  // Original posters and portfolio reconstruction artwork.
   const eventImages={
-    coupang:"img/Event_img01.png",
-    detective:"img/Event_img02.png"
+    "autumn-tour":"img/events/autumn-tour.svg",
+    "ddangyo-discount":"img/events/ddangyo-discount.svg",
+    "yogiyo-discount":"img/events/yogiyo-discount.svg",
+    "coupang-nov-discount":"img/events/coupang-nov-discount.svg",
+    "autumn-excuse":"img/events/autumn-excuse.svg",
+    "oct-hangeul":"img/events/oct-hangeul.svg",
+    "deep-defense":"img/events/deep-defense.svg",
+    "favorite-menu":"img/events/favorite-menu.svg",
+    "research-comment":"img/events/research-comment.svg",
+    "who-ate":"img/events/who-ate.svg",
+    "manyong":"img/events/manyong.svg",
+    "early-bird":"img/events/early-bird.svg",
+    "deep-lucky":"img/events/deep-lucky.svg",
+    "zero-raid":"img/events/zero-raid.svg",
+    "free-year":"img/events/free-year.svg",
+    "guerrilla":"img/events/guerrilla.svg",
+    "ending-quiz":"img/events/ending-quiz.svg",
+    "copy-chicken":"img/events/copy-chicken.svg",
+    "exam":"img/events/exam.svg",
+    "coupang":"img/Event_img01.png",
+    "detective":"img/Event_img02.png"
   };
   const grid=document.getElementById("event-card-grid");
   const count=document.getElementById("event-count");
