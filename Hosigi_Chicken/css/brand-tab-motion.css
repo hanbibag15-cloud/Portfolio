@@ -3,3 +3,22 @@
 .hosigi-story .story-subnav a:is(.is-active,:hover,:focus-visible),.philosophy-page .brand-subpage-tabs a:is(.is-active,:hover,:focus-visible),.social-page .brand-subpage-tabs a:is(.is-active,:hover,:focus-visible){background:var(--brand-red);color:var(--neutral-white);border-color:var(--brand-red)}
 .hosigi-story .story-subnav a:focus-visible,.philosophy-page .brand-subpage-tabs a:focus-visible,.social-page .brand-subpage-tabs a:focus-visible{outline:2px solid var(--brand-brown);outline-offset:3px}
 @media(prefers-reduced-motion:reduce){.hosigi-story .story-subnav a,.philosophy-page .brand-subpage-tabs a,.social-page .brand-subpage-tabs a{transition:none!important}}
+
+/* Menu tab title entrance, scoped to brand page hero text only. */
+@keyframes menu-tab-content-rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+    .hosigi-story .story-page-intro > .story-wrap > h1,
+    .hosigi-story .story-page-intro > .story-wrap > .story-page-subtitle,
+    .philosophy-page .brand-subpage-hero > .brand-subpage-container > h2,
+    .philosophy-page .brand-subpage-hero > .brand-subpage-container > .brand-subpage-lead,
+    .social-page .brand-subpage-hero > .brand-subpage-container > h2,
+    .social-page .brand-subpage-hero > .brand-subpage-container > .brand-subpage-lead {
+        animation: menu-tab-content-rise 560ms cubic-bezier(.22,1,.36,1) both;
+    }
+    .hosigi-story .story-page-intro > .story-wrap > .story-page-subtitle,
+    .philosophy-page .brand-subpage-hero > .brand-subpage-container > .brand-subpage-lead,
+    .social-page .brand-subpage-hero > .brand-subpage-container > .brand-subpage-lead { animation-delay: 70ms; }
+}
