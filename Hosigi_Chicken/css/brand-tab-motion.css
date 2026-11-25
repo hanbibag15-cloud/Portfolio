@@ -1,0 +1,5 @@
+/* Shared brand tab interaction, copied from menu-page.css. Layout remains page-local. */
+.hosigi-story .story-subnav a,.philosophy-page .brand-subpage-tabs a,.social-page .brand-subpage-tabs a{cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.hosigi-story .story-subnav a:is(.is-active,:hover,:focus-visible),.philosophy-page .brand-subpage-tabs a:is(.is-active,:hover,:focus-visible),.social-page .brand-subpage-tabs a:is(.is-active,:hover,:focus-visible){background:var(--brand-red);color:var(--neutral-white);border-color:var(--brand-red)}
+.hosigi-story .story-subnav a:focus-visible,.philosophy-page .brand-subpage-tabs a:focus-visible,.social-page .brand-subpage-tabs a:focus-visible{background:var(--brand-red);color:var(--neutral-white);border-color:var(--brand-red)}
+@media(prefers-reduced-motion:reduce){.hosigi-story .story-subnav a,.philosophy-page .brand-subpage-tabs a,.social-page .brand-subpage-tabs a{transition:none!important}}
