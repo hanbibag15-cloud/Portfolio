@@ -330,3 +330,16 @@
   .story-history .history-layout{grid-template-columns:66px minmax(0,1fr);gap:12px}
   .story-history .history-year-banner{width:100%}
 }
+
+/* HISTORY: align each year label with its corresponding banner along a full-height rail. */
+.story-history .history-layout{position:relative;row-gap:0;--history-rail-x:4px}
+.story-history .history-layout::before{content:"";position:absolute;top:0;bottom:0;left:var(--history-rail-x);width:3px;background:var(--border-default);pointer-events:none}
+.story-history .history-year-nav,.story-history .history-year-list,.story-history .history-content{display:contents}
+.story-history .history-year-list li{grid-column:1;grid-row:var(--history-row);align-self:start;display:flex;align-items:center;min-height:clamp(86px,9vw,120px);margin:0;padding:0 0 0 24px;border:0;box-sizing:border-box}
+.story-history .history-year-link{width:100%;box-sizing:border-box}
+.story-history .history-year-panel{grid-column:2;grid-row:var(--history-row)}
+@media(max-width:767px){
+  .story-history .history-layout{--history-rail-x:0px}
+  .story-history .history-layout::before{width:2px}
+  .story-history .history-year-list li{min-height:82px;padding-left:7px}
+}
