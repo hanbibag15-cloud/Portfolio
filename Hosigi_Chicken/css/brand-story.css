@@ -355,3 +355,12 @@
 
 /* HISTORY: repeat existing chicken cutouts along the timeline, outside the cards. */
 .story-history .history-decoration--extra{top:var(--history-decoration-top);width:clamp(160px,15vw,280px)}
+
+/* Birth story: reversible, scroll-linked image mask. Static layout is the fallback. */
+.story-begin-visual-section.is-mask-ready{position:relative;padding:0;height:var(--birth-track-height)}
+.story-begin-visual-section.is-mask-ready .story-begin-visual-inner{position:relative;width:100%;max-width:none;height:var(--birth-stage-height);margin:0;display:block;transform:translateY(var(--birth-pin,0px));isolation:isolate}
+.story-begin-visual-section.is-mask-ready .story-begin-figure{position:absolute;inset:0;width:100%;height:100%;max-width:none;margin:0;pointer-events:none}
+.story-begin-visual-section.is-mask-ready .story-begin-poster{position:absolute;inset:0;display:block}
+.story-begin-visual-section.is-mask-ready .story-begin-image{position:absolute;left:var(--birth-x);top:var(--birth-y);width:var(--birth-w);height:var(--birth-h);aspect-ratio:auto;border-radius:var(--birth-radius);overflow:hidden;margin:0}
+.story-begin-visual-section.is-mask-ready .story-begin-description{position:absolute;left:var(--birth-copy-x);top:var(--birth-copy-y);width:var(--birth-copy-w);opacity:var(--birth-copy-opacity,0);transform:translateY(var(--birth-copy-shift,24px));z-index:1}
+@media(prefers-reduced-motion:reduce){.story-begin-visual-section.is-mask-ready .story-begin-description{transform:none}}
