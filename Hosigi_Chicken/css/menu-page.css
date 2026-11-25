@@ -262,14 +262,14 @@ body.menu-modal-open{overflow:hidden}
 .all-menu-intro{position:relative;overflow:hidden;isolation:isolate}
 .all-menu-intro > .all-menu-container{position:relative;z-index:1}
 .all-menu-intro-chicken,.all-menu-intro-fried{position:absolute;z-index:0;height:auto;max-width:none;pointer-events:none}
-.all-menu-intro-chicken{top:0;right:-49.291px;width:505.291px}
+.all-menu-intro-chicken{top:0;right:-72px;width:505.291px}
 .all-menu-intro-fried{top:-45px;left:-25px;width:610px;transform:rotate(-5.24deg)}
 @media(max-width:1400px){
-  .all-menu-intro-chicken{width:min(39.48vw,505.291px);right:-3.85vw}
+  .all-menu-intro-chicken{width:min(39.48vw,505.291px);right:-5vw}
   .all-menu-intro-fried{width:min(47.66vw,610px);left:-1.95vw;top:-3.52vw}
 }
 @media(max-width:1100px){
-  .all-menu-intro-chicken{width:34vw;right:-5vw}
+  .all-menu-intro-chicken{width:34vw;right:-6vw}
   .all-menu-intro-fried{width:41vw;left:-3vw;top:-3.5vw}
 }
 @media(max-width:767px){.all-menu-intro-chicken,.all-menu-intro-fried{display:none}}
