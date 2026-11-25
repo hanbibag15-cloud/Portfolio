@@ -257,3 +257,10 @@ body.menu-modal-open{overflow:hidden}
 .menu-modal-source-link{display:inline-block;margin-top:12px;color:var(--brand-red);font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:3px;}
 .menu-modal-source-link:hover,.menu-modal-source-link:focus-visible{color:var(--brand-brown);}
 
+
+/* ALL MENU banner: Figma 30:136, decorative chicken cutout. */
+.all-menu-intro{position:relative;overflow:hidden;isolation:isolate}
+.all-menu-intro > .all-menu-container{position:relative;z-index:1}
+.all-menu-intro-chicken{position:absolute;z-index:0;top:12px;right:-83px;width:465px;height:349px;max-width:none;object-fit:contain;transform:rotate(-3.12deg);pointer-events:none}
+@media(max-width:1200px){.all-menu-intro-chicken{width:clamp(230px,36.33vw,465px);height:auto;right:-6.5vw}}
+@media(max-width:767px){.all-menu-intro-chicken{display:none}}
