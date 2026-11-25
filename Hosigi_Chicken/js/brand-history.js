@@ -87,9 +87,8 @@
       }
     }
 
-    // Use the red YEAR HEADER, not the card or the top of the viewport.
-    // At 75% viewport height, the next year is already active.
-    const activationLine = window.innerHeight * 0.75;
+    // Activate a year when its banner reaches the reading position below the header.
+    const activationLine = readingOffset() + 12;
     let index = 0;
     banners.forEach((banner, i) => {
       if (banner && banner.getBoundingClientRect().top <= activationLine) index = i;
@@ -101,15 +100,14 @@
     if (!frame) frame = requestAnimationFrame(update);
   }
 
-  // Crossings of the 75% line trigger a recheck even if scroll events are
-  // throttled. The pixel rootMargin is recalculated on viewport resize.
+  // Observe banner crossings at the same reading position used by scroll updates.
   let yearObserver = null;
   function observeYearHeaders() {
     if (!("IntersectionObserver" in window)) return;
     if (yearObserver) yearObserver.disconnect();
     yearObserver = new IntersectionObserver(schedule, {
       root: null,
-      rootMargin: `0px 0px -${Math.round(window.innerHeight * 0.25)}px 0px`,
+      rootMargin: `0px 0px -${Math.max(0, Math.round(window.innerHeight - readingOffset() - 12))}px 0px`,
       threshold: 0
     });
     banners.forEach(banner => { if (banner) yearObserver.observe(banner); });
