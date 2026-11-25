@@ -30,3 +30,72 @@
     if(!item.classList.contains("is-visible"))observer.observe(item);
   });
 })();
+
+/* Birth story only. Use actual scroll coordinates; never intercept wheel or touch. */
+(() => {
+  "use strict";
+  const section=document.querySelector("#story-begin.story-begin-visual-section");
+  if(!section)return;
+  const stage=section.querySelector(".story-begin-visual-inner");
+  const copy=section.querySelector(".story-begin-description");
+  if(!stage||!copy)return;
+  const reduced=matchMedia("(prefers-reduced-motion: reduce)");
+  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  const mix=(a,b,p)=>a+(b-a)*p;
+  const ease=p=>p*p*(3-2*p);
+  let frame=0,geometry=null;
+  const put=(name,value)=>section.style.setProperty("--birth-"+name,value);
+  function measure(){
+    if(reduced.matches){section.classList.remove("is-mask-ready");geometry=null;return}
+    const header=document.querySelector(".site-header");
+    const top=Math.ceil(header?header.getBoundingClientRect().height:0);
+    const w=section.clientWidth;
+    const vh=Math.max(1,window.innerHeight-top);
+    const mobile=w<=767;
+    const wrap=Math.min(1240,w-(mobile?32:48));
+    const gap=clamp(w*.05,36,78);
+    const copyW=mobile?wrap:(wrap-gap)/2.05;
+    const imageW=mobile?Math.min(wrap,520):Math.min((wrap-gap)*1.05/2.05,690);
+    const left=(w-wrap)/2;
+    put("copy-w",copyW+"px");
+    section.classList.add("is-mask-ready");
+    const copyH=copy.offsetHeight;
+    const stackH=imageW+34+copyH;
+    const stageH=mobile?Math.max(vh,stackH+48):Math.max(vh,imageW+48,copyH+48);
+    const distance=Math.max(500,vh*1.25);
+    const imageX=mobile?(w-imageW)/2:left+copyW+gap;
+    const imageY=mobile?24:(stageH-imageW)/2;
+    const copyY=mobile?imageY+imageW+34:(stageH-copyH)/2;
+    geometry={w,vh,top,stageH,distance,imageW,imageX,imageY,copyY,left};
+    put("stage-height",stageH+"px");
+    put("track-height",(stageH+distance)+"px");
+    put("copy-x",left+"px");
+    put("copy-y",copyY+"px");
+    update();
+  }
+  function update(){
+    frame=0;
+    if(!geometry)return;
+    const g=geometry;
+    const rect=section.getBoundingClientRect();
+    const travel=clamp(g.top-rect.top,0,g.distance);
+    const p=travel/g.distance;
+    const motion=ease(clamp(p/.9,0,1));
+    const reveal=ease(clamp((p-.48)/.42,0,1));
+    put("pin",travel+"px");
+    put("x",mix(0,g.imageX,motion)+"px");
+    put("y",mix(0,g.imageY,motion)+"px");
+    put("w",mix(g.w,g.imageW,motion)+"px");
+    put("h",mix(g.vh,g.imageW,motion)+"px");
+    put("radius",(50*motion)+"%");
+    put("copy-opacity",String(reveal));
+    put("copy-shift",((1-reveal)*24)+"px");
+  }
+  function schedule(){if(!frame)frame=requestAnimationFrame(update)}
+  window.addEventListener("scroll",schedule,{passive:true});
+  window.addEventListener("resize",measure,{passive:true});
+  window.addEventListener("pageshow",measure);
+  if(reduced.addEventListener)reduced.addEventListener("change",measure);
+  document.fonts?.ready.then(measure);
+  measure();
+})();
