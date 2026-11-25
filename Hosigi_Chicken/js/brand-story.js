@@ -70,7 +70,7 @@
     geometry={w,vh,top,stageH,distance,imageW,imageX,imageY,copyY,left};
     put("stage-height",stageH+"px");
     // Both visual transitions end at 90%; release the pin at that exact point.
-    put("track-height",(stageH+distance*.9)+"px");
+    put("track-height",(stageH+(isAnimationCompleted?0:distance*.9))+"px");
     put("copy-x",left+"px");
     put("copy-y",copyY+"px");
     if(isAnimationCompleted){renderFinal();return}
@@ -79,7 +79,8 @@
   function renderFinal(){
     const g=geometry;
     if(!g)return;
-    put("pin",g.distance*.9+"px");
+    put("pin","0px");
+    put("track-height",g.stageH+"px");
     put("x",g.imageX+"px");
     put("y",g.imageY+"px");
     put("w",g.imageW+"px");
@@ -97,7 +98,18 @@
     const p=travel/g.distance;
     if(travel>=g.distance*.9){
       isAnimationCompleted=true;
+      // Stop pending wheel easing before changing document geometry.
+      window.dispatchEvent(new Event("hosigi:birth-layout-rebase"));
+      const oldY=window.scrollY;
+      const root=document.documentElement;
+      const oldAnchor=root.style.overflowAnchor;
+      root.style.overflowAnchor="none";
       renderFinal();
+      // Force layout before rebasing scroll coordinates by the removed spacer.
+      void section.offsetHeight;
+      window.scrollTo({top:Math.max(0,oldY-g.distance*.9),behavior:"instant"});
+      window.dispatchEvent(new Event("hosigi:birth-layout-rebase"));
+      root.style.overflowAnchor=oldAnchor;
       window.removeEventListener("scroll",schedule);
       return;
     }
