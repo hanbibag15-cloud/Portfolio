@@ -316,7 +316,7 @@
 .story-flavors .story-flavor-card:hover{box-shadow:none}
 .story-flavors .story-flavor-card.story-reveal{transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
 .story-flavors .story-flavor-card.story-reveal.is-visible:hover{transform:none}
-.story-flavors .story-value-photo{position:absolute;inset:0;overflow:hidden;width:100%;height:100%;border-radius:inherit;background:var(--background-subtle);transition:transform .4s ease}
+.story-flavors .story-value-photo{position:absolute;inset:0;overflow:hidden;width:100%;height:100%;border-radius:inherit;background:var(--background-subtle);transition:transform .4s ease-in-out}
 .story-flavors .story-value-photo > img:only-child{display:block;width:100%;height:100%;object-fit:cover}
 .story-flavors .story-value-photo > img:not(:only-child){position:absolute;display:block;object-fit:contain;height:auto;max-width:none;pointer-events:none}
 .story-flavors .story-value-photo--pair img:first-child{width:79%;left:-6%;top:0}
@@ -326,14 +326,17 @@
 .story-flavors .story-value-photo--variety img:nth-child(3){width:82%;left:9%;bottom:1%}
 .story-flavors .story-value-photo--share img:first-child{width:95%;left:-7%;top:2%}
 .story-flavors .story-value-photo--share img:nth-child(2){width:53%;right:-4%;bottom:2%}
-.story-flavors .story-flavor-card::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,transparent 28%,rgba(25,13,9,.22) 48%,rgba(20,10,7,.88) 100%);pointer-events:none}
+.story-flavors .story-flavor-card::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,transparent 28%,rgba(0,0,0,.22) 48%,rgba(0,0,0,.88) 100%);pointer-events:none;opacity:1;transition:opacity .4s ease-in-out}
 .story-flavors .story-flavor-copy{position:absolute;z-index:2;left:0;right:0;bottom:0;margin:0;padding:clamp(16px,2.2vw,36px);text-align:left;color:#fff}
-.story-flavors .story-flavor-index{display:inline-flex;align-items:center;justify-content:center;min-width:42px;padding:5px 9px;border-radius:6px;background:var(--brand-red);color:#fff;font-size:18px;font-weight:800;line-height:1.3}
+.story-flavors .story-flavor-index{display:inline-flex;align-items:center;justify-content:center;min-width:42px;padding:5px 9px;border-radius:6px;background:var(--brand-brown);color:#fff;font-size:18px;font-weight:800;line-height:1.3;transition:background-color .4s ease-in-out}
 .story-flavors .story-flavor-copy .story-flavor-title{display:block;margin:12px 0 0;color:#fff;font-size:clamp(23px,2.3vw,36px);font-weight:800;line-height:1.25;letter-spacing:-.04em;word-break:keep-all}
-.story-flavors .story-flavor-copy p{margin:10px 0 0;color:#fff;font-size:clamp(14px,1.1vw,17px);line-height:1.6;word-break:keep-all;transition:opacity .4s ease,transform .4s ease}
-.story-flavors .story-flavor-description{display:grid;grid-template-rows:1fr;transition:grid-template-rows .4s ease}
+.story-flavors .story-flavor-copy p{margin:10px 0 0;color:#fff;font-size:clamp(14px,1.1vw,17px);line-height:1.6;word-break:keep-all;transition:opacity .4s ease-in-out,transform .4s ease-in-out}
+.story-flavors .story-flavor-description{display:grid;grid-template-rows:1fr;transition:grid-template-rows .4s ease-in-out}
 .story-flavors .story-flavor-description-inner{min-height:0;overflow:hidden}
 @media(hover:hover) and (pointer:fine) and (min-width:768px){
+ .story-flavors .story-flavor-card::after{opacity:0}
+ .story-flavors .story-flavor-card:is(:hover,:focus-visible,:focus-within)::after{opacity:1}
+ .story-flavors .story-flavor-card:is(:hover,:focus-visible,:focus-within) .story-flavor-index{background-color:var(--brand-red)}
  .story-flavors .story-flavor-description{grid-template-rows:0fr}
  .story-flavors .story-flavor-copy p{opacity:0;transform:translateY(12px)}
  .story-flavors .story-flavor-card:is(:hover,:focus-within) .story-flavor-description{grid-template-rows:1fr}
@@ -348,7 +351,7 @@
  .story-flavors .story-flavor-grid{grid-template-columns:1fr;gap:24px}
 }
 @media(prefers-reduced-motion:reduce){
- .story-flavors .story-flavor-card.story-reveal,.story-flavors .story-value-photo,.story-flavors .story-flavor-description,.story-flavors .story-flavor-copy p{transition:none!important}
+ .story-flavors .story-flavor-card.story-reveal,.story-flavors .story-value-photo,.story-flavors .story-flavor-description,.story-flavors .story-flavor-copy p,.story-flavors .story-flavor-index,.story-flavors .story-flavor-card::after{transition:none!important}
  .story-flavors .story-flavor-card:is(:hover,:focus-within) .story-value-photo{transform:none}
 }
 
