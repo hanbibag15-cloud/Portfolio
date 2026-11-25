@@ -257,3 +257,32 @@
 @media(max-width:420px){
   .story-begin-title-section .story-begin-heading h2{font-size:clamp(30px,8.4vw,38px)}
 }
+
+/* HISTORY — centered, single-column timeline inspired by the reference. */
+.story-history .story-section-heading{max-width:880px;margin:0 auto clamp(48px,6vw,90px);text-align:center}
+.story-history .story-section-heading>p:last-child{margin-inline:auto}
+.story-history .history-layout{display:block;width:min(100%,1000px);margin-inline:auto}
+.story-history .history-year-nav{display:block;position:static;margin:0 0 clamp(36px,5vw,64px);padding:0;background:transparent;border:0}
+.story-history .history-year-list{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;list-style:none;margin:0;padding:0;border:0}
+.story-history .history-year-list li{display:block;flex:0 0 auto;margin:0;padding:0;border:0}
+.story-history .history-year-link{padding:9px 8px;font-size:clamp(16px,1.8vw,22px);white-space:nowrap}
+.story-history .history-year-link::before{left:8px;right:8px;top:auto;bottom:2px;width:auto;height:3px;transform:scaleX(0);transform-origin:center}
+.story-history .history-year-link.is-active::before{transform:scaleX(1)}
+.story-history .history-content{display:block}
+.story-history .history-year-panel{display:block;padding-bottom:clamp(52px,7vw,90px);text-align:center}
+.story-history .history-year-panel:last-child{padding-bottom:0}
+.story-history .history-year-banner{position:relative;display:flex;align-items:center;justify-content:center;width:84%;min-height:clamp(86px,9vw,120px);margin:0 auto;padding:18px 24px;border-radius:12px;font-size:clamp(42px,5.2vw,60px);text-align:center}
+.story-history .history-year-banner::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);width:0;height:0;border-left:26px solid transparent;border-right:26px solid transparent;border-top:10px solid var(--brand-red)}
+.story-history .history-event-list{gap:12px;padding:30px 0 0}
+.story-history .history-event-card{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;padding:25px clamp(20px,4vw,42px);border:2px solid var(--border-default);border-radius:20px;background:transparent;text-align:center}
+.story-history .history-event-details{width:100%;text-align:center}
+.story-history .history-event-card h3,.story-history .history-event-card p{text-align:center}
+.story-history .story-source-note{text-align:center}
+@media(max-width:767px){
+  .story-history .history-year-list{flex-wrap:nowrap;justify-content:flex-start;gap:8px;overflow-x:auto;padding-bottom:5px}
+  .story-history .history-year-link{font-size:16px}
+  .story-history .history-year-banner{width:90%;min-height:82px;border-radius:10px}
+  .story-history .history-year-banner::after{border-left-width:18px;border-right-width:18px;border-top-width:8px}
+  .story-history .history-event-list{padding-top:24px;gap:10px}
+  .story-history .history-event-card{min-height:100px;padding:20px 16px;border-radius:15px}
+}
