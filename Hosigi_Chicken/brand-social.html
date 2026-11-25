@@ -44,8 +44,6 @@
 .social-page .social-volunteer{padding-top:clamp(30px,4vw,64px)}
 .social-page .social-split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(32px,6vw,96px);align-items:center}
 .social-page .social-feature-photo{aspect-ratio:4/5}
-.social-page .social-source-link{display:inline-flex;align-items:center;gap:18px;border:1px solid var(--border-default);border-radius:999px;padding:14px 24px;margin-top:28px;font-size:16px;font-weight:650;color:var(--brand-brown);text-decoration:none;transition:color .25s,background-color .25s,border-color .25s}
-.social-page .social-source-link:is(:hover,:focus-visible){background:var(--brand-red);border-color:var(--brand-red);color:#fff}
 .social-page .social-impact{background:var(--background-subtle)}
 .social-page .social-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:0;padding:0;text-align:center}
 .social-page .social-stat{display:flex;flex-direction:column-reverse;justify-content:center;gap:18px;padding:24px 12px;border-right:1px solid var(--border-default)}
@@ -55,7 +53,6 @@
 .social-page .social-unit{font-size:.29em;margin-left:6px;letter-spacing:0}
 .social-page .social-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
 .social-page .social-source{margin-top:40px;text-align:center;font-size:13px;color:#746d68}
-.social-page .social-source a{color:inherit;text-decoration:underline}
 .social-page .social-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 24px}
 .social-page .social-card{min-width:0}
 .social-page .social-card figure{aspect-ratio:16/10}
@@ -64,10 +61,6 @@
 .social-page .social-card-copy{padding-top:24px}
 .social-page .social-card h3{margin:0;font-size:clamp(26px,2.5vw,36px);font-weight:800;letter-spacing:-.04em;word-break:keep-all}
 .social-page .social-card p{margin:10px 0 0;font-size:17px;line-height:1.7;color:var(--text-primary);word-break:keep-all}
-.social-page .social-more{text-align:center;margin-top:24px}
-.social-page .social-vision{background:var(--brand-red);color:#fff;text-align:center;padding:clamp(100px,12vw,190px) 0}
-.social-page .social-vision h2{font-size:clamp(42px,6vw,88px);font-weight:850;line-height:1.2;margin:0;color:white;letter-spacing:-.045em;word-break:keep-all}
-.social-page .social-vision p{font-size:clamp(16px,1.5vw,21px);line-height:1.7;margin:28px 0 0;color:white;word-break:keep-all}
 @media(max-width:767px){
  .social-page .social-wrap{width:calc(100% - 32px)}
  .social-page .brand-subpage-hero{padding:60px 16px 48px}
@@ -85,7 +78,6 @@
  .social-page .social-grid,.social-page .social-split{grid-template-columns:1fr;gap:36px}
  .social-page .social-stats{grid-template-columns:1fr}
  .social-page .social-stat{border-right:0;border-bottom:1px solid var(--border-default);padding:28px 12px}
- .social-page .social-vision h2{font-size:clamp(34px,8vw,48px)}
 }
 @media(max-width:420px){.social-page .brand-subpage-tabs a{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.social-page .brand-subpage-tabs a,.social-page .social-card figure img,.social-page .social-card .social-photo{transition:none!important}.social-page .social-card:hover figure img,.social-page .social-card:hover .social-photo{transform:none}}
@@ -161,7 +153,7 @@
   <section class="social-section social-volunteer" aria-labelledby="social-volunteer-title">
     <div class="social-wrap social-split">
       <figure class="social-feature-photo brand-subpage-reveal"><div class="social-photo social-photo--volunteer" role="img" aria-label="가가호호 봉사단 사진 추가 예정"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M32 51S8 37 8 20C8 7 24 5 32 18 40 5 56 7 56 20c0 17-24 31-24 31Z"/><path d="M19 32h26M32 25v14"/></svg><span>가가호호 봉사단</span><small>활동 사진 추가 예정</small></div></figure>
-      <div class="social-copy brand-subpage-reveal"><h2 id="social-volunteer-title">함께 나누는 마음,<br><strong>가가호호 봉사단</strong></h2><p>가맹본부와 가맹점, 가맹점주협의회가 함께하는 가가호호 봉사단은 전국의 복지시설을 찾아 이웃들에게 따뜻한 치킨과 마음을 전합니다.</p><a class="social-source-link" href="https://www.9922.co.kr/volunteer" target="_blank" rel="noopener noreferrer">봉사단 공식 소개 보기 <span aria-hidden="true">↗</span></a></div>
+      <div class="social-copy brand-subpage-reveal"><h2 id="social-volunteer-title">함께 나누는 마음,<br><strong>가가호호 봉사단</strong></h2><p>가맹본부와 가맹점, 가맹점주협의회가 함께하는 가가호호 봉사단은 전국의 복지시설을 찾아 이웃들에게 따뜻한 치킨과 마음을 전합니다.</p></div>
     </div>
   </section>
   <section class="social-section social-impact" aria-labelledby="social-impact-title">
@@ -170,7 +162,7 @@
       <div class="social-stat"><dt>봉사활동 시작</dt><dd>2017</dd></div>
       <div class="social-stat"><dt>누적 봉사활동</dt><dd><span data-social-count="100" aria-hidden="true">100</span><span class="social-unit" aria-hidden="true">회</span><span class="social-sr">100회</span></dd></div>
       <div class="social-stat"><dt>누적 기부 치킨</dt><dd><span data-social-count="30000" aria-hidden="true">30,000</span><span class="social-unit" aria-hidden="true">마리</span><span class="social-sr">30,000마리</span></dd></div>
-    </dl><p class="social-source">2025년 12월 31일 보도 기준 · <a href="https://m.dhnews.co.kr/news/view/1065598041420668" target="_blank" rel="noopener noreferrer">관련 보도 보기</a></p></div>
+    </dl><p class="social-source">2025년 12월 31일 보도 기준</p></div>
   </section>
   <section class="social-section social-activities" aria-labelledby="social-activities-title">
     <div class="social-wrap"><div class="social-heading brand-subpage-reveal"><h2 id="social-activities-title">나눔으로 이어지는 <strong>행복</strong></h2><p>도움이 필요한 이웃과 지역사회를 위해 다양한 사회공헌 활동을 이어갑니다.</p></div>
@@ -178,9 +170,8 @@
       <article class="social-card brand-subpage-reveal"><figure><div class="social-photo social-photo--community" role="img" aria-label="지역사회 나눔 사진 추가 예정"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M32 51S8 37 8 20C8 7 24 5 32 18 40 5 56 7 56 20c0 17-24 31-24 31Z"/><path d="M19 32h26M32 25v14"/></svg><span>지역사회 나눔</span><small>활동 사진 추가 예정</small></div></figure><div class="social-card-copy"><h3>지역사회 나눔</h3><p>복지기관과 함께 도움이 필요한 이웃을 지원합니다.</p></div></article>
       <article class="social-card brand-subpage-reveal"><figure><div class="social-photo social-photo--soldier" role="img" aria-label="국군장병 후원 사진 추가 예정"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M32 51S8 37 8 20C8 7 24 5 32 18 40 5 56 7 56 20c0 17-24 31-24 31Z"/><path d="M19 32h26M32 25v14"/></svg><span>국군장병 후원</span><small>활동 사진 추가 예정</small></div></figure><div class="social-card-copy"><h3>국군장병 후원</h3><p>국군장병들에게 감사와 응원의 마음을 전합니다.</p></div></article>
       <article class="social-card brand-subpage-reveal"><figure><div class="social-photo social-photo--relief" role="img" aria-label="재난 및 긴급구호 사진 추가 예정"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M32 51S8 37 8 20C8 7 24 5 32 18 40 5 56 7 56 20c0 17-24 31-24 31Z"/><path d="M19 32h26M32 25v14"/></svg><span>재난 및 긴급구호</span><small>활동 사진 추가 예정</small></div></figure><div class="social-card-copy"><h3>재난 및 긴급구호</h3><p>어려움을 겪는 지역사회에 후원과 지원을 실천합니다.</p></div></article></div>
-    <div class="social-more brand-subpage-reveal"><a class="social-source-link" href="https://www.9922.co.kr/giving" target="_blank" rel="noopener noreferrer">공식 나눔 활동 더 보기 <span aria-hidden="true">↗</span></a></div></div>
+    </div>
   </section>
-  <section class="social-vision" aria-labelledby="social-vision-title"><div class="social-wrap brand-subpage-reveal"><h2 id="social-vision-title">두 마리의 행복,<br>세상으로 이어지는 나눔.</h2><p>호식이두마리치킨은 앞으로도 이웃과 함께하며 따뜻한 내일을 만들어가겠습니다.</p></div></section>
 </main>
 <footer class="site-footer">
             <div class="footer-inner">
