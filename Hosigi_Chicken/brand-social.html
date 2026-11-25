@@ -14,6 +14,83 @@
 <script src="js/gnb-motion.js?v=2" defer></script>
 <script src="js/brand-story.js?v=2" defer></script>
 <script src="js/smooth-wheel.js?v=4" defer></script>
+<style>
+.social-page{--social-width:1480px;background:#fff;color:var(--brand-brown,#241713)}
+.social-page .social-wrap{width:min(var(--social-width),calc(100% - 80px));margin-inline:auto}
+.social-page .brand-subpage-hero{padding:100px 20px 82px;text-align:center;background:var(--background-subtle)}
+.social-page .brand-subpage-hero .brand-subpage-container,.social-page .social-nav .social-wrap{width:min(1240px,calc(100% - 48px));margin-inline:auto}
+.social-page .brand-subpage-hero h2{margin:0;color:var(--brand-red);font-size:clamp(36px,5vw,68px);font-weight:700;line-height:1.05;letter-spacing:-.023em}
+.social-page .brand-subpage-lead{margin-top:12px;font-size:20px;font-weight:600;line-height:1.5;color:var(--text-primary);word-break:keep-all}
+.social-page .social-nav{padding:60px 20px 0;background:var(--surface-default)}
+.social-page .brand-subpage-tabs{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin:0}
+.social-page .brand-subpage-tabs a{display:inline-flex;align-items:center;justify-content:center;min-height:46px;min-width:148px;padding:12px 24px;background:var(--background-subtle);border:1px solid var(--border-default);border-radius:999px;color:var(--text-primary);font:500 16px var(--font);text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.social-page .brand-subpage-tabs a:is(.is-active,:hover,:focus-visible){background:var(--brand-red);border-color:var(--brand-red);color:var(--neutral-white)}
+.social-page .brand-subpage-tabs a:focus-visible{outline:2px solid var(--brand-brown);outline-offset:4px}
+@media(max-width:1024px){.social-page .brand-subpage-hero{padding:76px 20px 65px}}
+
+.social-page .social-section{padding-block:clamp(80px,9vw,146px)}
+.social-page .social-heading{text-align:center;margin:0 auto clamp(36px,5vw,72px);max-width:1080px}
+.social-page .social-heading h2,.social-page .social-copy h2{font-size:clamp(36px,4.1vw,58px);font-weight:800;line-height:1.24;margin:0;letter-spacing:-.045em;word-break:keep-all}
+.social-page strong{color:var(--brand-red)}
+.social-page .social-mission .social-heading h2{font-size:clamp(48px,6.3vw,96px);line-height:1.18}
+.social-page .social-heading p,.social-page .social-copy p{font-size:clamp(16px,1.3vw,19px);line-height:1.8;margin:24px 0 0;color:var(--text-primary);word-break:keep-all}
+.social-page figure{margin:0;overflow:hidden;border-radius:10px;background:#f5f5f5}
+.social-page figure img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.social-page .social-banner{aspect-ratio:16/9}
+.social-page .social-photo{height:100%;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--brand-brown);background:linear-gradient(145deg,#f7f3ef,#ede5df);text-align:center;padding:20px}
+.social-page .social-photo svg{width:clamp(48px,6vw,90px);height:auto;color:var(--brand-red);opacity:.65}
+.social-page .social-photo span{font-size:clamp(18px,2vw,28px);font-weight:700}
+.social-page .social-photo small{color:#766c67;font-size:14px}
+.social-page .social-volunteer{padding-top:clamp(30px,4vw,64px)}
+.social-page .social-split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(32px,6vw,96px);align-items:center}
+.social-page .social-feature-photo{aspect-ratio:4/5}
+.social-page .social-source-link{display:inline-flex;align-items:center;gap:18px;border:1px solid var(--border-default);border-radius:999px;padding:14px 24px;margin-top:28px;font-size:16px;font-weight:650;color:var(--brand-brown);text-decoration:none;transition:color .25s,background-color .25s,border-color .25s}
+.social-page .social-source-link:is(:hover,:focus-visible){background:var(--brand-red);border-color:var(--brand-red);color:#fff}
+.social-page .social-impact{background:var(--background-subtle)}
+.social-page .social-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:0;padding:0;text-align:center}
+.social-page .social-stat{display:flex;flex-direction:column-reverse;justify-content:center;gap:18px;padding:24px 12px;border-right:1px solid var(--border-default)}
+.social-page .social-stat:last-child{border:0}
+.social-page .social-stat dd{margin:0;color:var(--brand-red);font-size:clamp(48px,5.4vw,96px);line-height:1;font-weight:850;font-variant-numeric:tabular-nums;letter-spacing:-.055em}
+.social-page .social-stat dt{font-size:clamp(16px,1.4vw,22px);font-weight:650}
+.social-page .social-unit{font-size:.29em;margin-left:6px;letter-spacing:0}
+.social-page .social-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.social-page .social-source{margin-top:40px;text-align:center;font-size:13px;color:#746d68}
+.social-page .social-source a{color:inherit;text-decoration:underline}
+.social-page .social-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 24px}
+.social-page .social-card{min-width:0}
+.social-page .social-card figure{aspect-ratio:16/10}
+.social-page .social-card figure img,.social-page .social-card .social-photo{transition:transform .4s ease-in-out}
+@media(hover:hover){.social-page .social-card:hover figure img,.social-page .social-card:hover .social-photo{transform:scale(1.05)}}
+.social-page .social-card-copy{padding-top:24px}
+.social-page .social-number{color:var(--brand-red);font-size:18px;font-weight:800}
+.social-page .social-card h3{margin:8px 0 0;font-size:clamp(26px,2.5vw,36px);font-weight:800;letter-spacing:-.04em;word-break:keep-all}
+.social-page .social-card p{margin:10px 0 0;font-size:17px;line-height:1.7;color:var(--text-primary);word-break:keep-all}
+.social-page .social-more{text-align:center;margin-top:24px}
+.social-page .social-vision{background:var(--brand-red);color:#fff;text-align:center;padding:clamp(100px,12vw,190px) 0}
+.social-page .social-vision h2{font-size:clamp(42px,6vw,88px);font-weight:850;line-height:1.2;margin:0;color:white;letter-spacing:-.045em;word-break:keep-all}
+.social-page .social-vision p{font-size:clamp(16px,1.5vw,21px);line-height:1.7;margin:28px 0 0;color:white;word-break:keep-all}
+@media(max-width:767px){
+ .social-page .social-wrap{width:calc(100% - 32px)}
+ .social-page .brand-subpage-hero{padding:60px 16px 48px}
+ .social-page .brand-subpage-hero .brand-subpage-container,.social-page .social-nav .social-wrap{width:calc(100% - 32px)}
+ .social-page .brand-subpage-hero h2{font-size:clamp(30px,7vw,44px);overflow-wrap:anywhere}
+ .social-page .brand-subpage-lead{margin-top:16px;font-size:15px}
+ .social-page .social-nav{padding:35px 16px 0}
+ .social-page .brand-subpage-tabs{gap:8px}
+ .social-page .brand-subpage-tabs a{min-width:0;flex:1 1 calc(50% - 8px);padding:10px 8px;font-size:13px}
+ .social-page .social-section{padding-block:72px}
+ .social-page .social-mission .social-heading h2{font-size:clamp(34px,8vw,48px)}
+ .social-page .social-heading h2,.social-page .social-copy h2{font-size:clamp(30px,7vw,42px)}
+ .social-page .social-desktop-break{display:none}
+ .social-page .social-banner,.social-page .social-feature-photo{aspect-ratio:4/3}
+ .social-page .social-grid,.social-page .social-split{grid-template-columns:1fr;gap:36px}
+ .social-page .social-stats{grid-template-columns:1fr}
+ .social-page .social-stat{border-right:0;border-bottom:1px solid var(--border-default);padding:28px 12px}
+ .social-page .social-vision h2{font-size:clamp(34px,8vw,48px)}
+}
+@media(max-width:420px){.social-page .brand-subpage-tabs a{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.social-page .brand-subpage-tabs a,.social-page .social-card figure img,.social-page .social-card .social-photo{transition:none!important}.social-page .social-card:hover figure img,.social-page .social-card:hover .social-photo{transform:none}}
+</style>
 </head>
 <body>
 <div id="wrap">
@@ -69,28 +146,42 @@
                 </button>
             </div>
         </header>
-<main class="brand-subpage" id="main-content">
+<main class="brand-subpage social-page" id="main-content">
   <section class="brand-subpage-hero brand-subpage-reveal" aria-labelledby="brand-page-title">
-    <div class="brand-subpage-container">
-      <h2 id="brand-page-title">사회공헌</h2>
-      <p class="brand-subpage-lead">호식이두마리치킨의 나눔 활동을 소개하는 공간입니다.</p>
-    </div>
+    <div class="brand-subpage-container"><h2 id="brand-page-title">SOCIAL CONTRIBUTION</h2><p class="brand-subpage-lead">두 마리의 행복을 더 많은 이웃에게 전합니다.</p></div>
   </section>
-  <section class="brand-subpage-content" aria-label="사회공헌 소개">
-    <div class="brand-subpage-container">
-      <nav class="brand-subpage-tabs brand-subpage-reveal" aria-label="브랜드 페이지">
+  <div class="social-nav"><div class="social-wrap"><nav class="brand-subpage-tabs brand-subpage-reveal" aria-label="브랜드 페이지">
         <a href="brand-story.html"><span class="brand-submenu-text">호식이 이야기</span></a>
         <a href="brand-philosophy.html"><span class="brand-submenu-text">브랜드 철학</span></a>
         <a href="brand-social.html" class="is-active" aria-current="page">사회공헌</a>
-      </nav>
-      <div class="brand-subpage-placeholder brand-subpage-reveal">
-        <span class="brand-subpage-status">콘텐츠 준비 중</span>
-        <h3>사회공헌</h3>
-        <p>사회공헌 활동과 관련 소식을 확인하여 추가할 예정입니다.</p>
-        <a class="brand-subpage-home" href="brand.html">메인페이지로 돌아가기 <span aria-hidden="true">→</span></a>
-      </div>
+      </nav></div></div>
+  <section class="social-section social-mission" aria-labelledby="social-mission-title">
+    <div class="social-wrap"><div class="social-heading brand-subpage-reveal"><h2 id="social-mission-title">맛있는 행복을 넘어,<br><strong>따뜻한 나눔으로.</strong></h2><p>두 마리의 행복이 더 많은 이웃에게 전해질 수 있도록<br class="social-desktop-break"> 호식이두마리치킨은 함께하는 나눔을 실천합니다.</p></div>
+    <figure class="social-banner brand-subpage-reveal"><div class="social-photo social-photo--banner" role="img" aria-label="가가호호 봉사활동 사진 추가 예정"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M32 51S8 37 8 20C8 7 24 5 32 18 40 5 56 7 56 20c0 17-24 31-24 31Z"/><path d="M19 32h26M32 25v14"/></svg><span>가가호호 봉사활동</span><small>활동 사진 추가 예정</small></div></figure></div>
+  </section>
+  <section class="social-section social-volunteer" aria-labelledby="social-volunteer-title">
+    <div class="social-wrap social-split">
+      <figure class="social-feature-photo brand-subpage-reveal"><div class="social-photo social-photo--volunteer" role="img" aria-label="가가호호 봉사단 사진 추가 예정"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M32 51S8 37 8 20C8 7 24 5 32 18 40 5 56 7 56 20c0 17-24 31-24 31Z"/><path d="M19 32h26M32 25v14"/></svg><span>가가호호 봉사단</span><small>활동 사진 추가 예정</small></div></figure>
+      <div class="social-copy brand-subpage-reveal"><h2 id="social-volunteer-title">함께 나누는 마음,<br><strong>가가호호 봉사단</strong></h2><p>가맹본부와 가맹점, 가맹점주협의회가 함께하는 가가호호 봉사단은 전국의 복지시설을 찾아 이웃들에게 따뜻한 치킨과 마음을 전합니다.</p><a class="social-source-link" href="https://www.9922.co.kr/volunteer" target="_blank" rel="noopener noreferrer">봉사단 공식 소개 보기 <span aria-hidden="true">↗</span></a></div>
     </div>
   </section>
+  <section class="social-section social-impact" aria-labelledby="social-impact-title">
+    <div class="social-wrap"><div class="social-heading brand-subpage-reveal"><h2 id="social-impact-title">숫자로 만나는 <strong>따뜻한 변화</strong></h2></div>
+    <dl class="social-stats brand-subpage-reveal">
+      <div class="social-stat"><dt>봉사활동 시작</dt><dd>2017</dd></div>
+      <div class="social-stat"><dt>누적 봉사활동</dt><dd><span data-social-count="100" aria-hidden="true">100</span><span class="social-unit" aria-hidden="true">회</span><span class="social-sr">100회</span></dd></div>
+      <div class="social-stat"><dt>누적 기부 치킨</dt><dd><span data-social-count="30000" aria-hidden="true">30,000</span><span class="social-unit" aria-hidden="true">마리</span><span class="social-sr">30,000마리</span></dd></div>
+    </dl><p class="social-source">2025년 12월 31일 보도 기준 · <a href="https://m.dhnews.co.kr/news/view/1065598041420668" target="_blank" rel="noopener noreferrer">관련 보도 보기</a></p></div>
+  </section>
+  <section class="social-section social-activities" aria-labelledby="social-activities-title">
+    <div class="social-wrap"><div class="social-heading brand-subpage-reveal"><h2 id="social-activities-title">나눔으로 이어지는 <strong>행복</strong></h2><p>도움이 필요한 이웃과 지역사회를 위해 다양한 사회공헌 활동을 이어갑니다.</p></div>
+    <div class="social-grid"><article class="social-card brand-subpage-reveal"><figure><div class="social-photo social-photo--child" role="img" aria-label="아동·청소년 지원 사진 추가 예정"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M32 51S8 37 8 20C8 7 24 5 32 18 40 5 56 7 56 20c0 17-24 31-24 31Z"/><path d="M19 32h26M32 25v14"/></svg><span>아동·청소년 지원</span><small>활동 사진 추가 예정</small></div></figure><div class="social-card-copy"><span class="social-number" aria-hidden="true">01</span><h3>아동·청소년 지원</h3><p>지역아동센터와 보육시설에 따뜻한 한 끼를 전달합니다.</p></div></article>
+      <article class="social-card brand-subpage-reveal"><figure><div class="social-photo social-photo--community" role="img" aria-label="지역사회 나눔 사진 추가 예정"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M32 51S8 37 8 20C8 7 24 5 32 18 40 5 56 7 56 20c0 17-24 31-24 31Z"/><path d="M19 32h26M32 25v14"/></svg><span>지역사회 나눔</span><small>활동 사진 추가 예정</small></div></figure><div class="social-card-copy"><span class="social-number" aria-hidden="true">02</span><h3>지역사회 나눔</h3><p>복지기관과 함께 도움이 필요한 이웃을 지원합니다.</p></div></article>
+      <article class="social-card brand-subpage-reveal"><figure><div class="social-photo social-photo--soldier" role="img" aria-label="국군장병 후원 사진 추가 예정"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M32 51S8 37 8 20C8 7 24 5 32 18 40 5 56 7 56 20c0 17-24 31-24 31Z"/><path d="M19 32h26M32 25v14"/></svg><span>국군장병 후원</span><small>활동 사진 추가 예정</small></div></figure><div class="social-card-copy"><span class="social-number" aria-hidden="true">03</span><h3>국군장병 후원</h3><p>국군장병들에게 감사와 응원의 마음을 전합니다.</p></div></article>
+      <article class="social-card brand-subpage-reveal"><figure><div class="social-photo social-photo--relief" role="img" aria-label="재난 및 긴급구호 사진 추가 예정"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M32 51S8 37 8 20C8 7 24 5 32 18 40 5 56 7 56 20c0 17-24 31-24 31Z"/><path d="M19 32h26M32 25v14"/></svg><span>재난 및 긴급구호</span><small>활동 사진 추가 예정</small></div></figure><div class="social-card-copy"><span class="social-number" aria-hidden="true">04</span><h3>재난 및 긴급구호</h3><p>어려움을 겪는 지역사회에 후원과 지원을 실천합니다.</p></div></article></div>
+    <div class="social-more brand-subpage-reveal"><a class="social-source-link" href="https://www.9922.co.kr/giving" target="_blank" rel="noopener noreferrer">공식 나눔 활동 더 보기 <span aria-hidden="true">↗</span></a></div></div>
+  </section>
+  <section class="social-vision" aria-labelledby="social-vision-title"><div class="social-wrap brand-subpage-reveal"><h2 id="social-vision-title">두 마리의 행복,<br>세상으로 이어지는 나눔.</h2><p>호식이두마리치킨은 앞으로도 이웃과 함께하며 따뜻한 내일을 만들어가겠습니다.</p></div></section>
 </main>
 <footer class="site-footer">
             <div class="footer-inner">
@@ -142,5 +233,26 @@
         </aside>
 </div>
 <script src="js/quick-menu.js" defer></script>
+<script>
+(() => {
+  const stats=document.querySelector(".social-page .social-stats");
+  if(!stats||!window.IntersectionObserver||matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const counters=[...stats.querySelectorAll("[data-social-count]")];
+  const format=new Intl.NumberFormat("ko-KR");
+  const observer=new IntersectionObserver(entries=>{
+    if(!entries.some(entry=>entry.isIntersecting))return;
+    observer.disconnect();
+    const start=performance.now();
+    function tick(now){
+      const progress=Math.min(1,Math.max(0,(now-start)/1500));
+      const eased=1-Math.pow(1-progress,3);
+      counters.forEach(node=>node.textContent=format.format(Math.round(Number(node.dataset.socialCount)*eased)));
+      if(progress<1)requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  },{threshold:.25});
+  observer.observe(stats);
+})();
+</script>
 </body>
 </html>
