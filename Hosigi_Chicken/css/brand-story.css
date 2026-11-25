@@ -258,91 +258,51 @@
   .story-begin-title-section .story-begin-heading h2{font-size:clamp(30px,8.4vw,38px)}
 }
 
-/* HISTORY — centered, single-column timeline inspired by the reference. */
-.story-history .story-section-heading{max-width:880px;margin:0 auto clamp(48px,6vw,90px);text-align:center}
+/* HISTORY — section-bounded sticky index and centered timeline. */
+.story-history{position:relative;isolation:isolate;--history-sticky-top:112px}
+.story-history > .story-wrap{position:relative;z-index:1;width:min(1480px,calc(100% - 80px));margin-inline:auto}
+.story-history .story-section-heading{max-width:880px;margin:0 auto clamp(50px,7vw,105px);text-align:center}
 .story-history .story-section-heading>p:last-child{margin-inline:auto}
-.story-history .history-layout{display:block;width:min(100%,1000px);margin-inline:auto}
-.story-history .history-year-nav{display:block;position:static;margin:0 0 clamp(36px,5vw,64px);padding:0;background:transparent;border:0}
-.story-history .history-year-list{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;list-style:none;margin:0;padding:0;border:0}
-.story-history .history-year-list li{display:block;flex:0 0 auto;margin:0;padding:0;border:0}
-.story-history .history-year-link{padding:9px 8px;font-size:clamp(16px,1.8vw,22px);white-space:nowrap}
-.story-history .history-year-link::before{left:8px;right:8px;top:auto;bottom:2px;width:auto;height:3px;transform:scaleX(0);transform-origin:center}
-.story-history .history-year-link.is-active::before{transform:scaleX(1)}
-.story-history .history-content{display:block}
-.story-history .history-year-panel{display:block;padding-bottom:clamp(52px,7vw,90px);text-align:center}
+.story-history .history-layout{display:grid;grid-template-columns:minmax(110px,150px) minmax(0,1000px) minmax(110px,150px);justify-content:center;align-items:start;gap:clamp(24px,3vw,48px);width:100%;margin-inline:auto}
+.story-history .history-year-nav{display:block;position:sticky;top:var(--history-sticky-top);grid-column:1;grid-row:1;align-self:start;min-width:0;max-height:calc(100vh - var(--history-sticky-top) - 24px);max-height:calc(100dvh - var(--history-sticky-top) - 24px);overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:auto;scrollbar-width:thin;margin:0;padding:0;background:transparent;border:0;z-index:2}
+.story-history .history-year-list{display:flex;flex-direction:column;align-items:stretch;gap:0;overflow:visible;list-style:none;margin:0 0 0 4px;padding:0 0 0 10px;border-left:3px solid var(--border-default)}
+.story-history .history-year-list li{display:block;min-height:0;margin:0;padding:0;border:0}
+.story-history .history-year-link{display:block;position:relative;padding:8px 4px 8px 15px;color:var(--brand-brown);font-size:clamp(17px,1.5vw,22px);font-weight:750;line-height:1.25;white-space:nowrap;transition:color .25s ease}
+.story-history .history-year-link::before{left:0;right:auto;top:50%;bottom:auto;width:0;height:0;background:transparent;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:7px solid var(--brand-red);transform:translate(-4px,-50%);opacity:0;transition:opacity .25s ease,transform .25s ease}
+.story-history .history-year-link:is(:hover,:focus-visible,.is-active){color:var(--brand-red)}
+.story-history .history-year-link:is(:hover,:focus-visible,.is-active)::before{opacity:1;transform:translate(0,-50%)}
+.story-history .history-year-link.is-active{font-weight:850}
+.story-history .history-content{display:block;grid-column:2;grid-row:1;width:100%;min-width:0}
+.story-history .history-year-panel{display:block;width:100%;min-width:0;box-sizing:border-box;padding-bottom:clamp(62px,7vw,105px);scroll-margin-top:var(--history-sticky-top);text-align:center}
 .story-history .history-year-panel:last-child{padding-bottom:0}
-.story-history .history-year-banner{position:relative;display:flex;align-items:center;justify-content:center;width:84%;min-height:clamp(86px,9vw,120px);margin:0 auto;padding:18px 24px;border-radius:12px;font-size:clamp(42px,5.2vw,60px);text-align:center}
+.story-history .history-year-banner{position:relative;display:flex;align-items:center;justify-content:center;width:84%;min-height:clamp(86px,9vw,120px);margin:0 auto;padding:18px 24px;box-sizing:border-box;border-radius:12px;font-size:clamp(42px,5.2vw,60px);text-align:center}
 .story-history .history-year-banner::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);width:0;height:0;border-left:26px solid transparent;border-right:26px solid transparent;border-top:10px solid var(--brand-red)}
 .story-history .history-event-list{gap:12px;padding:30px 0 0}
-.story-history .history-event-card{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;padding:25px clamp(20px,4vw,42px);border:2px solid var(--border-default);border-radius:20px;background:transparent;text-align:center}
+.story-history .history-event-card{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;box-sizing:border-box;min-height:120px;padding:25px clamp(20px,4vw,42px);border:2px solid var(--border-default);border-radius:20px;background:transparent;text-align:center}
 .story-history .history-event-details{width:100%;text-align:center}
-.story-history .history-event-card h3,.story-history .history-event-card p{text-align:center}
+.story-history .history-event-card h3,.story-history .history-event-card p{max-width:100%;overflow-wrap:anywhere;text-align:center}
 .story-history .story-source-note{text-align:center}
-@media(max-width:767px){
-  .story-history .history-year-list{flex-wrap:nowrap;justify-content:flex-start;gap:8px;overflow-x:auto;padding-bottom:5px}
-  .story-history .history-year-link{font-size:16px}
-  .story-history .history-year-banner{width:90%;min-height:82px;border-radius:10px}
-  .story-history .history-year-banner::after{border-left-width:18px;border-right-width:18px;border-top-width:8px}
-  .story-history .history-event-list{padding-top:24px;gap:10px}
-  .story-history .history-event-card{min-height:100px;padding:20px 16px;border-radius:15px}
-}
-
-/* HISTORY — section-bounded sticky year index, with centered timeline cards. */
-.story-history .history-layout{display:grid;grid-template-columns:120px minmax(0,1fr) 120px;gap:24px;align-items:start;width:100%;max-width:1240px;margin-inline:auto}
-.story-history .history-year-nav{display:block;grid-column:1;grid-row:1;position:sticky;top:112px;align-self:start;max-height:calc(100vh - 136px);overflow-y:auto;overscroll-behavior-y:contain;scrollbar-width:thin;margin:0;padding:0;background:transparent;border:0}
-.story-history .history-year-list{display:flex;flex-direction:column;flex-wrap:nowrap;align-items:flex-start;justify-content:flex-start;gap:0;overflow:visible;margin:0 0 0 4px;padding:0 0 0 13px;border-left:3px solid var(--border-default)}
-.story-history .history-year-list li{margin:0;padding:0;border:0}
-.story-history .history-year-link{display:block;position:relative;padding:8px 0 8px 13px;color:var(--brand-brown);font-size:21px;font-weight:750;line-height:1.25;white-space:nowrap}
-.story-history .history-year-link::before{left:0;right:auto;top:50%;bottom:auto;width:0;height:0;background:transparent;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:7px solid var(--brand-red);transform:translateY(-50%) scale(.75);opacity:0;transition:opacity .2s,transform .2s}
-.story-history .history-year-link.is-active{color:var(--brand-red);font-weight:850}
-.story-history .history-year-link.is-active::before{transform:translateY(-50%) scale(1);opacity:1}
-.story-history .history-content{display:block;grid-column:2;grid-row:1;min-width:0}
-@media(max-width:1024px){
-  .story-history .history-layout{grid-template-columns:100px minmax(0,1fr) 100px;gap:14px}
-  .story-history .history-year-link{font-size:18px}
+.story-history .history-decoration{position:absolute;z-index:0;display:block;pointer-events:none;width:clamp(160px,16vw,300px);height:auto;max-width:none;opacity:.95;transform:translate3d(0,var(--history-drift,0px),0);will-change:transform}
+.story-history .history-decoration--left{left:0;top:23%}
+.story-history .history-decoration--right{right:0;top:56%}
+@media(min-width:1550px){.story-history .history-decoration--left{left:calc((100% - 1480px)/2 - 230px)}.story-history .history-decoration--right{right:calc((100% - 1480px)/2 - 230px)}}
+@media(max-width:1549px){.story-history .history-decoration{display:none}}
+@media(max-width:1100px){
+ .story-history > .story-wrap{width:calc(100% - 48px)}
+ .story-history .history-layout{grid-template-columns:100px minmax(0,1fr) 100px;gap:20px}
 }
 @media(max-width:767px){
-  .story-history .history-layout{grid-template-columns:66px minmax(0,1fr);gap:12px}
-  .story-history .history-year-nav{top:90px;max-height:calc(100vh - 110px)}
-  .story-history .history-year-list{margin-left:0;padding-left:5px;border-left-width:2px}
-  .story-history .history-year-link{font-size:14px;padding:8px 0 8px 10px}
-  .story-history .history-year-link::before{border-left-width:5px;border-top-width:4px;border-bottom-width:4px}
+ .story-history > .story-wrap{width:calc(100% - 32px)}
+ .story-history .history-layout{grid-template-columns:68px minmax(0,1fr);gap:12px}
+ .story-history .history-year-list{margin-left:0;padding-left:4px;border-left-width:2px}
+ .story-history .history-year-link{font-size:14px;padding:7px 0 7px 10px}
+ .story-history .history-year-link::before{border-left-width:5px;border-top-width:4px;border-bottom-width:4px}
+ .story-history .history-year-banner{width:100%;min-height:82px;border-radius:10px}
+ .story-history .history-year-banner::after{border-left-width:18px;border-right-width:18px;border-top-width:8px}
+ .story-history .history-event-list{padding-top:24px;gap:10px}
+ .story-history .history-event-card{min-height:100px;padding:20px 14px;border-radius:15px}
 }
-@media(prefers-reduced-motion:reduce){.story-history .history-year-link::before{transition:none}}
-
-/* HISTORY: generous side gutters, balanced central column and safe sizing. */
-.story-history > .story-wrap{width:min(1480px,calc(100% - 80px));margin-inline:auto}
-.story-history .history-layout{max-width:none;grid-template-columns:140px minmax(0,1fr) 140px;gap:clamp(24px,3vw,52px)}
-.story-history .history-year-nav{min-width:0;box-sizing:border-box}
-.story-history .history-content,.story-history .history-year-panel,.story-history .history-event-list,.story-history .history-event-card{width:100%;min-width:0;box-sizing:border-box}
-.story-history .history-year-banner{width:90%;max-width:100%;box-sizing:border-box}
-.story-history .history-event-card h3,.story-history .history-event-card p{max-width:100%;overflow-wrap:anywhere}
-@media(max-width:1200px){
-  .story-history > .story-wrap{width:calc(100% - 64px)}
-  .story-history .history-layout{grid-template-columns:112px minmax(0,1fr) 112px;gap:24px}
-}
-@media(max-width:900px){
-  .story-history > .story-wrap{width:calc(100% - 48px)}
-  .story-history .history-layout{grid-template-columns:92px minmax(0,1fr);gap:24px}
-}
-@media(max-width:767px){
-  .story-history > .story-wrap{width:calc(100% - 32px)}
-  .story-history .history-layout{grid-template-columns:66px minmax(0,1fr);gap:12px}
-  .story-history .history-year-banner{width:100%}
-}
-
-/* HISTORY: align each year label with its corresponding banner along a full-height rail. */
-.story-history .history-layout{position:relative;row-gap:0;--history-rail-x:4px}
-.story-history .history-layout::before{content:"";position:absolute;top:0;bottom:0;left:var(--history-rail-x);width:3px;background:var(--border-default);pointer-events:none}
-.story-history .history-year-nav,.story-history .history-year-list,.story-history .history-content{display:contents}
-.story-history .history-year-list li{grid-column:1;grid-row:var(--history-row);align-self:start;display:flex;align-items:center;min-height:clamp(86px,9vw,120px);margin:0;padding:0 0 0 24px;border:0;box-sizing:border-box}
-.story-history .history-year-link{width:100%;box-sizing:border-box}
-.story-history .history-year-panel{grid-column:2;grid-row:var(--history-row)}
-@media(max-width:767px){
-  .story-history .history-layout{--history-rail-x:0px}
-  .story-history .history-layout::before{width:2px}
-  .story-history .history-year-list li{min-height:82px;padding-left:7px}
-}
+@media(prefers-reduced-motion:reduce){.story-history .history-decoration{transform:none;will-change:auto}.story-history .history-year-link,.story-history .history-year-link::before{transition:none}}
 
 /* Brand story: photo-led three values, without enclosing card borders. */
 .story-flavors .story-flavor-grid{gap:clamp(18px,2.5vw,32px)}
