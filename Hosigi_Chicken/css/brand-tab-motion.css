@@ -22,3 +22,12 @@
     .philosophy-page .brand-subpage-hero > .brand-subpage-container > .brand-subpage-lead,
     .social-page .brand-subpage-hero > .brand-subpage-container > .brand-subpage-lead { animation-delay: 70ms; }
 }
+
+/* Only the three introductory slogans: mask each line independently without changing line metrics. */
+.brand-slogan-mask{display:block;overflow:clip;overflow-clip-margin:0px}
+.brand-slogan-line{display:block}
+@media (prefers-reduced-motion: no-preference){
+  .brand-slogan-ready .brand-slogan:not(.is-slogan-visible) .brand-slogan-line{opacity:0;transform:translateY(24px)}
+  .brand-slogan-ready .brand-slogan.is-slogan-visible .brand-slogan-line{animation:menu-tab-content-rise 560ms cubic-bezier(.22,1,.36,1) both}
+  .brand-slogan-ready .brand-slogan.is-slogan-visible .brand-slogan-mask:nth-child(2) .brand-slogan-line{animation-delay:70ms}
+}
