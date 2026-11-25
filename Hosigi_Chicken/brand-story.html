@@ -8,11 +8,26 @@
 <link rel="stylesheet" href="../css/default.css">
 <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
 <link rel="stylesheet" href="css/main.css?v=68">
-<link rel="stylesheet" href="css/nav-state.css?v=9">
+<script>
+/* Classify before first paint; do not persist category state across unrelated visits. */
+(() => {
+  const brandPages=new Set(["brand-story.html","brand-philosophy.html","brand-social.html"]);
+  try {
+    const current=new URL(location.href);
+    const previous=document.referrer ? new URL(document.referrer) : null;
+    const directory=url=>url.pathname.slice(0,url.pathname.lastIndexOf("/")+1);
+    const pageName=url=>url.pathname.split("/").pop().toLowerCase();
+    const sameBrand=previous && previous.origin===current.origin && directory(previous)===directory(current) && brandPages.has(pageName(previous));
+    const reload=performance.getEntriesByType("navigation")[0]?.type==="reload";
+    if(brandPages.has(pageName(current)) && (sameBrand || reload)) document.documentElement.classList.add("brand-gnb-continuation");
+  } catch (_) { /* Direct entries retain the original activation animation. */ }
+})();
+</script>
+<link rel="stylesheet" href="css/nav-state.css?v=10">
 <link rel="stylesheet" href="css/brand-story.css?v=33">
 <link rel="stylesheet" href="css/quick-menu-motion.css?v=10">
 <script src="js/store-nav.js?v=3" defer></script>
-<script src="js/gnb-motion.js?v=2" defer></script>
+<script src="js/gnb-motion.js?v=3" defer></script>
 <script src="js/brand-story.js?v=5" defer></script>
 <script src="js/brand-history.js?v=14" defer></script>
 <script src="js/smooth-wheel.js?v=5" defer></script>
@@ -40,7 +55,7 @@
                             </ul>
                         </li>
                         <li class="has-submenu">
-                            <a role="button" tabindex="0" aria-expanded="false" aria-controls="brand-submenu" class="is-current"><span class="brand-gnb-text">브랜드</span></a>
+                            <a role="button" tabindex="0" aria-expanded="false" aria-controls="brand-submenu" class="gnb-motion-link"><span class="gnb-label">브랜드</span></a>
                             <ul class="header-submenu" id="brand-submenu" aria-label="브랜드 상세">
                                 <li><a href="brand-story.html"><span class="brand-submenu-text">호식이 이야기</span></a></li>
                                 <li><a href="brand-philosophy.html"><span class="brand-submenu-text">브랜드 철학</span></a></li>
