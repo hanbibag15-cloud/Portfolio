@@ -343,3 +343,21 @@
   .story-history .history-layout::before{width:2px}
   .story-history .history-year-list li{min-height:82px;padding-left:7px}
 }
+
+/* Brand story: photo-led three values, without enclosing card borders. */
+.story-flavors .story-flavor-grid{gap:clamp(18px,2.5vw,32px)}
+.story-flavors .story-flavor-card{min-height:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
+.story-flavors .story-flavor-card:hover{transform:none;box-shadow:none}
+.story-flavors .story-value-photo{position:relative;isolation:isolate;overflow:hidden;aspect-ratio:4/3;border-radius:20px;background:var(--background-subtle)}
+.story-flavors .story-value-photo img{position:absolute;display:block;object-fit:contain;height:auto;max-width:none;pointer-events:none}
+.story-value-photo--pair img:first-child{width:70%;left:-4%;top:1%}
+.story-value-photo--pair img:nth-child(2){width:74%;right:-2%;bottom:-3%}
+.story-value-photo--variety img:first-child{width:60%;left:-2%;top:-3%}
+.story-value-photo--variety img:nth-child(2){width:60%;right:-2%;top:0}
+.story-value-photo--variety img:nth-child(3){width:72%;left:14%;bottom:-4%}
+.story-value-photo--share img:first-child{width:84%;left:-6%;top:1%}
+.story-value-photo--share img:nth-child(2){width:49%;right:-4%;bottom:0}
+.story-flavors .story-flavor-card h3{margin-top:24px;font-size:clamp(20px,2vw,28px);line-height:1.4}
+.story-flavors .story-flavor-title{gap:9px;word-break:keep-all}
+.story-flavors .story-flavor-card>p{margin-top:10px}
+@media(max-width:767px){.story-flavors .story-flavor-grid{gap:36px}.story-flavors .story-flavor-card h3{margin-top:18px}}
