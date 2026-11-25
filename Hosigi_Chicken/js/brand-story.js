@@ -132,3 +132,19 @@
   document.fonts?.ready.then(measure);
   measure();
 })();
+
+/* Independent one-shot slogan observer; never changes scroll position or hero/GNB state. */
+(() => {
+  "use strict";
+  const slogans=[...document.querySelectorAll(".brand-slogan")];
+  if(!slogans.length||!("IntersectionObserver" in window)||matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const observer=new IntersectionObserver(entries=>{
+    for(const entry of entries){
+      if(!entry.isIntersecting)continue;
+      entry.target.classList.add("is-slogan-visible");
+      observer.unobserve(entry.target);
+    }
+  },{threshold:0.08,rootMargin:"0px 0px -20px 0px"});
+  document.documentElement.classList.add("brand-slogan-ready");
+  slogans.forEach(slogan=>observer.observe(slogan));
+})();
