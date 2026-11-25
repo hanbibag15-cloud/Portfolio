@@ -309,3 +309,24 @@
   .story-history .history-year-link::before{border-left-width:5px;border-top-width:4px;border-bottom-width:4px}
 }
 @media(prefers-reduced-motion:reduce){.story-history .history-year-link::before{transition:none}}
+
+/* HISTORY: generous side gutters, balanced central column and safe sizing. */
+.story-history > .story-wrap{width:min(1480px,calc(100% - 80px));margin-inline:auto}
+.story-history .history-layout{max-width:none;grid-template-columns:140px minmax(0,1fr) 140px;gap:clamp(24px,3vw,52px)}
+.story-history .history-year-nav{min-width:0;box-sizing:border-box}
+.story-history .history-content,.story-history .history-year-panel,.story-history .history-event-list,.story-history .history-event-card{width:100%;min-width:0;box-sizing:border-box}
+.story-history .history-year-banner{width:90%;max-width:100%;box-sizing:border-box}
+.story-history .history-event-card h3,.story-history .history-event-card p{max-width:100%;overflow-wrap:anywhere}
+@media(max-width:1200px){
+  .story-history > .story-wrap{width:calc(100% - 64px)}
+  .story-history .history-layout{grid-template-columns:112px minmax(0,1fr) 112px;gap:24px}
+}
+@media(max-width:900px){
+  .story-history > .story-wrap{width:calc(100% - 48px)}
+  .story-history .history-layout{grid-template-columns:92px minmax(0,1fr);gap:24px}
+}
+@media(max-width:767px){
+  .story-history > .story-wrap{width:calc(100% - 32px)}
+  .story-history .history-layout{grid-template-columns:66px minmax(0,1fr);gap:12px}
+  .story-history .history-year-banner{width:100%}
+}
