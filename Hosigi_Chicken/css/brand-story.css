@@ -321,3 +321,12 @@
 .story-flavors .story-flavor-title{gap:9px;word-break:keep-all}
 .story-flavors .story-flavor-card>p{margin-top:10px}
 @media(max-width:767px){.story-flavors .story-flavor-grid{gap:36px}.story-flavors .story-flavor-card h3{margin-top:18px}}
+
+/* HISTORY: viewport-fitted rail, bounded by the timeline rather than root overflow. */
+.story-history .history-layout{position:relative}
+.story-history .history-year-nav{position:relative;top:auto;max-height:none;overflow:visible;transform:translateY(var(--history-nav-y,0px));will-change:transform}
+.story-history .history-year-list{gap:0;padding-bottom:0}
+.story-history .history-year-link{line-height:1.2;padding-block:var(--history-link-pad,8px);font-size:var(--history-link-size,clamp(17px,1.5vw,22px))}
+.story-history .history-year-link:not(.is-active)::before{opacity:0;transform:translate(-4px,-50%)}
+.story-history .history-year-link:not(.is-active):hover{color:var(--brand-red)}
+@media(max-width:767px){.story-history .history-year-link{font-size:var(--history-link-size,14px)}}
