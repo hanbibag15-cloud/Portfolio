@@ -92,7 +92,7 @@
         decorations.forEach((el,i) => {
           const distance = el.getBoundingClientRect().top - innerHeight/2;
           const drift = Math.max(-28,Math.min(28,distance*.035));
-          el.style.setProperty("--history-drift",(i===0?drift:-drift).toFixed(1)+"px");
+          el.style.setProperty("--history-drift",(el.classList.contains("history-decoration--left")?drift:-drift).toFixed(1)+"px");
         });
       }
     }
