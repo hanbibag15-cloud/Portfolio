@@ -278,7 +278,7 @@
 .story-history .history-year-banner{position:relative;display:flex;align-items:center;justify-content:center;width:84%;min-height:clamp(86px,9vw,120px);margin:0 auto;padding:18px 24px;box-sizing:border-box;border-radius:12px;font-size:clamp(42px,5.2vw,60px);text-align:center}
 .story-history .history-year-banner::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);width:0;height:0;border-left:26px solid transparent;border-right:26px solid transparent;border-top:10px solid var(--brand-red)}
 .story-history .history-event-list{gap:12px;padding:30px 0 0}
-.story-history .history-event-card{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;box-sizing:border-box;min-height:120px;padding:25px clamp(20px,4vw,42px);border:2px solid var(--border-default);border-radius:20px;background:transparent;text-align:center}
+.story-history .history-event-card{display:flex;flex-direction:column;align-items:center;justify-content:center;width:94%;margin-inline:auto;box-sizing:border-box;min-height:108px;padding:22px clamp(20px,4vw,42px);border:2px solid #c8c8c8;border-radius:20px;background:transparent;text-align:center}
 .story-history .history-event-details{width:100%;text-align:center}
 .story-history .history-event-card h3,.story-history .history-event-card p{max-width:100%;overflow-wrap:anywhere;text-align:center}
 .story-history .story-source-note{text-align:center}
@@ -300,7 +300,7 @@
  .story-history .history-year-banner{width:100%;min-height:82px;border-radius:10px}
  .story-history .history-year-banner::after{border-left-width:18px;border-right-width:18px;border-top-width:8px}
  .story-history .history-event-list{padding-top:24px;gap:10px}
- .story-history .history-event-card{min-height:100px;padding:20px 14px;border-radius:15px}
+ .story-history .history-event-card{width:96%;min-height:96px;padding:18px 14px;border-radius:15px}
 }
 @media(prefers-reduced-motion:reduce){.story-history .history-decoration{transform:none;will-change:auto}.story-history .history-year-link,.story-history .history-year-link::before{transition:none}}
 
