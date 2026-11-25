@@ -31,7 +31,6 @@
   const links = [...yearList.querySelectorAll(".history-year-link")];
   const panels = [...content.querySelectorAll(".history-year-panel")];
   const banners = panels.map(panel => panel.querySelector(".history-year-banner"));
-  const mobile = window.matchMedia("(max-width: 767px)");
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   if (!links.length || links.length !== panels.length) return;
 
@@ -55,16 +54,17 @@
       else link.removeAttribute("aria-current");
     });
 
-    // Only the mobile year tabs need their own horizontal position adjustment.
-    if (mobile.matches) {
-      const list = section.querySelector(".history-year-list");
-      const link = links[index];
-      if (!list || !link) return;
-      const listRect = list.getBoundingClientRect();
+    // Keep the active year in view inside the vertical sticky index.
+    const nav = section.querySelector(".history-year-nav");
+    const link = links[index];
+    if (nav && link) {
+      const navRect = nav.getBoundingClientRect();
       const linkRect = link.getBoundingClientRect();
-      const left = list.scrollLeft + linkRect.left - listRect.left -
-        (list.clientWidth - linkRect.width) / 2;
-      list.scrollTo({ left: Math.max(0, left), behavior: reduced.matches ? "auto" : "smooth" });
+      if (linkRect.top < navRect.top || linkRect.bottom > navRect.bottom) {
+        const top = nav.scrollTop + linkRect.top - navRect.top -
+          (nav.clientHeight - linkRect.height) / 2;
+        nav.scrollTo({ top: Math.max(0, top), behavior: reduced.matches ? "auto" : "smooth" });
+      }
     }
   }
 
