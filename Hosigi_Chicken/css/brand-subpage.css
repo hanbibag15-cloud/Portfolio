@@ -2,8 +2,7 @@
 .brand-subpage{min-height:65vh;background:var(--surface-default);color:var(--text-primary);}
 .brand-subpage-container{width:min(1240px,calc(100% - 40px));margin-inline:auto;}
 .brand-subpage-hero{padding:100px 0 86px;text-align:center;background:var(--background-subtle);}
-.brand-subpage-eyebrow{color:var(--brand-red);font-weight:700;font-size:13px;letter-spacing:.15em;}
-.brand-subpage-hero h2{margin:14px 0 0;color:var(--text-brand);font-size:clamp(40px,5vw,64px);line-height:1.15;letter-spacing:-.035em;}
+.brand-subpage-hero h2{margin:0;color:var(--text-brand);font-size:clamp(40px,5vw,64px);line-height:1.15;letter-spacing:-.035em;}
 .brand-subpage-lead{margin-top:17px;color:var(--text-primary);font-size:18px;line-height:1.65;word-break:keep-all;}
 .brand-subpage-content{padding:58px 0 115px;}
 .brand-subpage-tabs{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:54px;}
