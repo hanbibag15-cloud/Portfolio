@@ -1,0 +1,34 @@
+name: Sync official Hosigi events
+on:
+  schedule:
+    - cron: '0 0 * * *' # 09:00 Asia/Seoul (UTC+9)
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: hosigi-official-events
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install parser
+        run: python -m pip install beautifulsoup4==4.13.4
+      - name: Fetch public official event data
+        run: python scripts/sync_hosigi_events.py
+      - name: Commit changed data only
+        run: |
+          if git diff --quiet -- Hosigi_Chicken/data/official-events.json; then
+            echo "No verified changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- Hosigi_Chicken/data/official-events.json
+          git commit -m "Sync verified official Hosigi events"
+          git push
