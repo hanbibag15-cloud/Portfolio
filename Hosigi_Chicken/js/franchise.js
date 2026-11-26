@@ -18,6 +18,41 @@ const reduced=matchMedia("(prefers-reduced-motion:reduce)");
 function count(el){if(el.dataset.counted)return;el.dataset.counted="1";const end=Number(el.dataset.count);const format=n=>el.dataset.format==="plain"?String(n):n.toLocaleString("ko-KR");if(reduced.matches){el.textContent=format(end);return}const start=performance.now();function step(now){const p=Math.min(1,(now-start)/1100);el.textContent=format(Math.round(end*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step)}
 if("IntersectionObserver"in window&&!reduced.matches){const nodes=[...document.querySelectorAll(".f-reveal")];const observer=new IntersectionObserver(entries=>{for(const e of entries){if(!e.isIntersecting)continue;e.target.classList.add("is-visible");observer.unobserve(e.target);e.target.querySelectorAll("[data-count]").forEach(count)}},{threshold:.08});document.documentElement.classList.add("f-ready");nodes.forEach(n=>observer.observe(n))}
 const mainLinks=[...nav.querySelectorAll(":scope > ul > li > a")];
+/* Resolve the brand site's real text widths using the browser's computed font,
+   then keep franchise slots independent of the franchise labels' lengths. */
+const axisRef=document.createElement("div");
+axisRef.className="f-brand-axis-reference";
+axisRef.setAttribute("aria-hidden","true");
+axisRef.inert=true;
+for(const label of ["메뉴","브랜드","매장찾기","이벤트"]){const span=document.createElement("span");span.textContent=label;axisRef.append(span)}
+header.querySelector(".header-inner").append(axisRef);
+function alignBrandAxes(){
+ if(!desktop.matches){nav.classList.remove("axis-ready");return;}
+ const inner=header.querySelector(".header-inner").getBoundingClientRect();
+ const ref=[...axisRef.children].map(el=>{const r=el.getBoundingClientRect();return r.left+r.width/2});
+ const widths=mainLinks.map(a=>a.querySelector(".gnb-label").getBoundingClientRect().width);
+ const slot=Math.ceil(Math.max(...widths))+4;
+ const logo=header.querySelector(".header-logo").getBoundingClientRect();
+ const utils=header.querySelector(".header-utils").getBoundingClientRect();
+ const min=logo.right+12+slot/2,max=utils.left-12-slot/2;
+ let centers=ref;
+ // Preserve exact reference axes whenever space permits; avoid collisions otherwise.
+ if(ref[0]<min||ref[3]>max||ref.some((x,i)=>i>0&&x-ref[i-1]<slot)){
+   const left=Math.min(min,max),right=Math.max(min,max);
+   centers=ref.map((_,i)=>left+(right-left)*i/3);
+ }
+ nav.style.setProperty("--axis-width",inner.width+"px");
+ nav.style.setProperty("--axis-slot",slot+"px");
+ mainLinks.forEach((a,i)=>a.parentElement.style.setProperty("--axis-x",(centers[i]-inner.left)+"px"));
+ nav.classList.add("axis-ready");
+}
+let axisFrame=0;
+function scheduleAxes(){cancelAnimationFrame(axisFrame);axisFrame=requestAnimationFrame(alignBrandAxes)}
+alignBrandAxes();
+window.addEventListener("resize",scheduleAxes,{passive:true});
+if(document.fonts){document.fonts.ready.then(scheduleAxes);document.fonts.addEventListener("loadingdone",scheduleAxes)}
+if("ResizeObserver"in window){const observer=new ResizeObserver(scheduleAxes);observer.observe(header.querySelector(".header-inner"));observer.observe(header.querySelector(".header-utils"));observer.observe(axisRef)}
+
 function activeNav(){const y=window.scrollY+header.offsetHeight+80;let index=0;for(const [i,id] of [[1,"performance"],[2,"guide"],[3,"consulting"]]){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top+scrollY<=y)index=i}if(index===2&&tabs[5].getAttribute("aria-selected")==="true")index=3;mainLinks.forEach((a,i)=>a.classList.toggle("gnb-active",i===index))}
 window.addEventListener("scroll",activeNav,{passive:true});tabs.forEach(t=>t.addEventListener("click",activeNav));activeNav();
 const form=document.getElementById("f-form"), fields=document.getElementById("f-fields"), result=document.getElementById("f-result");
