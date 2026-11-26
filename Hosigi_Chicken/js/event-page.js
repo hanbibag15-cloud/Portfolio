@@ -511,7 +511,37 @@
     closeSubmenus();
     submenuParents.forEach(item=>item.classList.remove("submenu-dismissed"));
   });
+  async function loadOfficialEvents(){
+    try {
+      const response=await fetch("data/official-events.json",{cache:"no-cache"});
+      if(!response.ok)throw Error("event feed unavailable");
+      const records=await response.json();
+      if(!Array.isArray(records))throw Error("invalid feed");
+      const officialUrl=value=>{
+        try {const u=new URL(value);return u.protocol==="https:" && ["www.9922.co.kr","9922.co.kr"].includes(u.hostname) && !u.username && !u.password && !u.port;}catch{return false;}
+      };
+      const norm=value=>String(value||"").normalize("NFKC").toLowerCase().replace(/[^\p{L}\p{N}]/gu,"");
+      const same=(a,b)=>a.id===b.id || (a.sourceUrl && a.sourceUrl===b.sourceUrl && a.id.startsWith("official-")) || (norm(a.title)===norm(b.title) && a.startDate===b.startDate);
+      for(const record of records){
+        if(!record || !/^official-\d+$/.test(record.id) || typeof record.title!=="string" || !record.title.trim() || !/^\d{4}-\d{2}-\d{2}$/.test(record.startDate) || !/^\d{4}-\d{2}-\d{2}$/.test(record.endDate) || record.startDate>record.endDate || !officialUrl(record.sourceUrl) || typeof record.description!=="string")continue;
+        const index=events.findIndex(existing=>same(existing,record));
+        const item={...record,category:"공식 이벤트",type:"promo",state:"unknown",source:"호식이두마리치킨 공식 홈페이지"};
+        if(index<0)events.push(item);
+        else {const old=events[index];events[index]={...item,id:old.id};}
+        if(officialUrl(record.image))eventImages[index<0?item.id:events[index].id]=record.image;
+      }
+      if(currentSection==="events")render();
+    } catch(error){console.warn("Official event feed unavailable; existing events retained.",error);}
+  }
   render();
+  void loadOfficialEvents();
+  let lastDay=koreaToday();
+  const refreshStatus=()=>{
+    const today=koreaToday();
+    if(today!==lastDay){lastDay=today;if(currentSection==="events")render();}
+  };
+  setInterval(refreshStatus,60000);
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)refreshStatus();});
   // Main-page event image deep links show the correct listing page and detail.
   const linkedId=location.hash.startsWith("#event-")
     ? decodeURIComponent(location.hash.slice("#event-".length))
