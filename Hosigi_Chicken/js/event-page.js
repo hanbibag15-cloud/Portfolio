@@ -148,6 +148,8 @@
   const backdrop=document.getElementById("event-detail-backdrop");
   const closeButton=backdrop.querySelector(".event-detail-close");
   let previousFocus=null;
+  let previousEventTrigger=null;
+  let pointerOpenedEvent=false;
   // Status is evaluated in Seoul time on each render, so an expired event
   // automatically moves to the ended tab without a manual deployment.
   const koreaToday=()=>{
@@ -217,7 +219,7 @@
     info.append(cat,title,dates);
     button.append(art,info);
     article.append(button);
-    button.addEventListener("click",()=>openDetail(event));
+    button.addEventListener("click",click=>openDetail(event,button,click.detail>0));
     return article;
   }
   function makeNoticeRow(notice){
@@ -235,6 +237,8 @@
     article.append(button);return article;
   }
   function openNoticeDetail(notice){
+    previousEventTrigger=null;
+    pointerOpenedEvent=false;
     previousFocus=document.activeElement;
     document.getElementById("event-detail-title").textContent=notice.title;
     document.getElementById("event-detail-type").textContent=notice.category;
@@ -350,8 +354,10 @@
       button.setAttribute("aria-pressed",String(active));
     });
   }
-  function openDetail(event){
-    previousFocus=document.activeElement;
+  function openDetail(event,trigger=null,viaPointer=false){
+    previousFocus=trigger||document.activeElement;
+    previousEventTrigger=trigger;
+    pointerOpenedEvent=viaPointer;
     document.getElementById("event-detail-title").textContent=event.title;
     document.getElementById("event-detail-type").textContent=event.category+" · "+status(event);
     document.getElementById("event-detail-date").textContent=event.date;
@@ -397,8 +403,25 @@
   function closeDetail(){
     backdrop.hidden=true;
     document.body.classList.remove("event-dialog-open");
-    previousFocus?.focus();
+    const restore=previousFocus;
+    const pointerEvent=pointerOpenedEvent;
+    previousFocus=null;
+    previousEventTrigger=null;
+    pointerOpenedEvent=false;
+    if(pointerEvent){
+      // Pointer activation must not restore a synthetic hover-like focus state.
+      if(document.activeElement===closeButton)closeButton.blur();
+      if(document.activeElement?.matches(".event-card-open"))document.activeElement.blur();
+    }else if(restore?.isConnected){
+      restore.focus({preventScroll:true});
+    }
   }
+  window.addEventListener("pageshow",event=>{
+    if(!event.persisted && performance.getEntriesByType("navigation")[0]?.type!=="back_forward")return;
+    if(pointerOpenedEvent && previousEventTrigger && !backdrop.hidden)closeDetail();
+    const active=document.activeElement;
+    if(active?.matches(".event-card-open:not(:focus-visible)"))active.blur();
+  });
   filters.forEach(button=>button.addEventListener("click",()=>{
     currentSection=button.dataset.section;
     currentStatus="all";
