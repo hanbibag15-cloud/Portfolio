@@ -5,6 +5,6 @@
 .social-page > .brand-subpage-hero,
 .store-page > .store-intro,
 .hosigi-event-page > .event-page-hero {
-  background-color: #FFEA80;
+  background-color: var(--background-subtle);
   background-image: none;
 }
