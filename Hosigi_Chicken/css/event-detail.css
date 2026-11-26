@@ -9,11 +9,8 @@
 .event-post-body{padding:48px 0 60px}
 #event-post-poster{margin:0 auto 48px;text-align:center}
 #event-post-poster img{display:block;width:auto;max-width:100%;height:auto;margin:0 auto}
-.event-post-description h4,.event-post-notes h4{font-size:23px;font-weight:750;margin:0 0 16px}
-.event-post-description p,.event-post-notes p{font-size:17px;line-height:1.85;white-space:pre-line;margin:0}
-.event-post-notes{margin-top:40px;padding:24px;background:var(--background-subtle);border-radius:10px}
-.event-post-notes p{font-size:15px}
-.event-post-notes p+p{margin-top:12px}
+.event-post-description h4{font-size:23px;font-weight:750;margin:0 0 16px}
+.event-post-description p{font-size:17px;line-height:1.85;white-space:pre-line;margin:0}
 .event-post-neighbors{border-top:1px solid var(--brand-brown);border-bottom:1px solid var(--border-default)}
 .event-post-neighbors>div{display:grid;grid-template-columns:100px minmax(0,1fr);gap:20px;padding:22px 14px;align-items:center}
 .event-post-neighbors>div+div{border-top:1px solid var(--border-default)}
@@ -30,4 +27,4 @@
 #event-post-error p{margin-top:12px}
 @keyframes event-detail-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:no-preference){.event-standalone .event-page-hero h2,.event-standalone .event-page-subtitle{animation:event-detail-rise 560ms cubic-bezier(.22,1,.36,1) both}.event-standalone .event-page-subtitle{animation-delay:70ms}}
-@media(max-width:767px){.event-standalone .event-filters{margin-bottom:36px}.event-post-heading{padding-bottom:24px}.event-post-body{padding:30px 0 40px}#event-post-poster{margin-bottom:30px}.event-post-description p{font-size:16px}.event-post-neighbors>div{grid-template-columns:65px minmax(0,1fr);gap:10px;padding:18px 4px}.event-post-notes{padding:18px}.event-post-actions{margin-top:32px}}
+@media(max-width:767px){.event-standalone .event-filters{margin-bottom:36px}.event-post-heading{padding-bottom:24px}.event-post-body{padding:30px 0 40px}#event-post-poster{margin-bottom:30px}.event-post-description p{font-size:16px}.event-post-neighbors>div{grid-template-columns:65px minmax(0,1fr);gap:10px;padding:18px 4px}.event-post-actions{margin-top:32px}}
