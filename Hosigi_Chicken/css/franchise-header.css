@@ -492,3 +492,12 @@
 .site-header .f-util-icon{display:block;flex:0 0 19px;width:19px;height:19px;opacity:.8;vertical-align:middle}
 .site-header .header-utils-divider{flex:0 0 1px;width:1px;height:16px}
 .site-header .header-utils>a>span,.site-header .f-mobile-actions>a>span{display:block;line-height:19px}
+
+/* The full-width GNB axis layer must not intercept utility or logo clicks. */
+@media(min-width:1025px){
+ .site-header .header-nav.axis-ready,.site-header .header-nav.axis-ready>ul{pointer-events:none}
+ .site-header .header-nav.axis-ready>ul>li{pointer-events:auto}
+ .site-header .header-utils{position:relative;z-index:2}
+ .site-header .header-logo{position:relative;z-index:2}
+}
+.site-header .header-utils>a,.site-header .f-mobile-actions>a{cursor:pointer}
