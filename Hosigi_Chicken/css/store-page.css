@@ -778,3 +778,10 @@
 .store-map-panel .store-popup-focus:hover .store-popup-title,
 .store-map-panel .store-popup-focus:focus-visible .store-popup-title{color:var(--brand-red)}
 .store-map-panel .store-popup-focus:focus-visible{outline:2px solid var(--brand-red);outline-offset:4px;border-radius:5px}
+
+/* Decorative store cutout: same isolated banner layering as the menu hero. */
+.store-page > .store-intro{position:relative;overflow:hidden;isolation:isolate}
+.store-intro > .store-container{position:relative;z-index:1}
+.store-intro > .store-intro-art{position:absolute;z-index:0;right:0;bottom:0;width:min(505.291px,calc((100% - 480px)/2 - 24px));height:auto;max-width:none;max-height:100%;object-fit:contain;object-position:right bottom;pointer-events:none}
+@media(max-width:1100px){.store-intro > .store-intro-art{width:min(34vw,calc((100% - 440px)/2 - 20px))}}
+@media(max-width:767px){.store-intro > .store-intro-art{display:none}}
