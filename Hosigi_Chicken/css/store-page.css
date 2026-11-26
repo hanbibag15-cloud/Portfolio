@@ -782,6 +782,8 @@
 /* Decorative store cutout: same isolated banner layering as the menu hero. */
 .store-page > .store-intro{position:relative;overflow:hidden;isolation:isolate}
 .store-intro > .store-container{position:relative;z-index:1}
-.store-intro > .store-intro-art{position:absolute;z-index:0;right:0;bottom:0;width:min(505.291px,calc((100% - 480px)/2 - 24px));height:auto;max-width:none;max-height:100%;object-fit:contain;object-position:right bottom;pointer-events:none}
-@media(max-width:1100px){.store-intro > .store-intro-art{width:min(34vw,calc((100% - 440px)/2 - 20px))}}
+/* Figma 30:136: frame 1309 x 294.5; image 484 x 387, rotated 0.22deg.
+   Image wrapper 485.483 x 388.856 at x=825, y=13; overflow is intentionally clipped. */
+.store-intro > .store-intro-art{position:absolute;z-index:0;right:calc(-1.483 / 1309 * 100% + .7415px);top:calc(13 / 294.5 * 100% + .928px);bottom:auto;width:calc(484 / 1309 * 100%);height:auto;max-width:none;max-height:none;object-fit:contain;transform:rotate(.22deg);transform-origin:center;pointer-events:none}
+@media(max-width:1100px){.store-intro > .store-intro-art{width:min(calc(484 / 1309 * 100%),calc((100% - 360px)/2))}}
 @media(max-width:767px){.store-intro > .store-intro-art{display:none}}
