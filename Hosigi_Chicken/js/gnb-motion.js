@@ -17,7 +17,8 @@
     "brand-philosophy.html":1,
     "brand-social.html":1,
     "store.html":2,
-    "event.html":3
+    "event.html":3,
+    "event-detail.html":3
   };
   const permanent=Object.prototype.hasOwnProperty.call(activePages,page)?activePages[page]:-1;
 
