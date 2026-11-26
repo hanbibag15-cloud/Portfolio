@@ -188,7 +188,7 @@ body.event-dialog-open{overflow:hidden;}
 }
 .event-status,.event-list-action {display:none;}
 .event-list-card:hover,
-.event-list-card:focus-within {
+.event-list-card:has(> .event-card-open:focus-visible) {
   transform:translateY(-4px);
   box-shadow:0 12px 32px rgba(34,23,20,.13);
 }
@@ -216,7 +216,7 @@ body.event-dialog-open{overflow:hidden;}
 }
 @media(prefers-reduced-motion:reduce){
   .event-list-card,.event-card-image {transition:none!important;}
-  .event-list-card:hover,.event-list-card:focus-within {transform:none;}
+  .event-list-card:hover,.event-list-card:has(> .event-card-open:focus-visible) {transform:none;}
 }
 
 /* Two-tier navigation: primary Event/Notice pills, secondary compact status pills. */
@@ -283,7 +283,7 @@ body.event-dialog-open{overflow:hidden;}
   word-break:keep-all;
 }
 .event-list-card:hover .event-ended-overlay,
-.event-list-card:focus-within .event-ended-overlay{
+.event-list-card:has(> .event-card-open:focus-visible) .event-ended-overlay{
   background:rgba(25,12,12,.73);
 }
 
