@@ -19,7 +19,9 @@
   const stateKey="hosigi-event-list-v1";
   const readSaved=()=>{try{return JSON.parse(sessionStorage.getItem(stateKey)||"null")}catch{return null}};
   const saved=readSaved();
-  const restoring=params.get("restore")==="1" || performance.getEntriesByType("navigation")[0]?.type==="back_forward";
+  let linkedId=null;
+  try{if(location.hash.startsWith("#event-"))linkedId=decodeURIComponent(location.hash.slice("#event-".length));}catch{}
+  const restoring=!linkedId && (params.get("restore")==="1" || performance.getEntriesByType("navigation")[0]?.type==="back_forward");
   if(restoring && saved){
     currentSection=saved.section==="notices"?"notices":"events";
     currentStatus=["all","active","ended"].includes(saved.status)?saved.status:"all";
@@ -36,6 +38,7 @@
   function makeCard(event){
     const article=document.createElement("article");
     article.className="event-list-card";
+    article.dataset.eventId=event.id;
     const button=document.createElement("button");
     button.type="button";button.className="event-card-open";
     button.setAttribute("aria-label",event.title+" 상세 보기");
@@ -310,9 +313,44 @@
     if(!restoring||!saved)return;
     window.scrollTo({top:Math.max(0,Number(saved.y)||0),behavior:"instant"});
   }
-  render();
-  restoreScroll();
-  loadOfficialEvents().then(()=>{if(currentSection==="events"){render();restoreScroll();}});
+  async function initializeList(){
+    if(!linkedId){
+      render();
+      restoreScroll();
+      await loadOfficialEvents();
+      if(currentSection==="events"){render();restoreScroll();}
+      return;
+    }
+    // Resolve against the same merged dataset and sort order used by pagination.
+    currentSection="events";
+    currentStatus="all";
+    currentPage=1;
+    render();
+    await loadOfficialEvents();
+    const ordered=orderedEvents(events);
+    const index=ordered.findIndex(item=>item.id===linkedId);
+    if(index<0){render();return;}
+    const item=ordered[index];
+    if(eventState(item)!=="ended"){
+      location.replace(detailUrl(item.id));
+      return;
+    }
+    currentSection="events";
+    currentStatus="all";
+    currentPage=Math.floor(index/pageSize)+1;
+    render();
+    // Remove the consumed deep link so a later list return does not retrigger it.
+    history.replaceState(history.state,"",location.pathname+location.search);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      const card=[...grid.querySelectorAll(".event-list-card")].find(node=>node.dataset.eventId===item.id);
+      if(!card)return;
+      const header=document.querySelector(".site-header");
+      const offset=Math.max(0,header?.getBoundingClientRect().bottom||0)+20;
+      const top=Math.max(0,window.scrollY+card.getBoundingClientRect().top-offset);
+      window.scrollTo({top,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
+    }));
+  }
+  void initializeList();
   window.addEventListener("pageshow",event=>{
     if(event.persisted){
       const active=document.activeElement;
@@ -326,8 +364,4 @@
   };
   setInterval(refreshStatus,60000);
   document.addEventListener("visibilitychange",()=>{if(!document.hidden)refreshStatus();});
-  // Preserve existing homepage deep links with the new standalone detail URL.
-  if(location.hash.startsWith("#event-")){
-    try{location.replace(detailUrl(decodeURIComponent(location.hash.slice("#event-".length))));}catch{}
-  }
 })();
