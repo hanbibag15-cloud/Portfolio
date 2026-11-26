@@ -282,7 +282,7 @@
   }
 }
 
-/* Hosigi brand pagination: keep the reference's circular arrows and numbered layout. */
+/* Hosigi brand pagination: borderless chevrons and numbered layout. */
 .event-pagination{
   display:flex;
   align-items:center;
@@ -320,23 +320,22 @@
 .event-page-button.event-page-arrow{
   width:48px;
   height:48px;
-  border:1.5px solid var(--brand-brown);
-  background:var(--surface-default);
-  color:var(--brand-brown);
+  border:0;
+  background:transparent;
+  color:#767676;
   font-size:20px;
 }
+.event-page-arrow svg{display:block;width:24px;height:24px;flex:none;pointer-events:none;}
 @media(hover:hover){
   .event-page-button.event-page-arrow:not(:disabled):hover{
-    border-color:var(--brand-red);
-    background:var(--brand-red);
-    color:var(--neutral-white);
+    background:transparent;
+    color:var(--brand-red);
     transform:translateY(-2px);
   }
 }
 .event-page-button.event-page-arrow:disabled{
-  border-color:var(--border-default);
   color:#bcb5b2;
-  background:var(--surface-default);
+  background:transparent;
   cursor:default;
 }
 .event-page-button:focus-visible{
