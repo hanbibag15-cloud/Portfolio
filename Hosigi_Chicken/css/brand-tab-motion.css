@@ -48,6 +48,6 @@
 /* Left-side building illustration; independent of the existing right mascot. */
 .hosigi-story > .story-page-intro::after,
 .philosophy-page > .brand-subpage-hero::after,
-.social-page > .brand-subpage-hero::after{content:"";position:absolute;left:5.4%;bottom:-38.5%;height:130%;width:min(30%, 420px);background:url("../img/Service_img11.png") no-repeat left top / contain;pointer-events:none;z-index:0}
-@media(max-width:1100px){.hosigi-story > .story-page-intro::after,.philosophy-page > .brand-subpage-hero::after,.social-page > .brand-subpage-hero::after{left:2%;width:23%}}
+.social-page > .brand-subpage-hero::after{content:"";position:absolute;left:5.4%;bottom:-64%;height:156%;width:min(36%, 504px);background:url("../img/Service_img11.png") no-repeat left top / contain;pointer-events:none;z-index:0}
+@media(max-width:1100px){.hosigi-story > .story-page-intro::after,.philosophy-page > .brand-subpage-hero::after,.social-page > .brand-subpage-hero::after{left:2%;width:27.6%}}
 @media(max-width:767px){.hosigi-story > .story-page-intro::after,.philosophy-page > .brand-subpage-hero::after,.social-page > .brand-subpage-hero::after{display:none}}
