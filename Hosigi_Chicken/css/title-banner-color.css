@@ -1,0 +1,10 @@
+/* Shared solid title-banner background, scoped to the requested subpages. */
+.all-menu-page > .all-menu-intro,
+.hosigi-story > .story-page-intro,
+.philosophy-page > .brand-subpage-hero,
+.social-page > .brand-subpage-hero,
+.store-page > .store-intro,
+.hosigi-event-page > .event-page-hero {
+  background-color: #FFEA80;
+  background-image: none;
+}
