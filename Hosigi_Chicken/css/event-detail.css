@@ -22,8 +22,9 @@
 .event-post-neighbors a[href]:hover{color:var(--brand-red)}
 .event-post-neighbors a:not([href]){color:#767676}
 .event-post-actions{display:flex;justify-content:center;margin-top:48px}
-.event-post-back{display:inline-flex;align-items:center;justify-content:center;gap:26px;padding:16px 28px;border-radius:999px;background:var(--brand-red);color:#fff;text-decoration:none;font-weight:700;transition:background .4s ease-in-out}
-.event-post-back:hover{background:var(--brand-brown)}
+.event-post-back{display:inline-flex;align-items:center;justify-content:center;gap:26px;padding:16px 28px;border-radius:999px;background-color:var(--brand-brown);color:#fff;text-decoration:none;font-weight:700;transition:background-color 0.3s ease-in-out}
+@media(hover:hover) and (pointer:fine){.event-post-back:hover{background-color:var(--brand-red)}}
+@media(prefers-reduced-motion:reduce){.event-post-back{transition:none}}
 .event-post a:focus-visible{outline:2px solid var(--brand-red);outline-offset:4px}
 .event-post-loading,#event-post-error{text-align:center;padding:50px 0}
 #event-post-error p{margin-top:12px}
