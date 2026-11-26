@@ -427,3 +427,6 @@ html:has(.event-pagination),body:has(.event-pagination){overflow-anchor:none;}
 @media(prefers-reduced-motion:reduce){
   .event-notice-open{transition:none;}
 }
+
+/* Remove only the heading divider above the notice list. */
+.event-collection:has(> .event-card-grid.is-notice-list) > .event-list-top{border-bottom:0;padding-bottom:0;}
