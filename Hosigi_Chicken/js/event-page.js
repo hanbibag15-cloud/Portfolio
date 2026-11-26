@@ -1,6 +1,7 @@
 (() => {
   "use strict";
   const events=[
+    {"id":"school-chicken-race","type":"promo","category":"제휴 이벤트","title":"운전선생 × 호식이 고3 치킨 레이스","date":"2026.11.19 – 2026.12.06","startDate":"2026-11-19","endDate":"2026-12-06","state":"active","description":"제2회 고3 학교대항전. 서울·경기 학교의 2007~2008년생을 대상으로 11월 19일 오후 6시부터 12월 6일 밤 11시 59분까지 진행됩니다. 퀴즈를 맞히며 친구들과 학교의 누적 주행 거리를 높이는 이벤트로, 상위 4개 학교에 호식이두마리치킨 각 200마리(총 800마리)를 제공합니다. 아이패드, 친구 초대 시 메가커피, 운전학원 등록 시 최대 6만 원 페이백 등 추가 혜택은 원본 게시물의 조건을 확인해 주세요.","source":"운전선생 × 호식이두마리치킨 공식 제휴 이벤트 안내","sourceUrl":"https://drivingteacher.co.kr/event/school-car"},
     {"id":"autumn-tour","type":"sns","category":"SNS 이벤트","title":"호식이 단풍 투어 댓글 이벤트","date":"2026.11.03 – 2026.11.06","startDate":"2026-11-03","endDate":"2026-11-06","state":"active","description":"호식이 공식 인스타그램 계정 hosigi1999가 11월 3일 공개한 이벤트입니다. 팔로우·좋아요 후 가고 싶은 여행지를 댓글로 남기면 추첨을 통해 30명에게 치킨 세트를 제공합니다. 11월 6일 마감으로 안내됐으며, 참여 전 원문에서 마감 시각을 확인하세요.","source":"공식 인스타그램 게시물 인용 · 돈좀요 2026.11.03","sourceUrl":"https://donzomyo.kr/events/event-701d853be3ea024493f7fb99"},
     {"id":"ddangyo-discount","type":"promo","category":"배달앱 할인","title":"땡겨요 호식이 7천 원 할인","date":"2026.11.05 확인 – 2026.11.30","startDate":"2026-11-05","endDate":"2026-11-30","state":"active","description":"외부 할인정보 집계 사이트가 11월 5일 기준 땡겨요 7,000원 할인, 최소주문 21,000원, 11월 30일 종료 예정으로 안내했습니다. 호식이 공식 공지가 아닌 외부 집계 정보이므로 적용 지역·매장·쿠폰 소진·변경 여부를 반드시 배달앱에서 확인해야 합니다.","source":"주문의고수 외부 집계 · 2026.11.05","sourceUrl":"https://www.jumungosu.com/hosigi-discount"},
     {"id":"yogiyo-discount","type":"promo","category":"배달앱 할인","title":"요기요 호식이 5천 원 할인","date":"2026.11.05 확인 – 2026.11.08","startDate":"2026-11-05","endDate":"2026-11-08","state":"active","description":"외부 할인정보 집계 사이트에 따르면 11월 5일 기준 요기요 5,000원 할인, 최소주문 21,000원, 11월 8일까지로 표시돼 있습니다. 호식이 공식 공지가 아닌 외부 집계 정보이며, 매장이나 주문 조건에 따라 실제 적용되지 않을 수 있습니다.","source":"주문의고수 외부 집계 · 2026.11.05","sourceUrl":"https://www.jumungosu.com/hosigi-discount"},
@@ -25,6 +26,7 @@
   ];
   // Original posters and portfolio reconstruction artwork.
   const eventImages={
+    "school-chicken-race":"img/events/school-chicken-race.svg",
     "autumn-tour":"img/events/autumn-tour.svg",
     "ddangyo-discount":"img/events/ddangyo-discount.svg",
     "yogiyo-discount":"img/events/yogiyo-discount.svg",
