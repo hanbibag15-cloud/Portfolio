@@ -31,3 +31,16 @@
   .brand-slogan-ready .brand-slogan.is-slogan-visible .brand-slogan-line{animation:menu-tab-content-rise 560ms cubic-bezier(.22,1,.36,1) both}
   .brand-slogan-ready .brand-slogan.is-slogan-visible .brand-slogan-mask:nth-child(2) .brand-slogan-line{animation-delay:70ms}
 }
+
+/* Brand hero decoration — match the reference's bottom-clipped mascot on the right. */
+.hosigi-story > .story-page-intro,
+.philosophy-page > .brand-subpage-hero,
+.social-page > .brand-subpage-hero{position:relative;overflow:hidden;isolation:isolate}
+.hosigi-story > .story-page-intro::before,
+.philosophy-page > .brand-subpage-hero::before,
+.social-page > .brand-subpage-hero::before{content:"";position:absolute;right:5.4%;top:6%;height:105%;width:min(25%, 350px);background:url("../img/Service_img10.png") no-repeat right top / contain;pointer-events:none;z-index:0}
+.hosigi-story > .story-page-intro > .story-wrap,
+.philosophy-page > .brand-subpage-hero > .brand-subpage-container,
+.social-page > .brand-subpage-hero > .brand-subpage-container{position:relative;z-index:1}
+@media(max-width:1100px){.hosigi-story > .story-page-intro::before,.philosophy-page > .brand-subpage-hero::before,.social-page > .brand-subpage-hero::before{right:2%;width:19%}}
+@media(max-width:767px){.hosigi-story > .story-page-intro::before,.philosophy-page > .brand-subpage-hero::before,.social-page > .brand-subpage-hero::before{display:none}}
