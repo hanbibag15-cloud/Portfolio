@@ -1,5 +1,5 @@
 (()=>{"use strict";
-const nav=document.getElementById("f-nav"), menu=document.querySelector(".f-menu"), tabs=[...document.querySelectorAll('[role="tab"]')], panels=[...document.querySelectorAll('[role="tabpanel"]')];
+const nav=document.getElementById("f-nav"), menu=document.querySelector(".header-menu-toggle"), tabs=[...document.querySelectorAll('[role="tab"]')], panels=[...document.querySelectorAll('[role="tabpanel"]')];
 const header=document.querySelector(".site-header");
 const groups=[...nav.querySelectorAll(".has-submenu")];
 const desktop=matchMedia("(min-width:1025px)");
@@ -17,7 +17,7 @@ document.addEventListener("pointerdown",e=>{if(!e.target.closest(".site-header")
 const reduced=matchMedia("(prefers-reduced-motion:reduce)");
 function count(el){if(el.dataset.counted)return;el.dataset.counted="1";const end=Number(el.dataset.count);const format=n=>el.dataset.format==="plain"?String(n):n.toLocaleString("ko-KR");if(reduced.matches){el.textContent=format(end);return}const start=performance.now();function step(now){const p=Math.min(1,(now-start)/1100);el.textContent=format(Math.round(end*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step)}
 if("IntersectionObserver"in window&&!reduced.matches){const nodes=[...document.querySelectorAll(".f-reveal")];const observer=new IntersectionObserver(entries=>{for(const e of entries){if(!e.isIntersecting)continue;e.target.classList.add("is-visible");observer.unobserve(e.target);e.target.querySelectorAll("[data-count]").forEach(count)}},{threshold:.08});document.documentElement.classList.add("f-ready");nodes.forEach(n=>observer.observe(n))}
-const mainLinks=[...nav.querySelectorAll(".f-nav-group>a")];
+const mainLinks=[...nav.querySelectorAll(":scope > ul > li > a")];
 function activeNav(){const y=window.scrollY+header.offsetHeight+80;let index=0;for(const [i,id] of [[1,"performance"],[2,"guide"],[3,"consulting"]]){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top+scrollY<=y)index=i}if(index===2&&tabs[5].getAttribute("aria-selected")==="true")index=3;mainLinks.forEach((a,i)=>a.classList.toggle("gnb-active",i===index))}
 window.addEventListener("scroll",activeNav,{passive:true});tabs.forEach(t=>t.addEventListener("click",activeNav));activeNav();
 const form=document.getElementById("f-form"), fields=document.getElementById("f-fields"), result=document.getElementById("f-result");
