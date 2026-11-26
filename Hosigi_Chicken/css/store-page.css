@@ -788,3 +788,8 @@
 .store-intro > .store-intro-art{position:absolute;z-index:0;right:0;top:4.414%;bottom:auto;width:auto;height:131.409%;max-width:calc((100% - 380px)/2);max-height:none;object-fit:contain;object-position:right top;transform:rotate(.22deg);transform-origin:center;pointer-events:none}
 @media(max-width:1100px){.store-intro > .store-intro-art{max-width:calc((100% - 360px)/2)}}
 @media(max-width:767px){.store-intro > .store-intro-art{display:none}}
+
+/* Left tree artwork: scale with banner height, clipping only the base. */
+.store-intro > .store-intro-tree{position:absolute;z-index:0;left:4.2%;bottom:-18%;width:auto;height:100%;max-width:min(24%,calc((100% - 380px)/2));max-height:none;object-fit:contain;object-position:left bottom;pointer-events:none}
+@media(max-width:1100px){.store-intro > .store-intro-tree{left:3%;max-width:calc((100% - 360px)/2)}}
+@media(max-width:767px){.store-intro > .store-intro-tree{display:none}}
