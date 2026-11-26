@@ -33,8 +33,6 @@ get("event-post-description-heading").textContent=notice?"공지사항 안내":"
 get("event-post-description").textContent=item.description;
 const poster=get("event-post-poster");poster.replaceChildren();poster.hidden=true;
 if(!notice&&data.eventImages[item.id]){const img=document.createElement("img");img.src=data.eventImages[item.id];img.alt=item.title+" 이벤트 이미지";img.addEventListener("error",()=>{poster.hidden=true},{once:true});poster.append(img);poster.hidden=false}
-const source=get("event-post-source");source.textContent="자료 기준: "+(item.source||"확인 필요");
-// Sources remain plain text; source URLs are retained only in the shared data for synchronization and deduplication.
 neighbor(get("event-post-prev"),ordered[index+1],"이전 글이 없습니다.");
 neighbor(get("event-post-next"),ordered[index-1],"다음 글이 없습니다.");
 }
