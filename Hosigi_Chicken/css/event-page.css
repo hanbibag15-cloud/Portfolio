@@ -428,5 +428,7 @@ html:has(.event-pagination),body:has(.event-pagination){overflow-anchor:none;}
   .event-notice-open{transition:none;}
 }
 
-/* Remove only the heading divider above the notice list. */
-.event-collection:has(> .event-card-grid.is-notice-list) > .event-list-top{border-bottom:0;padding-bottom:0;}
+/* Notice heading inherits the same spacing and alignment as the event heading. */
+.event-collection:has(> .event-card-grid.is-notice-list) > .event-list-top{border-bottom:1px solid var(--border-default);}
+/* The heading supplies the single top divider; avoid a second line on the notice grid. */
+.event-card-grid.is-notice-list{border-top:0;}
