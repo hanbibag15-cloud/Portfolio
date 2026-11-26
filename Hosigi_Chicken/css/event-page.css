@@ -436,7 +436,7 @@ html:has(.event-pagination),body:has(.event-pagination){overflow-anchor:none;}
 .hosigi-event-page > .event-page-hero{position:relative;overflow:hidden;isolation:isolate}
 .hosigi-event-page > .event-page-hero > .event-page-container{position:relative;z-index:1}
 .hosigi-event-page > .event-page-hero::before,.hosigi-event-page > .event-page-hero::after{content:"";position:absolute;z-index:0;pointer-events:none;width:min(27%,460px);height:100%;background-repeat:no-repeat;background-size:contain}
-.hosigi-event-page > .event-page-hero::before{left:2.8%;bottom:-28%;background-image:url("../img/Service_img14.png");background-position:left bottom}
-.hosigi-event-page > .event-page-hero::after{right:3%;bottom:-22%;background-image:url("../img/Service_img13.png");background-position:right bottom}
+.hosigi-event-page > .event-page-hero::before{left:2.8%;bottom:-20%;background-image:url("../img/Service_img14.png");background-position:left bottom}
+.hosigi-event-page > .event-page-hero::after{right:3%;bottom:-14%;background-image:url("../img/Service_img13.png");background-position:right bottom}
 @media(max-width:1100px){.hosigi-event-page > .event-page-hero::before,.hosigi-event-page > .event-page-hero::after{width:23%}}
 @media(max-width:767px){.hosigi-event-page > .event-page-hero::before,.hosigi-event-page > .event-page-hero::after{display:none}}
