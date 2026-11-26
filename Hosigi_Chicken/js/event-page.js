@@ -129,12 +129,25 @@
           const button=document.createElement("button");
           button.type="button";
           button.className="event-page-button event-page-"+kind;
-          button.textContent=label;
+          if(kind==="arrow"){
+            const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
+            svg.setAttribute("viewBox","0 0 24 24");
+            svg.setAttribute("fill","none");
+            svg.setAttribute("stroke","currentColor");
+            svg.setAttribute("stroke-width","2");
+            svg.setAttribute("stroke-linecap","round");
+            svg.setAttribute("stroke-linejoin","round");
+            svg.setAttribute("aria-hidden","true");
+            const path=document.createElementNS("http://www.w3.org/2000/svg","path");
+            path.setAttribute("d",label==="prev"?"M15 6l-6 6 6 6":"M9 6l6 6-6 6");
+            svg.append(path);
+            button.append(svg);
+          }else button.textContent=label;
           pagination.append(button);
         };
-        addButton("◀","arrow");
+        addButton("prev","arrow");
         for(let page=1;page<=totalPages;page++)addButton(String(page),"number");
-        addButton("▶","arrow");
+        addButton("next","arrow");
         pagination.dataset.pageCount=String(totalPages);
       }
       const buttons=[...pagination.querySelectorAll("button")];
