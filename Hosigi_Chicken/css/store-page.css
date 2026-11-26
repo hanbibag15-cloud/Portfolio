@@ -31,7 +31,7 @@
 .store-card-view{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 18px;border:1px solid var(--brand-red);border-radius:999px;color:var(--brand-red);background:var(--surface-default);font:600 13px var(--font);cursor:pointer;transition:background .2s,color .2s;}
 .store-card-view:hover,.store-card-view:focus-visible{background:var(--brand-red);color:var(--neutral-white);}
 .store-card-phone-link{font-size:13px;font-weight:600;color:var(--text-primary);text-underline-offset:3px;}
-.store-map-panel{position:relative;min-width:0;height:590px;overflow:hidden;border-radius:20px;background:var(--background-subtle);border:1px solid var(--border-default);}
+.store-map-panel{position:relative;isolation:isolate;z-index:0;min-width:0;height:590px;overflow:hidden;border-radius:20px;background:var(--background-subtle);border:1px solid var(--border-default);}
 .store-map{height:100%;min-height:100%;width:100%;z-index:0;}
 /* Leaflet tiles must keep their native 256px dimensions.
    The project's global img reset (max-width:100%; height:auto) otherwise
