@@ -39,6 +39,15 @@
   function updateOnScroll() {
     const headerBottom = header?.getBoundingClientRect().bottom || 0;
     const viewportThreshold = Math.min(window.innerHeight * 0.35, 220);
+    // The app promotion is not a GNB category. Clear the previous marker
+    // once the app occupies the top of the visible content area.
+    const appRect = document.querySelector('#app')?.getBoundingClientRect();
+    if (appRect && appRect.top <= headerBottom + 8 && appRect.bottom > headerBottom + 8) {
+      selected = -1;
+      hasEnteredSelectedSection = false;
+      mark(-1);
+      return;
+    }
     // Detect MENU, STORE and EVENT on manual scroll, in either direction.
     for (const index of [0, 2, 3]) {
       const rect = targets[index]?.getBoundingClientRect();
