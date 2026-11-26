@@ -44,3 +44,10 @@
 .social-page > .brand-subpage-hero > .brand-subpage-container{position:relative;z-index:1}
 @media(max-width:1100px){.hosigi-story > .story-page-intro::before,.philosophy-page > .brand-subpage-hero::before,.social-page > .brand-subpage-hero::before{right:1.5%;width:24.7%}}
 @media(max-width:767px){.hosigi-story > .story-page-intro::before,.philosophy-page > .brand-subpage-hero::before,.social-page > .brand-subpage-hero::before{display:none}}
+
+/* Left-side building illustration; independent of the existing right mascot. */
+.hosigi-story > .story-page-intro::after,
+.philosophy-page > .brand-subpage-hero::after,
+.social-page > .brand-subpage-hero::after{content:"";position:absolute;left:5.4%;bottom:-38.5%;height:130%;width:min(30%, 420px);background:url("../img/Service_img11.png") no-repeat left top / contain;pointer-events:none;z-index:0}
+@media(max-width:1100px){.hosigi-story > .story-page-intro::after,.philosophy-page > .brand-subpage-hero::after,.social-page > .brand-subpage-hero::after{left:2%;width:23%}}
+@media(max-width:767px){.hosigi-story > .story-page-intro::after,.philosophy-page > .brand-subpage-hero::after,.social-page > .brand-subpage-hero::after{display:none}}
