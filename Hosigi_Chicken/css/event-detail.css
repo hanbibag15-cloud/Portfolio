@@ -14,7 +14,6 @@
 .event-post-notes{margin-top:40px;padding:24px;background:var(--background-subtle);border-radius:10px}
 .event-post-notes p{font-size:15px}
 .event-post-notes p+p{margin-top:12px}
-.event-post-notes a{color:var(--brand-red);text-decoration:underline;text-underline-offset:4px}
 .event-post-neighbors{border-top:1px solid var(--brand-brown);border-bottom:1px solid var(--border-default)}
 .event-post-neighbors>div{display:grid;grid-template-columns:100px minmax(0,1fr);gap:20px;padding:22px 14px;align-items:center}
 .event-post-neighbors>div+div{border-top:1px solid var(--border-default)}
