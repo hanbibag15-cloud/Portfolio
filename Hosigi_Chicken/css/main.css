@@ -1691,7 +1691,6 @@ a.store-promo-link,
 a.event-more {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     box-sizing: border-box;
     width: max-content;
     max-width: 100%;
@@ -1699,7 +1698,6 @@ a.event-more {
     align-self: flex-start;
     height: 50px;
     min-height: 50px;
-    gap: 12px;
     padding: 0 18px;
     border: 1px solid var(--brand-red);
     border-radius: 25px;
@@ -1712,8 +1710,14 @@ a.event-more {
 /* Match the EVENT CTA's rendered width and keep the STORE CTA left-aligned. */
 .store-promo-copy > a.store-promo-link {
     width: var(--event-cta-width, max-content);
+    justify-content: center;
+    gap: 14px;
 }
-a.event-more { align-self: center; }
+a.event-more {
+    align-self: center;
+    justify-content: space-between;
+    gap: 12px;
+}
 a.store-promo-link > span,
 a.event-more > span {
     font: inherit;
