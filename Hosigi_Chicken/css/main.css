@@ -1713,6 +1713,8 @@ a.event-more {
     text-decoration: none;
     transition: background .2s ease, color .2s ease;
 }
+/* Center only the store CTA within its existing text column. */
+.store-promo-copy > a.store-promo-link { margin-inline: auto; }
 a.event-more { align-self: center; }
 a.store-promo-link > span,
 a.event-more > span {
