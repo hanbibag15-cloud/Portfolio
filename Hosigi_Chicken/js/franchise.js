@@ -16,7 +16,25 @@ desktop.addEventListener("change",closeMenu);
 document.addEventListener("pointerdown",e=>{if(!e.target.closest(".site-header"))closeMenu()});
 const reduced=matchMedia("(prefers-reduced-motion:reduce)");
 function count(el){if(el.dataset.counted)return;el.dataset.counted="1";const end=Number(el.dataset.count);const format=n=>el.dataset.format==="plain"?String(n):n.toLocaleString("ko-KR");if(reduced.matches){el.textContent=format(end);return}const start=performance.now();function step(now){const p=Math.min(1,(now-start)/1100);el.textContent=format(Math.round(end*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step)}
-if("IntersectionObserver"in window&&!reduced.matches){const nodes=[...document.querySelectorAll(".f-reveal")];const observer=new IntersectionObserver(entries=>{for(const e of entries){if(!e.isIntersecting)continue;e.target.classList.add("is-visible");observer.unobserve(e.target);e.target.querySelectorAll("[data-count]").forEach(count)}},{threshold:.08});document.documentElement.classList.add("f-ready");nodes.forEach(n=>observer.observe(n))}
+if("IntersectionObserver"in window&&!reduced.matches){const nodes=[...document.querySelectorAll(".f-reveal")].filter(node=>!node.closest(".f-facts"));const observer=new IntersectionObserver(entries=>{for(const e of entries){if(!e.isIntersecting)continue;e.target.classList.add("is-visible");observer.unobserve(e.target);e.target.querySelectorAll("[data-count]").forEach(count)}},{threshold:.08});document.documentElement.classList.add("f-ready");nodes.forEach(n=>observer.observe(n))}
+// The four facts reveal once, together at 30% section visibility.
+const facts=document.querySelector(".f-facts");
+if(facts && "IntersectionObserver" in window && !reduced.matches){
+ const cards=[...facts.querySelectorAll(".f-reveal")];
+ const factsObserver=new IntersectionObserver(entries=>{
+   for(const entry of entries){
+     if(!entry.isIntersecting || entry.intersectionRatio<0.3)continue;
+     factsObserver.unobserve(facts);
+     cards.forEach((card,i)=>{
+       window.setTimeout(()=>{
+         card.classList.add("is-visible");
+         card.querySelectorAll("[data-count]").forEach(count);
+       },i*150);
+     });
+   }
+ },{threshold:0.3});
+ factsObserver.observe(facts);
+}
 const mainLinks=[...nav.querySelectorAll(":scope > ul > li > a")];
 /* Resolve the brand site's real text widths using the browser's computed font,
    then keep franchise slots independent of the franchise labels' lengths. */
