@@ -27,8 +27,8 @@ if(historySection && "IntersectionObserver" in window && !reduced.matches){
    if(!entries.some(e=>e.isIntersecting))return;
    historySection.classList.add("history-visible");
    observer.disconnect();
-  },{threshold:0,rootMargin:"0px 0px -12% 0px"});
-  observer.observe(fan);
+  },{threshold:0,rootMargin:"0px 0px -15% 0px"});
+  observer.observe(historySection.querySelector(".f-heading") || fan);
  }
 }
 // Operating metrics: each card reveals once, staggered within the visible group.
