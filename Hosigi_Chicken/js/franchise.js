@@ -36,6 +36,53 @@ if(hero && "IntersectionObserver" in window && !reduced.matches){
  },{threshold:.3});
  heroObserver.observe(hero);
 }
+// Performance grid: measure the actual image box, not its animated transform.
+const performanceGrid=document.querySelector("#performance .f-advantage-grid");
+if(performanceGrid){
+ const image=performanceGrid.querySelector(".f-advantage-visual img");
+ const figure=performanceGrid.querySelector(".f-advantage-visual");
+ const cards=[...performanceGrid.querySelectorAll(".f-advantage")];
+ const desktop=matchMedia("(min-width:1101px)");
+ let frame=0;
+ function syncPerformanceGeometry(){
+  frame=0;
+  if(!desktop.matches){performanceGrid.classList.remove("geometry-ready");return}
+  if(!image.naturalWidth || !image.offsetHeight)return;
+  const y=figure.offsetTop+image.offsetTop;
+  const height=image.offsetHeight;
+  const rows=[[cards[0],cards[2],.18],[cards[1],cards[3],.83]];
+  let previousBottom=0;
+  let gridMin=0;
+  for(const [left,right,ratio] of rows){
+   const copyHeight=Math.max(left.querySelector(".f-advantage-copy").offsetHeight,right.querySelector(".f-advantage-copy").offsetHeight);
+   const anchor=y+height*ratio;
+   // Keep labels aligned; reserve the same copy height on both sides.
+   const top=Math.max(previousBottom,anchor-copyHeight-24,0);
+   const lineTop=Math.max(copyHeight+16,anchor-top);
+   const rowHeight=lineTop+1;
+   for(const card of [left,right]){
+    card.style.setProperty("--row-top",top+"px");
+    card.style.setProperty("--row-height",rowHeight+"px");
+    card.style.setProperty("--line-top",lineTop+"px");
+   }
+   previousBottom=top+rowHeight+24;
+   gridMin=Math.max(gridMin,top+rowHeight+45);
+  }
+  performanceGrid.style.setProperty("--grid-min",Math.ceil(gridMin)+"px");
+  performanceGrid.classList.add("geometry-ready");
+ }
+ function queuePerformanceGeometry(){if(!frame)frame=requestAnimationFrame(syncPerformanceGeometry)}
+ image.addEventListener("load",queuePerformanceGeometry);
+ window.addEventListener("resize",queuePerformanceGeometry,{passive:true});
+ desktop.addEventListener("change",queuePerformanceGeometry);
+ if("ResizeObserver" in window){
+  const geometryObserver=new ResizeObserver(queuePerformanceGeometry);
+  geometryObserver.observe(image);
+  cards.forEach(card=>geometryObserver.observe(card.querySelector(".f-advantage-copy")));
+ }
+ if(document.fonts)document.fonts.ready.then(queuePerformanceGeometry);
+ queuePerformanceGeometry();
+}
 // Performance: observe each content group independently and reveal only once.
 const performanceSection=document.getElementById("performance");
 if(performanceSection && "IntersectionObserver" in window && !reduced.matches){
