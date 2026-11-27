@@ -292,3 +292,117 @@
 #consulting.consult-motion-ready .f-form.consult-visible,#consulting.consult-motion-ready .f-form:focus-within{opacity:1;transform:none}
 @media(max-width:650px){#consulting .f-heading{margin-bottom:36px}#consulting .f-form{padding:30px 20px}#consulting .f-form-grid{grid-template-columns:minmax(0,1fr);gap:8px}#consulting .f-form-grid label:not(:first-child){margin-top:12px}#consulting .f-form-grid :is(input,select,textarea){width:100%}#consulting .f-message-label{padding-top:0}#consulting .f-form-heading h3{font-size:21px}#consulting .f-check{align-items:flex-start;text-align:left}}
 @media(prefers-reduced-motion:reduce){#consulting.consult-motion-ready .f-form{opacity:1;transform:none;transition:none}}
+
+/* Consultation selects — copied from store-page.css region picker; local aliases preserve store tokens. */
+#consulting{--border-default:#e5e5e5;--surface-default:#fff;--text-primary:var(--brown);--brand-red:var(--red);--background-subtle:#f7f7f7;--font:"Pretendard Variable",Pretendard,sans-serif}
+/* Region dropdown styled like the main navigation submenu. */
+
+
+.consult-select-dropdown{position:relative;width:100%;}
+.consult-select-trigger{
+  width:100%;height:54px;padding:0 18px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  border:1px solid var(--border-default);border-radius:14px;
+  background:var(--surface-default);color:var(--text-primary);
+  font:500 16px var(--font);text-align:left;cursor:pointer;
+}
+.consult-select-trigger:hover,.consult-select-trigger:focus-visible,
+.consult-select-dropdown.is-open .consult-select-trigger{
+  border-color:var(--brand-red);
+}
+.consult-select-trigger:focus-visible{outline:2px solid var(--brand-red);outline-offset:2px;}
+.consult-select-chevron{
+  width:8px;height:8px;flex:none;
+  border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:translateY(-2px) rotate(45deg);transition:transform .2s;
+}
+.consult-select-dropdown.is-open .consult-select-chevron{transform:translateY(2px) rotate(225deg);}
+.consult-select-options{
+  position:absolute;left:0;right:0;top:calc(100% + 6px);
+  padding:9px 0;background:#fff;border:1px solid var(--border-default);
+  border-radius:16px;box-shadow:0 12px 28px rgba(34,23,20,.13);
+  max-height:240px;overflow-y:auto;z-index:30;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform:translateY(-10px) scale(.98);transform-origin:top center;
+  transition:opacity .26s ease,transform .32s cubic-bezier(.22,1,.36,1),visibility .26s;
+}
+.consult-select-dropdown.is-open .consult-select-options{
+  opacity:1;visibility:visible;pointer-events:auto;
+  transform:translateY(0) scale(1);
+}
+.consult-select-option{
+  display:block;width:100%;min-height:44px;padding:10px 18px;
+  background:transparent;border:0;border-radius:0;text-align:left;
+  color:var(--text-primary);font:500 15px var(--font);cursor:pointer;
+  transition:background-color .2s ease,color .2s ease;
+}
+.consult-select-option:hover,.consult-select-option:focus-visible{
+  background:var(--background-subtle);color:var(--brand-red);outline:none;
+}
+.consult-select-option.is-active{color:var(--brand-red);font-weight:700;}
+@media(max-width:767px){
+  .consult-select-trigger{height:48px;padding:0 12px;font-size:13px;}
+  .consult-select-option{font-size:13px;min-height:42px;padding:9px 14px;}
+}
+@media(prefers-reduced-motion:reduce){.consult-select-chevron{transition:none;}}
+
+/* Center selected region and each dropdown option; keep arrow at the right. */
+.consult-select-trigger{position:relative;justify-content:center;}
+.consult-select-current{display:block;flex:1;min-width:0;text-align:center;}
+.consult-select-chevron{position:absolute;right:18px;top:50%;margin-top:-5px;}
+.consult-select-option{text-align:center;}
+@media(max-width:767px){.consult-select-chevron{right:12px;}}
+
+
+/* Region picker only: a short fixed 30px thumb that tracks actual scroll.
+   The long native scrollbar remains available on the store-card list. */
+.consult-select-options {
+  scrollbar-width:none !important;
+  scrollbar-color:auto;
+  scrollbar-gutter:auto;
+  padding-right:12px;
+}
+.consult-select-options::-webkit-scrollbar {
+  display:none !important;
+  width:0 !important;
+  height:0 !important;
+}
+.consult-select-scroll-indicator {
+  position:absolute;
+  top:calc(100% + 19px);
+  right:7px;
+  height:212px;
+  width:5px;
+  z-index:31;
+  pointer-events:none;
+  visibility:hidden;
+  opacity:0;
+  transition:opacity .22s ease,visibility .22s ease;
+}
+.consult-select-dropdown.is-open .consult-select-scroll-indicator.has-overflow {
+  visibility:visible;
+  opacity:1;
+}
+.consult-select-scroll-thumb {
+  display:block;
+  width:5px;
+  height:30px;
+  border-radius:999px;
+  background:#BDBDBD;
+  will-change:transform;
+}
+@media (prefers-reduced-motion:reduce) {
+  .consult-select-scroll-indicator {transition:none;}
+}
+
+
+/* Retain the consultation grid's original 360px by 48px field footprint. */
+#consulting .consult-select-dropdown{width:min(100%,360px);min-width:0;z-index:1}
+#consulting .consult-select-dropdown.is-open{z-index:35}
+#consulting .consult-select-trigger{height:48px;box-sizing:border-box}
+#consulting .consult-select-current{padding-inline:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#consulting .consult-select-dropdown > select.consult-select-native{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;z-index:-1;margin:0}
+#consulting .consult-select-dropdown > select.consult-select-native:invalid:focus + .consult-select-trigger{border-color:var(--red);outline:2px solid var(--red);outline-offset:2px}
+#consulting .consult-select-options{overscroll-behavior:contain;touch-action:pan-y}
+@media(max-width:650px){#consulting .consult-select-dropdown{width:100%}}
+@media(prefers-reduced-motion:reduce){.consult-select-options,.consult-select-option{transition:none}}
