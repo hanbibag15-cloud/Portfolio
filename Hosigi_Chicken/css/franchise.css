@@ -62,3 +62,32 @@
 
 .f-hero-ring{overflow:visible}
 @media(max-width:767px){.f-hero-ring::before{inset:-11px;mask:radial-gradient(farthest-side,transparent calc(100% - 11px),#000 calc(100% - 10px),#000 calc(100% - 2px),transparent 100%)}.f-hero-ring::after{inset:-5px;box-shadow:0 0 8px 3px #fff9d9,0 0 18px 7px #ffe45cbf,0 0 30px 10px #ffe45c80}}
+
+/* Central brand advantage infographic */
+#performance .f-heading h2{font-weight:850}
+#performance .f-advantage-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1fr);grid-template-rows:1fr 1fr;gap:48px 0;align-items:center}
+#performance .f-advantage-visual{grid-area:1/2/3/3;align-self:stretch;position:relative;isolation:isolate;min-height:480px;border-radius:240px 240px 18px 18px;background:#fff5e7;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+#performance .f-advantage-since{position:absolute;top:15%;left:0;width:100%;text-align:center;font-size:clamp(29px,4vw,58px);font-weight:900;letter-spacing:-.055em;line-height:1;color:#221714;opacity:.1;z-index:-1;white-space:nowrap}
+#performance .f-advantage-visual img{width:100%;height:390px;object-fit:contain;object-position:center bottom;position:relative}
+#performance .f-advantage{min-width:0;position:relative;display:flex;flex-direction:column;justify-content:center}
+#performance .f-advantage-1{grid-area:1/1}
+#performance .f-advantage-2{grid-area:2/1}
+#performance .f-advantage-3{grid-area:1/3;text-align:right}
+#performance .f-advantage-4{grid-area:2/3;text-align:right}
+#performance .f-advantage-copy{padding-right:24px}
+#performance .f-advantage-3 .f-advantage-copy,#performance .f-advantage-4 .f-advantage-copy{padding:0 0 0 24px}
+#performance .f-point-num{display:inline-block;background:var(--red);color:#fff;padding:7px 13px;font-size:14px;font-weight:750;letter-spacing:.05em;line-height:1.2;margin-bottom:16px;border-radius:2px}
+#performance .f-advantage h3{font-size:clamp(22px,2.05vw,30px);font-weight:800;letter-spacing:-.04em;line-height:1.3;color:var(--brown);margin:0 0 12px}
+#performance .f-advantage-copy>p:last-child{font-size:17px;line-height:1.65;color:#625956}
+#performance .f-advantage-line{position:relative;height:1px;background:#bcb0a8;margin-top:23px;width:100%;transform-origin:left}
+#performance .f-advantage-line::before{content:"";position:absolute;left:0;top:-1px;width:44px;height:3px;background:var(--red)}
+#performance .f-advantage-line::after{content:"";position:absolute;right:0;top:50%;transform:translate(50%,-50%);width:8px;height:8px;border-radius:50%;background:var(--red);z-index:2}
+#performance .f-advantage-3 .f-advantage-line,#performance .f-advantage-4 .f-advantage-line{transform-origin:right}
+#performance .f-advantage-3 .f-advantage-line::before,#performance .f-advantage-4 .f-advantage-line::before{left:auto;right:0}
+#performance .f-advantage-3 .f-advantage-line::after,#performance .f-advantage-4 .f-advantage-line::after{right:auto;left:0;transform:translate(-50%,-50%)}
+#performance .f-advantage-grid.motion-ready .f-advantage-copy,#performance .f-advantage-grid.motion-ready .f-advantage-visual{opacity:0;transform:translateY(24px);transition:opacity .56s,transform .56s cubic-bezier(.22,1,.36,1)}
+#performance .f-advantage-grid.motion-ready .f-advantage-line{transform:scaleX(0);transition:transform .65s cubic-bezier(.22,1,.36,1) .18s}
+#performance .f-advantage-grid.motion-ready .f-advantage-visual.is-visible,#performance .f-advantage-grid.motion-ready .f-advantage.is-visible .f-advantage-copy{opacity:1;transform:none}
+#performance .f-advantage-grid.motion-ready .f-advantage.is-visible .f-advantage-line{transform:scaleX(1)}
+@media(max-width:900px){#performance .f-advantage-grid{grid-template-columns:1fr;grid-template-rows:auto;gap:28px}#performance .f-advantage-visual{grid-area:auto/1;width:min(100%,440px);min-height:340px;margin:auto;aspect-ratio:4/5}#performance .f-advantage-visual img{height:80%}#performance .f-advantage{grid-area:auto/1;text-align:left}#performance .f-advantage .f-advantage-copy{padding:0}#performance .f-advantage-line{display:none}#performance .f-advantage h3{font-size:25px}#performance .f-advantage-copy>p:last-child{font-size:16px}}
+@media(prefers-reduced-motion:reduce){#performance .f-advantage-grid.motion-ready .f-advantage-copy,#performance .f-advantage-grid.motion-ready .f-advantage-visual{opacity:1;transform:none;transition:none}#performance .f-advantage-grid.motion-ready .f-advantage-line{transform:none;transition:none}}
