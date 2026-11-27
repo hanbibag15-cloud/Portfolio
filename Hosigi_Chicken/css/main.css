@@ -1231,11 +1231,7 @@ body {
     line-height: 1.5;
 }
 .store-promo-link { margin-top:20px; }
-.store-promo-link:hover,
-.store-promo-link:focus-visible {
-    background: var(--brand-red);
-    color: var(--neutral-white);
-}
+
 /* Animate only the arrow when hovering or keyboard-focusing the STORE CTA. */
 
 
@@ -1372,8 +1368,8 @@ body {
 .event-heading { position: relative; top: 18px; text-align: left; }
 .event-heading h2 { color: var(--brand-red); font-size: 68px; font-weight: 700; line-height: 1.1; letter-spacing: -.023em; }
 .event-heading p { margin-top: 0; color: var(--brand-brown); font-size: 20px; font-weight: 600; letter-spacing: -.023em; }
-.event-more { margin-left:auto; flex:0 0 auto; }
-.event-more:hover, .event-more:focus-visible { background: var(--brand-red); color: #fff; }
+.event-more { margin-left:auto; }
+
 /* EVENT arrow: animate separately so the centered label never shifts or overlaps. */
 
 
@@ -1423,7 +1419,7 @@ body {
 @media (max-width: 420px) {
     .event-header { flex-direction: row; align-items: center; justify-content: space-between; gap: 8px; }
     .event-heading { flex: 1 1 auto; min-width: 0; top: 0; }
-    .event-more { flex: 0 0 auto; align-self: center; margin-left: auto; }
+
     .event-grid { gap: 10px; }
     .event-card-info { padding: 10px 8px 12px; }
     .event-card-info p { font-size: 9px; }
@@ -1713,8 +1709,10 @@ a.event-more {
     text-decoration: none;
     transition: background .2s ease, color .2s ease;
 }
-/* Center only the store CTA within its existing text column. */
-.store-promo-copy > a.store-promo-link { margin-inline: auto; }
+/* Match the EVENT CTA's rendered width and keep the STORE CTA left-aligned. */
+.store-promo-copy > a.store-promo-link {
+    width: var(--event-cta-width, max-content);
+}
 a.event-more { align-self: center; }
 a.store-promo-link > span,
 a.event-more > span {
