@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/default.css">
     <link rel="stylesheet" href="../npm/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="../Font/css/pretendardvariable.css">
-    <link rel="stylesheet" href="css/main.css?v=74">
+    <link rel="stylesheet" href="css/main.css?v=75">
     <link rel="stylesheet" href="css/nav-state.css?v=10">
     <script src="../npm/swiper/swiper-bundle.min.js"></script>
 <script src="js/nav-state.js?v=7" defer></script>
@@ -463,6 +463,25 @@
         window.addEventListener('scroll', updateStoreReveal, { passive: true });
         window.addEventListener('resize', updateStoreReveal);
         requestAnimationFrame(() => requestAnimationFrame(updateStoreReveal));
+    }
+
+    // Match STORE to the existing EVENT button's intrinsic border-box width.
+    // Observe only the reference button so font loading and breakpoints stay in sync.
+    const storeCTA = document.querySelector('.store-promo-copy > .store-promo-link');
+    const eventCTA = document.querySelector('.event-more');
+    if (storeCTA && eventCTA) {
+        const syncStoreCTAWidth = () => {
+            const width = eventCTA.getBoundingClientRect().width;
+            if (width > 0) storeCTA.style.setProperty('--event-cta-width', width + 'px');
+        };
+        syncStoreCTAWidth();
+        if ('ResizeObserver' in window) {
+            const ctaObserver = new ResizeObserver(syncStoreCTAWidth);
+            ctaObserver.observe(eventCTA, { box: 'border-box' });
+        } else {
+            window.addEventListener('resize', syncStoreCTAWidth, { passive: true });
+            document.fonts?.ready.then(syncStoreCTAWidth);
+        }
     }
 
     // EVENT: same scroll/reload reveal behavior as STORE.
