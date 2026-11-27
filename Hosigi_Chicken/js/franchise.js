@@ -17,6 +17,18 @@ document.addEventListener("pointerdown",e=>{if(!e.target.closest(".site-header")
 const reduced=matchMedia("(prefers-reduced-motion:reduce)");
 function count(el){if(el.dataset.counted)return;el.dataset.counted="1";const end=Number(el.dataset.count);const format=n=>el.dataset.format==="plain"?String(n):n.toLocaleString("ko-KR");if(reduced.matches){el.textContent=format(end);return}const start=performance.now();function step(now){const p=Math.min(1,(now-start)/1100);el.textContent=format(Math.round(end*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step)}
 if("IntersectionObserver"in window&&!reduced.matches){const nodes=[...document.querySelectorAll(".f-reveal")];const observer=new IntersectionObserver(entries=>{for(const e of entries){if(!e.isIntersecting)continue;e.target.classList.add("is-visible");observer.unobserve(e.target);e.target.querySelectorAll("[data-count]").forEach(count)}},{threshold:.08});document.documentElement.classList.add("f-ready");nodes.forEach(n=>observer.observe(n))}
+// Network graph: animate once, without affecting the existing metrics.
+const networkVisual=document.querySelector("#growth .f-network-visual");
+if(networkVisual && "IntersectionObserver" in window && !reduced.matches){
+ networkVisual.classList.add("network-motion-ready");
+ const networkObserver=new IntersectionObserver(entries=>{
+  if(!entries.some(e=>e.isIntersecting))return;
+  networkVisual.classList.add("is-visible");
+  networkVisual.querySelectorAll("[data-count]").forEach(count);
+  networkObserver.disconnect();
+ },{threshold:.2});
+ networkObserver.observe(networkVisual);
+}
 // Reveal the integrated hero once; reuse the original count-up routine.
 const hero=document.querySelector(".f-hero-quad");
 if(hero && "IntersectionObserver" in window && !reduced.matches){
