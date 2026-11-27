@@ -1254,17 +1254,10 @@ body {
     color: var(--neutral-white);
 }
 /* Animate only the arrow when hovering or keyboard-focusing the STORE CTA. */
-.store-promo-link > span[aria-hidden="true"] {
-    position: absolute;
-    left: calc(50% - 3.5em);
-    display: inline-block;
-    transition: transform 300ms cubic-bezier(.22, 1, .36, 1);
-}
+
 
 @media (prefers-reduced-motion: reduce) {
-    .store-promo-link > span[aria-hidden="true"] {
-        transition: none;
-    }
+    
 }
 
 .store-promo-art {
@@ -1407,19 +1400,13 @@ body {
 .event-more { margin-left: auto; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 176px; height: 50px; flex: 0 0 auto; border: 1px solid var(--brand-red); border-radius: 25px; color: var(--brand-red); font-size: 16px; font-weight: 500; transition: background .2s ease, color .2s ease; }
 .event-more:hover, .event-more:focus-visible { background: var(--brand-red); color: #fff; }
 /* EVENT arrow: animate separately so the centered label never shifts or overlaps. */
-.event-more > span[aria-hidden="true"] {
-    font-size: 16px;
-    position: absolute;
-    left: calc(50% - 4.15em);
-    display: inline-block;
-    transition: transform 300ms cubic-bezier(.22, 1, .36, 1);
-}
+
 
 @media (prefers-reduced-motion: reduce) {
-    .event-more > span[aria-hidden="true"] { transition: none; }
+    
 }
 @media (max-width: 767px) {
-    .event-more > span[aria-hidden="true"] { left: calc(50% - 4em); }
+    
 }
 .event-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 31px; }
 .event-card { min-width: 0; overflow: hidden; border-radius: 20px; background: #fff; box-shadow: 0 4px 9.8px -2px rgba(0,0,0,.05); }
@@ -1448,7 +1435,7 @@ body {
     .event-heading h2 { font-size: clamp(34px, 8vw, 44px); }
     .event-heading p { margin-top: 7px; font-size: 12px; }
     .event-more { width: 132px; height: 34px; border-radius: 17px; font-size: 12px; }
-    .event-more > span[aria-hidden="true"] { font-size: 12px; left: calc(50% - 4em); }
+    
     .event-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
     .event-card { border-radius: 12px; }
     .event-card-image { border-radius: 12px 12px 0 0; }
@@ -1647,70 +1634,17 @@ body {
 .menu-product-detail-link img{display:block;}
 .menu-product-detail-link:focus-visible{outline:3px solid var(--brand-red);outline-offset:4px;border-radius:16px;}
 
-/* Matching STORE and EVENT CTAs: equal dimensions, centered label, arrow on right. */
-.store-promo-link,
-.event-more{
-    box-sizing:border-box;
-    width:176px;
-    height:50px;
-    min-height:50px;
-    border:1px solid var(--brand-red);
-    border-radius:25px;
-    font-size:16px;
-    font-weight:500;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:0;
-    position:relative;
+/* STORE and EVENT CTAs: same fixed dimensions; flex owns all spacing. */
+.store-promo-link,.event-more{
+ box-sizing:border-box;width:176px;height:50px;min-height:50px;
+ border:1px solid var(--brand-red);border-radius:25px;font-size:16px;font-weight:500;
+ display:inline-flex;align-items:center;justify-content:space-between;gap:12px;padding:0 18px;
 }
-.store-promo-link .promo-cta-label,
-.event-more .promo-cta-label{
-    display:block;
-    box-sizing:border-box;
-    width:100%;
-    padding:0;
-    text-align:center;
-    white-space:nowrap;
-}
-.store-promo-link > .promo-cta-arrow[aria-hidden="true"],
-.event-more > .promo-cta-arrow[aria-hidden="true"]{
-    position:absolute;
-    left:auto;
-    right:15px;
-    top:50%;
-    font-size:16px;
-    line-height:1;
-    transform:translateY(-50%);
-    transition:transform 300ms cubic-bezier(.22,1,.36,1);
-}
-/* Animate only the arrow, while keeping CTA labels centered. */
-@media(hover:hover){
-    .store-promo-link:hover > .promo-cta-arrow[aria-hidden="true"],
-    .event-more:hover > .promo-cta-arrow[aria-hidden="true"]{
-        transform:translate(4px,-50%);
-    }
-}
-.store-promo-link:focus-visible > .promo-cta-arrow[aria-hidden="true"],
-.event-more:focus-visible > .promo-cta-arrow[aria-hidden="true"]{
-    transform:translate(4px,-50%);
-}
+.store-promo-link > .promo-cta-label,.event-more > .promo-cta-label{font:inherit;color:inherit}
+.store-promo-link > .promo-cta-arrow[aria-hidden="true"],.event-more > .promo-cta-arrow[aria-hidden="true"]{font-size:16px;line-height:1;color:inherit}
 @media(max-width:767px){
-    .store-promo-link,.event-more{
-        width:132px;
-        height:34px;
-        min-height:34px;
-        border-radius:17px;
-        font-size:12px;
-    }
-    .store-promo-link .promo-cta-label,
-    .event-more .promo-cta-label{padding:0;}
-    .store-promo-link > .promo-cta-arrow[aria-hidden="true"],
-    .event-more > .promo-cta-arrow[aria-hidden="true"]{right:9px;font-size:12px;left:auto;}
-}
-@media(prefers-reduced-motion:reduce){
-    .store-promo-link .promo-cta-arrow,
-    .event-more .promo-cta-arrow{transition:none;}
+ .store-promo-link,.event-more{width:132px;height:34px;min-height:34px;border-radius:17px;font-size:12px;padding:0 12px;gap:8px}
+ .store-promo-link > .promo-cta-arrow[aria-hidden="true"],.event-more > .promo-cta-arrow[aria-hidden="true"]{font-size:12px}
 }
 
 /* Non-interactive BRAND label; same type scale as sibling navigation links. */
