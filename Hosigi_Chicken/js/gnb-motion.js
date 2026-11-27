@@ -76,11 +76,12 @@
   if(permanent>=0){
     sync(permanent);
   }else if(page==="brand.html"){
-    // Keep existing homepage scroll-based active-section behavior.
-    const read=()=>links.findIndex(link=>link?.classList.contains("is-current"));
-    sync(read());
-    const observer=new MutationObserver(()=>sync(read()));
-    links.forEach(link=>{if(link)observer.observe(link,{attributes:true,attributeFilter:["class"]});});
+    // Homepage has only hover/focus states, never a persistent active menu.
+    links.forEach(link=>{
+      if(!link)return;
+      link.classList.remove("is-current","gnb-active","gnb-enter");
+      link.removeAttribute("aria-current");
+    });
   }else{
     sync(-1);
   }
