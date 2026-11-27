@@ -1,0 +1,72 @@
+// Franchise adaptation of smooth-wheel.js: identical wheel easing and input constants.
+// Mobile touch, keyboard navigation and reduced-motion preferences stay native.
+(() => {
+  const desktop = window.matchMedia('(min-width: 768px)'); // Wheel events are handled even on hybrid laptops.
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let frame = 0;
+  let current = 0;
+  let target = 0;
+
+  const maxScroll = () => Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  const stop = () => {
+    if (frame) cancelAnimationFrame(frame);
+    frame = 0;
+    current = target = window.scrollY;
+  };
+
+  function animate() {
+    const difference = target - current;
+    current += difference * 0.09;
+    if (Math.abs(difference) < 0.6) {
+      window.scrollTo({top:target,left:0,behavior:'instant'});
+      frame = 0;
+      return;
+    }
+    window.scrollTo({top:current,left:0,behavior:'instant'});
+    frame = requestAnimationFrame(animate);
+  }
+
+  // Do not intercept wheel input meant for independently scrolling regions.
+  function insideScrollable(element, delta) {
+    for (let node = element; node && node !== document.body; node = node.parentElement) {
+      if (!(node instanceof HTMLElement)) continue;
+      const overflow = getComputedStyle(node).overflowY;
+      if (!/auto|scroll/.test(overflow) || node.scrollHeight <= node.clientHeight + 1) continue;
+      if ((delta > 0 && node.scrollTop + node.clientHeight < node.scrollHeight - 1) ||
+          (delta < 0 && node.scrollTop > 1)) return true;
+    }
+    return false;
+  }
+
+  document.addEventListener('wheel', (event) => {
+    const origin = event.target instanceof Element ? event.target : event.target?.parentElement;
+    // Preserve native wheel behavior inside consultation controls, even at list boundaries.
+    if (origin?.closest('.consult-select-dropdown, textarea, select')) { stop(); return; }
+    if (!desktop.matches || reduced.matches || event.ctrlKey || event.metaKey ||
+        event.defaultPrevented || Math.abs(event.deltaX) > Math.abs(event.deltaY) ||
+        origin?.closest('textarea, select, [role="dialog"]') ||
+        origin?.closest('.store-map-panel') ||
+        (origin && insideScrollable(origin, event.deltaY))) return;
+
+    // Normalize wheel lines/pages; cap large mouse-wheel jumps.
+    const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1;
+    const delta = Math.max(-200, Math.min(200, event.deltaY * unit));
+    if (!delta) return;
+    event.preventDefault();
+
+    if (!frame) current = target = window.scrollY;
+    target = Math.max(0, Math.min(maxScroll(), target + delta * 0.85));
+    if (!frame && Math.abs(target - current) > 0.5) frame = requestAnimationFrame(animate);
+  }, { passive: false, capture: true });
+
+  // A click on an anchor, keyboard scrolling, or viewport change should not
+  // compete with a previous wheel animation.
+  window.addEventListener('hosigi:birth-layout-rebase', stop);
+  window.addEventListener('keydown', stop);
+  window.addEventListener('resize', stop);
+  window.addEventListener('pagehide', stop);
+  window.addEventListener('pageshow', stop);
+  document.addEventListener('click', stop);
+  desktop.addEventListener('change', stop);
+  reduced.addEventListener('change', stop);
+})();
