@@ -19,8 +19,8 @@
 .event-post-neighbors a[href]:hover{color:var(--brand-red)}
 .event-post-neighbors a:not([href]){color:#767676}
 .event-post-actions{display:flex;justify-content:center;margin-top:48px}
-.event-post-back{display:inline-flex;align-items:center;justify-content:center;gap:26px;padding:16px 28px;border-radius:999px;background-color:var(--brand-brown);color:#fff;text-decoration:none;font-weight:700;transition:background-color 0.3s ease-in-out}
-@media(hover:hover) and (pointer:fine){.event-post-back:hover{background-color:var(--brand-red)}}
+.event-post-back{display:inline-flex;align-items:center;justify-content:space-between;gap:12px;box-sizing:border-box;min-width:176px;height:50px;padding:0 18px;border:1px solid var(--brand-red);border-radius:25px;background:transparent;color:var(--brand-red);text-decoration:none;font-size:16px;font-weight:500;transition:background-color .2s ease,color .2s ease}
+@media(hover:hover) and (pointer:fine){.event-post-back:hover,.event-post-back:focus-visible{background-color:var(--brand-red);color:#fff}}
 @media(prefers-reduced-motion:reduce){.event-post-back{transition:none}}
 .event-post a:focus-visible{outline:2px solid var(--brand-red);outline-offset:4px}
 .event-post-loading,#event-post-error{text-align:center;padding:50px 0}
@@ -28,3 +28,5 @@
 @keyframes event-detail-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:no-preference){.event-standalone .event-page-hero h2,.event-standalone .event-page-subtitle{animation:event-detail-rise 560ms cubic-bezier(.22,1,.36,1) both}.event-standalone .event-page-subtitle{animation-delay:70ms}}
 @media(max-width:767px){.event-standalone .event-filters{margin-bottom:36px}.event-post-heading{padding-bottom:24px}.event-post-body{padding:30px 0 40px}#event-post-poster{margin-bottom:30px}.event-post-description p{font-size:16px}.event-post-neighbors>div{grid-template-columns:65px minmax(0,1fr);gap:10px;padding:18px 4px}.event-post-actions{margin-top:32px}}
+
+@media(max-width:767px){.event-post-back{min-width:132px;height:34px;font-size:12px;padding:0 12px;border-radius:17px}}
