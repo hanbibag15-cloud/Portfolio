@@ -18,9 +18,10 @@ for(const select of form.querySelectorAll("select")){
  trigger.setAttribute("aria-haspopup","listbox");trigger.setAttribute("aria-expanded","false");trigger.setAttribute("aria-controls",options.id);
  const items=[];
  const close=()=>{dropdown.classList.remove("is-open");trigger.setAttribute("aria-expanded","false");items.forEach(item=>item.tabIndex=-1);};
- const sync=()=>{text.textContent=select.selectedOptions[0]?.textContent||"";items.forEach((item,i)=>{const chosen=i===select.selectedIndex;item.classList.toggle("is-active",chosen);item.setAttribute("aria-selected",String(chosen));});if(select.validity.valid)trigger.removeAttribute("aria-invalid");};
+ const sync=()=>{text.textContent=select.selectedOptions[0]?.textContent||"";items.forEach((item,i)=>{const chosen=Number(item.dataset.optionIndex)===select.selectedIndex;item.classList.toggle("is-active",chosen);item.setAttribute("aria-selected",String(chosen));});if(select.validity.valid)trigger.removeAttribute("aria-invalid");};
  for(const [index,option] of [...select.options].entries()){
-  const item=document.createElement("button");item.type="button";item.className="consult-select-option";item.setAttribute("role","option");item.tabIndex=-1;item.disabled=option.disabled;item.textContent=option.textContent;
+  if(option.value==="")continue; // Placeholder remains native state only.
+  const item=document.createElement("button");item.type="button";item.className="consult-select-option";item.setAttribute("role","option");item.tabIndex=-1;item.disabled=option.disabled;item.dataset.optionIndex=String(index);item.textContent=option.textContent;
   item.addEventListener("click",()=>{select.selectedIndex=index;select.dispatchEvent(new Event("change",{bubbles:true}));close();trigger.focus({preventScroll:true});});
   items.push(item);options.append(item);
  }
@@ -28,7 +29,7 @@ for(const select of form.querySelectorAll("select")){
  const scrollThumb=document.createElement("span");scrollThumb.className="consult-select-scroll-thumb";scrollIndicator.append(scrollThumb);
  const updateThumb=()=>{const remaining=options.scrollHeight-options.clientHeight;const travel=Math.max(0,scrollIndicator.clientHeight-scrollThumb.offsetHeight);scrollIndicator.classList.toggle("has-overflow",remaining>1);scrollThumb.style.transform="translateY("+(remaining>0?options.scrollTop/remaining*travel:0)+"px)";};
  const focusItem=index=>{const item=items[index];if(!item||item.disabled)return;items.forEach(x=>x.tabIndex=-1);item.tabIndex=0;item.focus({preventScroll:true});const top=item.offsetTop,bottom=top+item.offsetHeight;if(top<options.scrollTop)options.scrollTop=top;else if(bottom>options.scrollTop+options.clientHeight)options.scrollTop=bottom-options.clientHeight;updateThumb();};
- const open=()=>{consultPickers.forEach(p=>{if(p.close!==close)p.close();});dropdown.classList.add("is-open");trigger.setAttribute("aria-expanded","true");requestAnimationFrame(()=>{if(dropdown.classList.contains("is-open")){focusItem(select.selectedIndex>=0?select.selectedIndex:0);updateThumb();}});};
+ const open=()=>{consultPickers.forEach(p=>{if(p.close!==close)p.close();});dropdown.classList.add("is-open");trigger.setAttribute("aria-expanded","true");requestAnimationFrame(()=>{if(dropdown.classList.contains("is-open")){const selectedItem=items.findIndex(item=>Number(item.dataset.optionIndex)===select.selectedIndex);focusItem(selectedItem>=0?selectedItem:0);updateThumb();}});};
  select.before(dropdown);dropdown.append(select,trigger,options,scrollIndicator);select.classList.add("consult-select-native");select.tabIndex=-1;select.setAttribute("aria-hidden","true");
  trigger.addEventListener("click",()=>dropdown.classList.contains("is-open")?close():open());
  label?.addEventListener("click",e=>{e.preventDefault();trigger.focus();});
