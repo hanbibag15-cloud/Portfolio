@@ -285,8 +285,8 @@
 #consulting .f-check{display:flex;justify-content:center;align-items:center;gap:10px;font-size:15px;line-height:1.5}
 #consulting .f-check input{accent-color:var(--red);width:19px;height:19px;flex:none}
 #consulting .f-privacy-note{font-size:13px;color:#746c68;line-height:1.6;margin-top:10px}
-#consulting .f-btn{width:min(100%,400px);margin-top:30px;background:var(--brown)}
-@media(hover:hover){#consulting .f-btn:hover{background:var(--red)}}
+#consulting .f-btn{width:min(100%,400px);margin-top:30px;background-color:var(--brown);color:#fff;transition:background-color .2s ease}
+@media(hover:hover){#consulting .f-btn:hover{background-color:var(--red);color:#fff}}
 #consulting #f-result:not(:empty){background:var(--cream);padding:16px;margin-top:20px;border-radius:8px;line-height:1.6;text-align:center}
 #consulting.consult-motion-ready .f-form{opacity:0;transform:translateY(48px);transition:opacity 1.35s ease,transform 1.35s cubic-bezier(.22,1,.36,1)}
 #consulting.consult-motion-ready .f-form.consult-visible,#consulting.consult-motion-ready .f-form:focus-within{opacity:1;transform:none}
