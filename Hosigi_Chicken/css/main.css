@@ -1423,7 +1423,7 @@ body {
 @media (max-width: 420px) {
     .event-header { flex-direction: row; align-items: center; justify-content: space-between; gap: 8px; }
     .event-heading { flex: 1 1 auto; min-width: 0; top: 0; }
-    .event-more { flex: 0 0 132px; align-self: center; margin-left: auto; }
+    .event-more { flex: 0 0 auto; align-self: center; margin-left: auto; }
     .event-grid { gap: 10px; }
     .event-card-info { padding: 10px 8px 12px; }
     .event-card-info p { font-size: 9px; }
@@ -1697,9 +1697,13 @@ a.event-more {
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
-    width: 176px;
+    width: max-content;
+    max-width: 100%;
+    flex: 0 0 auto;
+    align-self: flex-start;
     height: 50px;
     min-height: 50px;
+    gap: 12px;
     padding: 0 18px;
     border: 1px solid var(--brand-red);
     border-radius: 25px;
@@ -1709,6 +1713,7 @@ a.event-more {
     text-decoration: none;
     transition: background .2s ease, color .2s ease;
 }
+a.event-more { align-self: center; }
 a.store-promo-link > span,
 a.event-more > span {
     font: inherit;
@@ -1727,7 +1732,6 @@ a.event-more:is(:hover,:focus-visible) {
 @media (max-width: 767px) {
     a.store-promo-link,
     a.event-more {
-        width: 132px;
         height: 34px;
         min-height: 34px;
         padding: 0 12px;
