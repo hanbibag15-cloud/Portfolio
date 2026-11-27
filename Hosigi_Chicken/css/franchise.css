@@ -14,6 +14,10 @@
 .f-hero-tile:nth-child(2),.f-hero-tile:nth-child(3){background:#FFE45C;color:#221714}
 .f-hero-tile:nth-child(even){text-align:right;justify-content:flex-end;padding:24px clamp(40px,7vw,134px) 24px calc(var(--disc)/2 + 36px)}
 .f-hero-tile{--tile-shade:rgba(157,0,12,.42)}
+.f-hero-tile:nth-child(1){--tile-photo:url("../img/Service_img11.png")}
+.f-hero-tile:nth-child(2){--tile-photo:url("../img/Service_img09.png")}
+.f-hero-tile:nth-child(3){--tile-photo:url("../img/Service_img07.png")}
+.f-hero-tile:nth-child(4){--tile-photo:url("../img/Service_img02.png")}
 .f-hero-tile:nth-child(2),.f-hero-tile:nth-child(3){--tile-shade:rgba(255,228,92,.28)}
 .f-hero-tile::before{content:"";position:absolute;inset:0;z-index:0;background-image:linear-gradient(var(--tile-shade),var(--tile-shade)),var(--tile-photo);background-size:cover;background-position:center;background-repeat:no-repeat;opacity:0;transition:opacity .5s ease;pointer-events:none}
 .f-hero-tile .f-hero-stat{position:relative;z-index:1;transition:opacity .56s,transform .56s cubic-bezier(.22,1,.36,1)}
