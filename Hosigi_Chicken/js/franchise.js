@@ -176,8 +176,6 @@ window.addEventListener("resize",scheduleAxes,{passive:true});
 if(document.fonts){document.fonts.ready.then(scheduleAxes);document.fonts.addEventListener("loadingdone",scheduleAxes)}
 if("ResizeObserver"in window){const observer=new ResizeObserver(scheduleAxes);observer.observe(header.querySelector(".header-inner"));observer.observe(header.querySelector(".header-utils"));observer.observe(axisRef)}
 
-function activeNav(){const y=window.scrollY+header.offsetHeight+80;let index=0;for(const [i,id] of [[1,"performance"],[2,"guide"],[3,"consulting"]]){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top+scrollY<=y)index=i}if(index===2&&tabs[5].getAttribute("aria-selected")==="true")index=3;mainLinks.forEach((a,i)=>a.classList.toggle("gnb-active",i===index))}
-window.addEventListener("scroll",activeNav,{passive:true});tabs.forEach(t=>t.addEventListener("click",activeNav));activeNav();
 const form=document.getElementById("f-form"), fields=document.getElementById("f-fields"), result=document.getElementById("f-result");
 const consultSection=document.getElementById("consulting");
 if(consultSection && form && "IntersectionObserver" in window && !reduced.matches){
