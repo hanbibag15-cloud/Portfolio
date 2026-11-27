@@ -363,15 +363,15 @@
       let frame=0,still=0,lastY=window.scrollY,started=performance.now(),done=false;
       let cleanupTimer=0;
       const clear=()=>{card.classList.remove("event-deep-link-highlight");clearTimeout(cleanupTimer);card.removeEventListener("animationend",onAnimationEnd);window.removeEventListener("pagehide",cancel);};
-      const onAnimationEnd=e=>{if(e.target===card&&e.animationName==="event-deep-link-pulse")clear();};
+      const onAnimationEnd=e=>{if(e.target===card&&e.animationName==="hosigi-product-arrival")clear();};
       const cancel=()=>{done=true;cancelAnimationFrame(frame);clear();};
       window.addEventListener("pagehide",cancel,{once:true});
       const highlight=()=>{
         if(done)return;done=true;
-        if(!card.isConnected){clear();return;}
+        if(!card.isConnected||reduced){clear();return;}
         card.classList.add("event-deep-link-highlight");
         card.addEventListener("animationend",onAnimationEnd);
-        cleanupTimer=window.setTimeout(clear,2800);
+        cleanupTimer=window.setTimeout(clear,1850);
       };
       const check=now=>{
         if(done)return;
