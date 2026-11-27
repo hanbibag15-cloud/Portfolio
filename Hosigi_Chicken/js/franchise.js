@@ -17,6 +17,20 @@ document.addEventListener("pointerdown",e=>{if(!e.target.closest(".site-header")
 const reduced=matchMedia("(prefers-reduced-motion:reduce)");
 function count(el){if(el.dataset.counted)return;el.dataset.counted="1";const end=Number(el.dataset.count);const format=n=>el.dataset.format==="plain"?String(n):n.toLocaleString("ko-KR");if(reduced.matches){el.textContent=format(end);return}const start=performance.now();function step(now){const p=Math.min(1,(now-start)/1100);el.textContent=format(Math.round(end*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step)}
 if("IntersectionObserver"in window&&!reduced.matches){const nodes=[...document.querySelectorAll(".f-reveal")];const observer=new IntersectionObserver(entries=>{for(const e of entries){if(!e.isIntersecting)continue;e.target.classList.add("is-visible");observer.unobserve(e.target);e.target.querySelectorAll("[data-count]").forEach(count)}},{threshold:.08});document.documentElement.classList.add("f-ready");nodes.forEach(n=>observer.observe(n))}
+// History fan: reveal the outline and fan once when cards approach the viewport.
+const historySection=document.getElementById("history");
+if(historySection && "IntersectionObserver" in window && !reduced.matches){
+ const fan=historySection.querySelector(".f-timeline");
+ if(fan){
+  historySection.classList.add("history-motion-ready");
+  const observer=new IntersectionObserver(entries=>{
+   if(!entries.some(e=>e.isIntersecting))return;
+   historySection.classList.add("history-visible");
+   observer.disconnect();
+  },{threshold:0,rootMargin:"0px 0px -12% 0px"});
+  observer.observe(fan);
+ }
+}
 // Operating metrics: each card reveals once, staggered within the visible group.
 const metricResults=document.getElementById("results");
 if(metricResults && "IntersectionObserver" in window && !reduced.matches){
