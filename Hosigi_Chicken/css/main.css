@@ -1230,24 +1230,7 @@ body {
     font-weight: 600;
     line-height: 1.5;
 }
-.store-promo-link {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    width: 219px;
-    height: 49px;
-    min-height: 49px;
-    margin-top: 20px;
-    border: 2px solid var(--brand-red);
-    border-radius: 999px;
-    color: var(--brand-red);
-    font-size: 16px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background .2s ease, color .2s ease;
-}
+.store-promo-link { margin-top:20px; }
 .store-promo-link:hover,
 .store-promo-link:focus-visible {
     background: var(--brand-red);
@@ -1273,7 +1256,7 @@ body {
     .store-promo-copy { margin-top: 54.5px; margin-left: 0; }
     .store-promo-copy h2 { font-size: 56px; }
     .store-promo-copy p { font-size: 17px; }
-    .store-promo-link { width: 180px; min-height: 44px; font-size: 13px; }
+    
     .store-promo-art { width: min(43%, 380px); margin-top: -72px; }
 }
 @media (max-width: 767px) {
@@ -1306,15 +1289,7 @@ body {
     }
     .store-promo-copy h2 { font-size: clamp(30px, 8vw, 40px); }
     .store-promo-copy p { margin-top: 8px; font-size: clamp(10px, 2.7vw, 12px); }
-    .store-promo-link {
-        width: 124px;
-        height: 32px;
-        min-height: 32px;
-        margin-top: 13px;
-        border-width: 1px;
-        font-size: 11px;
-        line-height: 1;
-    }
+    .store-promo-link { margin-top:13px; line-height:1; }
     .store-promo-art {
         flex: 0 1 52%;
         width: 52%;
@@ -1346,7 +1321,7 @@ body {
     }
     .store-promo-copy h2 { font-size: clamp(28px, 8vw, 34px); }
     .store-promo-copy p { font-size: 10px; }
-    .store-promo-link { width: 112px; height: 30px; min-height: 30px; font-size: 10px; }
+    
     .store-promo-art {
         flex: 0 1 51%;
         width: 51%;
@@ -1397,7 +1372,7 @@ body {
 .event-heading { position: relative; top: 18px; text-align: left; }
 .event-heading h2 { color: var(--brand-red); font-size: 68px; font-weight: 700; line-height: 1.1; letter-spacing: -.023em; }
 .event-heading p { margin-top: 15px; color: var(--brand-brown); font-size: 20px; font-weight: 600; letter-spacing: -.023em; }
-.event-more { margin-left: auto; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 176px; height: 50px; flex: 0 0 auto; border: 1px solid var(--brand-red); border-radius: 25px; color: var(--brand-red); font-size: 16px; font-weight: 500; transition: background .2s ease, color .2s ease; }
+.event-more { margin-left:auto; flex:0 0 auto; }
 .event-more:hover, .event-more:focus-visible { background: var(--brand-red); color: #fff; }
 /* EVENT arrow: animate separately so the centered label never shifts or overlaps. */
 
@@ -1434,7 +1409,7 @@ body {
     .event-heading { top: 10px; }
     .event-heading h2 { font-size: clamp(34px, 8vw, 44px); }
     .event-heading p { margin-top: 7px; font-size: 12px; }
-    .event-more { width: 132px; height: 34px; border-radius: 17px; font-size: 12px; }
+    
     
     .event-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
     .event-card { border-radius: 12px; }
@@ -1634,19 +1609,6 @@ body {
 .menu-product-detail-link img{display:block;}
 .menu-product-detail-link:focus-visible{outline:3px solid var(--brand-red);outline-offset:4px;border-radius:16px;}
 
-/* STORE and EVENT CTAs: same fixed dimensions; flex owns all spacing. */
-.store-promo-link,.event-more{
- box-sizing:border-box;width:176px;height:50px;min-height:50px;
- border:1px solid var(--brand-red);border-radius:25px;font-size:16px;font-weight:500;
- display:inline-flex;align-items:center;justify-content:space-between;gap:12px;padding:0 18px;
-}
-.store-promo-link > .promo-cta-label,.event-more > .promo-cta-label{font:inherit;color:inherit}
-.store-promo-link > .promo-cta-arrow[aria-hidden="true"],.event-more > .promo-cta-arrow[aria-hidden="true"]{font-size:16px;line-height:1;color:inherit}
-@media(max-width:767px){
- .store-promo-link,.event-more{width:132px;height:34px;min-height:34px;border-radius:17px;font-size:12px;padding:0 12px;gap:8px}
- .store-promo-link > .promo-cta-arrow[aria-hidden="true"],.event-more > .promo-cta-arrow[aria-hidden="true"]{font-size:12px}
-}
-
 /* Non-interactive BRAND label; same type scale as sibling navigation links. */
 .header-nav .header-nav-static-label{display:block;white-space:nowrap;font-size:20px;font-weight:500;line-height:1;letter-spacing:-.023em;color:var(--text-primary);cursor:default;}
 @media(max-width:1024px){.header-nav .header-nav-static-label{padding:12px 2px;font-size:16px;text-align:center;}}
@@ -1727,3 +1689,51 @@ body {
 }
 
 /* GNB active styles are centralized in nav-state.css (no duplicate BRAND underline). */
+
+/* Homepage CTA layout follows event-post-back: all spacing belongs to the anchor. */
+a.store-promo-link,
+a.event-more {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 176px;
+    height: 50px;
+    min-height: 50px;
+    padding: 0 18px;
+    border: 1px solid var(--brand-red);
+    border-radius: 25px;
+    color: var(--brand-red);
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background .2s ease, color .2s ease;
+}
+a.store-promo-link > span,
+a.event-more > span {
+    font: inherit;
+    color: inherit;
+}
+a.store-promo-link > .promo-cta-arrow,
+a.event-more > .promo-cta-arrow {
+    font-size: 16px;
+    line-height: 1;
+}
+a.store-promo-link:is(:hover,:focus-visible),
+a.event-more:is(:hover,:focus-visible) {
+    background: var(--brand-red);
+    color: var(--neutral-white);
+}
+@media (max-width: 767px) {
+    a.store-promo-link,
+    a.event-more {
+        width: 132px;
+        height: 34px;
+        min-height: 34px;
+        padding: 0 12px;
+        border-radius: 17px;
+        font-size: 12px;
+    }
+    a.store-promo-link > .promo-cta-arrow,
+    a.event-more > .promo-cta-arrow { font-size: 12px; }
+}
