@@ -21,7 +21,7 @@
 .support-faq{border-top:1px solid var(--border-default);padding-top:38px}.support-faq details{border-bottom:1px solid var(--border-default)}.support-faq summary{display:flex;align-items:center;gap:16px;cursor:pointer;list-style:none;padding:22px 8px;font-size:19px;font-weight:650}.support-faq summary::-webkit-details-marker{display:none}.faq-q{color:var(--brand-red);font-weight:800}.faq-plus{position:relative;width:18px;height:18px;margin-left:auto;flex:none}.faq-plus:before,.faq-plus:after{content:"";position:absolute;top:8px;left:0;width:18px;height:2px;background:currentColor;transition:transform .25s}.faq-plus:after{transform:rotate(90deg)}details[open] .faq-plus:after{transform:rotate(0)}.faq-answer{display:flex;gap:16px;padding:22px 24px;background:var(--background-subtle);border-radius:12px;margin:0 0 18px}.faq-answer b{color:var(--brand-red)}.faq-answer p{margin:0}
 .support-demo-note{font-size:15px;color:#68615f;margin-bottom:25px!important}
 #customer-inquiry{--red:var(--brand-red);--brown:var(--brand-brown);--cream:#fff8f1;scroll-margin-top:120px}
-#customer-inquiry .f-btn{display:inline-flex;justify-content:center;align-items:center;color:#fff;border:0;border-radius:999px;min-height:52px;padding:12px 24px;font-weight:700;cursor:pointer;transition:background-color .3s}
+#customer-inquiry .f-btn{display:inline-flex;justify-content:center;align-items:center;color:#fff;border:0;border-radius:999px;min-height:52px;padding:12px 24px;font-weight:700;cursor:pointer;width:min(100%,400px);margin-top:30px;background-color:var(--brown);transition:background-color .2s ease}
 #customer-inquiry .f-form-heading h3{margin:0}
 #customer-inquiry .f-form-heading p{margin:0}
 #customer-inquiry #customer-result:empty{display:none}
@@ -53,8 +53,8 @@
 #customer-inquiry .f-check{display:flex;justify-content:center;align-items:center;gap:10px;font-size:15px;line-height:1.5}
 #customer-inquiry .f-check input{accent-color:var(--red);width:19px;height:19px;flex:none}
 #customer-inquiry .f-privacy-note{font-size:13px;color:#746c68;line-height:1.6;margin-top:10px}
-#customer-inquiry .f-btn{width:min(100%,400px);margin-top:30px;background:var(--brown)}
-@media(hover:hover){#customer-inquiry .f-btn:hover{background:var(--red)}}
+
+@media(hover:hover){#customer-inquiry .f-btn:hover{background-color:var(--red);color:#fff}}
 #customer-inquiry #customer-result:not(:empty){background:var(--cream);padding:16px;margin-top:20px;border-radius:8px;line-height:1.6;text-align:center}
 
 
@@ -63,7 +63,7 @@
 
 
 /* Consultation selects — copied from store-page.css region picker; local aliases preserve store tokens. */
-#customer-inquiry{--border-default:#e5e5e5;--surface-default:#fff;--text-primary:var(--brown);--brand-red:var(--red);--background-subtle:#f7f7f7;--font:"Pretendard Variable",Pretendard,sans-serif}
+#customer-inquiry{--border-default:#e5e5e5;--surface-default:#fff;--text-primary:var(--brown);--background-subtle:#f7f7f7;--font:"Pretendard Variable",Pretendard,sans-serif}
 /* Region dropdown styled like the main navigation submenu. */
 
 
