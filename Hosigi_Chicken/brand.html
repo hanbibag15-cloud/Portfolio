@@ -269,16 +269,16 @@
                     </header>
                     <div class="event-grid">
                         <article class="event-card">
-                            <a class="event-image-link" href="event.html#event-coupang" aria-label="쿠팡이츠 7천 원 할인 이벤트 상세 보기">
+                            <a class="event-image-link" href="event-detail.html?id=coupang&amp;section=events" aria-label="쿠팡이츠 7천 원 할인 이벤트 상세 보기">
                                 <div class="event-card-image event-card-image--promo">
                                 <img src="img/Event_img01.png" alt="쿠팡이츠 7천 원 할인 이벤트" loading="lazy">
                             </div>
-                            </a>
                             <div class="event-card-info">
                                 <span class="event-card-category">할인 프로모션</span>
                                 <h3>쿠팡이츠 7천 원 할인</h3>
                                 <p>2026.10.23(금) - 2026.10.25(일)</p>
                             </div>
+                            </a>
                         </article>
                         <article class="event-card event-card--ended">
                             <a class="event-image-link" href="event.html#event-detective" aria-label="치킨 범인 맞히기 이벤트 상세 보기">
@@ -477,6 +477,11 @@
         window.addEventListener('resize', updateEventReveal);
         requestAnimationFrame(() => requestAnimationFrame(updateEventReveal));
     }
+
+    // Clear pointer focus on the direct event link without affecting keyboard focus.
+    document.querySelector('#events a[href="event-detail.html?id=coupang&section=events"]')?.addEventListener("click", event => {
+        if (event.detail > 0) event.currentTarget.blur();
+    });
 
     // Open the matching menu card, not just the chicken/side category.
     // Read product names from the image alt and preserve existing carousel dragging.
