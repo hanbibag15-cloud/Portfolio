@@ -36,6 +36,20 @@ if(hero && "IntersectionObserver" in window && !reduced.matches){
  },{threshold:.3});
  heroObserver.observe(hero);
 }
+// One-time performance infographic reveal.
+const advantages=document.querySelector("#performance .f-advantage-grid");
+if(advantages && "IntersectionObserver" in window && !reduced.matches){
+ const visual=advantages.querySelector(".f-advantage-visual");
+ const points=[...advantages.querySelectorAll(".f-advantage")];
+ const observer=new IntersectionObserver(entries=>{
+  if(!entries.some(e=>e.isIntersecting))return;
+  observer.disconnect();
+  visual.classList.add("is-visible");
+  points.forEach((point,i)=>setTimeout(()=>point.classList.add("is-visible"),150+i*150));
+ },{threshold:0.1});
+ advantages.classList.add("motion-ready");
+ observer.observe(advantages);
+}
 const mainLinks=[...nav.querySelectorAll(":scope > ul > li > a")];
 /* Resolve the brand site's real text widths using the browser's computed font,
    then keep franchise slots independent of the franchise labels' lengths. */
