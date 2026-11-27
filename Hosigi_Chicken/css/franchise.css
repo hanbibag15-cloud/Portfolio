@@ -277,7 +277,7 @@
 #consulting .f-required::before{content:"*";position:absolute;left:0}
 #consulting .f-form-grid input,#consulting .f-form-grid select,#consulting .f-form-grid textarea{display:block;width:min(100%,360px);min-width:0;border:1px solid #ccc;border-radius:3px;background:white;color:var(--brown);padding:12px 15px;font:inherit;transition:border-color .2s;outline:none}
 #consulting .f-form-grid input,#consulting .f-form-grid select{height:48px}
-#consulting .f-form-grid textarea{width:100%;min-height:190px;resize:vertical}
+#consulting .f-form-grid textarea{width:100%;min-height:190px;resize:none;overflow-y:auto}
 #consulting .f-message-label{align-self:start;padding-top:12px}
 #consulting .f-form-grid :is(input,select,textarea):focus{border-color:var(--red);outline:1px solid var(--red);outline-offset:0}
 #consulting .f-form-grid ::placeholder{color:#938e8b}
