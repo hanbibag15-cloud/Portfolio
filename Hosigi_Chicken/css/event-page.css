@@ -441,19 +441,12 @@ html:has(.event-pagination),body:has(.event-pagination){overflow-anchor:none;}
 @media(max-width:1100px){.hosigi-event-page > .event-page-hero::before,.hosigi-event-page > .event-page-hero::after{width:23%}}
 @media(max-width:767px){.hosigi-event-page > .event-page-hero::before,.hosigi-event-page > .event-page-hero::after{display:none}}
 
-/* One-shot highlight for a consumed ended-event deep link only. No layout shift. */
-.event-list-card.event-deep-link-highlight{
-  position:relative;z-index:2;
-  animation:event-deep-link-pulse 2.6s ease-in-out both;
+/* Match the menu product-arrival effect exactly; apply to the existing rounded event card, not its clipped image. */
+.event-list-card.event-deep-link-highlight{position:relative;z-index:2;animation:hosigi-product-arrival 1.65s ease-out both;}
+@keyframes hosigi-product-arrival {
+    0%,100% {box-shadow:0 0 0 0 rgba(230,0,18,0);}
+    18% {box-shadow:0 0 0 4px rgba(230,0,18,.65),0 0 24px rgba(230,0,18,.35);}
+    55% {box-shadow:0 0 0 3px rgba(230,0,18,.45),0 0 17px rgba(230,0,18,.25);}
+    82% {box-shadow:0 0 0 1px rgba(230,0,18,.17),0 0 8px rgba(230,0,18,.09);}
 }
-@keyframes event-deep-link-pulse{
-  0%{outline:3px solid transparent;outline-offset:0;box-shadow:0 5px 22px rgba(34,23,20,.075);transform:scale(1)}
-  15%{outline:3px solid var(--brand-red);outline-offset:1px;box-shadow:0 0 22px rgba(230,0,18,.28);transform:scale(1.035)}
-  38%{outline:3px solid var(--brand-red);outline-offset:1px;box-shadow:0 0 15px rgba(230,0,18,.20);transform:scale(1)}
-  60%{outline:3px solid var(--brand-red);outline-offset:1px;box-shadow:0 0 22px rgba(230,0,18,.25);transform:scale(1.02)}
-  78%{outline:3px solid var(--brand-red);outline-offset:1px;box-shadow:0 0 12px rgba(230,0,18,.14);transform:scale(1)}
-  100%{outline:3px solid transparent;outline-offset:0;box-shadow:0 5px 22px rgba(34,23,20,.075);transform:scale(1)}
-}
-@media(prefers-reduced-motion:reduce){
- .event-list-card.event-deep-link-highlight{animation:none;transform:none;outline:3px solid var(--brand-red);outline-offset:1px;box-shadow:0 0 15px rgba(230,0,18,.2)}
-}
+@media(prefers-reduced-motion:reduce){.event-list-card.event-deep-link-highlight{animation:none;}}
