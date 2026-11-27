@@ -1371,7 +1371,7 @@ body {
 .event-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 54px; }
 .event-heading { position: relative; top: 18px; text-align: left; }
 .event-heading h2 { color: var(--brand-red); font-size: 68px; font-weight: 700; line-height: 1.1; letter-spacing: -.023em; }
-.event-heading p { margin-top: 15px; color: var(--brand-brown); font-size: 20px; font-weight: 600; letter-spacing: -.023em; }
+.event-heading p { margin-top: 0; color: var(--brand-brown); font-size: 20px; font-weight: 600; letter-spacing: -.023em; }
 .event-more { margin-left:auto; flex:0 0 auto; }
 .event-more:hover, .event-more:focus-visible { background: var(--brand-red); color: #fff; }
 /* EVENT arrow: animate separately so the centered label never shifts or overlaps. */
@@ -1408,7 +1408,7 @@ body {
     .event-header { align-items: flex-end; gap: 10px; margin-bottom: 24px; }
     .event-heading { top: 10px; }
     .event-heading h2 { font-size: clamp(34px, 8vw, 44px); }
-    .event-heading p { margin-top: 7px; font-size: 12px; }
+    .event-heading p { margin-top: 0; font-size: 12px; }
     
     
     .event-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -1754,3 +1754,11 @@ a.event-more:is(:hover,:focus-visible) {
 @media (max-width:380px) {
  .app-promo-stores .app-store-link {flex-basis:calc((100% - 10px) / 2);padding-inline:4px;gap:4px;}
 }
+
+/* Align the EVENT CTA to the subtitle's actual center, without moving the heading. */
+.event-header .event-heading {flex:1 1 100%;min-width:0;}
+.event-subtitle-row {display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:15px;}
+.event-subtitle-row > p {flex:0 1 auto;min-width:0;}
+/* The subtitle determines row height; the centered CTA must not increase it. */
+.event-more-slot {display:flex;align-items:center;justify-content:flex-end;flex:0 0 auto;height:0;margin-left:auto;}
+@media(max-width:767px){.event-subtitle-row{gap:10px;margin-top:7px;}}
