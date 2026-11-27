@@ -94,11 +94,11 @@
 
 /* Expanded performance composition: desktop only; preserve all existing reveal states. */
 @media(min-width:901px){
- #performance{position:relative;isolation:isolate;padding-top:150px;padding-bottom:150px;--adv-arch-rise:190px}
+ #performance{position:relative;isolation:isolate;padding-top:150px;padding-bottom:150px}
  #performance .f-heading{position:relative;z-index:2;margin-bottom:105px}
  #performance .f-advantage-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.55fr) minmax(0,1fr);grid-template-rows:repeat(2,minmax(390px,1fr));gap:110px 0;min-height:890px;position:relative}
  #performance .f-advantage-visual{min-height:890px;background:transparent;overflow:visible;isolation:auto}
- #performance .f-advantage-visual::before{content:"";position:absolute;inset:calc(-1 * var(--adv-arch-rise)) 0 0;background:#fff5e7;border-radius:50% 50% 18px 18px / 240px 240px 18px 18px;z-index:-1;pointer-events:none}
+ 
  #performance .f-advantage-since{top:5%;font-size:clamp(46px,5vw,76px);opacity:.18;z-index:0}
  #performance .f-advantage-visual img{width:116%;max-width:none;height:690px;object-fit:contain;object-position:center bottom;z-index:1}
  #performance .f-advantage{z-index:2}
@@ -112,7 +112,7 @@
  #performance .f-advantage-line::before{width:58px}
 }
 @media(min-width:901px) and (max-width:1150px){
- #performance{--adv-arch-rise:155px;padding-block:120px}
+ #performance{padding-block:120px}
  #performance .f-advantage-grid{min-height:760px;grid-template-rows:repeat(2,minmax(335px,1fr));gap:90px 0}
  #performance .f-advantage-visual{min-height:760px}
  #performance .f-advantage-visual img{width:105%;height:560px}
@@ -138,5 +138,14 @@
 #performance .f-heading .f-performance-title{color:#221714;font-size:clamp(30px,4.2vw,60px);font-weight:850;line-height:1.35;letter-spacing:-.045em;word-break:keep-all}
 #performance .f-brand-marker{display:inline-block;position:relative;isolation:isolate;white-space:nowrap}
 #performance .f-brand-marker::after{content:"";position:absolute;left:-2%;right:-2%;bottom:.02em;height:.19em;background:#E60012;border-radius:48% 36% 30% 24% / 32% 45% 25% 38%;transform:rotate(-1deg);z-index:-1}
-#performance .f-heading .f-performance-desc{margin-top:24px}
+
 @media(max-width:600px){#performance .f-heading .f-question-sign{padding:10px 20px;margin-bottom:20px}#performance .f-heading .f-performance-title{font-size:clamp(26px,6.1vw,36px)}}
+
+/* Independent full-section arch: decorative only, no grid geometry changes. */
+#performance{position:relative;isolation:isolate}
+#performance::before{content:"";position:absolute;left:50%;transform:translateX(-50%);top:0;bottom:0;width:59%;background:#fff5e7;border-radius:50% 50% 0 0 / min(29.5vw,366px) min(29.5vw,366px) 0 0;z-index:-1;pointer-events:none}
+#performance .f-advantage-visual{background:transparent;border-radius:0;overflow:visible}
+#performance .f-advantage-since{z-index:0}
+#performance .f-heading{position:relative;z-index:2}
+@media(max-width:900px){#performance::before{width:min(88%,675px);border-radius:50% 50% 0 0 / min(44vw,337.5px) min(44vw,337.5px) 0 0}#performance .f-advantage-visual{background:transparent}}
+@media(max-width:480px){#performance::before{width:100%;border-radius:50% 50% 0 0 / 45vw 45vw 0 0}}
