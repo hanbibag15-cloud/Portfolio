@@ -1,5 +1,4 @@
-/* Unified GNB visual states. The original nav-state.js still controls
-   homepage scroll activation, but visual animation is handled here. */
+/* Unified GNB visual states: hover and actual subpage activation only. */
 /* Unified GNB hover/active motion; top-level labels only. */
 .header-nav > ul > li > a.gnb-motion-link {
   color:var(--text-primary);
