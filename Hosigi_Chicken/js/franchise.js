@@ -36,19 +36,19 @@ if(hero && "IntersectionObserver" in window && !reduced.matches){
  },{threshold:.3});
  heroObserver.observe(hero);
 }
-// One-time performance infographic reveal.
-const advantages=document.querySelector("#performance .f-advantage-grid");
-if(advantages && "IntersectionObserver" in window && !reduced.matches){
- const visual=advantages.querySelector(".f-advantage-visual");
- const points=[...advantages.querySelectorAll(".f-advantage")];
+// Performance: observe each content group independently and reveal only once.
+const performanceSection=document.getElementById("performance");
+if(performanceSection && "IntersectionObserver" in window && !reduced.matches){
+ const targets=[...performanceSection.querySelectorAll(".f-question-sign,.f-performance-title,.f-advantage-since,.f-advantage-visual img,.f-advantage")];
  const observer=new IntersectionObserver(entries=>{
-  if(!entries.some(e=>e.isIntersecting))return;
-  observer.disconnect();
-  visual.classList.add("is-visible");
-  points.forEach((point,i)=>setTimeout(()=>point.classList.add("is-visible"),150+i*150));
- },{threshold:0.1});
- advantages.classList.add("motion-ready");
- observer.observe(advantages);
+  for(const entry of entries){
+   if(!entry.isIntersecting || entry.intersectionRatio<.25)continue;
+   entry.target.classList.add("perf-visible");
+   observer.unobserve(entry.target);
+  }
+ },{threshold:.25});
+ targets.forEach(target=>observer.observe(target));
+ performanceSection.classList.add("performance-motion-ready");
 }
 const mainLinks=[...nav.querySelectorAll(":scope > ul > li > a")];
 /* Resolve the brand site's real text widths using the browser's computed font,
