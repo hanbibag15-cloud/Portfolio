@@ -13,11 +13,13 @@
 .f-hero-tile{position:relative;isolation:isolate;display:flex;align-items:center;overflow:hidden;background:#E60012;color:#fff;padding:24px calc(var(--disc)/2 + 36px) 24px clamp(40px,7vw,134px)}
 .f-hero-tile:nth-child(2),.f-hero-tile:nth-child(3){background:#FFE45C;color:#221714}
 .f-hero-tile:nth-child(even){text-align:right;justify-content:flex-end;padding:24px clamp(40px,7vw,134px) 24px calc(var(--disc)/2 + 36px)}
-.f-hero-tile{--tile-color:#E60012}.f-hero-tile:nth-child(2),.f-hero-tile:nth-child(3){--tile-color:#FFE45C}
-.f-hero-tile::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(var(--tile-shade),var(--tile-shade)),var(--tile-photo) center/cover no-repeat;--tile-shade:rgba(230,0,18,.78);opacity:0;transition:opacity .5s ease;pointer-events:none}
-.f-hero-tile:nth-child(2)::before,.f-hero-tile:nth-child(3)::before{--tile-shade:rgba(255,228,92,.76)}
-@media(hover:hover) and (pointer:fine){.f-hero-tile:hover::before{opacity:1}}
-@media(hover:none),(pointer:coarse){.f-hero-tile::before{opacity:.65}}
+.f-hero-tile{--tile-shade:rgba(157,0,12,.42)}
+.f-hero-tile:nth-child(2),.f-hero-tile:nth-child(3){--tile-shade:rgba(255,228,92,.28)}
+.f-hero-tile::before{content:"";position:absolute;inset:0;z-index:0;background-image:linear-gradient(var(--tile-shade),var(--tile-shade)),var(--tile-photo);background-size:cover;background-position:center;background-repeat:no-repeat;opacity:0;transition:opacity .5s ease;pointer-events:none}
+.f-hero-tile .f-hero-stat{position:relative;z-index:1;transition:opacity .56s,transform .56s cubic-bezier(.22,1,.36,1)}
+@media(hover:hover) and (pointer:fine){.f-hero-tile:hover::before{opacity:1}.f-hero-tile:hover .f-hero-stat{text-shadow:0 1px 8px rgba(0,0,0,.45)}.f-hero-tile:nth-child(2):hover .f-hero-stat,.f-hero-tile:nth-child(3):hover .f-hero-stat{text-shadow:0 1px 8px rgba(255,245,180,.95)}}
+@media(hover:none),(pointer:coarse){.f-hero-tile::before{opacity:.35}}
+.f-hero-center,.f-hero-center *{pointer-events:none}
 .f-hero-stat{width:100%;min-width:0}
 .f-hero-stat h2{font-size:clamp(24px,1.65vw,30px);line-height:1.3;font-weight:750;letter-spacing:-.035em}
 .f-hero-stat p{margin-top:8px;font-size:clamp(18px,1.05vw,20px);line-height:1.5;font-weight:500}
