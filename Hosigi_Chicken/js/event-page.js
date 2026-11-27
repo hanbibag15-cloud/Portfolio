@@ -345,9 +345,44 @@
       const card=[...grid.querySelectorAll(".event-list-card")].find(node=>node.dataset.eventId===item.id);
       if(!card)return;
       const header=document.querySelector(".site-header");
-      const offset=Math.max(0,header?.getBoundingClientRect().bottom||0)+20;
-      const top=Math.max(0,window.scrollY+card.getBoundingClientRect().top-offset);
-      window.scrollTo({top,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
+      const headerBottom=Math.max(0,header?.getBoundingClientRect().bottom||0);
+      const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const gap=20;
+      // Center within the usable viewport below the fixed header. Tall cards
+      // align below the header instead of clipping their top.
+      const usable=Math.max(1,innerHeight-headerBottom-2*gap);
+      const tall=card.getBoundingClientRect().height>usable;
+      const root=document.documentElement;
+      const previousPadding=root.style.scrollPaddingTop;
+      root.style.scrollPaddingTop=(headerBottom+gap)+"px";
+      card.scrollIntoView({block:tall?"start":"center",inline:"nearest",behavior:reduced?"instant":"smooth"});
+      root.style.scrollPaddingTop=previousPadding;
+
+      // Wait for actual scroll settling; the timeout is only a safety bound.
+      // No focus is moved, so mouse/keyboard hover states stay independent.
+      let frame=0,still=0,lastY=window.scrollY,started=performance.now(),done=false;
+      let cleanupTimer=0;
+      const clear=()=>{card.classList.remove("event-deep-link-highlight");clearTimeout(cleanupTimer);card.removeEventListener("animationend",onAnimationEnd);window.removeEventListener("pagehide",cancel);};
+      const onAnimationEnd=e=>{if(e.target===card&&e.animationName==="event-deep-link-pulse")clear();};
+      const cancel=()=>{done=true;cancelAnimationFrame(frame);clear();};
+      window.addEventListener("pagehide",cancel,{once:true});
+      const highlight=()=>{
+        if(done)return;done=true;
+        if(!card.isConnected){clear();return;}
+        card.classList.add("event-deep-link-highlight");
+        card.addEventListener("animationend",onAnimationEnd);
+        cleanupTimer=window.setTimeout(clear,2800);
+      };
+      const check=now=>{
+        if(done)return;
+        if(!card.isConnected){cancel();return;}
+        const y=window.scrollY;
+        still=Math.abs(y-lastY)<.5?still+1:0;
+        lastY=y;
+        if((now-started>=180&&still>=8)||now-started>=2200){highlight();return;}
+        frame=requestAnimationFrame(check);
+      };
+      frame=requestAnimationFrame(check);
     }));
   }
   void initializeList();
