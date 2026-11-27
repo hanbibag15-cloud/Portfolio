@@ -1,0 +1,179 @@
+/* Shared support subpages, based on existing event banner and brand tokens. */
+.support-page{color:var(--text-primary)}
+.support-content{width:min(calc(100% - 40px),1240px);margin:auto;padding:80px 0 110px;font-size:17px;line-height:1.8}
+.support-content h3{font-size:clamp(23px,2.3vw,32px);font-weight:750;letter-spacing:-.035em;line-height:1.35;margin:0 0 18px}
+.support-content p{margin:0 0 12px}
+.support-content a:not(.support-pill){color:var(--text-brand);text-decoration:underline;text-underline-offset:3px}
+.support-note{padding:28px 32px;background:var(--background-subtle);border-radius:16px;margin-bottom:36px;border-left:4px solid var(--brand-red)}
+.support-note strong{display:block;font-size:20px;margin-bottom:8px}
+.support-note p{margin:0}
+.support-toc{border:1px solid var(--border-default);padding:25px 32px;border-radius:14px;margin-bottom:56px}
+.support-toc ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 24px;list-style:none;padding:12px 0 0;margin:0}
+.support-toc a:not(.support-pill){color:var(--text-primary);text-decoration:none}.support-toc a:hover{color:var(--brand-red)}
+.support-article{padding:0 0 35px;margin:0 0 35px;border-bottom:1px solid var(--border-default);scroll-margin-top:120px}
+.support-article:last-child{margin-bottom:0;border-bottom:0}
+.support-table-wrap{overflow-x:auto;margin:20px 0 8px}.support-table-wrap table{width:100%;min-width:650px;border-collapse:collapse;text-align:left;font-size:15px;line-height:1.65}.support-table-wrap th,.support-table-wrap td{padding:16px 20px;border:1px solid var(--border-default);vertical-align:top}.support-table-wrap thead{background:var(--background-subtle);font-weight:700}.support-table-wrap tbody th{font-weight:650;width:23%}
+.support-customer>section+section{margin-top:80px}
+.support-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:30px}
+.support-cards article{border:1px solid var(--border-default);border-radius:20px;padding:32px;background:white}
+.support-cards svg{color:var(--brand-red);margin-bottom:20px}.support-cards h4{font-size:19px;margin:0 0 8px}.support-cards strong{display:block;font-size:24px;line-height:1.25;margin:0 0 12px}.support-cards .support-phone{font-size:clamp(30px,3.5vw,46px);font-weight:850;color:var(--brand-red);white-space:nowrap}.support-cards p{font-size:15px;color:#68615f}
+.support-pill{display:inline-flex;align-items:center;justify-content:center;background:var(--brand-brown);color:white;border-radius:999px;padding:10px 22px;font-size:15px;transition:background-color .3s}.support-pill:hover{background:var(--brand-red);color:white}
+.support-faq{border-top:1px solid var(--border-default);padding-top:38px}.support-faq details{border-bottom:1px solid var(--border-default)}.support-faq summary{display:flex;align-items:center;gap:16px;cursor:pointer;list-style:none;padding:22px 8px;font-size:19px;font-weight:650}.support-faq summary::-webkit-details-marker{display:none}.faq-q{color:var(--brand-red);font-weight:800}.faq-plus{position:relative;width:18px;height:18px;margin-left:auto;flex:none}.faq-plus:before,.faq-plus:after{content:"";position:absolute;top:8px;left:0;width:18px;height:2px;background:currentColor;transition:transform .25s}.faq-plus:after{transform:rotate(90deg)}details[open] .faq-plus:after{transform:rotate(0)}.faq-answer{display:flex;gap:16px;padding:22px 24px;background:var(--background-subtle);border-radius:12px;margin:0 0 18px}.faq-answer b{color:var(--brand-red)}.faq-answer p{margin:0}
+.support-demo-note{font-size:15px;color:#68615f;margin-bottom:25px!important}
+#customer-inquiry{--red:var(--brand-red);--brown:var(--brand-brown);--cream:#fff8f1;scroll-margin-top:120px}
+#customer-inquiry .f-btn{display:inline-flex;justify-content:center;align-items:center;color:#fff;border:0;border-radius:999px;min-height:52px;padding:12px 24px;font-weight:700;cursor:pointer;transition:background-color .3s}
+#customer-inquiry .f-form-heading h3{margin:0}
+#customer-inquiry .f-form-heading p{margin:0}
+#customer-inquiry #customer-result:empty{display:none}
+.support-ready .support-reveal{opacity:0;transform:translateY(24px);transition:opacity .56s,transform .56s cubic-bezier(.22,1,.36,1)}.support-ready .support-reveal.is-visible,.support-ready .support-reveal:focus-within{opacity:1;transform:none}
+@media(max-width:900px){.support-cards{grid-template-columns:1fr;gap:16px}.support-cards article{padding:24px}.support-content{padding:55px 0 80px}}
+@media(max-width:650px){.support-content{width:calc(100% - 32px);font-size:15px;padding:45px 0 65px}.support-toc ol{grid-template-columns:1fr}.support-note,.support-toc{padding:20px}.support-customer>section+section{margin-top:48px}.support-faq summary{font-size:16px;gap:10px}.faq-answer{padding:16px}.support-table-wrap th,.support-table-wrap td{padding:12px}.support-article{margin-bottom:25px;padding-bottom:25px}}
+@media(prefers-reduced-motion:reduce){.support-ready .support-reveal{opacity:1;transform:none;transition:none}}
+/* Consultation — single-column reference layout, scoped to this section. */
+#customer-inquiry{background:#F5F5F5;padding:clamp(24px,4vw,56px);border-radius:16px}
+#customer-inquiry .f-heading{margin-bottom:56px}
+#customer-inquiry .f-heading h2{font-size:clamp(36px,4.2vw,64px);font-weight:850;color:var(--brown)}
+#customer-inquiry .f-heading p{font-size:clamp(16px,1.35vw,20px);line-height:1.65;margin-top:20px}
+#customer-inquiry .f-form{width:100%;max-width:1240px;margin:0 auto;background:#fff;border-radius:16px;padding:clamp(38px,6vw,90px) clamp(32px,8vw,150px);border:0}
+#customer-inquiry fieldset{border:0;padding:0;margin:0;min-width:0}
+#customer-inquiry .f-form-heading{display:flex;align-items:baseline;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+#customer-inquiry .f-form-heading h3{font-size:24px;font-weight:800}
+#customer-inquiry .f-form-heading p{font-size:13px;color:#746c68}
+#customer-inquiry .f-form-heading p span,#customer-inquiry .f-required::before{color:var(--red)}
+#customer-inquiry .f-form-grid{display:grid;grid-template-columns:clamp(160px,17vw,220px) minmax(0,1fr);gap:16px 24px;align-items:center}
+#customer-inquiry .f-form-grid label{font-size:17px;font-weight:700;position:relative;padding-left:14px}
+#customer-inquiry .f-required::before{content:"*";position:absolute;left:0}
+#customer-inquiry .f-form-grid input,#customer-inquiry .f-form-grid select,#customer-inquiry .f-form-grid textarea{display:block;width:min(100%,360px);min-width:0;border:1px solid #ccc;border-radius:3px;background:white;color:var(--brown);padding:12px 15px;font:inherit;transition:border-color .2s;outline:none}
+#customer-inquiry .f-form-grid input,#customer-inquiry .f-form-grid select{height:48px}
+#customer-inquiry .f-form-grid textarea{width:100%;min-height:190px;resize:vertical}
+#customer-inquiry .f-message-label{align-self:start;padding-top:12px}
+#customer-inquiry .f-form-grid :is(input,select,textarea):focus{border-color:var(--red);outline:1px solid var(--red);outline-offset:0}
+#customer-inquiry .f-form-grid ::placeholder{color:#938e8b}
+#customer-inquiry .f-form-actions{text-align:center;margin-top:30px}
+#customer-inquiry .f-check{display:flex;justify-content:center;align-items:center;gap:10px;font-size:15px;line-height:1.5}
+#customer-inquiry .f-check input{accent-color:var(--red);width:19px;height:19px;flex:none}
+#customer-inquiry .f-privacy-note{font-size:13px;color:#746c68;line-height:1.6;margin-top:10px}
+#customer-inquiry .f-btn{width:min(100%,400px);margin-top:30px;background:var(--brown)}
+@media(hover:hover){#customer-inquiry .f-btn:hover{background:var(--red)}}
+#customer-inquiry #customer-result:not(:empty){background:var(--cream);padding:16px;margin-top:20px;border-radius:8px;line-height:1.6;text-align:center}
+
+
+@media(max-width:650px){#customer-inquiry .f-heading{margin-bottom:36px}#customer-inquiry .f-form{padding:30px 20px}#customer-inquiry .f-form-grid{grid-template-columns:minmax(0,1fr);gap:8px}#customer-inquiry .f-form-grid label:not(:first-child){margin-top:12px}#customer-inquiry .f-form-grid :is(input,select,textarea){width:100%}#customer-inquiry .f-message-label{padding-top:0}#customer-inquiry .f-form-heading h3{font-size:21px}#customer-inquiry .f-check{align-items:flex-start;text-align:left}}
+@media(prefers-reduced-motion:reduce){}
+
+
+/* Consultation selects — copied from store-page.css region picker; local aliases preserve store tokens. */
+#customer-inquiry{--border-default:#e5e5e5;--surface-default:#fff;--text-primary:var(--brown);--brand-red:var(--red);--background-subtle:#f7f7f7;--font:"Pretendard Variable",Pretendard,sans-serif}
+/* Region dropdown styled like the main navigation submenu. */
+
+
+.consult-select-dropdown{position:relative;width:100%;}
+.consult-select-trigger{
+  width:100%;height:54px;padding:0 18px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  border:1px solid var(--border-default);border-radius:14px;
+  background:var(--surface-default);color:var(--text-primary);
+  font:500 16px var(--font);text-align:left;cursor:pointer;
+}
+.consult-select-trigger:hover,.consult-select-trigger:focus-visible,
+.consult-select-dropdown.is-open .consult-select-trigger{
+  border-color:var(--brand-red);
+}
+.consult-select-trigger:focus-visible{outline:2px solid var(--brand-red);outline-offset:2px;}
+.consult-select-chevron{
+  width:8px;height:8px;flex:none;
+  border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:translateY(-2px) rotate(45deg);transition:transform .2s;
+}
+.consult-select-dropdown.is-open .consult-select-chevron{transform:translateY(2px) rotate(225deg);}
+.consult-select-options{
+  position:absolute;left:0;right:0;top:calc(100% + 6px);
+  padding:9px 0;background:#fff;border:1px solid var(--border-default);
+  border-radius:16px;box-shadow:0 12px 28px rgba(34,23,20,.13);
+  max-height:240px;overflow-y:auto;z-index:30;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform:translateY(-10px) scale(.98);transform-origin:top center;
+  transition:opacity .26s ease,transform .32s cubic-bezier(.22,1,.36,1),visibility .26s;
+}
+.consult-select-dropdown.is-open .consult-select-options{
+  opacity:1;visibility:visible;pointer-events:auto;
+  transform:translateY(0) scale(1);
+}
+.consult-select-option{
+  display:block;width:100%;min-height:44px;padding:10px 18px;
+  background:transparent;border:0;border-radius:0;text-align:left;
+  color:var(--text-primary);font:500 15px var(--font);cursor:pointer;
+  transition:background-color .2s ease,color .2s ease;
+}
+.consult-select-option:hover,.consult-select-option:focus-visible{
+  background:var(--background-subtle);color:var(--brand-red);outline:none;
+}
+.consult-select-option.is-active{color:var(--brand-red);font-weight:700;}
+@media(max-width:767px){
+  .consult-select-trigger{height:48px;padding:0 12px;font-size:13px;}
+  .consult-select-option{font-size:13px;min-height:42px;padding:9px 14px;}
+}
+@media(prefers-reduced-motion:reduce){.consult-select-chevron{transition:none;}}
+
+/* Center selected region and each dropdown option; keep arrow at the right. */
+.consult-select-trigger{position:relative;justify-content:center;}
+.consult-select-current{display:block;flex:1;min-width:0;text-align:center;}
+.consult-select-chevron{position:absolute;right:18px;top:50%;margin-top:-5px;}
+.consult-select-option{text-align:center;}
+@media(max-width:767px){.consult-select-chevron{right:12px;}}
+
+
+/* Region picker only: a short fixed 30px thumb that tracks actual scroll.
+   The long native scrollbar remains available on the store-card list. */
+.consult-select-options {
+  scrollbar-width:none !important;
+  scrollbar-color:auto;
+  scrollbar-gutter:auto;
+  padding-right:12px;
+}
+.consult-select-options::-webkit-scrollbar {
+  display:none !important;
+  width:0 !important;
+  height:0 !important;
+}
+.consult-select-scroll-indicator {
+  position:absolute;
+  top:calc(100% + 19px);
+  right:7px;
+  height:212px;
+  width:5px;
+  z-index:31;
+  pointer-events:none;
+  visibility:hidden;
+  opacity:0;
+  transition:opacity .22s ease,visibility .22s ease;
+}
+.consult-select-dropdown.is-open .consult-select-scroll-indicator.has-overflow {
+  visibility:visible;
+  opacity:1;
+}
+.consult-select-scroll-thumb {
+  display:block;
+  width:5px;
+  height:30px;
+  border-radius:999px;
+  background:#BDBDBD;
+  will-change:transform;
+}
+@media (prefers-reduced-motion:reduce) {
+  .consult-select-scroll-indicator {transition:none;}
+}
+
+
+/* Retain the consultation grid's original 360px by 48px field footprint. */
+#customer-inquiry .consult-select-dropdown{width:min(100%,360px);min-width:0;z-index:1}
+#customer-inquiry .consult-select-dropdown.is-open{z-index:35}
+#customer-inquiry .consult-select-trigger{height:48px;box-sizing:border-box}
+#customer-inquiry .consult-select-current{padding-inline:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#customer-inquiry .consult-select-dropdown > select.consult-select-native{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;z-index:-1;margin:0}
+#customer-inquiry .consult-select-dropdown > select.consult-select-native:invalid:focus + .consult-select-trigger{border-color:var(--red);outline:2px solid var(--red);outline-offset:2px}
+#customer-inquiry .consult-select-options{overscroll-behavior:contain;touch-action:pan-y}
+@media(max-width:650px){#customer-inquiry .consult-select-dropdown{width:100%}}
+@media(prefers-reduced-motion:reduce){.consult-select-options,.consult-select-option{transition:none}}
+
+#customer-inquiry .consult-select-trigger[aria-invalid=true]{border-color:var(--brand-red)}
